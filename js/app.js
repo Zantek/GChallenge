@@ -782,7 +782,7 @@ function showDetails(id) {
     banner.innerHTML = `
         <div class="absolute inset-0 bg-black/40 z-0"></div>
         ${stampHtml}
-        <h2 id="modal-title-big" class="text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4 z-10">${game.title}</h2>
+        <h2 id="modal-title-big" class="hidden text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4 z-10">${game.title}</h2>
     `;
 
     const hltbUrl = `https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}`;
@@ -800,9 +800,11 @@ function showDetails(id) {
     ` : '<div></div>';
 
     modalActions.innerHTML = `
-        <div class="flex flex-wrap gap-3 justify-between items-center w-full mt-6 border-t border-gaming-border pt-6">
-            ${dropButtonHtml}
-            <div class="flex flex-wrap gap-3 justify-end items-center">
+        <div class="flex flex-col sm:flex-row gap-6 justify-between items-center w-full mt-6 border-t border-gaming-border pt-6">
+            <div class="flex justify-center w-full sm:w-auto order-2 sm:order-1">
+                ${dropButtonHtml}
+            </div>
+            <div class="flex flex-wrap gap-3 justify-center sm:justify-end items-center w-full sm:w-auto order-1 sm:order-2">
                 <a href="${ytUrl}" target="_blank" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 text-sm shadow-lg shadow-red-500/20">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
                     Trailer

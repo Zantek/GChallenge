@@ -213,15 +213,61 @@
             background: var(--accent);
         }
 
-        .trophy {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: grayscale(1) opacity(0.3);
-        }
+                .trophy {
+                    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                    filter: grayscale(1) opacity(0.3);
+                }
                 .trophy.unlocked {
                     filter: grayscale(0) opacity(1);
                 }
         
-                                /* Passport Stamp System */
+                /* --- New Trophy Showcase Styling --- */
+                .trophy-slot {
+                    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                }
+                .trophy-slot .trophy-icon-container {
+                    position: relative;
+                    z-index: 1;
+                    filter: grayscale(1) brightness(0.5);
+                    transition: all 0.5s ease;
+                }
+                .trophy-slot.unlocked .trophy-icon-container {
+                    filter: grayscale(0) brightness(1);
+                    transform: translateY(-5px);
+                }
+                .trophy-slot.unlocked .trophy-icon-container::after {
+                    content: '';
+                    position: absolute;
+                    inset: -10px;
+                    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+                    opacity: 0.2;
+                    z-index: -1;
+                    animation: pulse-slow 3s infinite;
+                }
+                .trophy-slot .trophy-lock {
+                    transition: all 0.3s ease;
+                }
+                .trophy-slot.unlocked .trophy-lock {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+        
+                [data-theme='brick'] .trophy-slot.unlocked .trophy-icon-container {
+                    border-color: var(--accent) !important;
+                    background: var(--bg-primary) !important;
+                    box-shadow: 4px 4px 0px var(--accent);
+                }
+        
+                [data-theme='os'] .trophy-slot .trophy-icon-container {
+                    border: 2px solid;
+                    border-color: #808080 #ffffff #ffffff #808080 !important;
+                    background: #c0c0c0 !important;
+                    border-radius: 0px !important;
+                }
+                [data-theme='os'] .trophy-slot.unlocked .trophy-icon-container {
+                    border-color: #ffffff #808080 #808080 #ffffff !important;
+                }
+                                        /* Passport Stamp System */
         
                                 .passport-stamp {
         
