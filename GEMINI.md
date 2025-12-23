@@ -1,22 +1,26 @@
 # 2026 Gaming Challenge Tracker
 
-This project is a web-based application designed to track progress through a curated list of video games for a yearly challenge. Although titled "2025 Gaming Challenge" in the code, it is located in the `2026_Challenge` directory, suggesting it's being adapted or used for the 2026 challenge.
+This project is a web-based application designed to track progress through a curated list of video games for the 2026 yearly challenge. It features a highly customizable and immersive interface inspired by classic gaming consoles.
 
 ## Project Overview
 
-- **Purpose:** Provide an interactive checklist and progress tracker for various gaming milestones.
+- **Purpose:** Provide an interactive checklist, progress tracker, and digital diary for various gaming milestones.
 - **Main Technologies:**
-    - **HTML5:** Core structure.
-    - **Tailwind CSS:** Styling via CDN.
-    - **JavaScript:** Client-side logic for state management and UI interactivity.
-- **Architecture:** Single-page application (SPA) that uses `localStorage` for data persistence.
+    - **HTML5:** Core structure and layout.
+    - **Tailwind CSS:** Modern utility-first styling with custom theme variables.
+    - **JavaScript:** Client-side logic for state management, procedural audio, and UI interactivity.
+- **Architecture:** Single-page application (SPA) with a modular JavaScript structure, using `localStorage` for persistent save data.
 
 ## Key Features
 
-- **Categorized Game Lists:** Core Challenge, Bonus, Zen Garden, Time Warps, and Art House.
-- **Progress Tracking:** Level-based XP system and completion bars.
-- **Trophy Room:** Visual milestones for completing specific categories.
-- **Game Details:** Modal popups with Wikipedia links and metadata for each game.
+- **Console Skins (Theme Switcher):** Multiple visual aesthetics including "The Future" (Dark Mode), "The Brick" (Retro Handheld), "The Cube" (Geometric Indigo), and "The OS" (Classic PC).
+- **CRT Mode:** An authentic retro visual filter featuring scanlines, screen curvature, flicker, and chromatic aberration.
+- **The Graveyard (DNF System):** A guilt-free way to drop games that aren't clicking, moving them to a separate section while awarding "Wisdom XP".
+- **Passport Stamp System:** Automatically logs completion dates with unique, theme-appropriate "ink stamps" on game cards.
+- **Trophy Showcase:** A sleek, interactive achievement gallery with glass pedestals and lock states for category completion.
+- **Companion Buddy:** An evolving 8-bit companion that grows and reacts as you level up your gaming progress.
+- **Advanced Integrations:** Quick search links for "HowLongToBeat" and YouTube gameplay trailers integrated into every game modal.
+- **State Management:** Robust Import/Export system for challenge progress and completion timestamps.
 
 ## Building and Running
 
@@ -27,16 +31,22 @@ Since this is a static web project, no build or installation steps are required.
 2. Alternatively, use a local development server like Live Server (VS Code extension) or `npx serve .`.
 
 ### Testing
-There are no automated tests. Verification is performed manually by interacting with the UI in a browser.
+Manual verification is performed by interacting with the UI in a browser. State persistence should be checked via page refreshes and Import/Export actions.
 
 ## Development Conventions
 
-- **Single File Structure:** The entire application (HTML, CSS, JS) is contained within `index.html`.
-- **Styling:** Uses Tailwind CSS with a custom theme configuration for gaming-specific colors and animations.
-- **State Management:** Uses a simple `completedGames` array stored in `localStorage`.
-- **Interactivity:** Uses vanilla JavaScript for DOM manipulation and event handling.
-- **Placeholders:** Uses `placehold.co` for game card images.
+- **Modular CSS Variables:** All themes are controlled via CSS variables defined in `:root` and `[data-theme]` attributes.
+- **Component-based JS:** Features like themes, CRT mode, achievements, and the companion are managed by dedicated classes/modules.
+- **Responsive Design:** Mobile-first approach with fluid transitions between handheld, tablet, and desktop layouts.
+- **Audio:** Procedural 8-bit sound effects generated via the Web Audio API.
 
 ## TODOs
 - [x] Update titles and dates from 2025 to 2026.
-- [ ] Customize the game lists for the 2026 challenge.
+- [x] Implement Console Skins and Theme Manager.
+- [x] Implement CRT Mode visual filter.
+- [x] Implement The Graveyard (DNF) and Wisdom XP system.
+- [x] Implement Passport Stamp completion logging.
+- [x] Rework Trophy Room into Showcase Gallery.
+- [x] Improve Header and Modal responsiveness.
+- [ ] Customize the final game lists for the 2026 challenge.
+- [ ] Add more "Secret" achievements for specific milestone combinations.
