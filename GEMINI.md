@@ -38,5 +38,5 @@ There are no automated tests. Verification is performed manually by interacting 
 - **Placeholders:** Uses `placehold.co` for game card images.
 
 ## TODOs
-- [ ] Update titles and dates from 2025 to 2026.
+- [x] Update titles and dates from 2025 to 2026.
 - [ ] Customize the game lists for the 2026 challenge.
