@@ -878,7 +878,10 @@ function createCard(game, category = 'core') {
                         <div class="mb-2">
                             <div class="flex justify-between items-start">
                                 <span class="text-[10px] font-semibold text-blue-400 uppercase tracking-wider">${game.genre}</span>
-                                <div class="flex gap-0.5 mt-0.5">${stars}</div>
+                                <div class="flex flex-col items-center">
+                                    <span class="text-[8px] text-gaming-muted uppercase font-bold leading-none mb-1">Difficulty</span>
+                                    <div class="flex gap-0.5">${stars}</div>
+                                </div>
                             </div>
                             <h3 class="text-base font-bold text-gaming-text leading-tight mt-1 truncate">${game.title}</h3>
                             <p class="text-[10px] text-gaming-muted italic mt-1 leading-tight line-clamp-1">"${game.tagline}"</p>
@@ -901,7 +904,7 @@ function createCard(game, category = 'core') {
                         </div>
                     </div>
 
-                    <div class="bg-gaming-dark/50 p-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
+                    <div class="bg-gaming-dark/50 px-4 py-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
                             onclick="${isDropped ? "toggleDrop('" + game.id + "', event)" : "toggleGame('" + game.id + "', event)"}">
                         <span class="text-[10px] ${isCompleted ? 'text-emerald-400 font-bold' : (isDropped ? 'text-red-400 font-bold' : 'text-gaming-muted font-medium')} uppercase tracking-wider transition-colors">
                             ${isCompleted ? 'Completed' : (isDropped ? 'Dropped (Wisdom +100)' : 'Mark as Complete')}
