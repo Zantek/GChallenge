@@ -24,6 +24,13 @@
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        glow: {
+                            'from': { 'filter': 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px #3b82f6)' },
+                            'to': { 'filter': 'drop-shadow(0 0 5px #fff) drop-shadow(0 0 15px #3b82f6)' },
+                        }
                     }
                 }
             }
@@ -96,6 +103,14 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
+
+        .trophy {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: grayscale(1) opacity(0.3);
+        }
+        .trophy.unlocked {
+            filter: grayscale(0) opacity(1);
+        }
     </style>
 </head>
 <body class="min-h-screen pb-12 relative">
@@ -103,23 +118,32 @@
     <!-- Header & Progress -->
     <header class="bg-gray-900 border-b border-gray-800 sticky top-0 z-40 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
-                        <span class="text-blue-500">2025</span> Gaming Challenge
-                    </h1>
-                    <p class="text-gray-400 text-sm">No Backlog Guilt. Normal Difficulty.</p>
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <div class="bg-blue-600 text-white w-12 h-12 rounded-xl flex items-center justify-center font-black text-xl shadow-lg shadow-blue-500/20" id="level-badge">
+                        L1
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                            <span class="text-blue-500">2025</span> Gaming Challenge
+                        </h1>
+                        <p class="text-gray-400 text-xs" id="xp-text">0 / 500 XP to Level 2</p>
+                    </div>
                 </div>
                 
-                <div class="w-full md:w-1/3 flex flex-col gap-2">
+                <div class="w-full md:w-1/2 flex flex-col gap-3">
                     <div class="flex justify-between items-end">
-                        <div class="flex flex-col">
-                            <span class="text-xs text-gray-400">Total Progress</span>
-                            <span id="progress-text" class="text-sm font-bold">0/36 Completed</span>
-                        </div>
+                        <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">Total Completion</span>
+                        <span id="progress-text" class="text-sm font-bold text-blue-400">0/36 Games</span>
                     </div>
-                    <div class="w-full bg-gray-700 rounded-full h-4 overflow-hidden">
-                        <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-green-400 h-4 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                    <div class="relative">
+                        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                            <div id="progress-bar" class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                        </div>
+                        <!-- Secondary XP bar -->
+                        <div class="w-full bg-gray-800 rounded-full h-1 mt-1 overflow-hidden">
+                            <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -128,6 +152,49 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-12">
         
+        <!-- Trophy Room -->
+        <section class="bg-gray-800/50 border border-gray-700 rounded-2xl p-6">
+            <h3 class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-6 text-center">Milestone Trophy Room</h3>
+            <div class="grid grid-cols-3 md:grid-cols-6 gap-4">
+                <div id="trophy-core" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-blue-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.46.81 1.08 1.48 1.8 1.95V15c-1.77 0-3.2 1.43-3.2 3.2V20h10v-1.8c0-1.77-1.43-3.2-3.2-3.2v-3.11c.72-.47 1.34-1.14 1.8-1.95C18.08 9.63 20 7.55 20 5V4c0-1.1-.9-2-2-2zM6 4h2v3H6V4zm12 3h-2V4h2v3z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Core Master</span>
+                </div>
+                <div id="trophy-bonus" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-purple-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Bonus Collector</span>
+                </div>
+                <div id="trophy-zen" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-green-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.84l4.5 4.05v5.11h-2v-3h-5v3h-2v-5.11L12 7.84z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Zen Master</span>
+                </div>
+                <div id="trophy-time" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-red-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Time Lord</span>
+                </div>
+                <div id="trophy-art" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-orange-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Art Critic</span>
+                </div>
+                <div id="trophy-all" class="trophy flex flex-col items-center text-center gap-2 group">
+                    <div class="bg-yellow-500/10 p-4 rounded-full group-[.unlocked]:animate-glow transition-all">
+                        <svg class="w-8 h-8 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2zm0 4.27l-1.91 3.86-4.27.62 3.09 3.01-.73 4.25L12 15.98l3.82 2.02-.73-4.25 3.09-3.01-4.27-.62L12 6.27z"/></svg>
+                    </div>
+                    <span class="text-[10px] font-bold text-gray-300 uppercase leading-tight">Grand Master</span>
+                </div>
+            </div>
+        </section>
+
         <!-- Core List Section -->
         <section>
             <div class="flex items-center gap-3 mb-6">
@@ -137,6 +204,20 @@
             </div>
             <div id="core-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </section>
+
+        <!-- Visual Separator -->
+        <div class="relative py-8">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                <div class="w-full border-t border-gray-800"></div>
+            </div>
+            <div class="relative flex justify-center">
+                <span class="bg-gaming-dark px-4 text-xs font-black uppercase tracking-widest text-gray-500 flex items-center gap-2">
+                    <span class="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                    Bonus Content
+                    <span class="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
+                </span>
+            </div>
+        </div>
 
         <!-- Bonus List Section -->
         <section>
@@ -149,28 +230,32 @@
         </section>
 
         <!-- Extra Gimmick Lists -->
+        
+        <!-- Zen Garden -->
         <section>
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1 bg-green-400 rounded-full"></div>
-                <h2 class="text-2xl font-bold text-white">🧘 The Zen Garden</h2>
+                <h2 class="text-2xl font-bold text-white">🧘 The Zen Bonus List</h2>
                 <span class="bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
             </div>
             <div id="zen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <!-- Time Warps -->
         <section>
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1 bg-red-500 rounded-full"></div>
-                <h2 class="text-2xl font-bold text-white">⏱️ The Time Warps</h2>
+                <h2 class="text-2xl font-bold text-white">⏱️ The Time Warp Bonus List</h2>
                 <span class="bg-red-900 text-red-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
             </div>
             <div id="time-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </section>
 
+        <!-- Art House -->
         <section>
             <div class="flex items-center gap-3 mb-6">
                 <div class="h-8 w-1 bg-orange-500 rounded-full"></div>
-                <h2 class="text-2xl font-bold text-white">🎨 The Art House</h2>
+                <h2 class="text-2xl font-bold text-white">🎨 The Art House Bonus List</h2>
                 <span class="bg-orange-900 text-orange-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
             </div>
             <div id="art-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -209,7 +294,7 @@
                 <div class="grid grid-cols-2 gap-4 border-t border-gray-700 pt-6">
                     <div>
                         <span class="text-xs text-gray-500 block">Platform</span>
-                        <span id="modal-system" class="text-gray-200 font-medium"></span>
+                        <div id="modal-system" class="text-gray-200 font-medium"></div>
                     </div>
                     <div>
                         <span class="text-xs text-gray-500 block">Completion Time</span>
@@ -238,10 +323,10 @@
             { id: 'c6', title: "Portal", year: 2007, system: "PC / Xbox", length: "3 hrs", genre: "Puzzle / FPS", color: "from-orange-400 to-blue-400", wiki: "https://en.wikipedia.org/wiki/Portal_(video_game)", desc: "Navigate the Aperture Science Enrichment Center using a portal gun while being taunted by the sarcastic AI, GLaDOS." },
             { id: 'c7', title: "Mirror's Edge", year: 2008, system: "PS3 / 360", length: "6 hrs", genre: "Parkour", color: "from-red-600 to-white", wiki: "https://en.wikipedia.org/wiki/Mirror%27s_Edge", desc: "A first-person parkour game set in a pristine, dystopian city. Focus on momentum and movement over combat as Faith, a 'Runner'." },
             { id: 'c8', title: "Asura's Wrath", year: 2012, system: "PS3 / 360", length: "8.5 hrs", genre: "Action / Beat 'em up", color: "from-orange-700 to-red-700", wiki: "https://en.wikipedia.org/wiki/Asura%27s_Wrath", desc: "An interactive anime where anger is your power. Asura fights to rescue his daughter from a pantheon of corrupt demigods." },
-            { id: 'c9', title: "Journey", year: 2012, system: "PS3", length: "2 hrs", genre: "Adventure / Art", color: "from-amber-200 to-amber-600", wiki: "https://en.wikipedia.org/wiki/Journey_(2012_video_game)", desc: "A beautiful, silent trek across a vast desert towards a distant mountain. A masterclass in atmosphere and emotional game design." },
+            { id: 'c9', title: "Max Payne 3", year: 2012, system: "PC / PS3 / 360", length: "10 hrs", genre: "Third-Person Shooter", color: "from-gray-800 to-red-900", wiki: "https://en.wikipedia.org/wiki/Max_Payne_3", desc: "A gritty, cinematic action masterpiece. Follow Max Payne as he works private security in São Paulo, Brazil. Experience the evolution of bullet-time in a story defined by its brutal gunplay and technical polish." },
             { id: 'c10', title: "Undertale", year: 2015, system: "PC / Switch", length: "6 hrs", genre: "RPG", color: "from-gray-900 to-white", wiki: "https://en.wikipedia.org/wiki/Undertale", desc: "The RPG where you don't have to kill anyone. Every encounter is a unique bullet-hell puzzle and your choices change everything." },
             { id: 'c11', title: "Ori and the Will of the Wisps", year: 2020, system: "PC / Xbox", length: "11 hrs", genre: "Metroidvania", color: "from-indigo-400 to-purple-500", wiki: "https://en.wikipedia.org/wiki/Ori_and_the_Will_of_the_Wisps", desc: "A heart-wrenching fairy tale with stunning art and incredibly fluid movement. Explore the forest of Niwen as the little spirit Ori." },
-            { id: 'c12', title: "Viewfinder", year: 2023, system: "PC / PS5", length: "5 hrs", genre: "Puzzle / Surreal", color: "from-purple-600 to-pink-500", wiki: "https://en.wikipedia.org/wiki/Viewfinder_(video_game)", desc: "Challenge your perception by bringing photographs to life. Place an image into the world, and it becomes a 3D space you can walk into." }
+            { id: 'c12', title: "Hi-Fi RUSH", year: 2023, system: "PC / Xbox / PS5", length: "11 hrs", genre: "Action / Rhythm", color: "from-yellow-400 to-red-500", wiki: "https://en.wikipedia.org/wiki/Hi-Fi_Rush", desc: "A vibrant, rhythm-action game where the entire world pulses to the beat. Play as Chai, a wannabe rockstar fighting a sinister corporation with music-synced combat." }
         ];
 
         const bonusGames = [
@@ -280,8 +365,27 @@
             { id: 'a6', title: "Manifold Garden", year: 2019, system: "All", length: "5 hrs", genre: "Geometry Puzzle", color: "from-gray-700 to-indigo-400", wiki: "https://en.wikipedia.org/wiki/Manifold_Garden", desc: "Rediscover gravity and explore a world of Escher-esque architecture. Solve puzzles using the infinite, repeating nature of space." }
         ];
 
-        // Combine for easy searching
         const allGames = [...coreGames, ...bonusGames, ...zenGames, ...timeGames, ...artGames];
+
+        // --- Helpers ---
+
+        function getSystemIcon(system) {
+            const s = system.toLowerCase();
+            let path = "";
+            
+            if (s.includes('pc')) {
+                // Monitor Icon
+                path = '<rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/>';
+            } else if (s.includes('mobile')) {
+                // Smartphone Icon
+                path = '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12" y1="18" y2="18"/>';
+            } else {
+                // Gamepad Icon (Default for Consoles)
+                path = '<path d="M6 12h.01M9 12h.01M15 12h.01M18 12h.01M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm6 12v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2"/>';
+            }
+
+            return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 opacity-80">${path}</svg>`;
+        }
 
         // --- Logic ---
 
@@ -306,16 +410,53 @@
             saveState();
         }
 
+        function parseLength(lengthStr) {
+            const num = parseFloat(lengthStr);
+            return isNaN(num) ? 0 : num;
+        }
+
         function updateProgress() {
             const total = allGames.length;
             const completed = completedGames.length;
             const percentage = Math.round((completed / total) * 100);
 
-            const progressBar = document.getElementById('progress-bar');
-            const progressText = document.getElementById('progress-text');
+            // Calculate XP
+            let totalXP = 0;
+            allGames.forEach(game => {
+                if (completedGames.includes(game.id)) {
+                    totalXP += parseLength(game.length) * 100;
+                }
+            });
 
-            progressBar.style.width = `${percentage}%`;
-            progressText.innerText = `${completed}/${total} Completed`;
+            // Level Logic
+            const xpPerLevel = 500;
+            const level = Math.floor(totalXP / xpPerLevel) + 1;
+            const currentLevelXP = totalXP % xpPerLevel;
+            const xpPercentage = (currentLevelXP / xpPerLevel) * 100;
+
+            // UI Updates
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
+            document.getElementById('progress-text').innerText = `${completed}/${total} Games`;
+            
+            document.getElementById('level-badge').innerText = `L${level}`;
+            document.getElementById('xp-bar').style.width = `${xpPercentage}%`;
+            document.getElementById('xp-text').innerText = `${Math.floor(currentLevelXP)} / ${xpPerLevel} XP to Level ${level + 1}`;
+
+            // Trophy Logic
+            const checkList = (list) => list.length > 0 && list.every(g => completedGames.includes(g.id));
+            
+            const updateTrophy = (id, condition) => {
+                const el = document.getElementById(id);
+                if (condition) el.classList.add('unlocked');
+                else el.classList.remove('unlocked');
+            };
+
+            updateTrophy('trophy-core', checkList(coreGames));
+            updateTrophy('trophy-bonus', checkList(bonusGames));
+            updateTrophy('trophy-zen', checkList(zenGames));
+            updateTrophy('trophy-time', checkList(timeGames));
+            updateTrophy('trophy-art', checkList(artGames));
+            updateTrophy('trophy-all', completed === total && total > 0);
         }
 
         function resetProgress() {
@@ -337,9 +478,15 @@
             document.getElementById('modal-genre').innerText = game.genre;
             document.getElementById('modal-year').innerText = game.year;
             document.getElementById('modal-description').innerText = game.desc;
-            document.getElementById('modal-system').innerText = game.system;
             document.getElementById('modal-length').innerText = game.length;
             document.getElementById('modal-wiki').href = game.wiki;
+            
+            document.getElementById('modal-system').innerHTML = `
+                <div class="flex items-center gap-2">
+                    ${getSystemIcon(game.system)}
+                    <span>${game.system}</span>
+                </div>
+            `;
             
             const banner = document.getElementById('modal-banner');
             banner.className = `h-48 w-full bg-gradient-to-br ${game.color} flex items-center justify-center`;
@@ -354,7 +501,6 @@
         function createCard(game) {
             const isCompleted = completedGames.includes(game.id);
             const borderClass = isCompleted ? 'border-green-500 border-2 completed' : 'border-gray-700 border';
-            
             const encodedTitle = encodeURIComponent(game.title);
             const imgUrl = `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
 
@@ -383,7 +529,10 @@
                         <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-700/50">
                             <div class="flex flex-col">
                                 <span class="text-xs text-gray-400">System</span>
-                                <span class="text-sm font-medium text-gray-200">${game.system}</span>
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    ${getSystemIcon(game.system)}
+                                    <span class="text-sm font-medium text-gray-200">${game.system}</span>
+                                </div>
                             </div>
                             <div class="flex flex-col items-end">
                                 <span class="text-xs text-gray-400">Year</span>
