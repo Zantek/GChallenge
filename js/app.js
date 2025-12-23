@@ -841,8 +841,7 @@ function createCard(game) {
     return `
         <div id="card-${game.id}" 
                 class="game-card relative bg-gaming-card overflow-hidden rounded-gaming ${statusClass} flex flex-col h-full group border border-gaming-border transition-all duration-300"
-                onclick="showDetails('${game.id}')"
-                onmouseenter="sfx.playTick()">
+                onclick="showDetails('${game.id}')">
             <div class="relative h-40 overflow-hidden">                         <!-- Gradient Overlay: Invisible by default, fades in on hover -->
             <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
             
