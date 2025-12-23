@@ -62,7 +62,18 @@
                 <div class="w-full md:w-1/2 flex flex-col gap-3">
                     <div class="flex justify-between items-end">
                         <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">Total Completion</span>
-                        <span id="progress-text" class="text-sm font-bold text-blue-400">0/36 Games</span>
+                        <div class="flex items-center gap-4">
+                            <span id="progress-text" class="text-sm font-bold text-blue-400">0/36 Games</span>
+                            <button id="mute-btn" onclick="sfx.toggleMute()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Toggle Sound">
+                                <!-- Icons handled by JS -->
+                                <svg id="icon-sound-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                <svg id="icon-sound-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+                            </button>
+                            <button onclick="generateShareCard()" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5 uppercase tracking-wider">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                Share
+                            </button>
+                        </div>
                     </div>
                     <div class="relative">
                         <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
@@ -191,10 +202,25 @@
 
     </main>
 
-    <!-- Reset Button Footer -->
-    <footer class="text-center mt-12 mb-8 text-gray-500">
-        <button onclick="resetProgress()" class="text-xs hover:text-red-400 transition-colors underline">Reset All Progress</button>
-        <p class="mt-2 text-xs opacity-50">Data saves automatically to your browser.</p>
+    <!-- Footer -->
+    <footer class="text-center mt-12 mb-8 text-gray-500 space-y-6">
+        <div class="flex justify-center items-center gap-4 text-xs font-medium">
+            <button onclick="exportData()" class="hover:text-blue-400 transition-colors flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                Export Save
+            </button>
+            <span class="text-gray-700">|</span>
+            <button onclick="importData()" class="hover:text-emerald-400 transition-colors flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                Import Save
+            </button>
+            <span class="text-gray-700">|</span>
+            <button onclick="resetProgress()" class="hover:text-red-400 transition-colors flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                Reset
+            </button>
+        </div>
+        <p class="text-[10px] opacity-30">Data saves automatically to your browser.</p>
     </footer>
 
     <!-- Info Modal -->
@@ -236,6 +262,26 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                     </a>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeShareModal()">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col" onclick="event.stopPropagation()">
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-white">Share Your Progress</h3>
+                <button onclick="closeShareModal()" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <div class="p-8 flex flex-col items-center gap-6 bg-black/20">
+                <img id="share-image" src="" alt="Summary Card" class="w-full rounded-lg shadow-2xl border border-gray-700/50">
+                <p class="text-sm text-gray-400 text-center">Right-click (or long press) to copy, or use the button below.</p>
+                <a id="download-link" href="#" download="gaming-challenge-2026-summary.png" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"></path></svg>
+                    Download Image
+                </a>
             </div>
         </div>
     </div>
@@ -295,6 +341,105 @@
 
         const allGames = [...coreGames, ...bonusGames, ...zenGames, ...timeGames, ...artGames];
 
+        // --- Audio System (Procedural 8-bit Sound) ---
+        class SoundFX {
+            constructor() {
+                this.muted = localStorage.getItem('gamingChallengeAudioMuted') === 'true';
+                this.ctx = null;
+                this.updateUI();
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    this.ctx = new AudioContext();
+                }
+            }
+
+            toggleMute() {
+                this.muted = !this.muted;
+                localStorage.setItem('gamingChallengeAudioMuted', this.muted);
+                this.updateUI();
+                if (!this.muted) this.playTick(); // Feedback
+            }
+
+            updateUI() {
+                const on = document.getElementById('icon-sound-on');
+                const off = document.getElementById('icon-sound-off');
+                if (on && off) {
+                    if (this.muted) {
+                        on.classList.add('hidden');
+                        off.classList.remove('hidden');
+                    } else {
+                        on.classList.remove('hidden');
+                        off.classList.add('hidden');
+                    }
+                }
+            }
+
+            playTone(freq, type, duration, startTime = 0, vol = 0.1) {
+                if (this.muted) return;
+                this.init();
+                if (this.ctx.state === 'suspended') this.ctx.resume();
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, this.ctx.currentTime + startTime);
+                
+                gain.gain.setValueAtTime(vol, this.ctx.currentTime + startTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + startTime + duration);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start(this.ctx.currentTime + startTime);
+                osc.stop(this.ctx.currentTime + startTime + duration);
+            }
+
+            playCoin() {
+                // 8-bit "bling": Square wave rapid pitch slide
+                if (this.muted) return;
+                this.init();
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(1200, now);
+                osc.frequency.linearRampToValueAtTime(2000, now + 0.1); // Slide up
+                
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
+                
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                
+                osc.start(now);
+                osc.stop(now + 0.1);
+            }
+
+            playTick() {
+                // Menu hover tick: very short high pitch blip
+                this.playTone(800, 'square', 0.03, 0, 0.03);
+            }
+
+            playFanfare() {
+                // Check/Trophy unlock: Major Triad Arpeggio (C-E-G)
+                if (this.muted) return;
+                const root = 523.25; // C5
+                const third = 659.25; // E5
+                const fifth = 783.99; // G5
+                
+                this.playTone(root, 'square', 0.1, 0, 0.1);
+                this.playTone(third, 'square', 0.1, 0.1, 0.1);
+                this.playTone(fifth, 'square', 0.4, 0.2, 0.1);
+            }
+        }
+
+        const sfx = new SoundFX();
+
         // --- Helpers ---
 
         function getSystemIcon(system) {
@@ -315,6 +460,13 @@
             return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 opacity-80">${path}</svg>`;
         }
 
+        function getEraClass(year) {
+            if (year < 2000) return 'era-retro';
+            if (year < 2010) return 'era-y2k';
+            if (year < 2020) return 'era-modern';
+            return 'era-cyber';
+        }
+
         // --- Logic ---
 
         let completedGames = JSON.parse(localStorage.getItem('gamingChallenge2026')) || [];
@@ -326,14 +478,27 @@
 
         function toggleGame(id, event) {
             if (event) event.stopPropagation();
+            const card = document.getElementById(`card-${id}`);
+            const checkbox = card.querySelector('input[type="checkbox"]');
+            const statusText = card.querySelector('.group\\/mark span');
+            
             if (completedGames.includes(id)) {
                 completedGames = completedGames.filter(gameId => gameId !== id);
-                document.getElementById(`card-${id}`).classList.remove('completed', 'border-green-500', 'border-2');
-                document.getElementById(`card-${id}`).classList.add('border-gray-700', 'border');
+                card.classList.remove('completed');
+                if (checkbox) checkbox.checked = false;
+                if (statusText) {
+                    statusText.innerText = 'Mark as Complete';
+                    statusText.className = 'text-xs text-gray-500 font-medium uppercase tracking-wider transition-colors';
+                }
             } else {
+                sfx.playCoin(); // Play Sound
                 completedGames.push(id);
-                document.getElementById(`card-${id}`).classList.add('completed', 'border-green-500', 'border-2');
-                document.getElementById(`card-${id}`).classList.remove('border-gray-700', 'border');
+                card.classList.add('completed');
+                if (checkbox) checkbox.checked = true;
+                if (statusText) {
+                    statusText.innerText = 'Completed';
+                    statusText.className = 'text-xs text-emerald-400 font-bold uppercase tracking-wider transition-colors';
+                }
             }
             saveState();
         }
@@ -343,12 +508,11 @@
             return isNaN(num) ? 0 : num;
         }
 
-        function updateProgress() {
+        function calculateStats() {
             const total = allGames.length;
             const completed = completedGames.length;
             const percentage = Math.round((completed / total) * 100);
 
-            // Calculate XP
             let totalXP = 0;
             allGames.forEach(game => {
                 if (completedGames.includes(game.id)) {
@@ -356,27 +520,41 @@
                 }
             });
 
-            // Level Logic
             const xpPerLevel = 500;
             const level = Math.floor(totalXP / xpPerLevel) + 1;
             const currentLevelXP = totalXP % xpPerLevel;
             const xpPercentage = (currentLevelXP / xpPerLevel) * 100;
 
+            return { total, completed, percentage, level, currentLevelXP, xpPerLevel, xpPercentage };
+        }
+
+        function updateProgress(silent = false) {
+            const stats = calculateStats();
+
             // UI Updates
-            document.getElementById('progress-bar').style.width = `${percentage}%`;
-            document.getElementById('progress-text').innerText = `${completed}/${total} Games`;
+            document.getElementById('progress-bar').style.width = `${stats.percentage}%`;
+            document.getElementById('progress-text').innerText = `${stats.completed}/${stats.total} Games`;
             
-            document.getElementById('level-badge').innerText = `L${level}`;
-            document.getElementById('xp-bar').style.width = `${xpPercentage}%`;
-            document.getElementById('xp-text').innerText = `${Math.floor(currentLevelXP)} / ${xpPerLevel} XP to Level ${level + 1}`;
+            document.getElementById('level-badge').innerText = `L${stats.level}`;
+            document.getElementById('xp-bar').style.width = `${stats.xpPercentage}%`;
+            document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
 
             // Trophy Logic
             const checkList = (list) => list.length > 0 && list.every(g => completedGames.includes(g.id));
             
             const updateTrophy = (id, condition) => {
                 const el = document.getElementById(id);
-                if (condition) el.classList.add('unlocked');
-                else el.classList.remove('unlocked');
+                const wasUnlocked = el.classList.contains('unlocked');
+                
+                if (condition) {
+                    el.classList.add('unlocked');
+                    // Only play sound if it wasn't unlocked before AND we are not silent (initial load)
+                    if (!wasUnlocked && !silent) {
+                        sfx.playFanfare();
+                    }
+                } else {
+                    el.classList.remove('unlocked');
+                }
             };
 
             updateTrophy('trophy-core', checkList(coreGames));
@@ -384,7 +562,7 @@
             updateTrophy('trophy-zen', checkList(zenGames));
             updateTrophy('trophy-time', checkList(timeGames));
             updateTrophy('trophy-art', checkList(artGames));
-            updateTrophy('trophy-all', completed === total && total > 0);
+            updateTrophy('trophy-all', stats.completed === stats.total && stats.total > 0);
         }
 
         function resetProgress() {
@@ -393,6 +571,122 @@
                 saveState();
                 location.reload();
             }
+        }
+
+        // --- New Features: Share & Export ---
+
+        function exportData() {
+            const data = btoa(JSON.stringify(completedGames));
+            navigator.clipboard.writeText(data).then(() => {
+                alert("Save code copied to clipboard! Keep it safe.");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                alert("Failed to copy to clipboard. Check console.");
+            });
+        }
+
+        function importData() {
+            const code = prompt("Paste your save code here:");
+            if (!code) return;
+            try {
+                const data = JSON.parse(atob(code));
+                if (Array.isArray(data)) {
+                    if(confirm("This will overwrite your current progress. Continue?")) {
+                        completedGames = data;
+                        saveState();
+                        location.reload();
+                    }
+                } else {
+                    alert("Invalid save code format.");
+                }
+            } catch (e) {
+                alert("Invalid save code. Please check and try again.");
+            }
+        }
+
+        function generateShareCard() {
+            const stats = calculateStats();
+            const canvas = document.createElement('canvas');
+            canvas.width = 1200;
+            canvas.height = 630;
+            const ctx = canvas.getContext('2d');
+
+            // 1. Background (Dark Gaming Theme)
+            const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+            gradient.addColorStop(0, '#0f172a'); // Slate-900
+            gradient.addColorStop(1, '#1e1b4b'); // Indigo-950
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 630);
+
+            // 2. Decorative Glow (Top Right)
+            ctx.shadowBlur = 150;
+            ctx.shadowColor = '#3b82f6';
+            ctx.fillStyle = '#3b82f6';
+            ctx.beginPath();
+            ctx.arc(1100, 100, 200, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+             // 3. Decorative Glow (Bottom Left)
+            ctx.shadowBlur = 150;
+            ctx.shadowColor = '#a855f7'; // Purple
+            ctx.fillStyle = '#a855f7';
+            ctx.beginPath();
+            ctx.arc(100, 530, 150, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // 4. Content
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            // Title
+            ctx.font = 'bold 70px Inter, sans-serif';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText('2026 Gaming Challenge', 600, 120);
+
+            // Main Stat (Percentage)
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = 'rgba(59, 130, 246, 0.5)'; // Blue glow
+            ctx.font = 'bold 180px Inter, sans-serif';
+            ctx.fillStyle = '#3b82f6'; // Blue-500
+            ctx.fillText(`${stats.percentage}%`, 600, 300);
+            ctx.shadowBlur = 0;
+
+            // Subtitle
+            ctx.font = 'bold 40px Inter, sans-serif';
+            ctx.fillStyle = '#94a3b8'; // Slate-400
+            ctx.fillText('COMPLETED', 600, 400);
+
+            // Details Bar
+            ctx.fillStyle = '#1e293b'; // Slate-800
+            ctx.roundRect(300, 480, 600, 100, 20); // x, y, w, h, radius
+            ctx.fill();
+
+            // Detail Text
+            ctx.font = 'bold 36px Inter, sans-serif';
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillText(`Level ${stats.level}  •  ${stats.completed}/${stats.total} Games`, 600, 530);
+
+            // Footer / Tag
+            ctx.font = '24px Inter, sans-serif';
+            ctx.fillStyle = '#475569';
+            ctx.fillText('generated by 2026 Gaming Challenge Tracker', 600, 600);
+
+            // 5. Show in Modal
+            const dataUrl = canvas.toDataURL('image/png');
+            const img = document.getElementById('share-image');
+            const link = document.getElementById('download-link');
+            
+            img.src = dataUrl;
+            link.href = dataUrl;
+            link.download = `gaming-challenge-2026-${stats.percentage}pct.png`;
+            
+            document.getElementById('share-modal').classList.remove('hidden');
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.add('hidden');
         }
 
         // --- Modal Logic ---
@@ -438,20 +732,21 @@
             document.getElementById('detail-modal').classList.add('hidden');
         }
 
-        function createCard(game) {
-            const isCompleted = completedGames.includes(game.id);
-            const borderClass = isCompleted ? 'border-green-500 border-2 completed' : 'border-gray-700 border';
-            const encodedTitle = encodeURIComponent(game.title);
-            
-            // Dynamic Approach: Use game.banner if it exists, fallback to placeholder
-            const imgUrl = game.banner || `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
-
-            return `
-                <div id="card-${game.id}" 
-                     class="game-card relative bg-gray-800 rounded-xl overflow-hidden ${borderClass} flex flex-col h-full group"
-                     onclick="showDetails('${game.id}')">
-                    <div class="relative h-40 overflow-hidden">
-                         <!-- Gradient Overlay: Invisible by default, fades in on hover -->
+                function createCard(game) {
+                    const isCompleted = completedGames.includes(game.id);
+                    const eraClass = getEraClass(game.year);
+                    const statusClass = isCompleted ? 'completed' : '';
+                    const encodedTitle = encodeURIComponent(game.title);
+        
+                    // Dynamic Approach: Use game.banner if it exists, fallback to placeholder
+                    const imgUrl = game.banner || `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
+        
+                    return `
+                        <div id="card-${game.id}" 
+                             class="game-card relative bg-gray-800 overflow-hidden ${eraClass} ${statusClass} flex flex-col h-full group"
+                             onclick="showDetails('${game.id}')"
+                             onmouseenter="sfx.playTick()">
+                            <div class="relative h-40 overflow-hidden">                         <!-- Gradient Overlay: Invisible by default, fades in on hover -->
                          <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
                          
                          <!-- Image: Full opacity by default, slight zoom on hover -->
@@ -489,16 +784,16 @@
                         </div>
                     </div>
 
-                    <div class="bg-gray-900/50 p-3 flex items-center justify-between border-t border-gray-700">
-                        <span class="text-xs text-gray-500 font-medium">Mark as Complete</span>
-                        <input type="checkbox" 
-                               class="custom-checkbox" 
-                               ${isCompleted ? 'checked' : ''} 
-                               onchange="toggleGame('${game.id}', event)"
-                               onclick="event.stopPropagation()"
-                               aria-label="Mark ${game.title} as complete">
-                    </div>
-                </div>
+                                        <div class="bg-gray-900/50 p-3 flex items-center justify-between border-t border-gray-700 cursor-pointer hover:bg-gray-800 transition-colors group/mark" 
+                                             onclick="toggleGame('${game.id}', event)">
+                                            <span class="text-xs ${isCompleted ? 'text-emerald-400 font-bold' : 'text-gray-500 font-medium'} uppercase tracking-wider transition-colors">
+                                                ${isCompleted ? 'Completed' : 'Mark as Complete'}
+                                            </span>
+                                            <input type="checkbox" 
+                                                   class="custom-checkbox pointer-events-none" 
+                                                   ${isCompleted ? 'checked' : ''} 
+                                                   aria-label="Mark ${game.title} as complete">
+                                        </div>                </div>
             `;
         }
 
@@ -510,7 +805,7 @@
             document.getElementById('time-grid').innerHTML = timeGames.map(game => createCard(game)).join('');
             document.getElementById('art-grid').innerHTML = artGames.map(game => createCard(game)).join('');
 
-            updateProgress();
+            updateProgress(true);
         });
 
     </script>

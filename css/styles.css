@@ -71,3 +71,50 @@
         .trophy.unlocked {
             filter: grayscale(0) opacity(1);
         }
+
+        /* --- Era Specific Themes --- */
+
+        /* Retro Era (Pre-2000) - Pixel/CRT feel */
+        .era-retro {
+            border: 4px double #475569;
+            image-rendering: pixelated;
+        }
+        .era-retro.completed {
+            border-color: #10b981 !important;
+        }
+
+        /* Y2K Era (2000-2009) - Glossy/Metallic feel */
+        .era-y2k {
+            border-radius: 1.5rem;
+            border: 2px solid #94a3b8;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
+        }
+        .era-y2k.completed {
+            border-color: #10b981 !important;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+        }
+
+        /* Modern Era (2010-2019) - Minimalist/Flat feel */
+        .era-modern {
+            border-radius: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .era-modern.completed {
+            border: 2px solid #10b981 !important;
+        }
+
+        /* Cyber Era (2020+) - Neon/Glassmorphism feel */
+        .era-cyber {
+            border: 1px solid rgba(59, 130, 246, 0.5);
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
+        }
+        .era-cyber:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+        .era-cyber.completed {
+            border: 2px solid #10b981 !important;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
