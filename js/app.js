@@ -163,48 +163,88 @@ function getSystemIcon(system) {
     } else if (s.includes('mobile')) {
         // Smartphone Icon
         path = '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12" y1="18" y2="18"/>';
+    } else if (s.includes('switch')) {
+        // Switch Icon (Screen + Joy-cons)
+        path = '<rect x="2" y="6" width="20" height="12" rx="2"/><line x1="7" y1="6" x2="7" y2="18"/><line x1="17" y1="6" x2="17" y2="18"/><circle cx="4.5" cy="10" r="1"/><circle cx="19.5" cy="14" r="1"/>';
+    } else if (s.includes('wii')) {
+        // Wii Remote
+        path = '<rect x="9" y="4" width="6" height="16" rx="1"/><circle cx="12" cy="7" r="1"/><circle cx="12" cy="14" r="0.5"/><circle cx="12" cy="16" r="0.5"/>';
+    } else if (s.includes('nes') || s.includes('snes')) {
+        // NES Controller
+        path = '<rect x="2" y="7" width="20" height="10" rx="1"/><rect x="5" y="11" width="4" height="1"/><rect x="6.5" y="9.5" width="1" height="4"/><circle cx="15" cy="12" r="1"/><circle cx="18" cy="12" r="1"/>';
+    } else if (s.includes('n64')) {
+        // N64 Controller shape
+        path = '<path d="M4 8l2 9h3l1-4h4l1 4h3l2-9H4z"/><circle cx="16" cy="11" r="1"/><circle cx="18" cy="11" r="1"/><circle cx="17" cy="9" r="1"/><circle cx="17" cy="13" r="1"/><path d="M6 11h2M7 10v2"/>';
+    } else if (s.includes('gamecube')) {
+        // GameCube Controller buttons
+        path = '<path d="M6 8h12a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a4 4 0 0 1 4-4z"/><circle cx="16" cy="11" r="2"/><circle cx="14" cy="13" r="1"/><circle cx="18" cy="13" r="0.8"/><circle cx="16" cy="14" r="0.8"/>';
+    } else if (s.includes('ps') || s.includes('playstation')) {
+        // DualShock style (Symmetrical sticks)
+        path = '<path d="M6 8h12a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a4 4 0 0 1 4-4z"/><circle cx="8.5" cy="14" r="1.5"/><circle cx="15.5" cy="14" r="1.5"/><path d="M6 11h2M7 10v2M15 10.5h1M16 11.5h1"/>';
+    } else if (s.includes('xbox') || s.includes('360')) {
+        // Xbox style (Asymmetrical sticks)
+        path = '<path d="M6 8h12a4 4 0 0 1 4 4v2a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4v-2a4 4 0 0 1 4-4z"/><circle cx="7.5" cy="11.5" r="1.5"/><circle cx="16.5" cy="14.5" r="1.5"/>';
     } else {
-        // Gamepad Icon (Default for Consoles)
+        // Default Gamepad Icon
         path = '<path d="M6 12h.01M9 12h.01M15 12h.01M18 12h.01M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm6 12v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2"/>';
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400 opacity-80">${path}</svg>`;
 }
 
-function getEraClass(year) {
-    if (year < 2000) return 'era-retro';
-    if (year < 2010) return 'era-y2k';
-    if (year < 2020) return 'era-modern';
-    return 'era-cyber';
-}
-
 // --- Logic ---
 
 let completedGames = JSON.parse(localStorage.getItem('gamingChallenge2026')) || [];
+let completionDates = JSON.parse(localStorage.getItem('gamingChallengeDates2026')) || {};
+let droppedGames = JSON.parse(localStorage.getItem('gamingChallengeDropped2026')) || [];
 
 function saveState() {
     localStorage.setItem('gamingChallenge2026', JSON.stringify(completedGames));
+    localStorage.setItem('gamingChallengeDates2026', JSON.stringify(completionDates));
+    localStorage.setItem('gamingChallengeDropped2026', JSON.stringify(droppedGames));
     updateProgress();
+}
+
+function formatDate(date) {
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(date).toLocaleDateString('en-US', options).toUpperCase();
 }
 
 function toggleGame(id, event) {
     if (event) event.stopPropagation();
+    
+    // Safety: Don't allow completing dropped games
+    if (droppedGames.includes(id)) return;
+
     const card = document.getElementById(`card-${id}`);
     const checkbox = card.querySelector('input[type="checkbox"]');
     const statusText = card.querySelector('.group-mark span');
     
     if (completedGames.includes(id)) {
         completedGames = completedGames.filter(gameId => gameId !== id);
+        delete completionDates[id];
         card.classList.remove('completed');
+        const stamp = card.querySelector('.passport-stamp');
+        if (stamp) stamp.remove();
+
         if (checkbox) checkbox.checked = false;
         if (statusText) {
             statusText.innerText = 'Mark as Complete';
-            statusText.className = 'text-xs text-gray-500 font-medium uppercase tracking-wider transition-colors';
+            statusText.className = 'text-xs text-gaming-muted font-medium uppercase tracking-wider transition-colors';
         }
     } else {
         sfx.playCoin(); // Play Sound
         completedGames.push(id);
+        const now = new Date().toISOString();
+        completionDates[id] = now;
+        
         card.classList.add('completed');
+        
+        // Add Stamp to UI immediately
+        const bannerContainer = card.querySelector('.relative.h-40');
+        const stampHtml = `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(now)}</div>`;
+        bannerContainer.insertAdjacentHTML('beforeend', stampHtml);
+
         if (checkbox) checkbox.checked = true;
         if (statusText) {
             statusText.innerText = 'Completed';
@@ -220,14 +260,17 @@ function parseLength(lengthStr) {
 }
 
 function calculateStats() {
-    const total = allGames.length;
+    const droppedCount = droppedGames.length;
+    const total = allGames.length - droppedCount;
     const completed = completedGames.length;
-    const percentage = Math.round((completed / total) * 100);
+    const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
     let totalXP = 0;
     allGames.forEach(game => {
         if (completedGames.includes(game.id)) {
             totalXP += parseLength(game.length) * 100;
+        } else if (droppedGames.includes(game.id)) {
+            totalXP += 100; // Wisdom XP
         }
     });
 
@@ -236,7 +279,7 @@ function calculateStats() {
     const currentLevelXP = totalXP % xpPerLevel;
     const xpPercentage = (currentLevelXP / xpPerLevel) * 100;
 
-    return { total, completed, percentage, level, currentLevelXP, xpPerLevel, xpPercentage };
+    return { total, completed, percentage, level, currentLevelXP, xpPerLevel, xpPercentage, droppedCount };
 }
 
 function updateProgress(silent = false) {
@@ -247,9 +290,58 @@ function updateProgress(silent = false) {
     document.getElementById('progress-bar').style.width = `${stats.percentage}%`;
     document.getElementById('progress-text').innerText = `${stats.completed}/${stats.total} Games`;
     
+    if (stats.droppedCount > 0) {
+        document.getElementById('progress-text').innerText += ` (${stats.droppedCount} Dropped)`;
+    }
+    
     document.getElementById('level-badge').innerText = `L${stats.level}`;
     document.getElementById('xp-bar').style.width = `${stats.xpPercentage}%`;
     document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
+
+    // Update Category Grids (Filter out dropped games)
+    const categoryData = {
+        'core': { list: coreGames, grid: 'core-grid', count: 'count-core', section: 'section-core' },
+        'bonus': { list: bonusGames, grid: 'bonus-grid', count: 'count-bonus', section: 'section-bonus' },
+        'zen': { list: zenGames, grid: 'zen-grid', count: 'count-zen', section: 'section-zen' },
+        'time': { list: timeGames, grid: 'time-grid', count: 'count-time', section: 'section-time' },
+        'art': { list: artGames, grid: 'art-grid', count: 'count-art', section: 'section-art' }
+    };
+
+    Object.entries(categoryData).forEach(([key, data]) => {
+        const grid = document.getElementById(data.grid);
+        const countBadge = document.getElementById(data.count);
+        const section = document.getElementById(data.section);
+        
+        if (grid) {
+            const activeGames = data.list.filter(g => !droppedGames.includes(g.id));
+            grid.innerHTML = activeGames.map(game => createCard(game)).join('');
+            
+            // Update Count Badge
+            if (countBadge) {
+                countBadge.innerText = `${activeGames.length} Games`;
+            }
+
+            // Update Section Opacity
+            if (section) {
+                if (activeGames.length === 0) {
+                    section.classList.add('opacity-30');
+                } else {
+                    section.classList.remove('opacity-30');
+                }
+            }
+        }
+    });
+
+    // Update Graveyard
+    const graveyardGrid = document.getElementById('graveyard-grid');
+    const graveyardSection = document.getElementById('graveyard-section');
+    if (droppedGames.length > 0) {
+        graveyardSection.classList.remove('hidden');
+        const droppedList = allGames.filter(g => droppedGames.includes(g.id));
+        graveyardGrid.innerHTML = droppedList.map(game => createCard(game)).join('');
+    } else {
+        graveyardSection.classList.add('hidden');
+    }
 
     // Level Up Achievement
     if (!silent && stats.level > oldLevel) {
@@ -262,7 +354,12 @@ function updateProgress(silent = false) {
     }
 
     // Trophy Logic
-    const checkList = (list) => list.length > 0 && list.every(g => completedGames.includes(g.id));
+    const checkList = (list) => {
+        if (list.length === 0) return false;
+        const allAccountedFor = list.every(g => completedGames.includes(g.id) || droppedGames.includes(g.id));
+        const atLeastOneCompleted = list.some(g => completedGames.includes(g.id));
+        return allAccountedFor && atLeastOneCompleted;
+    };
     
     const updateTrophy = (id, condition, trophyName) => {
         const el = document.getElementById(id);
@@ -294,9 +391,70 @@ function updateProgress(silent = false) {
     document.dispatchEvent(new CustomEvent('progressUpdated', { detail: { level: stats.level } }));
 }
 
+function toggleDrop(id, event) {
+    if (event) event.stopPropagation();
+    
+    if (droppedGames.includes(id)) {
+        droppedGames = droppedGames.filter(gameId => gameId !== id);
+    } else {
+        // Remove from completed if it was there
+        completedGames = completedGames.filter(gameId => gameId !== id);
+        delete completionDates[id];
+        
+        droppedGames.push(id);
+        sfx.playTone(200, 'sine', 0.5, 0, 0.1); // Low somber tone
+    }
+    closeModal();
+    saveState();
+}
+
+function dropCategory(key) {
+    const categoryLists = {
+        'core': coreGames,
+        'bonus': bonusGames,
+        'zen': zenGames,
+        'time': timeGames,
+        'art': artGames
+    };
+    
+    const list = categoryLists[key];
+    if (!list) return;
+
+    if (confirm(`Drop all available games in this category? Completed games will be skipped.`)) {
+        list.forEach(game => {
+            // Only drop if not already dropped AND not completed
+            if (!droppedGames.includes(game.id) && !completedGames.includes(game.id)) {
+                droppedGames.push(game.id);
+            }
+        });
+        sfx.playTone(200, 'sine', 0.5, 0, 0.1);
+        saveState();
+    }
+}
+
+function reviveCategory(key) {
+    const categoryLists = {
+        'core': coreGames,
+        'bonus': bonusGames,
+        'zen': zenGames,
+        'time': timeGames,
+        'art': artGames
+    };
+    
+    const list = categoryLists[key];
+    if (!list) return;
+
+    list.forEach(game => {
+        droppedGames = droppedGames.filter(id => id !== game.id);
+    });
+    saveState();
+}
+
 function resetProgress() {
-    if(confirm("Are you sure you want to reset all progress?")) {
+    if(confirm("Are you sure you want to reset all progress? This will also clear the Graveyard.")) {
         completedGames = [];
+        droppedGames = [];
+        completionDates = {};
         saveState();
         location.reload();
     }
@@ -437,10 +595,10 @@ function showStats() {
             const html = `
                 <div class="relative">
                     <div class="flex justify-between text-xs font-semibold mb-1">
-                        <span class="text-gray-300">${genre}</span>
-                        <span class="text-gray-500">${Math.round(pct)}%</span>
+                        <span class="text-gaming-text/80">${genre}</span>
+                        <span class="text-gaming-muted">${Math.round(pct)}%</span>
                     </div>
-                    <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden border border-gray-700">
+                    <div class="w-full bg-gaming-dark rounded-full h-2 overflow-hidden border border-gaming-border">
                         <div class="bg-blue-500 h-2 rounded-full" style="width: ${pct}%"></div>
                     </div>
                 </div>
@@ -455,7 +613,10 @@ function showStats() {
 // --- New Features: Share & Export ---
 
 function exportData() {
-    const data = btoa(JSON.stringify(completedGames));
+    const data = btoa(JSON.stringify({
+        completed: completedGames,
+        dates: completionDates
+    }));
     navigator.clipboard.writeText(data).then(() => {
         alert("Save code copied to clipboard! Keep it safe.");
     }).catch(err => {
@@ -468,15 +629,25 @@ function importData() {
     const code = prompt("Paste your save code here:");
     if (!code) return;
     try {
-        const data = JSON.parse(atob(code));
-        if (Array.isArray(data)) {
-            if(confirm("This will overwrite your current progress. Continue?")) {
-                completedGames = data;
-                saveState();
-                location.reload();
-            }
+        const decoded = JSON.parse(atob(code));
+        let newCompleted = [];
+        let newDates = {};
+
+        if (Array.isArray(decoded)) {
+            // Backward compatibility
+            newCompleted = decoded;
+        } else if (decoded.completed && Array.isArray(decoded.completed)) {
+            newCompleted = decoded.completed;
+            newDates = decoded.dates || {};
         } else {
-            alert("Invalid save code format.");
+            throw new Error("Invalid format");
+        }
+
+        if(confirm("This will overwrite your current progress. Continue?")) {
+            completedGames = newCompleted;
+            completionDates = newDates;
+            saveState();
+            location.reload();
         }
     } catch (e) {
         alert("Invalid save code. Please check and try again.");
@@ -598,10 +769,54 @@ function showDetails(id) {
     banner.style.backgroundPosition = 'center';
     banner.className = `h-48 w-full bg-gradient-to-br ${game.color} flex items-center justify-center relative overflow-hidden`;
     
-    // Add an overlay to ensure text readability if needed
+    // Completion Stamp in Modal
+    let stampHtml = '';
+    if (completionDates[id]) {
+        stampHtml = `
+            <div class="absolute top-4 left-4 z-20">
+                <div class="passport-stamp">${formatDate(completionDates[id])}</div>
+            </div>
+        `;
+    }
+
     banner.innerHTML = `
         <div class="absolute inset-0 bg-black/40 z-0"></div>
-        <h2 id="modal-title-big" class="text-4xl font-black text-white drop-shadow-lg text-center px-4 z-10">${game.title}</h2>
+        ${stampHtml}
+        <h2 id="modal-title-big" class="text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4 z-10">${game.title}</h2>
+    `;
+
+    const hltbUrl = `https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}`;
+    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay Trailer')}`;
+
+    const modalActions = document.getElementById('modal-actions');
+    const isDropped = droppedGames.includes(id);
+    const isCompleted = completedGames.includes(id);
+
+    const dropButtonHtml = !isCompleted ? `
+        <button onclick="toggleDrop('${id}')" class="text-gaming-muted hover:text-red-400 transition-colors flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+            ${isDropped ? 'Revive Game' : 'Drop Game'}
+        </button>
+    ` : '<div></div>';
+
+    modalActions.innerHTML = `
+        <div class="flex flex-wrap gap-3 justify-between items-center w-full mt-6 border-t border-gaming-border pt-6">
+            ${dropButtonHtml}
+            <div class="flex flex-wrap gap-3 justify-end items-center">
+                <a href="${ytUrl}" target="_blank" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 text-sm shadow-lg shadow-red-500/20">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
+                    Trailer
+                </a>
+                <a href="${hltbUrl}" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-4 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 text-sm">
+                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                    HLTB
+                </a>
+                <a id="modal-wiki" href="${game.wiki}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2">
+                    Wikipedia
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+            </div>
+        </div>
     `;
 
     document.getElementById('detail-modal').classList.remove('hidden');
@@ -613,59 +828,65 @@ function closeModal() {
 
 function createCard(game) {
     const isCompleted = completedGames.includes(game.id);
-    const eraClass = getEraClass(game.year);
     const statusClass = isCompleted ? 'completed' : '';
     const encodedTitle = encodeURIComponent(game.title);
 
     // Dynamic Approach: Use game.banner if it exists, fallback to placeholder
     const imgUrl = game.banner || `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
 
+    const stampHtml = isCompleted ? `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(completionDates[game.id])}</div>` : '';
+
     return `
         <div id="card-${game.id}" 
-                class="game-card relative bg-gray-800 overflow-hidden ${eraClass} ${statusClass} flex flex-col h-full group"
+                class="game-card relative bg-gaming-card overflow-hidden rounded-gaming ${statusClass} flex flex-col h-full group border border-gaming-border transition-all duration-300"
                 onclick="showDetails('${game.id}')"
                 onmouseenter="sfx.playTick()">
             <div class="relative h-40 overflow-hidden">                         <!-- Gradient Overlay: Invisible by default, fades in on hover -->
             <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
             
+            ${stampHtml}
+
             <!-- Image: Full opacity by default, slight zoom on hover -->
             <img src="${imgUrl}" 
                 alt="${game.title}" 
                 class="w-full h-full object-cover shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out"
                 onerror="this.onerror=null; this.src='https://placehold.co/600x350/222/eee?text=${encodedTitle}'">
-            <div class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded z-20 font-mono border border-white/20">
+            <a href="https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}" 
+               target="_blank" 
+               onclick="event.stopPropagation()"
+               class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded z-20 font-mono border border-white/20 hover:bg-orange-600 transition-colors">
             ${game.length}
-            </div>
+            </a>
     </div>
 
     <div class="p-4 flex flex-col flex-grow">
         <div class="flex justify-between items-start mb-2">
             <div>
                 <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">${game.genre}</span>
-                <h3 class="text-lg font-bold text-white leading-tight mt-1 hover:text-blue-400 transition-colors">
+                <h3 class="text-lg font-bold text-gaming-text leading-tight mt-1 hover:text-blue-400 transition-colors">
                     <a href="${game.wiki}" target="_blank" onclick="event.stopPropagation()">${game.title}</a>
                 </h3>
             </div>
         </div>
 
-        <div class="mt-auto pt-4 flex items-center justify-between border-t border-gray-700/50">
+        <div class="mt-auto pt-4 flex items-center justify-between border-t border-gaming-border/50">
             <div class="flex flex-col">
-                <span class="text-xs text-gray-400">System</span>
+                <span class="text-xs text-gaming-muted">System</span>
                 <div class="flex items-center gap-1.5 mt-0.5">
                     ${getSystemIcon(game.system)}
-                    <span class="text-sm font-medium text-gray-200">${game.system}</span>
+                    <span class="text-sm font-medium text-gaming-text/80">${game.system}</span>
                 </div>
             </div>
             <div class="flex flex-col items-end">
-                <span class="text-xs text-gray-400">Year</span>
-                <span class="text-sm font-medium text-gray-200">${game.year}</span>
+                <span class="text-xs text-gaming-muted">Year</span>
+                <span class="text-sm font-medium text-gaming-text/80">${game.year}</span>
             </div>
         </div>
     </div>
 
-                        <div class="bg-gray-900/50 p-3 flex items-center justify-between border-t border-gray-700 cursor-pointer hover:bg-gray-800 transition-colors group-mark" 
+                        <div class="bg-gaming-dark/50 p-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
                                 onclick="toggleGame('${game.id}', event)">
-                            <span class="text-xs ${isCompleted ? 'text-emerald-400 font-bold' : 'text-gray-500 font-medium'} uppercase tracking-wider transition-colors">
+                            <span class="text-xs ${isCompleted ? 'text-emerald-400 font-bold' : 'text-gaming-muted font-medium'} uppercase tracking-wider transition-colors">
                                 ${isCompleted ? 'Completed' : 'Mark as Complete'}
                             </span>
                             <input type="checkbox" 

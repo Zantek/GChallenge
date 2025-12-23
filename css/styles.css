@@ -1,7 +1,147 @@
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #1e293b;
+            --bg-header: #111827;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #3b82f6;
+            --border: #1e293b;
+            --radius: 0.75rem;
+            --font-main: 'Inter', sans-serif;
+        }
+
+        [data-theme='brick'] {
+            --bg-primary: #8bac0f;
+            --bg-secondary: #9bbc0f;
+            --bg-card: #9bbc0f;
+            --bg-header: #306230;
+            --text-primary: #0f380f;
+            --text-secondary: #306230;
+            --accent: #0f380f;
+            --border: #0f380f;
+            --radius: 0px;
+        }
+
+        [data-theme='cube'] {
+            --bg-primary: #6a5acd;
+            --bg-secondary: #483d8b;
+            --bg-card: #1e1e1e;
+            --bg-header: #4b0082;
+            --text-primary: #ffffff;
+            --text-secondary: #dcdcdc;
+            --accent: #ff4500;
+            --border: #4b0082;
+            --radius: 2rem;
+        }
+
+        [data-theme='os'] {
+            --bg-primary: #c0c0c0;
+            --bg-secondary: #c0c0c0;
+            --bg-card: #ffffff;
+            --bg-header: #000080;
+            --text-primary: #000000;
+            --text-secondary: #404040;
+            --accent: #000080;
+            --border: #808080;
+            --radius: 0px;
+        }
+
+        [data-theme='brick'] .game-card {
+            border: 2px solid var(--border);
+            image-rendering: pixelated;
+        }
+
+        [data-theme='brick'] .bg-blue-500,
+        [data-theme='brick'] .bg-blue-600,
+        [data-theme='brick'] .bg-purple-500,
+        [data-theme='brick'] .bg-green-400,
+        [data-theme='brick'] .bg-red-500,
+        [data-theme='brick'] .bg-orange-500,
+        [data-theme='brick'] .bg-gaming-accent {
+            background-color: var(--accent) !important;
+            color: var(--bg-primary) !important;
+        }
+
+        [data-theme='brick'] header .text-gaming-text,
+        [data-theme='brick'] header .text-blue-500,
+        [data-theme='brick'] header h1,
+        [data-theme='brick'] header p {
+            color: var(--bg-primary) !important;
+        }
+
+        [data-theme='brick'] .text-blue-400,
+        [data-theme='brick'] .text-blue-500,
+        [data-theme='brick'] .text-emerald-400,
+        [data-theme='brick'] .text-purple-400,
+        [data-theme='brick'] .text-yellow-400 {
+            color: var(--text-primary) !important;
+        }
+
+        [data-theme='brick'] .game-card.completed {
+            border-color: var(--accent) !important;
+            background-color: var(--bg-secondary);
+        }
+
+        [data-theme='cube'] .game-card {
+            border: 4px solid var(--border);
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
+        }
+
+        [data-theme='os'] .game-card,
+        [data-theme='os'] .rounded-gaming,
+        [data-theme='os'] header,
+        [data-theme='os'] section,
+        [data-theme='os'] .companion-window,
+        [data-theme='os'] #companion-bubble {
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+        }
+
+        [data-theme='brick'] .companion-window {
+            border-color: var(--border) !important;
+        }
+
+        [data-theme='brick'] .companion-window .bg-gaming-accent {
+            background-color: var(--accent) !important;
+        }
+
+        [data-theme='brick'] .companion-window .bg-gaming-dark\/30 {
+            background-color: var(--bg-primary) !important;
+        }
+
+        [data-theme='os'] .game-card:active {
+            border-color: #808080 #ffffff #ffffff #808080 !important;
+        }
+
+        [data-theme='os'] .bg-blue-600 {
+            background-color: #000080 !important;
+        }
+
+        [data-theme='os'] header .text-gaming-text,
+        [data-theme='os'] header h1,
+        [data-theme='os'] header p,
+        [data-theme='os'] header span,
+        [data-theme='os'] header #progress-text {
+            color: #ffffff !important;
+        }
+
+        [data-theme='os'] header .text-gaming-muted {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+
+        [data-theme='os'] header button,
+        [data-theme='os'] header .bg-gaming-card button {
+            color: #ffffff !important;
+        }
+
+        [data-theme='os'] #level-badge {
+            background-color: #c0c0c0 !important;
+            color: #000000 !important;
+            border: 2px solid;
+            border-color: #ffffff #808080 #808080 #ffffff !important;
         }
         .game-card {
             transition: all 0.3s ease;
@@ -15,16 +155,25 @@
             border-color: #10b981;
             opacity: 0.8;
         }
+        .game-card.dropped {
+            filter: grayscale(0.8) sepia(0.2);
+            border-color: var(--border);
+            opacity: 0.5;
+        }
+        .game-card.dropped:hover {
+            filter: grayscale(0.4) sepia(0.1);
+            opacity: 0.8;
+        }
         /* Custom Checkbox */
         .custom-checkbox {
             appearance: none;
-            background-color: #334155;
+            background-color: var(--bg-primary);
             margin: 0;
             font: inherit;
             color: currentColor;
             width: 1.5em;
             height: 1.5em;
-            border: 2px solid #475569;
+            border: 2px solid var(--border);
             border-radius: 0.25em;
             display: grid;
             place-content: center;
@@ -54,67 +203,242 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0f172a;
+            background: var(--bg-primary);
         }
         ::-webkit-scrollbar-thumb {
-            background: #334155;
+            background: var(--bg-header);
             border-radius: 10px;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: #475569;
+            background: var(--accent);
         }
 
         .trophy {
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             filter: grayscale(1) opacity(0.3);
         }
-        .trophy.unlocked {
-            filter: grayscale(0) opacity(1);
-        }
-
-        /* --- Era Specific Themes --- */
-
-        /* Retro Era (Pre-2000) - Pixel/CRT feel */
-        .era-retro {
-            border: 4px double #475569;
-            image-rendering: pixelated;
-        }
-        .era-retro.completed {
-            border-color: #10b981 !important;
-        }
-
-        /* Y2K Era (2000-2009) - Glossy/Metallic feel */
-        .era-y2k {
-            border-radius: 1.5rem;
-            border: 2px solid #94a3b8;
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.1);
-        }
-        .era-y2k.completed {
-            border-color: #10b981 !important;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
-        }
-
-        /* Modern Era (2010-2019) - Minimalist/Flat feel */
-        .era-modern {
-            border-radius: 0.5rem;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .era-modern.completed {
-            border: 2px solid #10b981 !important;
-        }
-
-        /* Cyber Era (2020+) - Neon/Glassmorphism feel */
-        .era-cyber {
-            border: 1px solid rgba(59, 130, 246, 0.5);
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 10px rgba(59, 130, 246, 0.1);
-        }
-        .era-cyber:hover {
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-        }
-        .era-cyber.completed {
-            border: 2px solid #10b981 !important;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-        }
+                .trophy.unlocked {
+                    filter: grayscale(0) opacity(1);
+                }
+        
+                                /* Passport Stamp System */
+        
+                                .passport-stamp {
+        
+                                    font-family: 'Courier New', Courier, monospace;
+        
+                                    color: #ef4444; /* Red ink default */
+        
+                                    border: 3px double #ef4444;
+        
+                                    padding: 4px 10px;
+        
+                                    font-size: 10px;
+        
+                                    font-weight: 900;
+        
+                                    text-transform: uppercase;
+        
+                                    letter-spacing: 1px;
+        
+                                    transform: rotate(-15deg);
+        
+                                    background: rgba(255, 255, 255, 0.95);
+        
+                                    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+        
+                                    pointer-events: none;
+        
+                                    user-select: none;
+        
+                                    animation: stamp-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        
+                                    z-index: 40;
+        
+                                }
+        
+                        
+        
+                                        /* Future Theme: Holographic/Digital Tag */
+        
+                        
+        
+                                        [data-theme='future'] .passport-stamp {
+        
+                        
+        
+                                            color: #ffffff;
+        
+                        
+        
+                                            border: 1px solid #22d3ee;
+        
+                        
+        
+                                            background: rgba(8, 145, 178, 0.9); /* Opaque background for readability */
+        
+                        
+        
+                                            backdrop-filter: blur(8px);
+        
+                        
+        
+                                            box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+        
+                        
+        
+                                            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        
+                        
+        
+                                            border-radius: 12px; /* Much rounder corners */
+        
+                        
+        
+                                            font-family: 'Inter', sans-serif;
+        
+                        
+        
+                                            font-weight: 800;
+        
+                        
+        
+                                            font-style: italic;
+        
+                        
+        
+                                            padding: 4px 12px;
+        
+                        
+        
+                                        }
+        
+                        
+        
+                                
+        
+                        
+        
+                                /* Cube Theme: Playful Sticker */
+        
+                                [data-theme='cube'] .passport-stamp {
+        
+                                    color: #ffffff;
+        
+                                    border: 4px solid #ffffff;
+        
+                                    background: #f97316; /* Orange-500 */
+        
+                                    border-radius: 9999px;
+        
+                                    padding: 4px 12px;
+        
+                                    box-shadow: 4px 4px 0px #4b0082; /* Indigo-900 */
+        
+                                    font-family: 'Arial Black', sans-serif;
+        
+                                }
+        
+                        
+        
+                                [data-theme='brick'] .passport-stamp {
+        
+                                    color: var(--accent);
+        
+                                    border-color: var(--accent);
+        
+                                    background: var(--bg-primary);
+        
+                                    box-shadow: none;
+        
+                                }
+        
+                        
+        
+                                [data-theme='os'] .passport-stamp {
+        
+                                    border: 2px solid #ef4444;
+        
+                                    background: #ffffff;
+        
+                                    color: #ef4444;
+        
+                                }
+        
+                        
+        
+                        @keyframes stamp-slam {
+                            0% { transform: scale(3) rotate(0deg); opacity: 0; }
+                            100% { transform: scale(1) rotate(-15deg); opacity: 1; }
+                        }
+                
+                                /* CRT Mode Effect */
+                                .crt-active body::before {
+                                    content: " ";
+                                    display: block;
+                                    position: fixed;
+                                    top: 0;
+                                    left: 0;
+                                    bottom: 0;
+                                    right: 0;
+                                    /* Softer Scanlines */
+                                    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+                                    z-index: 100;
+                                    background-size: 100% 4px;
+                                    pointer-events: none;
+                                }
+                        
+                                .crt-active body::after {
+                                    content: " ";
+                                    display: block;
+                                    position: fixed;
+                                    top: 0;
+                                    left: 0;
+                                    bottom: 0;
+                                    right: 0;
+                                    /* RGB phosphors and subtle noise */
+                                    background: linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+                                    background-size: 3px 100%;
+                                    z-index: 101;
+                                    pointer-events: none;
+                                    animation: crt-flicker 0.15s infinite;
+                                }
+                        
+                                .crt-active .crt-vignette {
+                                    position: fixed;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    /* This simulates the curvature by rounding the viewport corners and adding depth */
+                                    background: radial-gradient(circle at center, transparent 60%, rgba(0, 0, 0, 0.8) 100%);
+                                    box-shadow: inset 0 0 20rem rgba(0,0,0,1);
+                                    z-index: 102;
+                                    pointer-events: none;
+                                }
+                        
+                                /* The actual "Tube" curve mask */
+                                .crt-active::before {
+                                    content: "";
+                                    position: fixed;
+                                    inset: 0;
+                                    z-index: 103;
+                                    pointer-events: none;
+                                    background: radial-gradient(circle at center, transparent 0%, transparent 70%, rgba(0,0,0,1) 120%);
+                                }
+                        
+                                @keyframes crt-flicker {
+                                    0% { opacity: 0.1; }
+                                    50% { opacity: 0.15; }
+                                    100% { opacity: 0.1; }
+                                }
+                        
+                                /* Improved Glow & Aberration */
+                                .crt-active .game-card:not(.completed), 
+                                .crt-active h1, 
+                                .crt-active h2,
+                                .crt-active h3 {
+                                    text-shadow: 1px 0 1px rgba(255,0,0,0.4), -1px 0 1px rgba(0,0,255,0.4);
+                                    filter: brightness(1.1) contrast(1.1);
+                                }
+                        

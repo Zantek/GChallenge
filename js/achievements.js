@@ -38,9 +38,9 @@ class AchievementSystem {
             
             // Animation classes (Tailwind)
             toast.className = `
-                flex items-center gap-4 bg-gray-900/95 backdrop-blur-md border-2 border-gray-700 
-                p-4 rounded-xl shadow-2xl min-w-[320px] max-w-[400px]
-                animate-in slide-in-from-bottom-full duration-500 ease-out
+                flex items-center gap-4 bg-gaming-card/95 backdrop-blur-md border-2 border-gaming-border 
+                p-4 rounded-gaming shadow-2xl min-w-[320px] max-w-[400px]
+                animate-in slide-in-from-bottom-full duration-500 ease-out transition-colors duration-300
             `;
 
             const iconColor = data.type === 'level' ? 'text-blue-500' : 'text-yellow-500';
@@ -54,8 +54,8 @@ class AchievementSystem {
                     <p class="text-[10px] font-black uppercase tracking-[0.2em] ${iconColor} mb-0.5">
                         ${data.type === 'level' ? 'Level Up!' : 'Achievement Unlocked'}
                     </p>
-                    <h4 class="text-white font-bold text-sm">${data.title}</h4>
-                    <p class="text-gray-400 text-xs">${data.message}</p>
+                    <h4 class="text-gaming-text font-bold text-sm">${data.title}</h4>
+                    <p class="text-gaming-muted text-xs">${data.message}</p>
                 </div>
             `;
 

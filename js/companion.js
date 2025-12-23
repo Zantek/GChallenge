@@ -199,25 +199,25 @@ class Companion {
         this.container.innerHTML = `
             <div class="relative group cursor-pointer" onclick="companion.interact()">
                 <!-- Speech Bubble -->
-                <div id="companion-bubble" class="absolute bottom-full right-0 mb-4 w-40 bg-white border-4 border-gray-900 text-gray-900 text-[10px] p-2 font-bold text-center z-50 opacity-0 transition-opacity duration-300 pointer-events-none shadow-[4px_4px_0px_0px_rgba(17,24,39,1)]">
+                <div id="companion-bubble" class="absolute bottom-full right-0 mb-4 w-40 bg-gaming-card border-4 border-gaming-border text-gaming-text text-[10px] p-2 font-bold text-center z-50 opacity-0 transition-opacity duration-300 pointer-events-none shadow-[4px_4px_0px_0px_var(--border)]">
                     Level Up to see me grow!
-                    <div class="absolute -bottom-2 right-8 w-3 h-3 bg-white border-r-4 border-b-4 border-gray-900 rotate-45"></div>
+                    <div class="absolute -bottom-2 right-8 w-3 h-3 bg-gaming-card border-r-4 border-b-4 border-gaming-border rotate-45"></div>
                 </div>
                 
                 <!-- Retro Window Frame -->
-                <div class="bg-gray-100 border-4 border-gray-900 shadow-[8px_8px_0px_0px_rgba(0,0,0,0.4)] w-32 h-32 flex flex-col relative transition-all duration-200 hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,0.4)]">
+                <div class="companion-window bg-gaming-card border-4 border-gaming-border shadow-[8px_8px_0px_0px_rgba(0,0,0,0.4)] w-32 h-32 flex flex-col relative transition-all duration-200 hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(0,0,0,0.4)] rounded-gaming overflow-hidden">
                     <!-- Title Bar -->
-                    <div class="h-6 bg-blue-500 border-b-4 border-gray-900 flex items-center justify-between px-2">
+                    <div class="h-6 bg-gaming-accent border-b-4 border-gaming-border flex items-center justify-between px-2">
                         <span class="text-[8px] font-black text-white tracking-widest uppercase">BUDDY.EXE</span>
                         <div class="flex gap-1">
-                             <div class="w-2 h-2 bg-white border border-gray-900"></div>
+                             <div class="w-2 h-2 bg-white border border-gaming-border"></div>
                         </div>
                     </div>
                     
                     <!-- Screen Content -->
-                    <div class="flex-grow bg-indigo-100 flex items-end justify-center pb-2 relative overflow-hidden relative">
+                    <div class="flex-grow bg-gaming-dark/30 flex items-end justify-center pb-2 relative overflow-hidden">
                         <!-- Pixel Background Pattern -->
-                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#4f46e5 1px, transparent 1px); background-size: 4px 4px;"></div>
+                        <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(var(--accent) 1px, transparent 1px); background-size: 4px 4px;"></div>
                         
                         <!-- Floor -->
                         <div class="absolute bottom-0 w-full h-8 bg-green-400/30 border-t-4 border-green-500/30"></div>
