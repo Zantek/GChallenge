@@ -52,6 +52,14 @@ const artGames = [
 
 const allGames = [...coreGames, ...bonusGames, ...zenGames, ...timeGames, ...artGames];
 
+const categoryNames = { 
+    'core': 'Core Challenge', 
+    'bonus': 'Weird Bonus', 
+    'zen': 'Zen Garden', 
+    'time': 'Time Warp', 
+    'art': 'Art House' 
+};
+
 // --- Audio System (Procedural 8-bit Sound) ---
 class SoundFX {
     constructor() {
@@ -314,7 +322,7 @@ function updateProgress(silent = false) {
         
         if (grid) {
             const activeGames = data.list.filter(g => !droppedGames.includes(g.id));
-            grid.innerHTML = activeGames.map(game => createCard(game)).join('');
+            grid.innerHTML = activeGames.map(game => createCard(game, key)).join('');
             
             // Update Count Badge
             if (countBadge) {
@@ -830,81 +838,125 @@ function closeModal() {
 
 function createCard(game) {
     const isCompleted = completedGames.includes(game.id);
-    const statusClass = isCompleted ? 'completed' : '';
+    const isDropped = droppedGames.includes(game.id);
+    const statusClass = isCompleted ? 'completed' : (isDropped ? 'dropped' : '');
     const encodedTitle = encodeURIComponent(game.title);
 
-    // Dynamic Approach: Use game.banner if it exists, fallback to placeholder
     const imgUrl = game.banner || `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
-
     const stampHtml = isCompleted ? `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(completionDates[game.id])}</div>` : '';
+    
+    const hltbUrl = `https://howlongtobeat.com/?q=${encodedTitle}`;
+    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay Trailer')}`;
 
     return `
-        <div id="card-${game.id}" 
-                class="game-card relative bg-gaming-card overflow-hidden rounded-gaming ${statusClass} flex flex-col h-full group border border-gaming-border transition-all duration-300"
-                onclick="showDetails('${game.id}')">
-            <div class="relative h-40 overflow-hidden">                         <!-- Gradient Overlay: Invisible by default, fades in on hover -->
-            <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
-            
-            ${stampHtml}
+        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="this.classList.toggle('flipped')">
+            <div class="game-card-inner">
+                <!-- FRONT FACE -->
+                <div class="game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
+                    <div class="relative h-40 overflow-hidden shrink-0">
+                        <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
+                        ${stampHtml}
+                        ${isDropped ? '<div class="absolute inset-0 bg-black/40 z-20 flex items-center justify-center"><svg class="w-12 h-12 text-white/30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg></div>' : ''}
+                        <img src="${imgUrl}" alt="${game.title}" class="w-full h-full object-cover shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                        <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-2 py-1 rounded z-20 font-mono border border-white/20" style="transform: translateZ(1px)">
+                            ${game.length}
+                        </div>
+                    </div>
 
-            <!-- Image: Full opacity by default, slight zoom on hover -->
-            <img src="${imgUrl}" 
-                alt="${game.title}" 
-                class="w-full h-full object-cover shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out"
-                onerror="this.onerror=null; this.src='https://placehold.co/600x350/222/eee?text=${encodedTitle}'">
-            <a href="https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}" 
-               target="_blank" 
-               onclick="event.stopPropagation()"
-               class="absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded z-20 font-mono border border-white/20 hover:bg-orange-600 transition-colors">
-            ${game.length}
-            </a>
-    </div>
+                    <div class="p-4 flex flex-col flex-grow">
+                        <div class="mb-2">
+                            <span class="text-[10px] font-semibold text-blue-400 uppercase tracking-wider">${game.genre}</span>
+                            <h3 class="text-base font-bold text-gaming-text leading-tight mt-1 truncate">${game.title}</h3>
+                        </div>
 
-    <div class="p-4 flex flex-col flex-grow">
-        <div class="flex justify-between items-start mb-2">
-            <div>
-                <span class="text-xs font-semibold text-blue-400 uppercase tracking-wider">${game.genre}</span>
-                <h3 class="text-lg font-bold text-gaming-text leading-tight mt-1 hover:text-blue-400 transition-colors">
-                    <a href="${game.wiki}" target="_blank" onclick="event.stopPropagation()">${game.title}</a>
-                </h3>
-            </div>
-        </div>
+                        <div class="mt-auto pt-4 flex items-center justify-between border-t border-gaming-border/50">
+                            <div class="flex flex-col">
+                                <span class="text-[10px] text-gaming-muted">System</span>
+                                <div class="flex items-center gap-1.5 mt-0.5">
+                                    ${getSystemIcon(game.system)}
+                                    <span class="text-xs font-medium text-gaming-text/80">${game.system}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end">
+                                <span class="text-[10px] text-gaming-muted">Year</span>
+                                <span class="text-xs font-medium text-gaming-text/80">${game.year}</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="mt-auto pt-4 flex items-center justify-between border-t border-gaming-border/50">
-            <div class="flex flex-col">
-                <span class="text-xs text-gaming-muted">System</span>
-                <div class="flex items-center gap-1.5 mt-0.5">
-                    ${getSystemIcon(game.system)}
-                    <span class="text-sm font-medium text-gaming-text/80">${game.system}</span>
+                    <div class="bg-gaming-dark/50 p-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
+                            onclick="${isDropped ? "toggleDrop('" + game.id + "', event)" : "toggleGame('" + game.id + "', event)"}">
+                        <span class="text-[10px] ${isCompleted ? 'text-emerald-400 font-bold' : (isDropped ? 'text-red-400 font-bold' : 'text-gaming-muted font-medium')} uppercase tracking-wider transition-colors">
+                            ${isCompleted ? 'Completed' : (isDropped ? 'Dropped (Wisdom +100)' : 'Mark as Complete')}
+                        </span>
+                        ${!isDropped ? `
+                        <input type="checkbox" class="custom-checkbox pointer-events-none" ${isCompleted ? 'checked' : ''} aria-label="Mark ${game.title} as complete">
+                        ` : `
+                        <svg class="w-4 h-4 text-red-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                        `}
+                    </div>
+                </div>
+
+                <!-- BACK FACE -->
+                <div class="game-card-back bg-gaming-card border-2 border-gaming-accent p-4 flex flex-col gap-3 shadow-2xl relative">
+                    <div class="absolute top-2 right-2 opacity-20">
+                         <svg class="w-12 h-12 text-gaming-accent" fill="currentColor" viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                    </div>
+                    
+                    <div class="min-w-0">
+                        <h3 class="text-base font-black text-gaming-text leading-tight mb-1 truncate">${game.title}</h3>
+                        <div class="flex gap-2">
+                            <span class="text-[8px] font-black text-blue-400 uppercase tracking-widest bg-blue-900/20 px-1.5 py-0.5 rounded border border-blue-500/20">${game.genre}</span>
+                            <span class="text-[8px] font-black text-gaming-muted bg-gaming-dark/50 px-1.5 py-0.5 rounded border border-gaming-border">${game.year}</span>
+                        </div>
+                    </div>
+
+                    <p class="text-[10px] text-gaming-muted leading-relaxed line-clamp-[8] flex-grow">
+                        ${game.desc}
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-2 mt-auto pt-2">
+                        <div class="bg-gaming-dark/30 p-1.5 rounded border border-gaming-border">
+                            <span class="text-[7px] text-gaming-muted block uppercase font-bold">Platform</span>
+                            <span class="text-[9px] text-gaming-text font-medium truncate block">${game.system}</span>
+                        </div>
+                        <div class="bg-gaming-dark/30 p-1.5 rounded border border-gaming-border text-right">
+                            <span class="text-[7px] text-gaming-muted block uppercase font-bold">Playtime</span>
+                            <span class="text-[9px] text-emerald-400 font-bold block">${game.length}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-1.5 mt-2 pt-2 border-t border-gaming-border">
+                        <div class="flex gap-1.5">
+                            <a href="${ytUrl}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-red-600 hover:bg-red-500 text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
+                                YT
+                            </a>
+                            <a href="${hltbUrl}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
+                                HLTB
+                            </a>
+                        </div>
+                        <a href="${game.wiki}" target="_blank" onclick="event.stopPropagation()" class="bg-blue-600 hover:bg-blue-500 text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
+                            Wikipedia
+                        </a>
+                        ${!isCompleted ? `
+                        <button onclick="toggleDrop('${game.id}', event)" class="text-gaming-muted hover:text-red-400 text-[8px] font-black uppercase tracking-widest pt-0.5">
+                            ${isDropped ? 'Revive' : 'Drop'}
+                        </button>
+                        ` : ''}
+                    </div>
                 </div>
             </div>
-            <div class="flex flex-col items-end">
-                <span class="text-xs text-gaming-muted">Year</span>
-                <span class="text-sm font-medium text-gaming-text/80">${game.year}</span>
-            </div>
         </div>
-    </div>
-
-                        <div class="bg-gaming-dark/50 p-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
-                                onclick="toggleGame('${game.id}', event)">
-                            <span class="text-xs ${isCompleted ? 'text-emerald-400 font-bold' : 'text-gaming-muted font-medium'} uppercase tracking-wider transition-colors">
-                                ${isCompleted ? 'Completed' : 'Mark as Complete'}
-                            </span>
-                            <input type="checkbox" 
-                                    class="custom-checkbox pointer-events-none"
-                                    ${isCompleted ? 'checked' : ''} 
-                                    aria-label="Mark ${game.title} as complete">
-                        </div>                </div>
-`;
+    `;
 }
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('core-grid').innerHTML = coreGames.map(game => createCard(game)).join('');
-    document.getElementById('bonus-grid').innerHTML = bonusGames.map(game => createCard(game)).join('');
-    document.getElementById('zen-grid').innerHTML = zenGames.map(game => createCard(game)).join('');
-    document.getElementById('time-grid').innerHTML = timeGames.map(game => createCard(game)).join('');
-    document.getElementById('art-grid').innerHTML = artGames.map(game => createCard(game)).join('');
+    document.getElementById('core-grid').innerHTML = coreGames.map(game => createCard(game, 'core')).join('');
+    document.getElementById('bonus-grid').innerHTML = bonusGames.map(game => createCard(game, 'bonus')).join('');
+    document.getElementById('zen-grid').innerHTML = zenGames.map(game => createCard(game, 'zen')).join('');
+    document.getElementById('time-grid').innerHTML = timeGames.map(game => createCard(game, 'time')).join('');
+    document.getElementById('art-grid').innerHTML = artGames.map(game => createCard(game, 'art')).join('');
 
     updateProgress(true);
 });
