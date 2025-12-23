@@ -241,6 +241,7 @@ function calculateStats() {
 
 function updateProgress(silent = false) {
     const stats = calculateStats();
+    const oldLevel = parseInt(document.getElementById('level-badge').innerText.replace('L', '')) || 1;
 
     // UI Updates
     document.getElementById('progress-bar').style.width = `${stats.percentage}%`;
@@ -250,30 +251,44 @@ function updateProgress(silent = false) {
     document.getElementById('xp-bar').style.width = `${stats.xpPercentage}%`;
     document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
 
+    // Level Up Achievement
+    if (!silent && stats.level > oldLevel) {
+        achievements.show({
+            title: `Level ${stats.level}`,
+            message: "Your gaming prowess is expanding!",
+            type: 'level',
+            icon: '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>'
+        });
+    }
+
     // Trophy Logic
     const checkList = (list) => list.length > 0 && list.every(g => completedGames.includes(g.id));
     
-    const updateTrophy = (id, condition) => {
+    const updateTrophy = (id, condition, trophyName) => {
         const el = document.getElementById(id);
         const wasUnlocked = el.classList.contains('unlocked');
         
         if (condition) {
             el.classList.add('unlocked');
-            // Only play sound if it wasn't unlocked before AND we are not silent (initial load)
             if (!wasUnlocked && !silent) {
-                sfx.playFanfare();
+                // Achievement Popup
+                achievements.show({
+                    title: trophyName,
+                    message: "Category fully completed!",
+                    type: 'trophy'
+                });
             }
         } else {
             el.classList.remove('unlocked');
         }
     };
 
-    updateTrophy('trophy-core', checkList(coreGames));
-    updateTrophy('trophy-bonus', checkList(bonusGames));
-    updateTrophy('trophy-zen', checkList(zenGames));
-    updateTrophy('trophy-time', checkList(timeGames));
-    updateTrophy('trophy-art', checkList(artGames));
-    updateTrophy('trophy-all', stats.completed === stats.total && stats.total > 0);
+    updateTrophy('trophy-core', checkList(coreGames), "Core Master");
+    updateTrophy('trophy-bonus', checkList(bonusGames), "Bonus Collector");
+    updateTrophy('trophy-zen', checkList(zenGames), "Zen Master");
+    updateTrophy('trophy-time', checkList(timeGames), "Time Lord");
+    updateTrophy('trophy-art', checkList(artGames), "Art Critic");
+    updateTrophy('trophy-all', stats.completed === stats.total && stats.total > 0, "Grand Master");
 
     // Notify other components (Companion)
     document.dispatchEvent(new CustomEvent('progressUpdated', { detail: { level: stats.level } }));
