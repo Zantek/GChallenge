@@ -60,17 +60,30 @@
                 </div>
                 
                 <div class="w-full md:w-1/2 flex flex-col gap-3">
-                    <div class="flex justify-between items-end">
+                    <div class="flex justify-between items-center">
                         <span class="text-xs text-gray-400 uppercase tracking-widest font-bold">Total Completion</span>
                         <div class="flex items-center gap-4">
                             <span id="progress-text" class="text-sm font-bold text-blue-400">0/36 Games</span>
-                            <button id="mute-btn" onclick="sfx.toggleMute()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Toggle Sound">
-                                <!-- Icons handled by JS -->
-                                <svg id="icon-sound-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
-                                <svg id="icon-sound-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
-                            </button>
-                            <button onclick="generateShareCard()" class="text-xs font-bold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1.5 uppercase tracking-wider">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            
+                            <!-- Tools Toolbar -->
+                            <div class="bg-gray-800/80 backdrop-blur rounded-full px-3 py-1.5 flex items-center gap-3 border border-gray-700 shadow-sm">
+                                <button onclick="startRandomizer()" class="text-purple-400 hover:text-purple-300 transition-colors p-1" title="What should I play?">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                </button>
+                                <div class="w-px h-4 bg-gray-700"></div>
+                                <button onclick="showStats()" class="text-emerald-400 hover:text-emerald-300 transition-colors p-1" title="Gamer Stats">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                                </button>
+                                <div class="w-px h-4 bg-gray-700"></div>
+                                <button id="mute-btn" onclick="sfx.toggleMute()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Toggle Sound">
+                                    <!-- Icons handled by JS -->
+                                    <svg id="icon-sound-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                                    <svg id="icon-sound-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+                                </button>
+                            </div>
+
+                            <button onclick="generateShareCard()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold py-1.5 px-3 rounded-full transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-lg shadow-blue-500/20">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                 Share
                             </button>
                         </div>
@@ -286,6 +299,66 @@
         </div>
     </div>
 
+    <!-- Stats Modal -->
+    <div id="stats-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeStatsModal()">
+        <div class="bg-gray-900 border border-gray-700 rounded-2xl max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh]" onclick="event.stopPropagation()">
+            <div class="p-6 border-b border-gray-800 flex justify-between items-center bg-gray-800/50">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                    <span class="text-emerald-400">Gamer Stats</span> Sheet
+                </h3>
+                <button onclick="closeStatsModal()" class="text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="p-6 overflow-y-auto space-y-8">
+                
+                <!-- Main Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-gray-800 p-4 rounded-xl border border-gray-700">
+                        <span class="text-xs text-gray-500 uppercase tracking-widest font-bold block mb-1">Time Invested</span>
+                        <div class="flex items-end gap-2">
+                            <span id="stat-hours-done" class="text-3xl font-black text-white">0</span>
+                            <span class="text-sm text-gray-400 mb-1">Hours</span>
+                        </div>
+                        <div class="w-full bg-gray-700 h-1 mt-2 rounded-full overflow-hidden">
+                             <div id="stat-hours-bar" class="bg-emerald-500 h-1 transition-all" style="width: 0%"></div>
+                        </div>
+                        <p class="text-[10px] text-gray-500 mt-2"><span id="stat-hours-left">0</span> hours remaining</p>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 rounded-xl border border-gray-700">
+                         <span class="text-xs text-gray-500 uppercase tracking-widest font-bold block mb-1">Favorite Era</span>
+                         <span id="stat-era" class="text-xl font-black text-white block truncate">TBD</span>
+                         <p class="text-[10px] text-gray-500 mt-2">Based on completion count</p>
+                    </div>
+
+                    <div class="bg-gray-800 p-4 rounded-xl border border-gray-700">
+                        <span class="text-xs text-gray-500 uppercase tracking-widest font-bold block mb-1">Completion Rate</span>
+                        <span id="stat-rate" class="text-3xl font-black text-white">0%</span>
+                        <p class="text-[10px] text-gray-500 mt-2" id="stat-count">0 / 0 Games</p>
+                   </div>
+                </div>
+
+                <!-- Genre Distribution -->
+                <div>
+                    <h4 class="text-sm text-gray-400 uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
+                        Genre Spread
+                        <div class="h-px bg-gray-800 flex-grow"></div>
+                    </h4>
+                    <div id="genre-bars" class="space-y-3">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Companion Container -->
+    <div id="companion-container" class="fixed bottom-6 right-6 z-30"></div>
+
     <script src="js/app.js"></script>
+    <script src="js/companion.js"></script>
 </body>
 </html>

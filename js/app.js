@@ -274,6 +274,9 @@ function updateProgress(silent = false) {
     updateTrophy('trophy-time', checkList(timeGames));
     updateTrophy('trophy-art', checkList(artGames));
     updateTrophy('trophy-all', stats.completed === stats.total && stats.total > 0);
+
+    // Notify other components (Companion)
+    document.dispatchEvent(new CustomEvent('progressUpdated', { detail: { level: stats.level } }));
 }
 
 function resetProgress() {
@@ -282,6 +285,156 @@ function resetProgress() {
         saveState();
         location.reload();
     }
+}
+
+function startRandomizer() {
+    const available = allGames.filter(g => !completedGames.includes(g.id));
+    
+    if (available.length === 0) {
+        alert("You've completed everything! Go touch some grass!");
+        return;
+    }
+
+    // Open Modal in "Loading" state
+    const modal = document.getElementById('detail-modal');
+    modal.classList.remove('hidden');
+    
+    let ticks = 0;
+    const maxTicks = 20; // How many spins
+    const intervalTime = 50; // Speed of spin
+
+    // Slot Machine Loop
+    const timer = setInterval(() => {
+        // Pick random game
+        const randomGame = available[Math.floor(Math.random() * available.length)];
+        
+        // Update Modal Visuals Rapidly
+        document.getElementById('modal-title-big').innerText = "???"; 
+        document.getElementById('modal-title').innerText = randomGame.title;
+        document.getElementById('modal-banner').style.backgroundImage = 'none';
+        document.getElementById('modal-banner').className = `h-48 w-full bg-gradient-to-br ${randomGame.color} flex items-center justify-center relative overflow-hidden`;
+        
+        sfx.playTick();
+        ticks++;
+
+        if (ticks >= maxTicks) {
+            clearInterval(timer);
+            // Show Final Result
+            showDetails(randomGame.id);
+            sfx.playFanfare();
+        }
+    }, intervalTime);
+}
+
+// --- Stats Logic ---
+
+function closeStatsModal() {
+    document.getElementById('stats-modal').classList.add('hidden');
+}
+
+function showStats() {
+    // 1. Calculate Hours
+    let hoursDone = 0;
+    let hoursTotal = 0;
+
+    allGames.forEach(g => {
+        const h = parseLength(g.length);
+        hoursTotal += h;
+        if (completedGames.includes(g.id)) {
+            hoursDone += h;
+        }
+    });
+
+    const hoursLeft = hoursTotal - hoursDone;
+    const hoursPct = hoursTotal > 0 ? (hoursDone / hoursTotal) * 100 : 0;
+
+    document.getElementById('stat-hours-done').innerText = hoursDone.toFixed(1);
+    document.getElementById('stat-hours-left').innerText = hoursLeft.toFixed(1);
+    document.getElementById('stat-hours-bar').style.width = `${hoursPct}%`;
+
+
+    // 2. Completion Rate
+    const stats = calculateStats();
+    document.getElementById('stat-rate').innerText = `${stats.percentage}%`;
+    document.getElementById('stat-count').innerText = `${stats.completed} / ${stats.total} Games`;
+
+
+    // 3. Favorite Era
+    const eraCounts = {};
+    completedGames.forEach(id => {
+        const g = allGames.find(game => game.id === id);
+        if (g) {
+            const decade = Math.floor(g.year / 10) * 10;
+            const eraName = `${decade}s`;
+            eraCounts[eraName] = (eraCounts[eraName] || 0) + 1;
+        }
+    });
+
+    let bestEra = "TBD";
+    let maxCount = 0;
+    
+    // Sort eras to handle ties (prefer modern? retro? random? just first found)
+    for (const [era, count] of Object.entries(eraCounts)) {
+        if (count > maxCount) {
+            maxCount = count;
+            bestEra = era;
+        }
+    }
+    
+    // If no games, keep TBD
+    if(completedGames.length === 0) bestEra = "N/A";
+    
+    document.getElementById('stat-era').innerText = bestEra;
+
+
+    // 4. Genre Distribution
+    // Some games have "Action / Platformer". We will split them.
+    const genreCounts = {};
+    let totalGenrePoints = 0;
+
+    completedGames.forEach(id => {
+        const g = allGames.find(game => game.id === id);
+        if (g) {
+            const genres = g.genre.split('/').map(s => s.trim());
+            genres.forEach(gen => {
+                genreCounts[gen] = (genreCounts[gen] || 0) + 1;
+                totalGenrePoints++;
+            });
+        }
+    });
+
+    const genreList = Object.entries(genreCounts)
+        .sort((a, b) => b[1] - a[1]); // Sort by most frequent
+
+    const container = document.getElementById('genre-bars');
+    container.innerHTML = '';
+
+    if (genreList.length === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 text-sm italic py-4">Complete games to see your stats!</p>';
+    } else {
+        genreList.forEach(([genre, count]) => {
+            const pct = (count / totalGenrePoints) * 100;
+            
+            // Determine Color based on Genre name (Simple hash-like approach or predefined)
+            // Let's use predefined mapping or random consistent colors if list grows.
+            // For now, simple blue is fine, or we can vary slightly.
+            
+            const html = `
+                <div class="relative">
+                    <div class="flex justify-between text-xs font-semibold mb-1">
+                        <span class="text-gray-300">${genre}</span>
+                        <span class="text-gray-500">${Math.round(pct)}%</span>
+                    </div>
+                    <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden border border-gray-700">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: ${pct}%"></div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += html;
+        });
+    }
+
+    document.getElementById('stats-modal').classList.remove('hidden');
 }
 
 // --- New Features: Share & Export ---
