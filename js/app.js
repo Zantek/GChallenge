@@ -109,7 +109,7 @@ let droppedGames = JSON.parse(localStorage.getItem('gamingChallengeDropped2026')
 let gameReviews = JSON.parse(localStorage.getItem('gamingChallengeReviews2026')) || {};
 let collapsedSections = JSON.parse(localStorage.getItem('gamingChallengeCollapsed2026')) || {};
 
-function saveState() {
+function saveState(skipGrids = false) {
     localStorage.setItem('gamingChallenge2026', JSON.stringify(completedGames));
     localStorage.setItem('gamingChallengeDates2026', JSON.stringify(completionDates));
     localStorage.setItem('gamingChallengeDropped2026', JSON.stringify(droppedGames));
@@ -120,7 +120,7 @@ function saveState() {
     } else {
         localStorage.removeItem('gamingChallengePlaying');
     }
-    updateProgress();
+    updateProgress(false, skipGrids);
 }
 
 function toggleSection(key) {
@@ -136,12 +136,12 @@ function toggleSection(key) {
         chevron.style.transform = 'rotate(-90deg)';
     } else {
         // Use a large enough value for the content, but keep it consistent
-        container.style.maxHeight = '2000px'; 
+        container.style.maxHeight = ''; 
         chevron.style.transform = 'rotate(0deg)';
     }
 
     if (sfx) sfx.playTick();
-    saveState();
+    saveState(true);
 }
 
 function applyInitialCollapses() {
@@ -258,7 +258,7 @@ function calculateStats() {
     return { total, completed, percentage, level, currentLevelXP, xpPerLevel, xpPercentage, droppedCount };
 }
 
-function updateProgress(silent = false) {
+function updateProgress(silent = false, skipGrids = false) {
     const stats = calculateStats();
     const oldLevel = parseInt(document.getElementById('level-badge').innerText.replace('L', '')) || 1;
 
@@ -274,49 +274,51 @@ function updateProgress(silent = false) {
     document.getElementById('xp-bar').style.width = `${stats.xpPercentage}%`;
     document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
 
-    // Update Category Grids (Filter out dropped games)
-    const categoryData = {
-        'core': { list: coreGames, grid: 'core-grid', count: 'count-core', section: 'section-core' },
-        'bonus': { list: bonusGames, grid: 'bonus-grid', count: 'count-bonus', section: 'section-bonus' },
-        'zen': { list: zenGames, grid: 'zen-grid', count: 'count-zen', section: 'section-zen' },
-        'time': { list: timeGames, grid: 'time-grid', count: 'count-time', section: 'section-time' },
-        'art': { list: artGames, grid: 'art-grid', count: 'count-art', section: 'section-art' }
-    };
+    if (!skipGrids) {
+        // Update Category Grids (Filter out dropped games)
+        const categoryData = {
+            'core': { list: coreGames, grid: 'core-grid', count: 'count-core', section: 'section-core' },
+            'bonus': { list: bonusGames, grid: 'bonus-grid', count: 'count-bonus', section: 'section-bonus' },
+            'zen': { list: zenGames, grid: 'zen-grid', count: 'count-zen', section: 'section-zen' },
+            'time': { list: timeGames, grid: 'time-grid', count: 'count-time', section: 'section-time' },
+            'art': { list: artGames, grid: 'art-grid', count: 'count-art', section: 'section-art' }
+        };
 
-    Object.entries(categoryData).forEach(([key, data]) => {
-        const grid = document.getElementById(data.grid);
-        const countBadge = document.getElementById(data.count);
-        const section = document.getElementById(data.section);
-        
-        if (grid) {
-            const activeGames = data.list.filter(g => !droppedGames.includes(g.id));
-            grid.innerHTML = activeGames.map(game => createCard(game, key)).join('');
+        Object.entries(categoryData).forEach(([key, data]) => {
+            const grid = document.getElementById(data.grid);
+            const countBadge = document.getElementById(data.count);
+            const section = document.getElementById(data.section);
             
-            // Update Count Badge
-            if (countBadge) {
-                countBadge.innerText = `${activeGames.length} Games`;
-            }
+            if (grid) {
+                const activeGames = data.list.filter(g => !droppedGames.includes(g.id));
+                grid.innerHTML = activeGames.map(game => createCard(game, key)).join('');
+                
+                // Update Count Badge
+                if (countBadge) {
+                    countBadge.innerText = `${activeGames.length} Games`;
+                }
 
-            // Update Section Opacity
-            if (section) {
-                if (activeGames.length === 0) {
-                    section.classList.add('opacity-30');
-                } else {
-                    section.classList.remove('opacity-30');
+                // Update Section Opacity
+                if (section) {
+                    if (activeGames.length === 0) {
+                        section.classList.add('opacity-30');
+                    } else {
+                        section.classList.remove('opacity-30');
+                    }
                 }
             }
-        }
-    });
+        });
 
-    // Update Graveyard
-    const graveyardGrid = document.getElementById('graveyard-grid');
-    const graveyardSection = document.getElementById('graveyard-section');
-    if (droppedGames.length > 0) {
-        graveyardSection.classList.remove('hidden');
-        const droppedList = allGames.filter(g => droppedGames.includes(g.id));
-        graveyardGrid.innerHTML = droppedList.map(game => createCard(game)).join('');
-    } else {
-        graveyardSection.classList.add('hidden');
+        // Update Graveyard
+        const graveyardGrid = document.getElementById('graveyard-grid');
+        const graveyardSection = document.getElementById('graveyard-section');
+        if (droppedGames.length > 0) {
+            graveyardSection.classList.remove('hidden');
+            const droppedList = allGames.filter(g => droppedGames.includes(g.id));
+            graveyardGrid.innerHTML = droppedList.map(game => createCard(game)).join('');
+        } else {
+            graveyardSection.classList.add('hidden');
+        }
     }
 
     // Level Up Achievement
