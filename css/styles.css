@@ -132,6 +132,13 @@
             border-color: #ffffff !important;
         }
 
+        /* No border for header toolbar buttons */
+        [data-theme='legacy'] header .bg-gaming-card\/80,
+        [data-theme='legacy'] header .bg-gaming-card\/80 button {
+            border: none !important;
+            background-color: transparent !important;
+        }
+
         /* Specific padding for Footer buttons */
         [data-theme='legacy'] footer button {
             padding: 0.6rem 1.5rem !important;
@@ -368,9 +375,32 @@
             border-color: var(--border);
             opacity: 0.5;
         }
-        .game-card.dropped:hover {
-            filter: grayscale(0.4) sepia(0.1);
-            opacity: 0.8;
+        /* --- Theme-Specific Hover Overlays --- */
+        [data-theme='brick'] .game-card-overlay {
+            background: var(--accent) !important;
+            mix-blend-mode: color;
+        }
+
+        [data-theme='os'] .game-card-overlay,
+        [data-theme='legacy'] .game-card-overlay {
+            background: none !important;
+            opacity: 0 !important;
+        }
+
+        [data-theme='cube'] .game-card-overlay {
+            background: linear-gradient(to bottom right, #ff4500, #4b0082) !important;
+            opacity: 0;
+        }
+        [data-theme='cube'] .group:hover .game-card-overlay {
+            opacity: 0.3 !important;
+        }
+
+        [data-theme='os'] .group:hover img {
+            filter: brightness(1.1) contrast(1.1) !important;
+        }
+
+        [data-theme='legacy'] .group:hover img {
+            filter: grayscale(1) brightness(1.1) contrast(1.2) !important;
         }
         /* Custom Checkbox */
         .custom-checkbox {
@@ -738,10 +768,15 @@
 
                                 /* Fix Buddy.exe text visibility in Legacy/High Contrast */
                                 [data-theme='legacy'] .companion-window .bg-gaming-accent span {
-                                    color: #000000 !important;
+                                    color: #ffffff !important;
                                 }
                                 [data-theme='legacy'] .companion-window .bg-gaming-accent .w-2.h-2 {
-                                    background-color: #000000 !important;
+                                    background-color: #ffffff !important;
+                                }
+
+                                [data-theme='legacy'] .companion-floor {
+                                    background-color: rgba(255, 255, 255, 0.1) !important;
+                                    border-top-color: rgba(255, 255, 255, 0.2) !important;
                                 }
         
                         

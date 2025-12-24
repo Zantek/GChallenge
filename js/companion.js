@@ -255,7 +255,7 @@ class Companion {
                         ${decsHtml}
 
                         <!-- Floor -->
-                        <div class="absolute bottom-0 w-full h-8 bg-green-400/30 border-t-4 border-green-500/30"></div>
+                        <div class="companion-floor absolute bottom-0 w-full h-8 bg-green-400/30 border-t-4 border-green-500/30"></div>
                         
                         <!-- Sprite -->
                         <div id="companion-sprite" class="transition-all duration-300 relative z-10 scale-110">
