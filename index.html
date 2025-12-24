@@ -420,19 +420,26 @@
         <!-- Stats Modal -->
         <div id="stats-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeStatsModal()">
             <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh] transition-colors duration-300" onclick="event.stopPropagation()">
-                <div class="p-6 border-b border-gaming-border flex justify-between items-center bg-gaming-card/50">
-                    <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2"> 
-                        <span class="text-emerald-400">Gamer Stats</span> Sheet
-                    </h3>
-                    <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
+                            <div class="p-6 border-b border-gaming-border flex flex-col gap-4 bg-gaming-card/50">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2"> 
+                                        <span class="text-emerald-400">Gamer Profile</span> 2026
+                                    </h3>
+                                    <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                                    </button>
+                                </div>
+                                <!-- Tabs -->
+                                <div class="flex gap-2 p-1 bg-gaming-dark rounded-lg self-start">
+                                    <button onclick="switchStatsTab('dashboard')" id="tab-dashboard" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
+                                    <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
+                                </div>
+                            </div>
+                            
+                            <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
+                                <!-- Dashboard Content (Existing) -->
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 
-                <div class="p-6 overflow-y-auto space-y-8">
-                    
-                    <!-- Main Stats Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
                             <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Time Invested</span>
                             <div class="flex items-end gap-2">
@@ -458,17 +465,118 @@
                        </div>
                     </div>
     
-                                    <!-- Review Stamp Distribution -->
-                                    <div>
-                                        <h4 class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
-                                            Review Distribution
-                                            <div class="h-px bg-gaming-border flex-grow"></div>
-                                        </h4>
-                                        <div id="review-stamp-bars" class="space-y-3">
-                                            <!-- Populated by JS -->
-                                        </div>
-                                    </div>
-                                    </div>
+                                                    <!-- Review Stamp Distribution -->
+    
+                                                    <div>
+    
+                                                        <h4 class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
+    
+                                                            Review Distribution
+    
+                                                            <div class="h-px bg-gaming-border flex-grow"></div>
+    
+                                                        </h4>
+    
+                                                        <div id="review-stamp-bars" class="space-y-3">
+    
+                                                            <!-- Populated by JS -->
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                    
+    
+                                                </div>
+    
+                                    
+    
+                                                <!-- Skill Tree Tab -->
+    
+                                                <div id="stats-tab-skill-tree" class="p-6 overflow-y-auto hidden">
+    
+                                                    <div class="flex flex-col items-center gap-8 py-4">
+    
+                                                        <div class="text-center">
+    
+                                                            <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Character Archetype</h4>
+    
+                                                            <p id="archetype-label" class="text-emerald-400 font-bold italic">The Novice Adventurer</p>
+    
+                                                        </div>
+    
+                                    
+    
+                    <div id="skill-tree-viz" class="relative w-full max-w-sm aspect-square bg-gaming-dark/50 rounded-xl border-2 border-gaming-border p-0 flex items-center justify-center overflow-hidden shadow-inner">
+                        <!-- Grid Lines -->
+                        <div class="absolute inset-0 grid grid-cols-2 grid-rows-2">
+                            <div class="border-r border-b border-gaming-border/30"></div>
+                            <div class="border-b border-gaming-border/30"></div>
+                            <div class="border-r border-gaming-border/30"></div>
+                            <div></div>
+                        </div>
+
+                        <!-- Axes Labels -->
+                        <div class="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-red-400 uppercase tracking-tighter opacity-50">Combat</div>
+                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-emerald-400 uppercase tracking-tighter opacity-50">Wisdom</div>
+                        <div class="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black text-purple-400 uppercase tracking-tighter opacity-50">Intelligence</div>
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 text-[10px] font-black text-blue-400 uppercase tracking-tighter opacity-50">Agility</div>
+
+                        <!-- Quadrant Flavor Text -->
+                        <div class="absolute top-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Berserker</div>
+                        <div class="absolute top-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Tactician</div>
+                        <div class="absolute bottom-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Acrobat</div>
+                        <div class="absolute bottom-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Scholar</div>
+
+                        <!-- Player Avatar Dot -->
+                        <div id="player-avatar" class="absolute z-20 w-8 h-8 bg-gaming-text rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-1000 ease-out border-2 border-white" style="left: 50%; top: 50%; transform: translate(-50%, -50%)">
+                            <span class="text-sm">👤</span>
+                        </div>
+                    </div>
+    
+                                    
+    
+                                                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+    
+                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+    
+                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Agility</span>
+    
+                                                                <span id="skill-val-agility" class="text-xl font-black text-blue-400">0</span>
+    
+                                                            </div>
+    
+                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+    
+                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Combat</span>
+    
+                                                                <span id="skill-val-combat" class="text-xl font-black text-red-400">0</span>
+    
+                                                            </div>
+    
+                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+    
+                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Intelligence</span>
+    
+                                                                <span id="skill-val-intelligence" class="text-xl font-black text-purple-400">0</span>
+    
+                                                            </div>
+    
+                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+    
+                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Wisdom</span>
+    
+                                                                <span id="skill-val-wisdom" class="text-xl font-black text-emerald-400">0</span>
+    
+                                                            </div>
+    
+                                                        </div>
+    
+                                                    </div>
+    
+                                                </div>
+    
+                                    
             </div>
         </div>
     
@@ -480,15 +588,15 @@
                     <p class="text-gaming-muted text-xs mt-1">Select a stamp to finalize this entry</p>
                 </div>
                             <div class="p-8 grid grid-cols-3 gap-4">
-                                <button onclick="applyReviewStamp('masterpiece')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-emerald-500/30 transition-all">
+                                <button onclick="applyReviewStamp('masterpiece', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-emerald-500/30 transition-all">
                                     <div class="w-12 h-12 border-4 border-emerald-500 rounded-lg flex items-center justify-center text-emerald-500 font-black text-[8px] rotate-[-12deg] uppercase">Masterpiece</div>
                                     <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Masterpiece</span>
                                 </button>
-                                <button onclick="applyReviewStamp('solid')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-blue-500/30 transition-all">
+                                <button onclick="applyReviewStamp('solid', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-blue-500/30 transition-all">
                                     <div class="w-12 h-12 border-4 border-blue-500 rounded-lg flex items-center justify-center text-blue-500 font-black text-[8px] rotate-[8deg] uppercase">Solid</div>
                                     <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Solid Play</span>
                                 </button>
-                                <button onclick="applyReviewStamp('meh')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-yellow-500/30 transition-all">
+                                <button onclick="applyReviewStamp('meh', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-yellow-500/30 transition-all">
                                     <div class="w-12 h-12 border-4 border-yellow-500 rounded-lg flex items-center justify-center text-yellow-500 font-black text-[8px] rotate-[-5deg] uppercase">Meh</div>
                                     <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Average</span>
                                 </button>
@@ -506,6 +614,7 @@
 
     <script src="js/themes.js"></script>
     <script src="js/crt.js"></script>
+    <script src="js/confetti.js"></script>
     <script src="js/app.js"></script>
     <script src="js/companion.js"></script>
     <script src="js/achievements.js"></script>

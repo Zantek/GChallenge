@@ -253,11 +253,19 @@ function closeReviewModal() {
     document.getElementById('review-modal').classList.add('hidden');
 }
 
-function applyReviewStamp(rating) {
+function applyReviewStamp(rating, event) {
     if (!currentReviewTarget) return;
     
     const id = currentReviewTarget;
     sfx.playThud();
+
+    // Visual Juice: Confetti Cannon
+    if (event && event.clientX) {
+        confetti.fire(event.clientX, event.clientY);
+    } else {
+        // Fallback to center screen if no event provided
+        confetti.fire(window.innerWidth / 2, window.innerHeight / 2);
+    }
     
     // Process Completion
     if (!completedGames.includes(id)) {
@@ -542,8 +550,93 @@ function closeStatsModal() {
     document.getElementById('stats-modal').classList.add('hidden');
 }
 
+function switchStatsTab(tab) {
+    const dashboard = document.getElementById('stats-tab-dashboard');
+    const skillTree = document.getElementById('stats-tab-skill-tree');
+    const btnDash = document.getElementById('tab-dashboard');
+    const btnSkill = document.getElementById('tab-skilltree');
+
+    if (tab === 'dashboard') {
+        dashboard.classList.remove('hidden');
+        skillTree.classList.add('hidden');
+        btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
+    } else {
+        dashboard.classList.add('hidden');
+        skillTree.classList.remove('hidden');
+        btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
+        btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        renderSkillTree();
+    }
+}
+
+function renderSkillTree() {
+    const skills = {
+        agility: 0,
+        combat: 0,
+        intelligence: 0,
+        wisdom: 0
+    };
+
+    let totalCompleted = 0;
+
+    // Mapping logic
+    allGames.forEach(g => {
+        if (!completedGames.includes(g.id)) return;
+        totalCompleted++;
+
+        const genre = g.genre.toLowerCase();
+        if (genre.includes('platformer') || genre.includes('parkour') || genre.includes('rhythm')) {
+            skills.agility++;
+        } else if (genre.includes('shooter') || genre.includes('action') || genre.includes('beat')) {
+            skills.combat++;
+        } else if (genre.includes('puzzle') || genre.includes('logic') || genre.includes('geometry')) {
+            skills.intelligence++;
+        } else {
+            skills.wisdom++;
+        }
+    });
+
+    // Update Numerical Displays
+    Object.keys(skills).forEach(s => {
+        document.getElementById(`skill-val-${s}`).innerText = skills[s];
+    });
+
+    // Calculate Coordinates (-50 to 50 scale, where 0 is center)
+    // X-Axis: Intelligence (Left) vs Agility (Right)
+    // Y-Axis: Combat (Top) vs Wisdom (Bottom)
+    
+    let xPercent = 50;
+    let yPercent = 50;
+
+    if (totalCompleted > 0) {
+        const xBalance = (skills.agility - skills.intelligence) / totalCompleted;
+        const yBalance = (skills.combat - skills.wisdom) / totalCompleted;
+
+        // Map balance (-1 to 1) to percentage (10% to 90% to keep away from edges)
+        xPercent = 50 + (xBalance * 40);
+        yPercent = 50 - (yBalance * 40); // Subtract because CSS top:0 is top
+    }
+
+    // Update Avatar Position
+    const avatar = document.getElementById('player-avatar');
+    avatar.style.left = `${xPercent}%`;
+    avatar.style.top = `${yPercent}%`;
+
+    // Determine Archetype based on Quadrant
+    let archetype = "The Versatile Generalist";
+    if (totalCompleted > 0) {
+        if (xPercent >= 50 && yPercent <= 50) archetype = "The Apex Predator (Combat + Speed)";
+        if (xPercent < 50 && yPercent <= 50) archetype = "The Master Tactician (Combat + Logic)";
+        if (xPercent >= 50 && yPercent > 50) archetype = "The Flow-State Monk (Speed + Serenity)";
+        if (xPercent < 50 && yPercent > 50) archetype = "The Cosmic Sage (Logic + Serenity)";
+    }
+    document.getElementById('archetype-label').innerText = archetype;
+}
+
 function showStats() {
-    // 1. Calculate Hours
+    // Force default tab
+    switchStatsTab('dashboard');
     let hoursDone = 0;
     let hoursTotal = 0;
 

@@ -401,11 +401,58 @@
                                                 .stamp-btn:hover {
                                                     transform: scale(1.05) rotate(-2deg);
                                                 }
-                                                .stamp-btn:active {
-                                                    transform: scale(0.95);
-                                                }
-                                        
-                /* Passport Stamp System (Base) */
+                                                        .skill-node {
+                                                            position: absolute;
+                                                            width: 3rem;
+                                                            height: 3rem;
+                                                            background: var(--bg-secondary);
+                                                            border: 2px solid var(--border);
+                                                            border-radius: 50%;
+                                                            display: flex;
+                                                            items-center: center;
+                                                            justify-content: center;
+                                                            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+                                                            filter: grayscale(1) brightness(0.5);
+                                                            z-index: 5;
+                                                        }
+                                                
+                                                        .skill-node.active {
+                                                            filter: grayscale(0) brightness(1.2);
+                                                            transform: scale(1.1);
+                                                            border-width: 3px;
+                                                            box-shadow: 0 0 15px currentColor;
+                                                        }
+                                                
+                                                        .skill-node span {
+                                                            font-size: 1.25rem;
+                                                        }
+                                                
+                                                        .skill-node-label {
+                                                            position: absolute;
+                                                            top: 100%;
+                                                            left: 50%;
+                                                            transform: translateX(-50%);
+                                                            white-space: nowrap;
+                                                            font-size: 0.6rem;
+                                                            font-weight: 900;
+                                                            text-transform: uppercase;
+                                                            letter-spacing: 0.05rem;
+                                                            margin-top: 0.25rem;
+                                                            opacity: 0.6;
+                                                        }
+                                                
+                                                        [data-theme='brick'] .skill-node {
+                                                            border-radius: 0px;
+                                                            image-rendering: pixelated;
+                                                        }
+                                                
+                                                        [data-theme='os'] .skill-node {
+                                                            border-radius: 0px;
+                                                            background: #c0c0c0;
+                                                            border: 2px solid;
+                                                            border-color: #ffffff #808080 #808080 #ffffff !important;
+                                                        }
+                                                                /* Passport Stamp System (Base) */
                 .passport-stamp {
                     position: absolute;
                     top: 1rem;
