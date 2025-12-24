@@ -417,63 +417,89 @@
         </div>
     </div>
 
-    <!-- Stats Modal -->
-    <div id="stats-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeStatsModal()">
-        <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh] transition-colors duration-300" onclick="event.stopPropagation()">
-            <div class="p-6 border-b border-gaming-border flex justify-between items-center bg-gaming-card/50">
-                <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2">
-                    <span class="text-emerald-400">Gamer Stats</span> Sheet
-                </h3>
-                <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            
-            <div class="p-6 overflow-y-auto space-y-8">
+        <!-- Stats Modal -->
+        <div id="stats-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeStatsModal()">
+            <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh] transition-colors duration-300" onclick="event.stopPropagation()">
+                <div class="p-6 border-b border-gaming-border flex justify-between items-center bg-gaming-card/50">
+                    <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2"> 
+                        <span class="text-emerald-400">Gamer Stats</span> Sheet
+                    </h3>
+                    <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
                 
-                <!-- Main Stats Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                        <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Time Invested</span>
-                        <div class="flex items-end gap-2">
-                            <span id="stat-hours-done" class="text-3xl font-black text-gaming-text">0</span>
-                            <span class="text-sm text-gaming-muted mb-1">Hours</span>
+                <div class="p-6 overflow-y-auto space-y-8">
+                    
+                    <!-- Main Stats Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                            <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Time Invested</span>
+                            <div class="flex items-end gap-2">
+                                <span id="stat-hours-done" class="text-3xl font-black text-gaming-text">0</span>
+                                <span class="text-sm text-gaming-muted mb-1">Hours</span>   
+                            </div>
+                            <div class="w-full bg-gaming-dark h-1 mt-2 rounded-full overflow-hidden">
+                                 <div id="stat-hours-bar" class="bg-emerald-500 h-1 transition-all" style="width: 0%"></div>
+                            </div>
+                            <p class="text-[10px] text-gaming-muted mt-2"><span id="stat-hours-left">0</span> hours remaining</p>
                         </div>
-                        <div class="w-full bg-gaming-dark h-1 mt-2 rounded-full overflow-hidden">
-                             <div id="stat-hours-bar" class="bg-emerald-500 h-1 transition-all" style="width: 0%"></div>
+    
+                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                             <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Favorite Era</span>
+                             <span id="stat-era" class="text-xl font-black text-gaming-text block truncate">TBD</span>
+                             <p class="text-[10px] text-gaming-muted mt-2">Based on completion count</p>
                         </div>
-                        <p class="text-[10px] text-gaming-muted mt-2"><span id="stat-hours-left">0</span> hours remaining</p>
+    
+                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                            <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Completion Rate</span>
+                            <span id="stat-rate" class="text-3xl font-black text-gaming-text">0%</span>
+                            <p class="text-[10px] text-gaming-muted mt-2" id="stat-count">0 / 0 Games</p>
+                       </div>
                     </div>
-
-                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                         <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Favorite Era</span>
-                         <span id="stat-era" class="text-xl font-black text-gaming-text block truncate">TBD</span>
-                         <p class="text-[10px] text-gaming-muted mt-2">Based on completion count</p>
-                    </div>
-
-                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                        <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Completion Rate</span>
-                        <span id="stat-rate" class="text-3xl font-black text-gaming-text">0%</span>
-                        <p class="text-[10px] text-gaming-muted mt-2" id="stat-count">0 / 0 Games</p>
-                   </div>
-                </div>
-
-                <!-- Genre Distribution -->
-                <div>
-                    <h4 class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
-                        Genre Spread
-                        <div class="h-px bg-gaming-border flex-grow"></div>
-                    </h4>
-                    <div id="genre-bars" class="space-y-3">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-
+    
+                                    <!-- Review Stamp Distribution -->
+                                    <div>
+                                        <h4 class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
+                                            Review Distribution
+                                            <div class="h-px bg-gaming-border flex-grow"></div>
+                                        </h4>
+                                        <div id="review-stamp-bars" class="space-y-3">
+                                            <!-- Populated by JS -->
+                                        </div>
+                                    </div>
+                                    </div>
             </div>
         </div>
-    </div>
-
-    <!-- Companion Container -->
+    
+        <!-- Review Stamp Modal -->
+        <div id="review-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4" onclick="closeReviewModal()">
+            <div class="bg-gaming-card border-4 border-gaming-border rounded-gaming max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200" onclick="event.stopPropagation()">
+                <div class="p-6 text-center border-b border-gaming-border">
+                    <h3 class="text-xl font-black text-gaming-text uppercase tracking-widest">Seal the Record</h3>
+                    <p class="text-gaming-muted text-xs mt-1">Select a stamp to finalize this entry</p>
+                </div>
+                            <div class="p-8 grid grid-cols-3 gap-4">
+                                <button onclick="applyReviewStamp('masterpiece')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-emerald-500/30 transition-all">
+                                    <div class="w-12 h-12 border-4 border-emerald-500 rounded-lg flex items-center justify-center text-emerald-500 font-black text-[8px] rotate-[-12deg] uppercase">Masterpiece</div>
+                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Masterpiece</span>
+                                </button>
+                                <button onclick="applyReviewStamp('solid')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-blue-500/30 transition-all">
+                                    <div class="w-12 h-12 border-4 border-blue-500 rounded-lg flex items-center justify-center text-blue-500 font-black text-[8px] rotate-[8deg] uppercase">Solid</div>
+                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Solid Play</span>
+                                </button>
+                                <button onclick="applyReviewStamp('meh')" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-yellow-500/30 transition-all">
+                                    <div class="w-12 h-12 border-4 border-yellow-500 rounded-lg flex items-center justify-center text-yellow-500 font-black text-[8px] rotate-[-5deg] uppercase">Meh</div>
+                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Average</span>
+                                </button>
+                            </div>
+                
+                <div class="p-4 bg-gaming-dark/30 text-center">
+                    <button onclick="closeReviewModal()" class="text-gaming-muted hover:text-gaming-text text-[10px] uppercase font-bold tracking-widest">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <!-- Companion Container -->
     <div id="companion-container" class="fixed bottom-6 right-6 z-30"></div>
 
     <div id="crt-vignette" class="hidden"></div>

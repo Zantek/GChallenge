@@ -303,41 +303,129 @@
                 [data-theme='os'] .trophy-slot.unlocked .trophy-icon-container {
                     border-color: #ffffff #808080 #808080 #ffffff !important;
                 }
-                                        /* Passport Stamp System */
-        
-                                .passport-stamp {
-        
-                                    font-family: 'Courier New', Courier, monospace;
-        
-                                    color: #ef4444; /* Red ink default */
-        
-                                    border: 3px double #ef4444;
-        
-                                    padding: 4px 10px;
-        
-                                    font-size: 10px;
-        
-                                    font-weight: 900;
-        
-                                    text-transform: uppercase;
-        
-                                    letter-spacing: 1px;
-        
-                                    transform: rotate(-15deg);
-        
-                                    background: rgba(255, 255, 255, 0.95);
-        
-                                    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
-        
-                                    pointer-events: none;
-        
-                                    user-select: none;
-        
-                                    animation: stamp-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        
-                                    z-index: 40;
-        
-                                }
+                                                /* --- Ink Stamp (Review System) --- */
+                                                .review-stamp {
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    left: 50%;
+                                                    transform: translate(-50%, -50%) rotate(-15deg);
+                                                    padding: 0.4rem 0.8rem;
+                                                    border: 0.3rem solid;
+                                                    font-family: 'Courier New', Courier, monospace;
+                                                    font-weight: 900;
+                                                    font-size: 1.25rem;
+                                                    text-transform: uppercase;
+                                                    letter-spacing: 0.1rem;
+                                                    pointer-events: none;
+                                                    user-select: none;
+                                                    z-index: 30;
+                                                    animation: review-stamp-slam 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                                                }
+
+                                                /* Future Theme Style (Holographic) */
+                                                [data-theme='future'] .review-stamp {
+                                                    color: #ffffff;
+                                                    border-width: 1px;
+                                                    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+                                                    border-radius: 12px;
+                                                    font-family: 'Inter', sans-serif;
+                                                    font-style: italic;
+                                                }
+                                                [data-theme='future'] .stamp-masterpiece { background: rgba(16, 185, 129, 0.9); border-color: #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); }
+                                                [data-theme='future'] .stamp-solid { background: rgba(59, 130, 246, 0.9); border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4); }
+                                                [data-theme='future'] .stamp-meh { background: rgba(245, 158, 11, 0.9); border-color: #f59e0b; box-shadow: 0 0 20px rgba(245, 158, 11, 0.4); }
+                                                [data-theme='future'] .stamp-dropped { background: rgba(239, 68, 68, 0.9); border-color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.4); }
+
+                                                /* Cube Style (Sticker) */
+                                                [data-theme='cube'] .review-stamp {
+                                                    color: #ffffff;
+                                                    border: 4px solid #ffffff;
+                                                    border-radius: 9999px;
+                                                    box-shadow: 4px 4px 0px #4b0082;
+                                                    font-family: 'Arial Black', sans-serif;
+                                                }
+                                                [data-theme='cube'] .stamp-masterpiece { background: #10b981; }
+                                                [data-theme='cube'] .stamp-solid { background: #3b82f6; }
+                                                [data-theme='cube'] .stamp-meh { background: #f59e0b; }
+                                                [data-theme='cube'] .stamp-dropped { background: #ef4444; }
+
+                                                /* Brick Style (Pixel) */
+                                                [data-theme='brick'] .review-stamp {
+                                                    background: var(--bg-primary);
+                                                    border: 2px solid;
+                                                    border-radius: 0px;
+                                                    box-shadow: none;
+                                                }
+                                                [data-theme='brick'] .stamp-masterpiece { color: #0f380f; border-color: #0f380f; }
+                                                [data-theme='brick'] .stamp-solid { color: #306230; border-color: #306230; }
+                                                [data-theme='brick'] .stamp-meh { color: #8bac0f; border-color: #8bac0f; }
+                                                [data-theme='brick'] .stamp-dropped { color: #000000; border-color: #000000; }
+
+                                                /* OS Style (Classic UI) */
+                                                [data-theme='os'] .review-stamp {
+                                                    background: #ffffff;
+                                                    border: 2px solid;
+                                                    border-radius: 0px;
+                                                    box-shadow: 2px 2px 0px rgba(0,0,0,1);
+                                                }
+                                                [data-theme='os'] .stamp-masterpiece { color: #008000; border-color: #008000; }
+                                                [data-theme='os'] .stamp-solid { color: #0000ff; border-color: #0000ff; }
+                                                [data-theme='os'] .stamp-meh { color: #808000; border-color: #808000; }
+                                                [data-theme='os'] .stamp-dropped { color: #ff0000; border-color: #ff0000; }
+                                        
+                                                .stamp-masterpiece { color: #10b981; border-color: #10b981; }
+                                                .stamp-solid { color: #3b82f6; border-color: #3b82f6; }
+                                                .stamp-meh { color: #f59e0b; border-color: #f59e0b; }
+                                                .stamp-dropped { color: #ef4444; border-color: #ef4444; }
+                                        
+                                                [data-theme='brick'] .review-stamp {
+                                                    mix-blend-mode: normal;
+                                                    color: var(--text-primary);
+                                                    border-color: var(--text-primary);
+                                                    background: var(--bg-primary);
+                                                }
+                                        
+                                                [data-theme='os'] .review-stamp {
+                                                    mix-blend-mode: normal;
+                                                    background: white;
+                                                }
+                                        
+                                                @keyframes review-stamp-slam {
+                                                    0% { transform: translate(-50%, -50%) scale(2) rotate(0deg); opacity: 0; }
+                                                    100% { transform: translate(-50%, -50%) scale(1) rotate(-15deg); opacity: 0.85; }
+                                                }
+                                        
+                                                .stamp-btn {
+                                                    transition: all 0.2s ease;
+                                                }
+                                                .stamp-btn:hover {
+                                                    transform: scale(1.05) rotate(-2deg);
+                                                }
+                                                .stamp-btn:active {
+                                                    transform: scale(0.95);
+                                                }
+                                        
+                /* Passport Stamp System (Base) */
+                .passport-stamp {
+                    position: absolute;
+                    top: 1rem;
+                    left: 1rem;
+                    font-family: 'Courier New', Courier, monospace;
+                    color: #ef4444; /* Red ink default */
+                    border: 3px double #ef4444;
+                    padding: 4px 10px;
+                    font-size: 10px;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transform: rotate(-15deg);
+                    background: rgba(255, 255, 255, 0.95);
+                    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+                    pointer-events: none;
+                    user-select: none;
+                    animation: stamp-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    z-index: 40;
+                }
         
                         
         
@@ -346,53 +434,16 @@
                         
         
                                         [data-theme='future'] .passport-stamp {
-        
-                        
-        
                                             color: #ffffff;
-        
-                        
-        
                                             border: 1px solid #22d3ee;
-        
-                        
-        
                                             background: rgba(8, 145, 178, 0.9); /* Opaque background for readability */
-        
-                        
-        
-                                            backdrop-filter: blur(8px);
-        
-                        
-        
                                             box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
-        
-                        
-        
                                             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        
-                        
-        
                                             border-radius: 12px; /* Much rounder corners */
-        
-                        
-        
                                             font-family: 'Inter', sans-serif;
-        
-                        
-        
                                             font-weight: 800;
-        
-                        
-        
                                             font-style: italic;
-        
-                        
-        
                                             padding: 4px 12px;
-        
-                        
-        
                                         }
         
                         

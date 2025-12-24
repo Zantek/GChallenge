@@ -155,6 +155,27 @@ class SoundFX {
         this.playTone(third, 'square', 0.1, 0.1, 0.1);
         this.playTone(fifth, 'square', 0.4, 0.2, 0.1);
     }
+
+    playThud() {
+        if (this.muted) return;
+        this.init();
+        const now = this.ctx.currentTime;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(150, now);
+        osc.frequency.exponentialRampToValueAtTime(40, now + 0.2);
+        
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
+        
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        
+        osc.start(now);
+        osc.stop(now + 0.2);
+    }
 }
 
 const sfx = new SoundFX();
@@ -205,11 +226,13 @@ function getSystemIcon(system) {
 let completedGames = JSON.parse(localStorage.getItem('gamingChallenge2026')) || [];
 let completionDates = JSON.parse(localStorage.getItem('gamingChallengeDates2026')) || {};
 let droppedGames = JSON.parse(localStorage.getItem('gamingChallengeDropped2026')) || [];
+let gameReviews = JSON.parse(localStorage.getItem('gamingChallengeReviews2026')) || {};
 
 function saveState() {
     localStorage.setItem('gamingChallenge2026', JSON.stringify(completedGames));
     localStorage.setItem('gamingChallengeDates2026', JSON.stringify(completionDates));
     localStorage.setItem('gamingChallengeDropped2026', JSON.stringify(droppedGames));
+    localStorage.setItem('gamingChallengeReviews2026', JSON.stringify(gameReviews));
     updateProgress();
 }
 
@@ -218,48 +241,51 @@ function formatDate(date) {
     return new Date(date).toLocaleDateString('en-US', options).toUpperCase();
 }
 
+let currentReviewTarget = null;
+
+function openReviewModal(id) {
+    currentReviewTarget = id;
+    document.getElementById('review-modal').classList.remove('hidden');
+}
+
+function closeReviewModal() {
+    currentReviewTarget = null;
+    document.getElementById('review-modal').classList.add('hidden');
+}
+
+function applyReviewStamp(rating) {
+    if (!currentReviewTarget) return;
+    
+    const id = currentReviewTarget;
+    sfx.playThud();
+    
+    // Process Completion
+    if (!completedGames.includes(id)) {
+        completedGames.push(id);
+        const now = new Date().toISOString();
+        completionDates[id] = now;
+    }
+    
+    gameReviews[id] = rating;
+    
+    closeReviewModal();
+    saveState();
+}
+
 function toggleGame(id, event) {
     if (event) event.stopPropagation();
     
     // Safety: Don't allow completing dropped games
     if (droppedGames.includes(id)) return;
 
-    const card = document.getElementById(`card-${id}`);
-    const checkbox = card.querySelector('input[type="checkbox"]');
-    const statusText = card.querySelector('.group-mark span');
-    
     if (completedGames.includes(id)) {
         completedGames = completedGames.filter(gameId => gameId !== id);
         delete completionDates[id];
-        card.classList.remove('completed');
-        const stamp = card.querySelector('.passport-stamp');
-        if (stamp) stamp.remove();
-
-        if (checkbox) checkbox.checked = false;
-        if (statusText) {
-            statusText.innerText = 'Mark as Complete';
-            statusText.className = 'text-xs text-gaming-muted font-medium uppercase tracking-wider transition-colors';
-        }
+        delete gameReviews[id];
+        saveState();
     } else {
-        sfx.playCoin(); // Play Sound
-        completedGames.push(id);
-        const now = new Date().toISOString();
-        completionDates[id] = now;
-        
-        card.classList.add('completed');
-        
-        // Add Stamp to UI immediately
-        const bannerContainer = card.querySelector('.relative.h-40');
-        const stampHtml = `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(now)}</div>`;
-        bannerContainer.insertAdjacentHTML('beforeend', stampHtml);
-
-        if (checkbox) checkbox.checked = true;
-        if (statusText) {
-            statusText.innerText = 'Completed';
-            statusText.className = 'text-xs text-emerald-400 font-bold uppercase tracking-wider transition-colors';
-        }
+        openReviewModal(id);
     }
-    saveState();
 }
 
 function parseLength(lengthStr) {
@@ -404,12 +430,14 @@ function toggleDrop(id, event) {
     
     if (droppedGames.includes(id)) {
         droppedGames = droppedGames.filter(gameId => gameId !== id);
+        if (gameReviews[id] === 'dropped') delete gameReviews[id];
     } else {
         // Remove from completed if it was there
         completedGames = completedGames.filter(gameId => gameId !== id);
         delete completionDates[id];
         
         droppedGames.push(id);
+        gameReviews[id] = 'dropped'; // Automatic Stamp
         sfx.playTone(200, 'sine', 0.5, 0, 0.1); // Low somber tone
     }
     closeModal();
@@ -459,10 +487,11 @@ function reviveCategory(key) {
 }
 
 function resetProgress() {
-    if(confirm("Are you sure you want to reset all progress? This will also clear the Graveyard.")) {
+    if(confirm("Are you sure you want to reset all progress? This will also clear the Graveyard and Review Stamps.")) {
         completedGames = [];
         droppedGames = [];
         completionDates = {};
+        gameReviews = {};
         saveState();
         location.reload();
     }
@@ -568,46 +597,56 @@ function showStats() {
     document.getElementById('stat-era').innerText = bestEra;
 
 
-    // 4. Genre Distribution
-    // Some games have "Action / Platformer". We will split them.
-    const genreCounts = {};
-    let totalGenrePoints = 0;
-
-    completedGames.forEach(id => {
-        const g = allGames.find(game => game.id === id);
-        if (g) {
-            const genres = g.genre.split('/').map(s => s.trim());
-            genres.forEach(gen => {
-                genreCounts[gen] = (genreCounts[gen] || 0) + 1;
-                totalGenrePoints++;
-            });
+    // 4. Review Distribution
+    const reviewCounts = {
+        'masterpiece': 0,
+        'solid': 0,
+        'meh': 0,
+        'dropped': 0
+    };
+    
+    let totalReviews = 0;
+    Object.values(gameReviews).forEach(rating => {
+        if (reviewCounts.hasOwnProperty(rating)) {
+            reviewCounts[rating]++;
+            totalReviews++;
         }
     });
 
-    const genreList = Object.entries(genreCounts)
-        .sort((a, b) => b[1] - a[1]); // Sort by most frequent
-
-    const container = document.getElementById('genre-bars');
+    const container = document.getElementById('review-stamp-bars');
     container.innerHTML = '';
 
-    if (genreList.length === 0) {
-        container.innerHTML = '<p class="text-center text-gray-500 text-sm italic py-4">Complete games to see your stats!</p>';
+    if (totalReviews === 0) {
+        container.innerHTML = '<p class="text-center text-gray-500 text-sm italic py-4">Review games to see your distribution!</p>';
     } else {
-        genreList.forEach(([genre, count]) => {
-            const pct = (count / totalGenrePoints) * 100;
+        const order = ['masterpiece', 'solid', 'meh', 'dropped'];
+        const colors = {
+            'masterpiece': 'bg-emerald-500',
+            'solid': 'bg-blue-500',
+            'meh': 'bg-yellow-500',
+            'dropped': 'bg-red-500'
+        };
+        const labels = {
+            'masterpiece': 'Masterpiece',
+            'solid': 'Solid Play',
+            'meh': 'Meh / Average',
+            'dropped': 'Dropped'
+        };
+
+        order.forEach(key => {
+            const count = reviewCounts[key];
+            if (count === 0) return; // Skip empty categories
             
-            // Determine Color based on Genre name (Simple hash-like approach or predefined)
-            // Let's use predefined mapping or random consistent colors if list grows.
-            // For now, simple blue is fine, or we can vary slightly.
+            const pct = (count / totalReviews) * 100;
             
             const html = `
                 <div class="relative">
                     <div class="flex justify-between text-xs font-semibold mb-1">
-                        <span class="text-gaming-text/80">${genre}</span>
-                        <span class="text-gaming-muted">${Math.round(pct)}%</span>
+                        <span class="text-gaming-text/80">${labels[key]}</span>
+                        <span class="text-gaming-muted">${count} (${Math.round(pct)}%)</span>
                     </div>
                     <div class="w-full bg-gaming-dark rounded-full h-2 overflow-hidden border border-gaming-border">
-                        <div class="bg-blue-500 h-2 rounded-full" style="width: ${pct}%"></div>
+                        <div class="${colors[key]} h-2 rounded-full" style="width: ${pct}%"></div>
                     </div>
                 </div>
             `;
@@ -623,7 +662,9 @@ function showStats() {
 function exportData() {
     const data = btoa(JSON.stringify({
         completed: completedGames,
-        dates: completionDates
+        dates: completionDates,
+        dropped: droppedGames,
+        reviews: gameReviews
     }));
     navigator.clipboard.writeText(data).then(() => {
         alert("Save code copied to clipboard! Keep it safe.");
@@ -640,6 +681,8 @@ function importData() {
         const decoded = JSON.parse(atob(code));
         let newCompleted = [];
         let newDates = {};
+        let newDropped = [];
+        let newReviews = {};
 
         if (Array.isArray(decoded)) {
             // Backward compatibility
@@ -647,6 +690,8 @@ function importData() {
         } else if (decoded.completed && Array.isArray(decoded.completed)) {
             newCompleted = decoded.completed;
             newDates = decoded.dates || {};
+            newDropped = decoded.dropped || [];
+            newReviews = decoded.reviews || {};
         } else {
             throw new Error("Invalid format");
         }
@@ -654,6 +699,8 @@ function importData() {
         if(confirm("This will overwrite your current progress. Continue?")) {
             completedGames = newCompleted;
             completionDates = newDates;
+            droppedGames = newDropped;
+            gameReviews = newReviews;
             saveState();
             location.reload();
         }
@@ -664,71 +711,153 @@ function importData() {
 
 function generateShareCard() {
     const stats = calculateStats();
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'future';
+    
     const canvas = document.createElement('canvas');
     canvas.width = 1200;
     canvas.height = 630;
     const ctx = canvas.getContext('2d');
 
-    // 1. Background (Dark Gaming Theme)
+    // Theme Configs
+    const themeStyles = {
+        'future': {
+            bg: ['#0f172a', '#1e1b4b'],
+            accent: '#3b82f6',
+            secondary: '#a855f7',
+            text: '#ffffff',
+            muted: '#94a3b8',
+            font: 'Inter, sans-serif',
+            radius: 20,
+            glow: true
+        },
+        'brick': {
+            bg: ['#8bac0f', '#8bac0f'],
+            accent: '#0f380f',
+            secondary: '#306230',
+            text: '#0f380f',
+            muted: '#306230',
+            font: 'monospace',
+            radius: 0,
+            glow: false
+        },
+        'cube': {
+            bg: ['#6a5acd', '#4b0082'],
+            accent: '#ff4500',
+            secondary: '#ffa500',
+            text: '#ffffff',
+            muted: '#dcdcdc',
+            font: 'Arial Black, sans-serif',
+            radius: 50,
+            glow: true
+        },
+        'os': {
+            bg: ['#c0c0c0', '#c0c0c0'],
+            accent: '#000080',
+            secondary: '#808080',
+            text: '#000000',
+            muted: '#404040',
+            font: 'Tahoma, sans-serif',
+            radius: 0,
+            glow: false
+        }
+    };
+
+    const s = themeStyles[currentTheme] || themeStyles['future'];
+
+    // 1. Background
     const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
-    gradient.addColorStop(0, '#0f172a'); // Slate-900
-    gradient.addColorStop(1, '#1e1b4b'); // Indigo-950
+    gradient.addColorStop(0, s.bg[0]);
+    gradient.addColorStop(1, s.bg[1]);
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, 1200, 630);
 
-    // 2. Decorative Glow (Top Right)
-    ctx.shadowBlur = 150;
-    ctx.shadowColor = '#3b82f6';
-    ctx.fillStyle = '#3b82f6';
-    ctx.beginPath();
-    ctx.arc(1100, 100, 200, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
+    // 2. Decorative elements
+    if (s.glow) {
+        ctx.shadowBlur = 150;
+        ctx.shadowColor = s.accent;
+        ctx.fillStyle = s.accent;
+        ctx.beginPath();
+        ctx.arc(1100, 100, 200, 0, Math.PI * 2);
+        ctx.fill();
 
-     // 3. Decorative Glow (Bottom Left)
-    ctx.shadowBlur = 150;
-    ctx.shadowColor = '#a855f7'; // Purple
-    ctx.fillStyle = '#a855f7';
-    ctx.beginPath();
-    ctx.arc(100, 530, 150, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.shadowBlur = 0;
+        ctx.shadowColor = s.secondary;
+        ctx.fillStyle = s.secondary;
+        ctx.beginPath();
+        ctx.arc(100, 530, 150, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+
+    if (currentTheme === 'os') {
+        // Win95 Blue Header Bar
+        ctx.fillStyle = '#000080';
+        ctx.fillRect(10, 10, 1180, 60);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = `bold 30px ${s.font}`;
+        ctx.textAlign = 'left';
+        ctx.fillText(' Challenge_Results.exe', 30, 45);
+        
+        // Window Borders
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 4;
+        ctx.strokeRect(5, 5, 1190, 620);
+        ctx.strokeStyle = '#808080';
+        ctx.strokeRect(7, 7, 1186, 616);
+    }
+
+    if (currentTheme === 'brick') {
+        // Scanlines effect for brick
+        ctx.fillStyle = 'rgba(0,0,0,0.05)';
+        for(let i=0; i<630; i+=4) {
+            ctx.fillRect(0, i, 1200, 2);
+        }
+    }
 
     // 4. Content
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     
     // Title
-    ctx.font = 'bold 70px Inter, sans-serif';
-    ctx.fillStyle = '#ffffff';
-    ctx.fillText('2026 Gaming Challenge', 600, 120);
+    ctx.font = `bold 70px ${s.font}`;
+    ctx.fillStyle = s.text;
+    if (currentTheme === 'os') ctx.fillStyle = '#000000';
+    ctx.fillText('2026 Gaming Challenge', 600, 150);
 
     // Main Stat (Percentage)
-    ctx.shadowBlur = 20;
-    ctx.shadowColor = 'rgba(59, 130, 246, 0.5)'; // Blue glow
-    ctx.font = 'bold 180px Inter, sans-serif';
-    ctx.fillStyle = '#3b82f6'; // Blue-500
-    ctx.fillText(`${stats.percentage}%`, 600, 300);
+    if (s.glow) {
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = s.accent;
+    }
+    ctx.font = `bold 180px ${s.font}`;
+    ctx.fillStyle = s.accent;
+    ctx.fillText(`${stats.percentage}%`, 600, 320);
     ctx.shadowBlur = 0;
 
     // Subtitle
-    ctx.font = 'bold 40px Inter, sans-serif';
-    ctx.fillStyle = '#94a3b8'; // Slate-400
-    ctx.fillText('COMPLETED', 600, 400);
+    ctx.font = `bold 40px ${s.font}`;
+    ctx.fillStyle = s.muted;
+    ctx.fillText('COMPLETED', 600, 420);
 
     // Details Bar
-    ctx.fillStyle = '#1e293b'; // Slate-800
-    ctx.roundRect(300, 480, 600, 100, 20); // x, y, w, h, radius
-    ctx.fill();
+    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : '#1e293b');
+    if (currentTheme === 'os') {
+        ctx.strokeStyle = '#000000';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(300, 480, 600, 100);
+        ctx.fillRect(300, 480, 600, 100);
+    } else {
+        ctx.roundRect(300, 480, 600, 100, s.radius);
+        ctx.fill();
+    }
 
     // Detail Text
-    ctx.font = 'bold 36px Inter, sans-serif';
-    ctx.fillStyle = '#f8fafc';
+    ctx.font = `bold 36px ${s.font}`;
+    ctx.fillStyle = currentTheme === 'brick' ? s.bg[0] : (currentTheme === 'os' ? '#000000' : '#f8fafc');
     ctx.fillText(`Level ${stats.level}  •  ${stats.completed}/${stats.total} Games`, 600, 530);
 
-    // Footer / Tag
-    ctx.font = '24px Inter, sans-serif';
-    ctx.fillStyle = '#475569';
+    // Footer
+    ctx.font = `20px ${s.font}`;
+    ctx.fillStyle = s.muted;
     ctx.fillText('generated by 2026 Gaming Challenge Tracker', 600, 600);
 
     // 5. Show in Modal
@@ -867,6 +996,7 @@ function createCard(game, category = 'core') {
                         <div class="absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
                         
                         ${stampHtml}
+                        ${(isDropped || gameReviews[game.id]) ? `<div class="review-stamp stamp-${isDropped ? 'dropped' : gameReviews[game.id]}">${isDropped ? 'dropped' : gameReviews[game.id]}</div>` : ''}
                         ${isDropped ? '<div class="absolute inset-0 bg-black/40 z-20 flex items-center justify-center"><svg class="w-12 h-12 text-white/30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg></div>' : ''}
                         <img src="${imgUrl}" alt="${game.title}" class="w-full h-full object-cover shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
                         <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-2 py-1 rounded z-20 font-mono border border-white/20" style="transform: translateZ(1px)">
@@ -904,8 +1034,8 @@ function createCard(game, category = 'core') {
                         </div>
                     </div>
 
-                    <div class="bg-gaming-dark/50 px-4 py-3 flex items-center justify-between border-t border-gaming-border cursor-pointer hover:bg-gaming-card transition-colors group-mark" 
-                            onclick="${isDropped ? "toggleDrop('" + game.id + "', event)" : "toggleGame('" + game.id + "', event)"}">
+                    <div class="bg-gaming-dark/50 px-4 py-3 flex items-center justify-between border-t border-gaming-border ${isDropped ? 'opacity-60' : 'cursor-pointer hover:bg-gaming-card'} transition-colors group-mark" 
+                            ${!isDropped ? `onclick="toggleGame('${game.id}', event)"` : ''}>
                         <span class="text-[10px] ${isCompleted ? 'text-emerald-400 font-bold' : (isDropped ? 'text-red-400 font-bold' : 'text-gaming-muted font-medium')} uppercase tracking-wider transition-colors">
                             ${isCompleted ? 'Completed' : (isDropped ? 'Dropped (Wisdom +100)' : 'Mark as Complete')}
                         </span>
