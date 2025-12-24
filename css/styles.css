@@ -262,6 +262,22 @@
             background-color: var(--bg-secondary);
         }
 
+        /* Dot Matrix Effect for Brick */
+        [data-theme='brick'] .game-card-front .relative.h-40::after,
+        [data-theme='brick'] #modal-banner::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 15;
+            background-image: radial-gradient(rgba(15, 56, 15, 0.4) 1px, transparent 1px);
+            background-size: 3px 3px;
+            pointer-events: none;
+        }
+
+        [data-theme='brick'] img {
+            filter: sepia(1) hue-rotate(40deg) saturate(2) brightness(0.9) contrast(1.2) !important;
+        }
+
         [data-theme='cube'] .game-card {
             border: 4px solid var(--border);
             box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
@@ -375,7 +391,18 @@
             border-color: var(--border);
             opacity: 0.5;
         }
-        /* --- Theme-Specific Hover Overlays --- */
+        /* --- Theme-Specific List Header Styles --- */
+        [data-theme='brick'] .list-accent-bar { background-color: var(--accent) !important; border-radius: 0; width: 4px; }
+        [data-theme='brick'] .list-count-badge { background-color: var(--accent) !important; color: var(--bg-primary) !important; border-radius: 0; }
+
+        [data-theme='cube'] .list-accent-bar { background: linear-gradient(to bottom, #ff4500, #4b0082) !important; width: 6px; }
+        [data-theme='cube'] .list-count-badge { background-color: #4b0082 !important; border: 2px solid #ffffff !important; border-radius: 1rem; }
+
+        [data-theme='os'] .list-accent-bar { background-color: #808080 !important; width: 2px; border-radius: 0; }
+        [data-theme='os'] .list-count-badge { background-color: #c0c0c0 !important; color: #000000 !important; border: 1px solid #808080 !important; border-radius: 0; }
+
+        [data-theme='legacy'] .list-accent-bar { background-color: #ffffff !important; width: 1px; border-radius: 0; }
+        [data-theme='legacy'] .list-count-badge { background-color: #000000 !important; color: #ffffff !important; border: 1px solid #ffffff !important; border-radius: 0; }
         [data-theme='brick'] .game-card-overlay {
             background: var(--accent) !important;
             mix-blend-mode: color;
