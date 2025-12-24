@@ -154,24 +154,25 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-20">
         
         <!-- Trophy Room (Showcase) -->
-        <section id="section-trophies" class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming p-8 transition-all duration-300 overflow-hidden shadow-inner">
+        <section id="section-trophies" class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming transition-all duration-[360ms] ease-linear overflow-hidden shadow-inner">
             <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gaming-accent/30 to-transparent"></div>
             
-            <div class="flex items-center justify-between mb-8">
-                <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('trophies')" class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
-                        <svg id="chevron-trophies" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </button>
-                    <div class="h-8 w-1 bg-yellow-500 rounded-full"></div>
-                    <div>
-                        <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary Achievements</h3>
-                        <h2 class="text-xl md:text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
+            <div class="p-8">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center gap-3">
+                        <button onclick="toggleSection('trophies')" class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
+                            <svg id="chevron-trophies" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="h-8 w-1 bg-yellow-500 rounded-full"></div>
+                        <div>
+                            <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary Achievements</h3>
+                            <h2 class="text-xl md:text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="grid-container-trophies" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[1000px]">
-                <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
+                <div id="grid-container-trophies" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[1000px]">
+                    <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
                     <!-- Core Master -->
                     <div id="trophy-core" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Core Challenge games">
                         <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">

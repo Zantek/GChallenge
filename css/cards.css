@@ -48,7 +48,33 @@
 /* Theme Overrides for Cards */
 [data-theme='brick'] .game-card { border: 2px solid var(--border); image-rendering: pixelated; }
 [data-theme='cube'] .game-card { border: 4px solid var(--border); box-shadow: 8px 8px 0px rgba(0,0,0,0.2); }
-[data-theme='os'] .game-card { border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff !important; border-radius: 0px !important; }
+[data-theme='os'] .game-card { 
+    border: 2px solid !important; 
+    border-color: #ffffff #808080 #808080 #ffffff !important; 
+    border-radius: 0px !important;
+    background-color: #c0c0c0 !important;
+}
+[data-theme='os'] .game-card-front::before {
+    content: "Game_Details.exe";
+    display: block;
+    height: 18px;
+    background: #000080;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    padding: 2px 6px;
+    margin-bottom: 2px;
+}
+[data-theme='os'] .game-card-front .relative.h-40 {
+    margin: 2px;
+    border: 2px solid !important;
+    border-color: #808080 #ffffff #ffffff #808080 !important;
+}
+[data-theme='os'] .game-card-back {
+    border: 2px solid !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+}
+[data-theme='legacy'] .game-card-container { margin-left: 1px; }
 [data-theme='legacy'] .game-card { border: 1px solid #ffffff !important; }
 
 /* Hover Overlays */

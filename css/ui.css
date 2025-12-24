@@ -37,7 +37,8 @@
 /* Progress & XP Bars */
 #progress-bar, #xp-bar { transition: all 0.7s ease-out; }
 [data-theme='legacy'] #progress-bar, [data-theme='legacy'] #xp-bar { background-color: #ffffff !important; background-image: none !important; }
-[data-theme='legacy'] .bg-gaming-dark, [data-theme='legacy'] .bg-gray-700 { background-color: #000000 !important; border: 1px solid #ffffff !important; }
+[data-theme='legacy'] .bg-gaming-dark, [data-theme='legacy'] .bg-gray-700 { background-color: #000000 !important; }
+[data-theme='legacy'] .bg-gray-700 { border: 1px solid #ffffff !important; }
 [data-theme='legacy'] .bg-gray-700:hover { background-color: #000000 !important; }
 [data-theme='legacy'] .bg-gradient-to-r { background-image: none !important; }
 
