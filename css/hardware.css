@@ -1,0 +1,113 @@
+/* --- Universal Retro Console Hardware Styling --- */
+#console-container {
+    perspective: 1000px;
+    z-index: 30;
+}
+
+#console-hardware {
+    background: #2a2a2a;
+    border-bottom: 10px solid #151515;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Theme Adaptations for Console */
+[data-theme='brick'] #console-hardware {
+    background: #306230;
+    border-bottom-color: #0f380f;
+    border-radius: 0;
+}
+[data-theme='brick'] #active-cartridge {
+    background: #8bac0f;
+    border-radius: 0;
+}
+
+[data-theme='os'] #console-hardware {
+    background: #c0c0c0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    border-bottom-width: 10px;
+    border-radius: 0;
+}
+
+[data-theme='legacy'] #console-hardware {
+    background: #000000;
+    border: 1px solid #ffffff;
+    border-bottom-width: 8px;
+    border-radius: 0;
+}
+
+/* Cartridge Animation */
+#active-cartridge {
+    will-change: transform;
+    opacity: 1 !important;
+    background-color: #444 !important;
+    z-index: 100;
+}
+
+/* --- Theme-Specific Cartridges --- */
+
+/* Future: Holographic/Digital Cartridge */
+[data-theme='future'] #active-cartridge {
+    background-color: var(--bg-card) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+}
+[data-theme='future'] #active-cartridge .flex-grow {
+    background-color: var(--bg-card) !important;
+}
+
+/* Brick: Game Boy Grey */
+[data-theme='brick'] #active-cartridge {
+    background-color: var(--bg-card) !important;
+    border: 2px solid var(--accent) !important;
+}
+[data-theme='brick'] #active-cartridge .flex-grow {
+    background-color: var(--bg-card) !important;
+}
+[data-theme='brick'] #cart-title {
+    color: var(--text-primary) !important;
+}
+
+/* Cube: Vibrant/Rounded */
+[data-theme='cube'] #active-cartridge {
+    background-color: var(--bg-card) !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 1rem 1rem 0 0;
+}
+[data-theme='cube'] #active-cartridge .flex-grow {
+    background-color: var(--bg-card) !important;
+}
+
+/* OS: Classic Win95 Beige/Grey */
+[data-theme='os'] #active-cartridge {
+    background-color: var(--bg-card) !important;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+}
+[data-theme='os'] #active-cartridge .flex-grow {
+    background-color: var(--bg-card) !important;
+}
+[data-theme='os'] #cart-title {
+    color: #000000 !important;
+}
+
+/* Legacy: Stark Monochrome */
+[data-theme='legacy'] #active-cartridge {
+    background-color: var(--bg-card) !important;
+    border: 1px solid #ffffff !important;
+}
+[data-theme='legacy'] #active-cartridge .flex-grow {
+    background-color: var(--bg-card) !important;
+}
+[data-theme='legacy'] #cart-title {
+    color: #ffffff !important;
+}
+
+/* CRT Overlay for Cartridge label */
+[data-theme='brick'] #cart-label::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(15, 56, 15, 0.4) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+}

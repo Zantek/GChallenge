@@ -23,6 +23,31 @@
             --radius: 0px;
         }
 
+        /* Full-Page LCD Screen Effects for Brick */
+        [data-theme='brick'] body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: 
+                /* Extremely Light Pixel Grid */
+                radial-gradient(rgba(15, 56, 15, 0.015) 1px, transparent 1px),
+                /* Near-Invisible Vertical Banding */
+                linear-gradient(90deg, transparent 0%, rgba(15, 56, 15, 0.005) 50%, transparent 100%);
+            background-size: 4px 4px, 200px 100%;
+            pointer-events: none;
+        }
+
+        [data-theme='brick'] body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            /* Ghostly Recessed Bezel Shadow */
+            box-shadow: inset 0 0 40px rgba(15, 56, 15, 0.05);
+            pointer-events: none;
+        }
+
         [data-theme='cube'] {
             --bg-primary: #6a5acd;
             --bg-secondary: #483d8b;
@@ -166,6 +191,14 @@
         [data-theme='legacy'] .text-yellow-500,
         [data-theme='legacy'] .text-red-400 {
             color: #ffffff !important;
+        }
+
+        /* Difficulty Stars Monochrome Override */
+        [data-theme='legacy'] .text-yellow-500 {
+            color: #ffffff !important;
+        }
+        [data-theme='legacy'] .text-gaming-text\/10 {
+            color: rgba(255, 255, 255, 0.1) !important;
         }
 
         /* Game List Header Badges & Actions */
@@ -889,12 +922,66 @@
                                     filter: invert(1) hue-rotate(90deg);
                                 }
 
-                                @keyframes screen-shake {
-                                    0% { transform: translate(2px, 1px) rotate(0deg); }
-                                    20% { transform: translate(-1px, -2px) rotate(-1deg); }
-                                    40% { transform: translate(-3px, 0px) rotate(1deg); }
-                                    60% { transform: translate(3px, 2px) rotate(0deg); }
-                                    80% { transform: translate(1px, -1px) rotate(1deg); }
-                                    100% { transform: translate(-1px, 2px) rotate(-1deg); }
-                                }
-                        
+                                        @keyframes screen-shake {
+                                            0% { transform: translate(2px, 1px) rotate(0deg); }
+                                            20% { transform: translate(-1px, -2px) rotate(-1deg); }
+                                            40% { transform: translate(-3px, 0px) rotate(1deg); }
+                                            60% { transform: translate(3px, 2px) rotate(0deg); }
+                                            80% { transform: translate(1px, -1px) rotate(1deg); }
+                                            100% { transform: translate(-1px, 2px) rotate(-1deg); }
+                                        }
+                                
+                                        /* --- Boot Sequence --- */
+                                                                        #boot-overlay {
+                                                                            position: fixed;
+                                                                            inset: 0;
+                                                                            background: #000;
+                                                                            z-index: 9999;
+                                                                            display: flex;
+                                                                            flex-direction: column;
+                                                                            padding: 2rem;
+                                                                            font-family: 'Courier New', monospace;
+                                                                            color: #fff;
+                                                                            pointer-events: auto;
+                                                                            transition: opacity 0.5s ease-in-out;
+                                                                        }
+                                                                                                                                                                #boot-terminal {
+                                                    font-size: 0.8rem;
+                                                    line-height: 1.4;
+                                                    overflow: hidden;
+                                                    text-shadow: 0 0 5px #fff;
+                                                }
+                                        
+                                                                                /* --- Settings Toggle Switch --- */
+                                        .toggle-switch {
+                                            position: relative;
+                                            display: inline-block;
+                                            width: 40px;
+                                            height: 20px;
+                                        }
+                                        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+                                        .toggle-slider {
+                                            position: absolute;
+                                            cursor: pointer;
+                                            inset: 0;
+                                            background-color: var(--bg-primary);
+                                            border: 2px solid var(--border);
+                                            border-radius: 20px;
+                                            transition: .4s;
+                                        }
+                                        .toggle-slider:before {
+                                            position: absolute;
+                                            content: "";
+                                            height: 12px;
+                                            width: 12px;
+                                            left: 2px;
+                                            bottom: 2px;
+                                            background-color: var(--accent);
+                                            border-radius: 50%;
+                                            transition: .4s;
+                                        }
+                                        input:checked + .toggle-slider:before {
+                                            transform: translateX(20px);
+                                            background-color: #10b981;
+                                        }
+                                

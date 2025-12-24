@@ -60,142 +60,6 @@ const categoryNames = {
     'art': 'Art House' 
 };
 
-// --- Audio System (Procedural 8-bit Sound) ---
-class SoundFX {
-    constructor() {
-        this.muted = localStorage.getItem('gamingChallengeAudioMuted') === 'true';
-        this.ctx = null;
-        this.updateUI();
-    }
-
-    init() {
-        if (!this.ctx) {
-            const AudioContext = window.AudioContext || window.webkitAudioContext;
-            this.ctx = new AudioContext();
-        }
-    }
-
-    toggleMute() {
-        this.muted = !this.muted;
-        localStorage.setItem('gamingChallengeAudioMuted', this.muted);
-        this.updateUI();
-        if (!this.muted) this.playTick(); // Feedback
-    }
-
-    updateUI() {
-        const on = document.getElementById('icon-sound-on');
-        const off = document.getElementById('icon-sound-off');
-        if (on && off) {
-            if (this.muted) {
-                on.classList.add('hidden');
-                off.classList.remove('hidden');
-            } else {
-                on.classList.remove('hidden');
-                off.classList.add('hidden');
-            }
-        }
-    }
-
-    playTone(freq, type, duration, startTime = 0, vol = 0.1) {
-        if (this.muted) return;
-        this.init();
-        if (this.ctx.state === 'suspended') this.ctx.resume();
-
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + startTime);
-        
-        gain.gain.setValueAtTime(vol, this.ctx.currentTime + startTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + startTime + duration);
-
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-
-        osc.start(this.ctx.currentTime + startTime);
-        osc.stop(this.ctx.currentTime + startTime + duration);
-    }
-
-    playCoin() {
-        // 8-bit "bling": Square wave rapid pitch slide
-        if (this.muted) return;
-        this.init();
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(1200, now);
-        osc.frequency.linearRampToValueAtTime(2000, now + 0.1); // Slide up
-        
-        gain.gain.setValueAtTime(0.1, now);
-        gain.gain.linearRampToValueAtTime(0.01, now + 0.1);
-        
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        
-        osc.start(now);
-        osc.stop(now + 0.1);
-    }
-
-    playTick() {
-        // Menu hover tick: very short high pitch blip
-        this.playTone(800, 'square', 0.03, 0, 0.03);
-    }
-
-    playFanfare() {
-        if (this.muted) return;
-        this.init();
-        const vol = 0.1;
-
-        // Even more accurate FF-style timing
-        const notes = [
-            { f: 523.25, d: 0.05, t: 0.00 }, // Triplet 1
-            { f: 523.25, d: 0.05, t: 0.07 }, // Triplet 2
-            { f: 523.25, d: 0.05, t: 0.14 }, // Triplet 3
-            { f: 523.25, d: 0.25, t: 0.21 }, // Sustained C
-            
-            { f: 415.30, d: 0.12, t: 0.46 }, // Ab4 (Faster)
-            { f: 466.16, d: 0.12, t: 0.58 }, // Bb4 (Faster)
-        ];
-
-        notes.forEach(n => {
-            this.playTone(n.f, 'square', n.d, n.t, vol);
-        });
-
-        // Final Triumphant Chord (Faster transition)
-        const chordTime = 0.70;
-        this.playTone(523.25, 'square', 1, chordTime, vol);      
-        this.playTone(659.25, 'square', 1, chordTime, vol * 0.8); 
-        this.playTone(783.99, 'square', 1, chordTime, vol * 0.8); 
-        this.playTone(1046.50, 'square', 1, chordTime, vol * 0.5);
-    }
-
-    playThud() {
-        if (this.muted) return;
-        this.init();
-        const now = this.ctx.currentTime;
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(150, now);
-        osc.frequency.exponentialRampToValueAtTime(40, now + 0.2);
-        
-        gain.gain.setValueAtTime(0.3, now);
-        gain.gain.linearRampToValueAtTime(0.01, now + 0.2);
-        
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        
-        osc.start(now);
-        osc.stop(now + 0.2);
-    }
-}
-
-const sfx = new SoundFX();
-
 // --- Helpers ---
 
 function getSystemIcon(system) {
@@ -249,6 +113,11 @@ function saveState() {
     localStorage.setItem('gamingChallengeDates2026', JSON.stringify(completionDates));
     localStorage.setItem('gamingChallengeDropped2026', JSON.stringify(droppedGames));
     localStorage.setItem('gamingChallengeReviews2026', JSON.stringify(gameReviews));
+    if (currentlyPlaying) {
+        localStorage.setItem('gamingChallengePlaying', currentlyPlaying);
+    } else {
+        localStorage.removeItem('gamingChallengePlaying');
+    }
     updateProgress();
 }
 
@@ -275,6 +144,11 @@ function applyReviewStamp(rating, event) {
     const id = currentReviewTarget;
     sfx.playThud();
     sfx.playFanfare();
+
+    // Stop playing if it's the active game
+    if (typeof currentlyPlaying !== 'undefined' && currentlyPlaying === id) {
+        ejectCartridge();
+    }
 
     // Visual Juice: Confetti Cannon
     if (event && event.clientX) {
@@ -462,6 +336,11 @@ function toggleDrop(id, event) {
         droppedGames = droppedGames.filter(gameId => gameId !== id);
         if (gameReviews[id] === 'dropped') delete gameReviews[id];
     } else {
+        // Stop playing if it's the active game
+        if (typeof currentlyPlaying !== 'undefined' && currentlyPlaying === id) {
+            ejectCartridge();
+        }
+
         // Remove from completed if it was there
         completedGames = completedGames.filter(gameId => gameId !== id);
         delete completionDates[id];
@@ -518,16 +397,22 @@ function reviveCategory(key) {
 
     list.forEach(game => {
         droppedGames = droppedGames.filter(id => id !== game.id);
+        // Remove dropped stamp if it exists
+        if (gameReviews[game.id] === 'dropped') {
+            delete gameReviews[game.id];
+        }
     });
     saveState();
 }
 
 function resetProgress() {
-    if(confirm("Are you sure you want to reset all progress? This will also clear the Graveyard and Review Stamps.")) {
+    if(confirm("Are you sure you want to reset all progress? This will also clear the Graveyard, Review Stamps, and the Active Console game.")) {
         completedGames = [];
         droppedGames = [];
         completionDates = {};
         gameReviews = {};
+        currentlyPlaying = null;
+        localStorage.removeItem('gamingChallengePlaying');
         saveState();
         location.reload();
     }
@@ -567,7 +452,7 @@ function startRandomizer() {
             clearInterval(timer);
             // Show Final Result
             showDetails(randomGame.id);
-            sfx.playFanfare();
+            if (sfx) sfx.playDing();
         }
     }, intervalTime);
 }
@@ -785,10 +670,15 @@ function exportData() {
         completed: completedGames,
         dates: completionDates,
         dropped: droppedGames,
-        reviews: gameReviews
+        reviews: gameReviews,
+        playing: currentlyPlaying,
+        theme: themeManager.currentTheme,
+        prevTheme: themeManager.previousTheme,
+        muted: sfx.muted,
+        skipBoot: bootSequence.skipBoot
     }));
     navigator.clipboard.writeText(data).then(() => {
-        alert("Save code copied to clipboard! Keep it safe.");
+        alert("Full System Save copied to clipboard! Keep it safe.");
     }).catch(err => {
         console.error('Failed to copy: ', err);
         alert("Failed to copy to clipboard. Check console.");
@@ -800,32 +690,38 @@ function importData() {
     if (!code) return;
     try {
         const decoded = JSON.parse(atob(code));
-        let newCompleted = [];
-        let newDates = {};
-        let newDropped = [];
-        let newReviews = {};
+        
+        if(confirm("This will restore all settings, progress, and hardware state. Continue?")) {
+            // Restore Data
+            completedGames = decoded.completed || [];
+            completionDates = decoded.dates || {};
+            droppedGames = decoded.dropped || [];
+            gameReviews = decoded.reviews || {};
+            currentlyPlaying = decoded.playing || null;
+            if (currentlyPlaying) localStorage.setItem('gamingChallengePlaying', currentlyPlaying);
+            else localStorage.removeItem('gamingChallengePlaying');
 
-        if (Array.isArray(decoded)) {
-            // Backward compatibility
-            newCompleted = decoded;
-        } else if (decoded.completed && Array.isArray(decoded.completed)) {
-            newCompleted = decoded.completed;
-            newDates = decoded.dates || {};
-            newDropped = decoded.dropped || [];
-            newReviews = decoded.reviews || {};
-        } else {
-            throw new Error("Invalid format");
-        }
+            // Restore Hardware/System state
+            if (decoded.theme) themeManager.applyTheme(decoded.theme);
+            if (decoded.prevTheme) {
+                themeManager.previousTheme = decoded.prevTheme;
+                localStorage.setItem('gamingChallengePreviousTheme', decoded.prevTheme);
+            }
+            if (decoded.muted !== undefined) {
+                sfx.muted = decoded.muted;
+                localStorage.setItem('gamingChallengeAudioMuted', sfx.muted);
+                sfx.updateUI();
+            }
+            if (decoded.skipBoot !== undefined) {
+                bootSequence.skipBoot = decoded.skipBoot;
+                localStorage.setItem('skipBootSequence', decoded.skipBoot);
+            }
 
-        if(confirm("This will overwrite your current progress. Continue?")) {
-            completedGames = newCompleted;
-            completionDates = newDates;
-            droppedGames = newDropped;
-            gameReviews = newReviews;
             saveState();
             location.reload();
         }
     } catch (e) {
+        console.error(e);
         alert("Invalid save code. Please check and try again.");
     }
 }
@@ -1009,6 +905,27 @@ function closeShareModal() {
 
 // --- Modal Logic ---
 
+function openSettings() {
+    const modal = document.getElementById('settings-modal');
+    // Sync toggles
+    document.getElementById('setting-audio').checked = !sfx.muted;
+    document.getElementById('setting-boot').checked = !bootSequence.skipBoot;
+    
+    modal.classList.remove('hidden');
+    if (sfx) sfx.playTick();
+}
+
+function closeSettings() {
+    document.getElementById('settings-modal').classList.add('hidden');
+}
+
+function toggleBootSetting() {
+    const isEnabled = document.getElementById('setting-boot').checked;
+    bootSequence.skipBoot = !isEnabled;
+    localStorage.setItem('skipBootSequence', !isEnabled);
+    if (sfx) sfx.playTick();
+}
+
 function showDetails(id) {
     const game = allGames.find(g => g.id === id);
     if (!game) return;
@@ -1119,7 +1036,7 @@ function createCard(game, category = 'core') {
     }
 
     return `
-        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="this.classList.toggle('flipped')">
+        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="this.classList.toggle('flipped'); if(sfx) sfx.playFlip()">
             <div class="game-card-inner">
                 <!-- FRONT FACE -->
                 <div class="game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
@@ -1144,8 +1061,22 @@ function createCard(game, category = 'core') {
                                     <div class="flex gap-0.5">${stars}</div>
                                 </div>
                             </div>
-                            <h3 class="text-base font-bold text-gaming-text leading-tight mt-1 truncate">${game.title}</h3>
-                            <p class="text-[10px] text-gaming-muted italic mt-1 leading-tight line-clamp-1">"${game.tagline}"</p>
+                            <div class="flex justify-between items-center mt-1">
+                                <div class="min-w-0 flex-grow">
+                                    <h3 class="text-base font-bold text-gaming-text leading-tight truncate">${game.title}</h3>
+                                    <p class="text-[10px] text-gaming-muted italic mt-1 leading-tight line-clamp-1">"${game.tagline}"</p>
+                                </div>
+                                ${(!isCompleted && !isDropped) ? `
+                                <button onclick="event.stopPropagation(); insertCartridge('${game.id}'); if(window.sfx) sfx.playTick()" 
+                                        id="play-btn-${game.id}"
+                                        class="play-toggle-btn ml-3 shrink-0 w-8 h-8 flex items-center justify-center ${currentlyPlaying === game.id ? 'bg-red-600 shadow-red-500/40' : 'bg-gaming-accent shadow-gaming-accent/40'} text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all group/play" 
+                                        title="${currentlyPlaying === game.id ? 'Eject from Console' : 'Load into Console'}">
+                                    <svg class="w-4 h-4 fill-current transition-transform ${currentlyPlaying === game.id ? '' : 'group-hover/play:translate-x-0.5'}" viewBox="0 0 24 24">
+                                        ${currentlyPlaying === game.id ? '<rect x="6" y="6" width="12" height="12"/>' : '<path d="M8 5v14l11-7z"/>'}
+                                    </svg>
+                                </button>
+                                ` : ''}
+                            </div>
                         </div>
 
                         <div class="mt-auto pt-4 flex items-center justify-between border-t border-gaming-border/50">
@@ -1231,8 +1162,49 @@ function createCard(game, category = 'core') {
     `;
 }
 
+function updateAllPlayButtons() {
+    allGames.forEach(game => {
+        const btn = document.getElementById(`play-btn-${game.id}`);
+        if (!btn) return;
+
+        const isCompleted = completedGames.includes(game.id);
+        const isDropped = droppedGames.includes(game.id);
+        
+        if (isCompleted || isDropped) {
+            btn.classList.add('hidden');
+            return;
+        } else {
+            btn.classList.remove('hidden');
+        }
+
+        const isPlaying = (currentlyPlaying === game.id);
+        
+        // Update Button Color & Shadow
+        btn.className = `play-toggle-btn ml-3 shrink-0 w-8 h-8 flex items-center justify-center ${isPlaying ? 'bg-red-600 shadow-red-500/40' : 'bg-gaming-accent shadow-gaming-accent/40'} text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all group/play`;
+        btn.title = isPlaying ? 'Eject from Console' : 'Load into Console';
+
+        // Update Icon
+        btn.innerHTML = `
+            <svg class="w-4 h-4 fill-current transition-transform ${isPlaying ? '' : 'group-hover/play:translate-x-0.5'}" viewBox="0 0 24 24">
+                ${isPlaying ? '<rect x="6" y="6" width="12" height="12"/>' : '<path d="M8 5v14l11-7z"/>'}
+            </svg>
+        `;
+    });
+}
+
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
+    if (bootSequence) bootSequence.init();
+    
+    // Sync initial console state
+    if (currentlyPlaying) {
+        // Need a slight delay to ensure console elements are ready or just call it
+        setTimeout(() => {
+            const gameId = currentlyPlaying;
+            currentlyPlaying = null; // Reset temporarily so insert doesn't eject
+            insertCartridge(gameId, true, true); // Silent & Instant load
+        }, 100);
+    }
     document.getElementById('core-grid').innerHTML = coreGames.map(game => createCard(game, 'core')).join('');
     document.getElementById('bonus-grid').innerHTML = bonusGames.map(game => createCard(game, 'bonus')).join('');
     document.getElementById('zen-grid').innerHTML = zenGames.map(game => createCard(game, 'zen')).join('');
