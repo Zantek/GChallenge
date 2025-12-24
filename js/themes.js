@@ -1,6 +1,6 @@
 class ThemeManager {
     constructor() {
-        this.themes = ['future', 'brick', 'cube', 'os'];
+        this.themes = ['future', 'brick', 'cube', 'os', 'legacy'];
         this.currentTheme = localStorage.getItem('gamingChallengeTheme') || 'future';
         this.previousTheme = localStorage.getItem('gamingChallengePreviousTheme') || 'future';
         
@@ -16,7 +16,7 @@ class ThemeManager {
             if (e.key === this.konamiCode[this.konamiIndex]) {
                 this.konamiIndex++;
                 if (this.konamiIndex === this.konamiCode.length) {
-                    this.activateLegacy();
+                    this.triggerSecretGlitch();
                     this.konamiIndex = 0;
                 }
             } else {
@@ -25,20 +25,37 @@ class ThemeManager {
         });
     }
 
-    activateLegacy() {
-        if (this.currentTheme !== 'legacy') {
-            this.previousTheme = this.currentTheme;
-            localStorage.setItem('gamingChallengePreviousTheme', this.previousTheme);
-            this.applyTheme('legacy');
-            if (typeof achievements !== 'undefined') {
-                achievements.show({
-                    title: "Legacy Mode",
-                    message: "You've unlocked the secret monochrome skin!",
-                    type: 'level'
-                });
+    triggerSecretGlitch() {
+        // High-intensity visual juice
+        const body = document.body;
+        body.classList.add('system-glitch');
+        
+        if (typeof sfx !== 'undefined') {
+            // Intense glitch sound (rapid random tones)
+            for(let i=0; i<10; i++) {
+                sfx.playTone(Math.random() * 1000 + 100, 'sawtooth', 0.05, i * 0.05, 0.05);
             }
-            if (typeof sfx !== 'undefined') sfx.playFanfare();
         }
+
+        if (window.companion) {
+            companion.react('dropped'); // Use dropped for sad/glitchy look
+            const bubble = document.getElementById('companion-bubble');
+            if (bubble) bubble.innerText = "SYSTEM CRITICAL: HACK DETECTED";
+        }
+
+        // Give Achievement
+        if (typeof achievements !== 'undefined') {
+            achievements.show({
+                title: "System Breaker",
+                message: "You've accessed the restricted glitch layer.",
+                type: 'level'
+            });
+        }
+
+        // Remove effect after 2 seconds
+        setTimeout(() => {
+            body.classList.remove('system-glitch');
+        }, 2000);
     }
 
     applyTheme(theme) {
@@ -51,20 +68,15 @@ class ThemeManager {
     }
 
     nextTheme() {
-        if (this.currentTheme === 'legacy') {
-            // Escape legacy mode back to previous
-            this.applyTheme(this.previousTheme);
-        } else {
-            const currentIndex = this.themes.indexOf(this.currentTheme);
-            const nextIndex = (currentIndex + 1) % this.themes.length;
-            const nextTheme = this.themes[nextIndex];
-            
-            // Update previousTheme when normally switching
-            this.previousTheme = this.currentTheme;
-            localStorage.setItem('gamingChallengePreviousTheme', this.previousTheme);
-            
-            this.applyTheme(nextTheme);
-        }
+        const currentIndex = this.themes.indexOf(this.currentTheme);
+        const nextIndex = (currentIndex + 1) % this.themes.length;
+        const nextTheme = this.themes[nextIndex];
+        
+        // Update previousTheme when normally switching
+        this.previousTheme = this.currentTheme;
+        localStorage.setItem('gamingChallengePreviousTheme', this.previousTheme);
+        
+        this.applyTheme(nextTheme);
         
         if (typeof sfx !== 'undefined') {
             sfx.playTick();

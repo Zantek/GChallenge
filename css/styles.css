@@ -49,20 +49,17 @@
 
         [data-theme='legacy'] {
             --bg-primary: #000000;
-            --bg-secondary: #111111;
+            --bg-secondary: #000000;
             --bg-card: #000000;
             --bg-header: #000000;
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
             --accent: #ffffff;
-            --border: #ffffff;
-            --radius: 0px;
+            --border: #333333;
+            --radius: 0.5rem;
         }
 
         [data-theme='legacy'] .game-card,
-        [data-theme='legacy'] .rounded-gaming,
-        [data-theme='legacy'] header,
-        [data-theme='legacy'] section,
         [data-theme='legacy'] .companion-window {
             border: 1px solid #ffffff !important;
             box-shadow: none !important;
@@ -72,6 +69,145 @@
         [data-theme='legacy'] .bg-gaming-dark\/30,
         [data-theme='legacy'] .bg-gaming-card\/50 {
             background-color: #000000 !important;
+        }
+
+        /* Monochrome Everything for Legacy */
+        [data-theme='legacy'] img,
+        [data-theme='legacy'] #modal-banner {
+            filter: grayscale(1) contrast(1.2) brightness(0.9) !important;
+        }
+
+        /* Progress & XP Bars */
+        [data-theme='legacy'] #progress-bar,
+        [data-theme='legacy'] #xp-bar {
+            background-color: #ffffff !important;
+            background-image: none !important;
+        }
+
+        [data-theme='legacy'] .bg-blue-500,
+        [data-theme='legacy'] .bg-emerald-500,
+        [data-theme='legacy'] .bg-yellow-500,
+        [data-theme='legacy'] .bg-yellow-400,
+        [data-theme='legacy'] .bg-gradient-to-r {
+            background-image: none !important;
+        }
+
+        [data-theme='legacy'] .bg-gaming-dark,
+        [data-theme='legacy'] .bg-gaming-dark\/30 {
+            background-color: rgba(255,255,255,0.02) !important;
+            border: none !important;
+        }
+
+        /* Trophy Showcase & Badges */
+        [data-theme='legacy'] .trophy-icon-container,
+        [data-theme='legacy'] .bg-blue-900\/20,
+        [data-theme='legacy'] .bg-blue-500\/20,
+        [data-theme='legacy'] .bg-yellow-500\/20 {
+            filter: grayscale(1) brightness(1.2) !important;
+            background-color: rgba(255,255,255,0.05) !important;
+            color: #ffffff !important;
+            border: none !important;
+        }
+
+        /* Buttons (Share, Theme, CRT, etc.) */
+        [data-theme='legacy'] button,
+        [data-theme='legacy'] a.bg-blue-600,
+        [data-theme='legacy'] a.bg-red-600,
+        [data-theme='legacy'] a.bg-gray-700,
+        [data-theme='legacy'] .bg-gaming-accent {
+            background-color: #000000 !important;
+            color: #ffffff !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 4px !important;
+            box-shadow: none !important;
+            text-transform: uppercase;
+            font-family: inherit;
+            transition: all 0.2s ease;
+        }
+
+        [data-theme='legacy'] button:hover,
+        [data-theme='legacy'] a:hover {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-color: #ffffff !important;
+        }
+
+        /* Specific padding for Footer buttons */
+        [data-theme='legacy'] footer button {
+            padding: 0.6rem 1.5rem !important;
+        }
+
+        /* Game List Header Badges & Actions (Text-only for Drop/Revive) */
+        [data-theme='legacy'] .flex.gap-4.text-\[10px\] button {
+            background: none !important;
+            border: none !important;
+            padding: 0 !important;
+            color: rgba(255,255,255,0.6) !important;
+        }
+        [data-theme='legacy'] .flex.gap-4.text-\[10px\] button:hover {
+            color: #ffffff !important;
+            background: none !important;
+        }
+
+        /* Game Score Monochrome Override */
+        [data-theme='legacy'] .border-emerald-400\/30,
+        [data-theme='legacy'] .border-yellow-500\/30,
+        [data-theme='legacy'] .border-red-400\/30 {
+            border-color: #ffffff !important;
+        }
+        [data-theme='legacy'] .text-emerald-400,
+        [data-theme='legacy'] .text-yellow-500,
+        [data-theme='legacy'] .text-red-400 {
+            color: #ffffff !important;
+        }
+
+        /* Game List Header Badges & Actions */
+        [data-theme='legacy'] .text-blue-400,
+        [data-theme='legacy'] .text-red-400,
+        [data-theme='legacy'] .text-emerald-400 {
+            color: #ffffff !important;
+        }
+
+        /* Level Badge */
+        [data-theme='legacy'] #level-badge {
+            background-color: #ffffff !important;
+            color: #000000 !important;
+            border-radius: 0.5rem !important;
+            font-weight: 900;
+        }
+
+        /* Title & Header */
+        [data-theme='legacy'] h1,
+        [data-theme='legacy'] h2,
+        [data-theme='legacy'] h3,
+        [data-theme='legacy'] h1 span {
+            color: #ffffff !important;
+            letter-spacing: -0.05em;
+        }
+
+        [data-theme='legacy'] .text-gaming-accent,
+        [data-theme='legacy'] .text-blue-500 {
+            color: #ffffff !important;
+        }
+
+        /* Modal specific button icons */
+        [data-theme='legacy'] svg {
+            filter: grayscale(1) brightness(2) !important;
+        }
+
+        /* Progress Bar Container */
+        [data-theme='legacy'] .bg-gaming-dark {
+            background-color: #000000 !important;
+            border: none !important;
+        }
+
+        /* Checkbox Monochrome Override */
+        [data-theme='legacy'] .custom-checkbox:checked {
+            background-color: #ffffff !important;
+            border-color: #ffffff !important;
+        }
+        [data-theme='legacy'] .custom-checkbox:checked::before {
+            box-shadow: inset 1em 1em #000000 !important;
         }
 
         [data-theme='legacy'] .text-blue-400,
@@ -683,5 +819,20 @@
                                 .crt-active h3 {
                                     text-shadow: 1px 0 1px rgba(255,0,0,0.4), -1px 0 1px rgba(0,0,255,0.4);
                                     filter: brightness(1.1) contrast(1.1);
+                                }
+
+                                /* System Glitch (Konami Code) */
+                                .system-glitch {
+                                    animation: screen-shake 0.1s infinite;
+                                    filter: invert(1) hue-rotate(90deg);
+                                }
+
+                                @keyframes screen-shake {
+                                    0% { transform: translate(2px, 1px) rotate(0deg); }
+                                    20% { transform: translate(-1px, -2px) rotate(-1deg); }
+                                    40% { transform: translate(-3px, 0px) rotate(1deg); }
+                                    60% { transform: translate(3px, 2px) rotate(0deg); }
+                                    80% { transform: translate(1px, -1px) rotate(1deg); }
+                                    100% { transform: translate(-1px, 2px) rotate(-1deg); }
                                 }
                         
