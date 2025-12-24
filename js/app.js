@@ -971,7 +971,7 @@ function showDetails(id) {
     `;
 
     const hltbUrl = `https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}`;
-    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay Trailer')}`;
+    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay')}`;
 
     const modalActions = document.getElementById('modal-actions');
     const isDropped = droppedGames.includes(id);

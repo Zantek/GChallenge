@@ -1,0 +1,116 @@
+/* --- 3D Box Flipper & Card Styling --- */
+.game-card-container {
+    perspective: 1200px;
+    height: 400px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+.game-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+.game-card-container.flipped .game-card-inner {
+    transform: rotateY(180deg);
+}
+.game-card-front, .game-card-back {
+    position: absolute;
+    inset: -1px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+.game-card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card {
+    height: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+.game-card.completed { border-color: #10b981; opacity: 0.8; }
+.game-card.dropped { filter: grayscale(0.8) sepia(0.2); opacity: 0.5; }
+
+/* Theme Overrides for Cards */
+[data-theme='brick'] .game-card { border: 2px solid var(--border); image-rendering: pixelated; }
+[data-theme='cube'] .game-card { border: 4px solid var(--border); box-shadow: 8px 8px 0px rgba(0,0,0,0.2); }
+[data-theme='os'] .game-card { border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff !important; border-radius: 0px !important; }
+[data-theme='legacy'] .game-card { border: 1px solid #ffffff !important; }
+
+/* Hover Overlays */
+.game-card-overlay { transition: opacity 0.5s; }
+[data-theme='brick'] .game-card-overlay { background: var(--accent) !important; mix-blend-mode: color; }
+[data-theme='cube'] .game-card-overlay { background: linear-gradient(to bottom right, #ff4500, #4b0082) !important; opacity: 0; }
+[data-theme='cube'] .group:hover .game-card-overlay { opacity: 0.3 !important; }
+[data-theme='os'] .group:hover img { filter: brightness(1.1) contrast(1.1) !important; }
+[data-theme='legacy'] .group:hover img { filter: grayscale(1) brightness(1.1) contrast(1.2) !important; }
+
+/* --- Passport Stamp --- */
+.passport-stamp {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    color: #ef4444;
+    border: 3px double #ef4444;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    transform: rotate(-15deg);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 40;
+    animation: stamp-slam 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes stamp-slam {
+    0% { transform: scale(3) rotate(0deg); opacity: 0; }
+    100% { transform: scale(1) rotate(-15deg); opacity: 1; }
+}
+
+/* --- Review Stamps --- */
+.review-stamp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    padding: 0.4rem 0.8rem;
+    border: 0.3rem solid;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 900;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 30;
+    animation: review-stamp-slam 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes review-stamp-slam {
+    0% { transform: translate(-50%, -50%) scale(2) rotate(0deg); opacity: 0; }
+    100% { translate(-50%, -50%) scale(1) rotate(-15deg); opacity: 0.9; }
+}
+
+.stamp-masterpiece { color: #10b981; border-color: #10b981; }
+.stamp-solid { color: #3b82f6; border-color: #3b82f6; }
+.stamp-meh { color: #f59e0b; border-color: #f59e0b; }
+.stamp-dropped { color: #ef4444; border-color: #ef4444; }
+
+/* Theme Stamps */
+[data-theme='future'] .review-stamp { font-family: 'Inter', sans-serif; font-style: italic; border-radius: 12px; }
+[data-theme='cube'] .review-stamp { color: #ffffff; border: 4px solid #ffffff; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
+[data-theme='os'] .review-stamp { background: #ffffff; border: 2px solid; border-radius: 0px; box-shadow: 2px 2px 0px #000; }
+[data-theme='legacy'] .review-stamp { background: #ffffff; color: #000 !important; border: 1px solid #000; border-radius: 0px; }

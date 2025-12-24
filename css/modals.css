@@ -1,0 +1,33 @@
+/* --- Modals & Popups --- */
+
+/* Settings Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+    position: absolute; cursor: pointer; inset: 0;
+    background-color: var(--bg-primary); border: 2px solid var(--border); border-radius: 20px;
+    transition: .4s;
+}
+.toggle-slider:before {
+    position: absolute; content: ""; height: 12px; width: 12px;
+    left: 2px; bottom: 2px; background-color: var(--accent);
+    border-radius: 50%; transition: .4s;
+}
+input:checked + .toggle-slider:before { transform: translateX(20px); background-color: #10b981; }
+
+/* Modal Image Monochrome (Legacy) */
+[data-theme='legacy'] #modal-banner {
+    filter: grayscale(1) contrast(1.2) brightness(0.9) !important;
+}
+
+/* Modal Icons (Legacy) */
+[data-theme='legacy'] svg { filter: grayscale(1) brightness(2) !important; }
+
+/* Custom Scrollbar for Card Descriptions */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }

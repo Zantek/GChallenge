@@ -1,0 +1,33 @@
+/* --- Visual Juice & Special Effects --- */
+
+/* Boot Sequence */
+#boot-overlay {
+    position: fixed; inset: 0; background: #000; z-index: 9999;
+    display: flex; flex-direction: column; padding: 2rem;
+    font-family: 'Courier New', monospace; color: #fff;
+    pointer-events: auto; transition: opacity 0.5s ease-in-out;
+}
+#boot-terminal { font-size: 0.8rem; line-height: 1.4; overflow: hidden; text-shadow: 0 0 5px #fff; }
+
+/* CRT Mode */
+.crt-active body::before {
+    content: " "; display: block; position: fixed; inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    z-index: 100; background-size: 100% 4px; pointer-events: none;
+}
+.crt-active body::after {
+    content: " "; display: block; position: fixed; inset: 0;
+    background: linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    background-size: 3px 100%; z-index: 101; pointer-events: none;
+    animation: crt-flicker 0.15s infinite;
+}
+@keyframes crt-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.15; } 100% { opacity: 0.1; } }
+
+/* System Glitch (Konami) */
+.system-glitch { animation: screen-shake 0.1s infinite; filter: invert(1) hue-rotate(90deg); }
+@keyframes screen-shake {
+    0% { transform: translate(2px, 1px) rotate(0deg); }
+    20% { transform: translate(-1px, -2px) rotate(-1deg); }
+    40% { transform: translate(-3px, 0px) rotate(1deg); }
+    100% { transform: translate(-1px, 2px) rotate(-1deg); }
+}

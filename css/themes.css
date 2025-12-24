@@ -1,0 +1,74 @@
+:root {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #1e293b;
+    --bg-header: #111827;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #3b82f6;
+    --border: #1e293b;
+    --radius: 0.75rem;
+    --font-main: 'Inter', sans-serif;
+}
+
+[data-theme='brick'] {
+    --bg-primary: #8bac0f;
+    --bg-secondary: #9bbc0f;
+    --bg-card: #9bbc0f;
+    --bg-header: #306230;
+    --text-primary: #0f380f;
+    --text-secondary: #306230;
+    --accent: #0f380f;
+    --border: #0f380f;
+    --radius: 0px;
+}
+
+[data-theme='cube'] {
+    --bg-primary: #6a5acd;
+    --bg-secondary: #483d8b;
+    --bg-card: #1e1e1e;
+    --bg-header: #4b0082;
+    --text-primary: #ffffff;
+    --text-secondary: #dcdcdc;
+    --accent: #ff4500;
+    --border: #4b0082;
+    --radius: 2rem;
+}
+
+[data-theme='os'] {
+    --bg-primary: #c0c0c0;
+    --bg-secondary: #c0c0c0;
+    --bg-card: #ffffff;
+    --bg-header: #000080;
+    --text-primary: #000000;
+    --text-secondary: #404040;
+    --accent: #000080;
+    --border: #808080;
+    --radius: 0px;
+}
+
+[data-theme='legacy'] {
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-card: #000000;
+    --bg-header: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent: #ffffff;
+    --border: #333333;
+    --radius: 0.5rem;
+}
+
+/* --- Theme Global Overrides --- */
+
+[data-theme='brick'] .bg-gaming-accent { background-color: var(--accent) !important; color: var(--bg-primary) !important; }
+[data-theme='brick'] header .text-gaming-text, [data-theme='brick'] header h1 { color: var(--bg-primary) !important; }
+[data-theme='brick'] .text-blue-400, [data-theme='brick'] .text-emerald-400 { color: var(--text-primary) !important; }
+
+[data-theme='os'] .bg-blue-600 { background-color: #000080 !important; }
+[data-theme='os'] header .text-gaming-text, [data-theme='os'] header h1 { color: #ffffff !important; }
+[data-theme='os'] #level-badge { background-color: #c0c0c0 !important; color: #000000 !important; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff !important; }
+
+[data-theme='legacy'] h1, [data-theme='legacy'] h2, [data-theme='legacy'] h3, [data-theme='legacy'] h1 span { color: #ffffff !important; letter-spacing: -0.05em; }
+[data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500 { color: #ffffff !important; }
+[data-theme='legacy'] #level-badge { background-color: #ffffff !important; color: #000000 !important; border-radius: 0.5rem !important; font-weight: 900; }
