@@ -20,6 +20,12 @@
 }
 input:checked + .toggle-slider:before { transform: translateX(20px); background-color: #10b981; }
 
+/* Legacy Toggle Overrides */
+[data-theme='legacy'] .toggle-slider { background-color: #000; border-color: #fff; }
+[data-theme='legacy'] .toggle-slider:before { background-color: #fff; }
+[data-theme='legacy'] input:checked + .toggle-slider:before { background-color: #fff; transform: translateX(20px); }
+[data-theme='legacy'] input:checked + .toggle-slider { background-color: #333; }
+
 /* Modal Image Monochrome (Legacy) */
 [data-theme='legacy'] #modal-banner {
     filter: grayscale(1) contrast(1.2) brightness(0.9) !important;
@@ -27,6 +33,51 @@ input:checked + .toggle-slider:before { transform: translateX(20px); background-
 
 /* Modal Icons (Legacy) */
 [data-theme='legacy'] svg { filter: grayscale(1) brightness(2) !important; }
+
+/* --- Review Modal Stamp Button Theming --- */
+
+/* Future: Holographic Buttons */
+[data-theme='future'] .stamp-btn div { border-width: 1px; border-radius: 12px; font-family: 'Inter', sans-serif; font-style: italic; }
+
+/* Brick: Pixel Buttons */
+[data-theme='brick'] .stamp-btn div { 
+    border: 3px double var(--accent); 
+    border-radius: 0; 
+    background: var(--bg-primary); 
+    color: var(--accent);
+}
+[data-theme='brick'] .stamp-btn span { color: var(--accent) !important; }
+
+/* Cube: Round Sticker Buttons */
+[data-theme='cube'] .stamp-btn div { 
+    border: 4px solid #ffffff; 
+    border-radius: 9999px; 
+    color: #ffffff; 
+    font-family: 'Arial Black', sans-serif;
+}
+[data-theme='cube'] .stamp-btn:nth-child(1) div { background: #10b981; }
+[data-theme='cube'] .stamp-btn:nth-child(2) div { background: #3b82f6; }
+[data-theme='cube'] .stamp-btn:nth-child(3) div { background: #f59e0b; }
+
+/* OS: Classic UI Buttons */
+[data-theme='os'] .stamp-btn div { 
+    border: 2px solid; 
+    border-color: #ffffff #808080 #808080 #ffffff; 
+    background: #c0c0c0; 
+    border-radius: 0; 
+    color: #000;
+}
+[data-theme='os'] .stamp-btn:hover div { border-color: #808080 #ffffff #ffffff #808080; }
+
+/* Legacy: Monochrome Buttons */
+[data-theme='legacy'] .stamp-btn div { 
+    border: 1px solid #ffffff; 
+    border-radius: 0; 
+    background: #000; 
+    color: #fff;
+    font-family: 'Courier New', monospace;
+}
+[data-theme='legacy'] .stamp-btn span { color: #fff !important; }
 
 /* Custom Scrollbar for Card Descriptions */
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }

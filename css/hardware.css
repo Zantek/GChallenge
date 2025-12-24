@@ -101,13 +101,20 @@
 [data-theme='legacy'] #cart-title {
     color: #ffffff !important;
 }
+[data-theme='legacy'] #cart-label {
+    filter: grayscale(1) contrast(1.2) brightness(0.9) !important;
+}
 
 /* CRT Overlay for Cartridge label */
+[data-theme='brick'] #cart-label {
+    filter: sepia(1) hue-rotate(40deg) saturate(2) brightness(0.9) contrast(1.2) !important;
+}
 [data-theme='brick'] #cart-label::after {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(rgba(15, 56, 15, 0.4) 1px, transparent 1px);
+    z-index: 20;
+    background-image: radial-gradient(rgba(15, 56, 15, 0.6) 1px, transparent 1px);
     background-size: 3px 3px;
     pointer-events: none;
 }

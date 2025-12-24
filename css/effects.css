@@ -21,6 +21,22 @@
     background-size: 3px 100%; z-index: 101; pointer-events: none;
     animation: crt-flicker 0.15s infinite;
 }
+
+/* Curvature and Vignette */
+.crt-active #crt-vignette {
+    display: block !important;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, transparent 75%, rgba(0, 0, 0, 0.5) 100%);
+    box-shadow: inset 0 0 10rem rgba(0,0,0,0.8);
+    z-index: 102; pointer-events: none;
+}
+
+/* The actual "Tube" curve mask */
+.crt-active::before {
+    content: ""; position: fixed; inset: 0; z-index: 103; pointer-events: none;
+    background: radial-gradient(circle at center, transparent 0%, transparent 70%, rgba(0,0,0,1) 120%);
+}
+
 @keyframes crt-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.15; } 100% { opacity: 0.1; } }
 
 /* System Glitch (Konami) */

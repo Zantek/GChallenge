@@ -63,12 +63,112 @@
 
 [data-theme='brick'] .bg-gaming-accent { background-color: var(--accent) !important; color: var(--bg-primary) !important; }
 [data-theme='brick'] header .text-gaming-text, [data-theme='brick'] header h1 { color: var(--bg-primary) !important; }
-[data-theme='brick'] .text-blue-400, [data-theme='brick'] .text-emerald-400 { color: var(--text-primary) !important; }
+[data-theme='brick'] header .text-gaming-muted, [data-theme='brick'] header #xp-text { color: #0f380f !important; opacity: 1 !important; }
+[data-theme='brick'] .text-blue-400, 
+[data-theme='brick'] .text-emerald-400,
+[data-theme='brick'] .text-orange-400,
+[data-theme='brick'] .text-yellow-400,
+[data-theme='brick'] .text-purple-400 { color: #0f380f !important; }
+
+/* Brick Theme Difficulty Stars */
+[data-theme='brick'] .text-yellow-500 {
+    color: #0f380f !important;
+}
+[data-theme='brick'] .text-gaming-text\/10 {
+    color: rgba(15, 56, 15, 0.15) !important;
+}
+
+/* Brick Theme Header Details */
+[data-theme='brick'] header h1 .text-blue-500,
+[data-theme='brick'] header h1 svg {
+    color: #0f380f !important;
+}
+[data-theme='brick'] #level-badge {
+    background-color: #0f380f !important;
+    color: #8bac0f !important;
+    box-shadow: none !important;
+}
+[data-theme='brick'] header button.bg-blue-600 {
+    background-color: #0f380f !important;
+    color: #8bac0f !important;
+    box-shadow: none !important;
+}
+
+/* --- Dot Matrix Grid Effect (Brick Theme) --- */
+[data-theme='brick'] .game-card-front .relative.h-40::after,
+[data-theme='brick'] #modal-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    background-image: radial-gradient(rgba(15, 56, 15, 0.4) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+}
+
+[data-theme='brick'] img {
+    filter: sepia(1) hue-rotate(40deg) saturate(2) brightness(0.9) contrast(1.2) !important;
+}
 
 [data-theme='os'] .bg-blue-600 { background-color: #000080 !important; }
 [data-theme='os'] header .text-gaming-text, [data-theme='os'] header h1 { color: #ffffff !important; }
+[data-theme='os'] header .text-gaming-muted, [data-theme='os'] header .text-gaming-muted\/60 { color: rgba(255,255,255,0.8) !important; }
+[data-theme='os'] header #progress-text { color: #ffffff !important; }
 [data-theme='os'] #level-badge { background-color: #c0c0c0 !important; color: #000000 !important; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff !important; }
 
 [data-theme='legacy'] h1, [data-theme='legacy'] h2, [data-theme='legacy'] h3, [data-theme='legacy'] h1 span { color: #ffffff !important; letter-spacing: -0.05em; }
-[data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500 { color: #ffffff !important; }
+[data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500, [data-theme='legacy'] #progress-text { color: #ffffff !important; }
 [data-theme='legacy'] #level-badge { background-color: #ffffff !important; color: #000000 !important; border-radius: 0.5rem !important; font-weight: 900; }
+
+/* Legacy Theme Button Overrides (including Share) */
+[data-theme='legacy'] .bg-blue-600,
+[data-theme='legacy'] .hover\:bg-blue-500:hover {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+}
+
+/* Legacy Toolbar Transparency */
+[data-theme='legacy'] header .bg-gaming-card\/80 {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Legacy Theme Image Filters */
+[data-theme='legacy'] img, 
+[data-theme='legacy'] #modal-banner {
+    filter: grayscale(1) contrast(1.2) brightness(0.9) !important;
+}
+
+/* Legacy Buddy Refinements */
+[data-theme='legacy'] .companion-window .bg-gaming-accent span {
+    color: #000000 !important;
+}
+[data-theme='legacy'] .companion-window .bg-gaming-accent .w-2.h-2 {
+    background-color: #000000 !important;
+}
+[data-theme='legacy'] .companion-floor {
+    background-color: #111111 !important;
+    border-top: 2px solid #ffffff !important;
+    /* Add dots to floor as well */
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px) !important;
+    background-size: 4px 4px !important;
+}
+[data-theme='legacy'] .companion-window .bg-gaming-dark\/30 {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px) !important;
+    background-size: 4px 4px !important;
+    background-color: #000000 !important;
+}
+[data-theme='legacy'] #companion-sprite {
+    background: transparent !important;
+}
+
+/* Legacy Genre Color Overrides (Front & Back) */
+[data-theme='legacy'] .text-blue-400,
+[data-theme='legacy'] .bg-blue-900\/20,
+[data-theme='legacy'] .bg-blue-900\/30 {
+    color: #ffffff !important;
+    background-color: transparent !important; /* Fixed: removed the bg color */
+    border-color: rgba(255,255,255,0.2) !important;
+}

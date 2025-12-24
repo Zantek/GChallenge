@@ -1079,7 +1079,7 @@ function createCard(game, category = 'core') {
                 <!-- FRONT FACE -->
                 <div class="game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
                     <div class="relative h-40 overflow-hidden shrink-0">
-                        <div class="game-card-overlay absolute inset-0 bg-gradient-to-br ${game.color} opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10"></div>
+                        <div class="game-card-overlay absolute inset-0 opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10 ${document.documentElement.getAttribute('data-theme') === 'future' ? 'bg-gradient-to-br ' + game.color : ''}"></div>
                         
                         ${stampHtml}
                         ${(isDropped || gameReviews[game.id]) ? `<div class="review-stamp stamp-${isDropped ? 'dropped' : gameReviews[game.id]}">${isDropped ? 'dropped' : gameReviews[game.id]}</div>` : ''}
