@@ -145,15 +145,31 @@ class SoundFX {
     }
 
     playFanfare() {
-        // Check/Trophy unlock: Major Triad Arpeggio (C-E-G)
         if (this.muted) return;
-        const root = 523.25; // C5
-        const third = 659.25; // E5
-        const fifth = 783.99; // G5
-        
-        this.playTone(root, 'square', 0.1, 0, 0.1);
-        this.playTone(third, 'square', 0.1, 0.1, 0.1);
-        this.playTone(fifth, 'square', 0.4, 0.2, 0.1);
+        this.init();
+        const vol = 0.1;
+
+        // Even more accurate FF-style timing
+        const notes = [
+            { f: 523.25, d: 0.05, t: 0.00 }, // Triplet 1
+            { f: 523.25, d: 0.05, t: 0.07 }, // Triplet 2
+            { f: 523.25, d: 0.05, t: 0.14 }, // Triplet 3
+            { f: 523.25, d: 0.25, t: 0.21 }, // Sustained C
+            
+            { f: 415.30, d: 0.12, t: 0.46 }, // Ab4 (Faster)
+            { f: 466.16, d: 0.12, t: 0.58 }, // Bb4 (Faster)
+        ];
+
+        notes.forEach(n => {
+            this.playTone(n.f, 'square', n.d, n.t, vol);
+        });
+
+        // Final Triumphant Chord (Faster transition)
+        const chordTime = 0.70;
+        this.playTone(523.25, 'square', 1, chordTime, vol);      
+        this.playTone(659.25, 'square', 1, chordTime, vol * 0.8); 
+        this.playTone(783.99, 'square', 1, chordTime, vol * 0.8); 
+        this.playTone(1046.50, 'square', 1, chordTime, vol * 0.5);
     }
 
     playThud() {
@@ -258,6 +274,7 @@ function applyReviewStamp(rating, event) {
     
     const id = currentReviewTarget;
     sfx.playThud();
+    sfx.playFanfare();
 
     // Visual Juice: Confetti Cannon
     if (event && event.clientX) {
@@ -275,6 +292,11 @@ function applyReviewStamp(rating, event) {
     }
     
     gameReviews[id] = rating;
+    
+    // Live Feed Reaction
+    if (window.companion) {
+        companion.react(rating);
+    }
     
     closeReviewModal();
     saveState();
@@ -446,6 +468,12 @@ function toggleDrop(id, event) {
         
         droppedGames.push(id);
         gameReviews[id] = 'dropped'; // Automatic Stamp
+        
+        // Live Feed Reaction
+        if (window.companion) {
+            companion.react('dropped');
+        }
+
         sfx.playTone(200, 'sine', 0.5, 0, 0.1); // Low somber tone
     }
     closeModal();
@@ -850,6 +878,16 @@ function generateShareCard() {
             text: '#000000',
             muted: '#404040',
             font: 'Tahoma, sans-serif',
+            radius: 0,
+            glow: false
+        },
+        'legacy': {
+            bg: ['#000000', '#000000'],
+            accent: '#ffffff',
+            secondary: '#ffffff',
+            text: '#ffffff',
+            muted: '#cccccc',
+            font: 'Courier New, monospace',
             radius: 0,
             glow: false
         }

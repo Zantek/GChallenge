@@ -61,16 +61,6 @@ class AchievementSystem {
 
             this.container.appendChild(toast);
 
-            // Play Sound
-            if (sfx) {
-                if (data.type === 'level') {
-                    // Unique level up sound or just fanfare
-                    sfx.playFanfare();
-                } else {
-                    sfx.playFanfare();
-                }
-            }
-
             // Remove after duration
             setTimeout(() => {
                 toast.classList.add('animate-out', 'fade-out', 'slide-out-to-bottom-full');

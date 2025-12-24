@@ -47,6 +47,42 @@
             --radius: 0px;
         }
 
+        [data-theme='legacy'] {
+            --bg-primary: #000000;
+            --bg-secondary: #111111;
+            --bg-card: #000000;
+            --bg-header: #000000;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --accent: #ffffff;
+            --border: #ffffff;
+            --radius: 0px;
+        }
+
+        [data-theme='legacy'] .game-card,
+        [data-theme='legacy'] .rounded-gaming,
+        [data-theme='legacy'] header,
+        [data-theme='legacy'] section,
+        [data-theme='legacy'] .companion-window {
+            border: 1px solid #ffffff !important;
+            box-shadow: none !important;
+        }
+
+        [data-theme='legacy'] .bg-gaming-dark\/50,
+        [data-theme='legacy'] .bg-gaming-dark\/30,
+        [data-theme='legacy'] .bg-gaming-card\/50 {
+            background-color: #000000 !important;
+        }
+
+        [data-theme='legacy'] .text-blue-400,
+        [data-theme='legacy'] .text-emerald-400,
+        [data-theme='legacy'] .text-purple-400,
+        [data-theme='legacy'] .text-red-400,
+        [data-theme='legacy'] .text-yellow-500 {
+            color: #ffffff !important;
+            text-decoration: underline;
+        }
+
         [data-theme='brick'] .game-card {
             border: 2px solid var(--border);
             image-rendering: pixelated;
@@ -372,6 +408,22 @@
                                                 [data-theme='os'] .stamp-solid { color: #0000ff; border-color: #0000ff; }
                                                 [data-theme='os'] .stamp-meh { color: #808000; border-color: #808000; }
                                                 [data-theme='os'] .stamp-dropped { color: #ff0000; border-color: #ff0000; }
+
+                                                /* Legacy Style (Monochrome) */
+                                                [data-theme='legacy'] .review-stamp {
+                                                    background: #ffffff;
+                                                    color: #000000 !important;
+                                                    border: 1px solid #000000;
+                                                    border-radius: 0px;
+                                                    box-shadow: none;
+                                                    font-family: 'Courier New', monospace;
+                                                }
+                                                [data-theme='legacy'] .review-stamp.stamp-masterpiece,
+                                                [data-theme='legacy'] .review-stamp.stamp-solid,
+                                                [data-theme='legacy'] .review-stamp.stamp-meh,
+                                                [data-theme='legacy'] .review-stamp.stamp-dropped {
+                                                    border-color: #000000;
+                                                }
                                         
                                                 .stamp-masterpiece { color: #10b981; border-color: #10b981; }
                                                 .stamp-solid { color: #3b82f6; border-color: #3b82f6; }
@@ -536,13 +588,24 @@
                         
         
                                 [data-theme='os'] .passport-stamp {
-        
                                     border: 2px solid #ef4444;
-        
                                     background: #ffffff;
-        
                                     color: #ef4444;
-        
+                                }
+
+                                [data-theme='legacy'] .passport-stamp {
+                                    border: 1px solid #ffffff;
+                                    background: #000000;
+                                    color: #ffffff;
+                                    box-shadow: none;
+                                }
+
+                                /* Fix Buddy.exe text visibility in Legacy/High Contrast */
+                                [data-theme='legacy'] .companion-window .bg-gaming-accent span {
+                                    color: #000000 !important;
+                                }
+                                [data-theme='legacy'] .companion-window .bg-gaming-accent .w-2.h-2 {
+                                    background-color: #000000 !important;
                                 }
         
                         

@@ -4,6 +4,30 @@ class Companion {
         this.container = document.getElementById('companion-container');
         this.level = 1;
         this.frame = 0;
+        this.decorationsEnabled = true; // Easy toggle for room decorations
+        
+        this.decorations = {
+            plant: `
+                <svg width="24" height="24" viewBox="0 0 16 16" fill="#10b981">
+                    <rect x="7" y="10" width="2" height="4" fill="#78350f" />
+                    <rect x="6" y="6" width="4" height="4" />
+                    <rect x="5" y="7" width="6" height="2" />
+                </svg>
+            `,
+            poster: `
+                <div class="w-10 h-12 bg-white/10 border border-white/20 rounded-sm flex items-center justify-center">
+                    <div class="w-6 h-8 bg-blue-500/20 rounded-sm animate-pulse"></div>
+                </div>
+            `,
+            console: `
+                <svg width="20" height="12" viewBox="0 0 16 16" fill="#94a3b8">
+                    <rect x="2" y="10" width="12" height="4" rx="1" />
+                    <rect x="4" y="11" width="2" height="2" fill="#1e293b" />
+                    <circle cx="11" cy="12" r="1" fill="#ef4444" />
+                </svg>
+            `
+        };
+
         this.sprites = {
             egg: `
                 <svg width="64" height="64" viewBox="0 0 16 16" fill="currentColor" class="text-yellow-200 drop-shadow-lg">
@@ -183,19 +207,27 @@ class Companion {
     }
 
     getSprite() {
-        if (this.level < 3) return this.sprites.egg;
-        if (this.level < 6) return this.sprites.baby;
-        if (this.level < 9) return this.sprites.teen;
-        if (this.level < 12) return this.sprites.adult;
-        if (this.level < 15) return this.sprites.warrior;
-        if (this.level < 18) return this.sprites.mecha;
-        if (this.level < 21) return this.sprites.dragon;
+        if (this.level < 1) return this.sprites.egg;
+        if (this.level < 3) return this.sprites.baby;
+        if (this.level < 6) return this.sprites.teen;
+        if (this.level < 9) return this.sprites.adult;
+        if (this.level < 12) return this.sprites.warrior;
+        if (this.level < 15) return this.sprites.mecha;
+        if (this.level < 18) return this.sprites.dragon;
         return this.sprites.legend;
     }
 
     render() {
         if (!this.container) return;
         
+        // Decide which decorations to show
+        let decsHtml = '';
+        if (this.decorationsEnabled) {
+            if (this.level >= 5) decsHtml += `<div class="absolute bottom-2 left-2 z-0 animate-bounce" style="animation-duration: 3s">${this.decorations.plant}</div>`;
+            if (this.level >= 10) decsHtml += `<div class="absolute top-4 left-4 z-0 opacity-50">${this.decorations.poster}</div>`;
+            if (this.level >= 15) decsHtml += `<div class="absolute bottom-2 right-2 z-0">${this.decorations.console}</div>`;
+        }
+
         this.container.innerHTML = `
             <div class="relative group cursor-pointer" onclick="companion.interact()">
                 <!-- Speech Bubble -->
@@ -219,6 +251,9 @@ class Companion {
                         <!-- Pixel Background Pattern -->
                         <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(var(--accent) 1px, transparent 1px); background-size: 4px 4px;"></div>
                         
+                        <!-- Room Decorations -->
+                        ${decsHtml}
+
                         <!-- Floor -->
                         <div class="absolute bottom-0 w-full h-8 bg-green-400/30 border-t-4 border-green-500/30"></div>
                         
@@ -238,6 +273,50 @@ class Companion {
             this.frame = !this.frame;
             sprite.style.transform = this.frame ? 'translateY(-2px)' : 'translateY(0)';
         }
+    }
+
+    react(type) {
+        const bubble = document.getElementById('companion-bubble');
+        const sprite = document.getElementById('companion-sprite');
+        if (!bubble || !sprite) return;
+
+        const reactions = {
+            'masterpiece': { 
+                msg: "HOLY PIXELS! AN ABSOLUTE MASTERPIECE!", 
+                anim: 'animate-bounce',
+                color: 'text-emerald-400'
+            },
+            'solid': { 
+                msg: "Nice! That looked like a solid play.", 
+                anim: 'animate-pulse',
+                color: 'text-blue-400'
+            },
+            'meh': { 
+                msg: "Mid... but hey, a win is a win!", 
+                anim: '',
+                color: 'text-yellow-500'
+            },
+            'dropped': { 
+                msg: "Farewell... another one for the vault.", 
+                anim: 'opacity-50 scale-90',
+                color: 'text-red-500'
+            }
+        };
+
+        const r = reactions[type];
+        if (!r) return;
+
+        // Visual Reaction
+        bubble.innerText = r.msg;
+        bubble.classList.remove('opacity-0');
+        bubble.classList.add(r.color);
+        sprite.classList.add(...r.anim.split(' '));
+
+        setTimeout(() => {
+            bubble.classList.add('opacity-0');
+            bubble.classList.remove(r.color);
+            sprite.classList.remove(...r.anim.split(' '));
+        }, 4000);
     }
 
     interact() {
