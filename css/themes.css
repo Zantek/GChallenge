@@ -113,8 +113,17 @@
 [data-theme='os'] .bg-blue-600 { background-color: #000080 !important; }
 [data-theme='os'] header .text-gaming-text, [data-theme='os'] header h1 { color: #ffffff !important; }
 [data-theme='os'] header .text-gaming-muted, [data-theme='os'] header .text-gaming-muted\/60 { color: rgba(255,255,255,0.8) !important; }
-[data-theme='os'] header #progress-text { color: #ffffff !important; }
-[data-theme='os'] #level-badge { background-color: #c0c0c0 !important; color: #000000 !important; border: 2px solid; border-color: #ffffff #808080 #808080 #ffffff !important; }
+[data-theme='os'] header #progress-text, [data-theme='os'] header h1 span { color: #ffffff !important; }
+[data-theme='os'] header h1 svg { color: #ffffff !important; }
+[data-theme='os'] #level-badge { 
+    background-color: #c0c0c0 !important; 
+    color: #000000 !important; 
+    border: 2px solid; 
+    border-color: #ffffff #808080 #808080 #ffffff !important; 
+    border-radius: 0px !important;
+    font-weight: 900;
+    box-shadow: none !important;
+}
 
 [data-theme='legacy'] h1, [data-theme='legacy'] h2, [data-theme='legacy'] h3, [data-theme='legacy'] h1 span { color: #ffffff !important; letter-spacing: -0.05em; }
 [data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500, [data-theme='legacy'] #progress-text { color: #ffffff !important; }

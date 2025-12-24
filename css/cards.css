@@ -83,7 +83,7 @@
 
 [data-theme='brick'] .passport-stamp { color: var(--accent); border-color: var(--accent); background: var(--bg-primary); box-shadow: none; }
 [data-theme='cube'] .passport-stamp { color: #ffffff; border: 4px solid #ffffff; background: #f97316; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
-[data-theme='os'] .passport-stamp { border: 2px solid #ef4444; background: #ffffff; color: #ef4444; }
+[data-theme='os'] .passport-stamp { border: 2px solid !important; border-color: #ffffff #808080 #808080 #ffffff !important; background: #c0c0c0; color: #000; border-radius: 0; box-shadow: none; }
 [data-theme='legacy'] .passport-stamp { border: 1px solid #ffffff; background: #000000; color: #ffffff; box-shadow: none; }
 
 @keyframes stamp-slam {
@@ -120,7 +120,14 @@
 /* Theme Stamps */
 [data-theme='future'] .review-stamp { font-family: 'Inter', sans-serif; font-style: italic; border-radius: 12px; }
 [data-theme='cube'] .review-stamp { color: #ffffff; border: 4px solid #ffffff; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
-[data-theme='os'] .review-stamp { background: #ffffff; border: 2px solid; border-radius: 0px; box-shadow: 2px 2px 0px #000; }
+[data-theme='os'] .review-stamp { 
+    background: #c0c0c0; 
+    border: 2px solid !important; 
+    border-color: #ffffff #808080 #808080 #ffffff !important; 
+    border-radius: 0px; 
+    box-shadow: none; 
+    color: #000;
+}
 [data-theme='legacy'] .review-stamp { background: #ffffff; color: #000 !important; border: 1px solid #000; border-radius: 0px; }
 
 /* Brick Style Review Stamps */
@@ -182,6 +189,24 @@
     filter: brightness(1.5);
 }
 
+/* OS Card Back Buttons */
+[data-theme='os'] .bg-red-600,
+[data-theme='os'] .bg-gray-700,
+[data-theme='os'] .bg-blue-600,
+[data-theme='os'] a[href*="howlongtobeat"] {
+    background-color: #c0c0c0 !important;
+    color: #000000 !important;
+    border: 2px solid !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+    border-radius: 0 !important;
+}
+[data-theme='os'] .bg-red-600:hover,
+[data-theme='os'] .bg-gray-700:hover,
+[data-theme='os'] .bg-blue-600:hover,
+[data-theme='os'] a[href*="howlongtobeat"]:hover {
+    border-color: #808080 #ffffff #ffffff #808080 !important;
+}
+
 /* Legacy Play/Stop Buttons */
 [data-theme='legacy'] .play-toggle-btn {
     background-color: #000 !important;
@@ -213,4 +238,20 @@
 }
 [data-theme='brick'] .play-toggle-btn:hover {
     filter: brightness(1.2);
+}
+
+/* OS Play/Stop Buttons */
+[data-theme='os'] .play-toggle-btn {
+    background-color: #c0c0c0 !important;
+    color: #000000 !important;
+    border: 2px solid !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+}
+[data-theme='os'] .play-toggle-btn:active {
+    border-color: #808080 #ffffff #ffffff #808080 !important;
+}
+[data-theme='os'] .play-toggle-btn.bg-red-600 {
+    background-color: #c0c0c0 !important;
 }

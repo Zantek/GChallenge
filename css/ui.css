@@ -25,6 +25,9 @@
 [data-theme='brick'] .custom-checkbox:checked { background-color: var(--accent) !important; border-color: var(--accent) !important; }
 [data-theme='brick'] .custom-checkbox:checked::before { box-shadow: inset 1em 1em var(--bg-primary) !important; }
 
+[data-theme='os'] .custom-checkbox { border-radius: 0; }
+[data-theme='os'] .custom-checkbox:checked { background-color: #000080 !important; border-color: #000080 !important; }
+
 /* Scrollbars */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
@@ -37,6 +40,19 @@
 [data-theme='legacy'] .bg-gaming-dark, [data-theme='legacy'] .bg-gray-700 { background-color: #000000 !important; border: 1px solid #ffffff !important; }
 [data-theme='legacy'] .bg-gray-700:hover { background-color: #000000 !important; }
 [data-theme='legacy'] .bg-gradient-to-r { background-image: none !important; }
+
+/* OS Progress Overrides */
+[data-theme='os'] #progress-bar, [data-theme='os'] #xp-bar { 
+    background-color: #000080 !important; 
+    background-image: none !important; 
+    border-radius: 0 !important;
+}
+[data-theme='os'] .bg-gray-700, [data-theme='os'] .bg-gray-800 { 
+    background-color: #ffffff !important; 
+    border: 1px solid #808080 !important; 
+    border-radius: 0 !important; 
+}
+[data-theme='os'] .bg-gray-700:hover { background-color: #ffffff !important; }
 
 /* Brick Progress Overrides */
 [data-theme='brick'] #progress-bar, [data-theme='brick'] #xp-bar { background-color: var(--accent) !important; background-image: none !important; }
@@ -60,6 +76,7 @@
 .trophy.unlocked { filter: grayscale(0) opacity(1); }
 [data-theme='legacy'] .bg-yellow-500 { background-color: #ffffff !important; }
 [data-theme='brick'] .bg-yellow-500 { background-color: var(--accent) !important; }
+[data-theme='os'] .bg-yellow-500 { background-color: #808080 !important; }
 .trophy-slot.unlocked .trophy-icon-container::after {
     content: ''; position: absolute; inset: -10px;
     background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
