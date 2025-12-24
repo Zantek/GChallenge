@@ -107,18 +107,56 @@ let completedGames = JSON.parse(localStorage.getItem('gamingChallenge2026')) || 
 let completionDates = JSON.parse(localStorage.getItem('gamingChallengeDates2026')) || {};
 let droppedGames = JSON.parse(localStorage.getItem('gamingChallengeDropped2026')) || [];
 let gameReviews = JSON.parse(localStorage.getItem('gamingChallengeReviews2026')) || {};
+let collapsedSections = JSON.parse(localStorage.getItem('gamingChallengeCollapsed2026')) || {};
 
 function saveState() {
     localStorage.setItem('gamingChallenge2026', JSON.stringify(completedGames));
     localStorage.setItem('gamingChallengeDates2026', JSON.stringify(completionDates));
     localStorage.setItem('gamingChallengeDropped2026', JSON.stringify(droppedGames));
     localStorage.setItem('gamingChallengeReviews2026', JSON.stringify(gameReviews));
+    localStorage.setItem('gamingChallengeCollapsed2026', JSON.stringify(collapsedSections));
     if (currentlyPlaying) {
         localStorage.setItem('gamingChallengePlaying', currentlyPlaying);
     } else {
         localStorage.removeItem('gamingChallengePlaying');
     }
     updateProgress();
+}
+
+function toggleSection(key) {
+    const container = document.getElementById(`grid-container-${key}`);
+    const chevron = document.getElementById(`chevron-${key}`);
+    if (!container || !chevron) return;
+
+    const isCollapsed = !collapsedSections[key];
+    collapsedSections[key] = isCollapsed;
+
+    if (isCollapsed) {
+        container.style.maxHeight = '0px';
+        chevron.style.transform = 'rotate(-90deg)';
+    } else {
+        // Use a large enough value for the content, but keep it consistent
+        container.style.maxHeight = '2000px'; 
+        chevron.style.transform = 'rotate(0deg)';
+    }
+
+    if (sfx) sfx.playTick();
+    saveState();
+}
+
+function applyInitialCollapses() {
+    Object.keys(collapsedSections).forEach(key => {
+        const container = document.getElementById(`grid-container-${key}`);
+        const chevron = document.getElementById(`chevron-${key}`);
+        if (!container || !chevron) return;
+
+        if (collapsedSections[key]) {
+            container.style.transition = 'none'; // Instant on load
+            container.style.maxHeight = '0px';
+            chevron.style.transform = 'rotate(-90deg)';
+            setTimeout(() => container.style.transition = '', 50);
+        }
+    });
 }
 
 function formatDate(date) {
@@ -1211,5 +1249,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('time-grid').innerHTML = timeGames.map(game => createCard(game, 'time')).join('');
     document.getElementById('art-grid').innerHTML = artGames.map(game => createCard(game, 'art')).join('');
 
+    applyInitialCollapses();
     updateProgress(true);
 });

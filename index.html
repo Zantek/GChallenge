@@ -154,16 +154,24 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-20">
         
         <!-- Trophy Room (Showcase) -->
-        <section class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming p-8 transition-all duration-300 overflow-hidden shadow-inner">
+        <section id="section-trophies" class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming p-8 transition-all duration-300 overflow-hidden shadow-inner">
             <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gaming-accent/30 to-transparent"></div>
             
-            <div class="flex flex-col items-center gap-10">
-                <div class="flex flex-col items-center text-center">
-                    <h3 class="text-gaming-accent text-[10px] font-black uppercase tracking-[0.3em] mb-1">Honorary Achievements</h3>
-                    <h2 class="text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('trophies')" class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
+                        <svg id="chevron-trophies" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="h-8 w-1 bg-yellow-500 rounded-full"></div>
+                    <div>
+                        <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary Achievements</h3>
+                        <h2 class="text-xl md:text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
+                    </div>
                 </div>
+            </div>
 
-                <div class="flex flex-wrap justify-center gap-8 md:gap-12">
+            <div id="grid-container-trophies" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[1000px]">
+                <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
                     <!-- Core Master -->
                     <div id="trophy-core" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Core Challenge games">
                         <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
@@ -253,8 +261,11 @@
 
         <!-- Core List Section -->
         <section id="section-core" class="transition-opacity duration-500">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div class="flex flex-col md:flex-row md::items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('core')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-core" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <div class="list-accent-bar h-8 w-1 bg-blue-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">The Core Challenge</h2>
                     <span id="count-core" class="list-count-badge bg-blue-900 text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">12 Games</span>
@@ -264,7 +275,9 @@
                     <button onclick="reviveCategory('core')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="core-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"></div>
+            <div id="grid-container-core" class="transition-all duration-[500ms] linear overflow-hidden max-h-[5000px]">
+                <div id="core-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pb-4"></div>
+            </div>
         </section>
 
         <!-- Visual Separator -->
@@ -285,6 +298,9 @@
         <section id="section-bonus" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('bonus')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-bonus" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <div class="list-accent-bar h-8 w-1 bg-purple-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">The Weird Bonus</h2>
                     <span id="count-bonus" class="list-count-badge bg-purple-900 text-purple-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
@@ -294,7 +310,9 @@
                     <button onclick="reviveCategory('bonus')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="bonus-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="grid-container-bonus" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[5000px]">
+                <div id="bonus-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
         </section>
 
         <!-- Extra Gimmick Lists -->
@@ -303,6 +321,9 @@
         <section id="section-zen" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('zen')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-zen" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <div class="list-accent-bar h-8 w-1 bg-green-400 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">🧘 The Zen Bonus List</h2>
                     <span id="count-zen" class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
@@ -312,13 +333,18 @@
                     <button onclick="reviveCategory('zen')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="zen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="grid-container-zen" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[5000px]">
+                <div id="zen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
         </section>
 
         <!-- Time Warps -->
         <section id="section-time" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('time')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-time" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <div class="list-accent-bar h-8 w-1 bg-red-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">⏱️ The Time Warp Bonus List</h2>
                     <span id="count-time" class="list-count-badge bg-red-900 text-red-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
@@ -328,13 +354,18 @@
                     <button onclick="reviveCategory('time')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="time-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="grid-container-time" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[5000px]">
+                <div id="time-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
         </section>
 
         <!-- Art House -->
         <section id="section-art" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('art')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-art" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
                     <div class="list-accent-bar h-8 w-1 bg-orange-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">🎨 The Art House Bonus List</h2>
                     <span id="count-art" class="list-count-badge bg-orange-900 text-orange-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
@@ -344,7 +375,9 @@
                     <button onclick="reviveCategory('art')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="art-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="grid-container-art" class="transition-all duration-[360ms] ease-linear overflow-hidden max-h-[5000px]">
+                <div id="art-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
         </section>
 
         <!-- The Graveyard (DNF) Section -->
