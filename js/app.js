@@ -197,21 +197,50 @@ function applyReviewStamp(rating, event) {
     }
     
     // Process Completion
+    let now = completionDates[id];
     if (!completedGames.includes(id)) {
         completedGames.push(id);
-        const now = new Date().toISOString();
+        now = new Date().toISOString();
         completionDates[id] = now;
     }
     
     gameReviews[id] = rating;
     
+    // Manual UI Update for the specific card to avoid full grid re-render
+    const card = document.getElementById(`card-${id}`);
+    if (card) {
+        card.classList.add('completed');
+        
+        // 1. Update Stamps
+        const bannerContainer = card.querySelector('.relative.h-40');
+        if (bannerContainer) {
+            const oldStamps = bannerContainer.querySelectorAll('.passport-stamp, .review-stamp');
+            oldStamps.forEach(s => s.remove());
+            bannerContainer.insertAdjacentHTML('beforeend', `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(now)}</div>`);
+            bannerContainer.insertAdjacentHTML('beforeend', `<div class="review-stamp stamp-${rating}">${rating}</div>`);
+        }
+
+        // 2. Update Footer
+        const statusText = card.querySelector('.group-mark span');
+        const checkbox = card.querySelector('input[type="checkbox"]');
+        if (statusText) {
+            statusText.innerText = 'Completed';
+            statusText.className = 'text-[10px] text-emerald-400 font-bold uppercase tracking-wider transition-colors';
+        }
+        if (checkbox) checkbox.checked = true;
+
+        // 3. Hide Play Button
+        const playBtn = document.getElementById(`play-btn-${id}`);
+        if (playBtn) playBtn.classList.add('hidden');
+    }
+
     // Live Feed Reaction
     if (window.companion) {
         companion.react(rating);
     }
     
     closeReviewModal();
-    saveState();
+    saveState(true); // Save with skipGrids = true
 }
 
 function toggleGame(id, event) {
@@ -224,7 +253,29 @@ function toggleGame(id, event) {
         completedGames = completedGames.filter(gameId => gameId !== id);
         delete completionDates[id];
         delete gameReviews[id];
-        saveState();
+        
+        // Manual UI Removal
+        const card = document.getElementById(`card-${id}`);
+        if (card) {
+            card.classList.remove('completed');
+            const stamps = card.querySelectorAll('.passport-stamp, .review-stamp');
+            stamps.forEach(s => s.remove());
+
+            // Update Footer
+            const statusText = card.querySelector('.group-mark span');
+            const checkbox = card.querySelector('input[type="checkbox"]');
+            if (statusText) {
+                statusText.innerText = 'Mark as Complete';
+                statusText.className = 'text-[10px] text-gaming-muted font-medium uppercase tracking-wider transition-colors';
+            }
+            if (checkbox) checkbox.checked = false;
+
+            // Show Play Button
+            const playBtn = document.getElementById(`play-btn-${id}`);
+            if (playBtn) playBtn.classList.remove('hidden');
+        }
+        
+        saveState(true);
     } else {
         openReviewModal(id);
     }
