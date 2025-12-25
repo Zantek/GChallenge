@@ -220,6 +220,19 @@ function applyReviewStamp(rating, event) {
             bannerContainer.insertAdjacentHTML('beforeend', `<div class="review-stamp stamp-${rating}">${rating}</div>`);
         }
 
+        // 1.5 Update Poster Button (New location)
+        const posterContainer = document.getElementById(`poster-btn-container-${id}`);
+        if (posterContainer) {
+            posterContainer.innerHTML = `
+                <button onclick="event.stopPropagation(); showGamePoster('${id}')" 
+                        class="poster-btn px-2 h-6 flex items-center gap-1.5 bg-gaming-accent/10 hover:bg-gaming-accent text-gaming-accent hover:text-white rounded border border-gaming-accent/30 hover:border-gaming-accent transition-all active:scale-95 group/poster" 
+                        title="View High-Res Poster">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span class="text-[8px] font-black uppercase tracking-widest">Poster</span>
+                </button>
+            `;
+        }
+
         // 2. Update Footer
         const statusText = card.querySelector('.group-mark span');
         const checkbox = card.querySelector('input[type="checkbox"]');
@@ -260,6 +273,10 @@ function toggleGame(id, event) {
             card.classList.remove('completed');
             const stamps = card.querySelectorAll('.passport-stamp, .review-stamp');
             stamps.forEach(s => s.remove());
+
+            // Clear Poster Button (New location)
+            const posterContainer = document.getElementById(`poster-btn-container-${id}`);
+            if (posterContainer) posterContainer.innerHTML = '';
 
             // Update Footer
             const statusText = card.querySelector('.group-mark span');
@@ -655,6 +672,25 @@ function openAdLightbox(html, type = 'poster') {
     if (sfx) sfx.playDing();
 }
 
+function showGamePoster(id) {
+    const game = allGames.find(g => g.id === id);
+    if (!game) return;
+
+    const posterUrl = game.banner.replace('banners/', 'posters/').replace(/-banner\.(jpg|png)$/, '-poster.jpg');
+    
+    const html = `
+        <div class="group relative aspect-[2/3] bg-gaming-card border border-gaming-border rounded-lg overflow-hidden shadow-2xl h-full">
+            <img src="${posterUrl}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent flex flex-col justify-end p-6">
+                <h5 class="text-white font-bold text-2xl">${game.title}</h5>
+                <p class="text-gaming-accent font-black text-xs uppercase tracking-widest">${game.system} Edition</p>
+            </div>
+        </div>
+    `;
+    
+    openAdLightbox(html, 'poster');
+}
+
 function renderAds() {
     const grid = document.getElementById('ads-grid');
     if (!grid) return;
@@ -680,7 +716,7 @@ function renderAds() {
         return `
             <div class="group relative aspect-[2/3] bg-gaming-card border border-gaming-border rounded-lg overflow-hidden shadow-2xl transition-all cursor-zoom-in" onclick="openAdLightbox(this.innerHTML, 'poster')">
                 <img src="${posterUrl}" class="w-full h-full object-cover transition-transform duration-1000">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                     <h5 class="text-white font-bold text-sm">${game.title}</h5>
                     <p class="text-gaming-accent font-black text-[8px] uppercase tracking-widest">${game.system} Edition</p>
                 </div>
@@ -1401,6 +1437,7 @@ function createCard(game, category = 'core') {
                                     <span class="text-xs font-medium text-gaming-text/80">${game.system}</span>
                                 </div>
                             </div>
+
                             <div class="flex flex-col items-center">
                                 <span class="text-[10px] text-gaming-muted">Score</span>
                                 <span class="text-xs font-black ${game.score >= 70 ? 'text-emerald-400 border-emerald-400/30' : (game.score >= 50 ? 'text-yellow-500 border-yellow-500/30' : 'text-red-400 border-red-400/30')} border px-1.5 rounded bg-black/20">
@@ -1415,6 +1452,19 @@ function createCard(game, category = 'core') {
                         <span class="text-[10px] ${isCompleted ? 'text-emerald-400 font-bold' : (isDropped ? 'text-red-400 font-bold' : 'text-gaming-muted font-medium')} uppercase tracking-wider transition-colors">
                             ${isCompleted ? 'Completed' : (isDropped ? 'Dropped (Wisdom +100)' : 'Mark as Complete')}
                         </span>
+                        
+                        <!-- Poster Button (New location) -->
+                        <div id="poster-btn-container-${game.id}" class="flex items-center justify-center">
+                            ${isCompleted ? `
+                            <button onclick="event.stopPropagation(); showGamePoster('${game.id}')" 
+                                    class="poster-btn px-2 h-6 flex items-center gap-1.5 bg-gaming-accent/10 hover:bg-gaming-accent text-gaming-accent hover:text-white rounded border border-gaming-accent/30 hover:border-gaming-accent transition-all active:scale-95 group/poster" 
+                                    title="View High-Res Poster">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                <span class="text-[8px] font-black uppercase tracking-widest">Poster</span>
+                            </button>
+                            ` : ''}
+                        </div>
+
                         ${!isDropped ? `
                         <input type="checkbox" class="custom-checkbox pointer-events-none" ${isCompleted ? 'checked' : ''} aria-label="Mark ${game.title} as complete">
                         ` : `

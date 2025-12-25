@@ -143,10 +143,15 @@
 /* Legacy Theme Button Overrides (including Share and Active Radio Channels) */
 [data-theme='legacy'] .bg-blue-600,
 [data-theme='legacy'] .bg-gaming-accent,
-[data-theme='legacy'] .hover\:bg-blue-500:hover {
+[data-theme='legacy'] .hover\:bg-blue-500:hover,
+[data-theme='legacy'] .poster-btn:hover {
     background-color: #ffffff !important;
     color: #000000 !important;
     border: 1px solid #ffffff !important;
+}
+[data-theme='legacy'] .poster-btn:hover span,
+[data-theme='legacy'] .poster-btn:hover svg {
+    color: #000000 !important;
 }
 
 /* Legacy Toolbar Transparency */
