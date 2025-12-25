@@ -1,6 +1,25 @@
 // --- Console Hardware Logic ---
 let currentlyPlaying = localStorage.getItem('gamingChallengePlaying') || null;
 
+function updateHeaderMarquee(gameId) {
+    const marquee = document.getElementById('now-playing-marquee');
+    const contents = marquee.querySelectorAll('.marquee-content');
+
+    if (gameId) {
+        const game = allGames.find(g => g.id === gameId);
+        if (game) {
+            // Update all content instances
+            const text = `Now Playing: ${game.title} [${game.system}] ... Est. Playtime: ${game.length} ... Difficulty: ${game.difficulty}/5 ... "${game.tagline}" ... `;
+            contents.forEach(el => el.innerText = text);
+            // Reveal
+            marquee.style.opacity = '1';
+        }
+    } else {
+        // Hide
+        marquee.style.opacity = '0';
+    }
+}
+
 function insertCartridge(gameId, silent = false, instant = false) {
     if (!instant && currentlyPlaying === gameId) {
         ejectCartridge();
@@ -33,12 +52,14 @@ function insertCartridge(gameId, silent = false, instant = false) {
         status.classList.add('text-emerald-400/40');
         status.classList.remove('text-white/10');
         if (typeof updateAllPlayButtons === 'function') updateAllPlayButtons();
+        updateHeaderMarquee(gameId); // Instant marquee update
         return;
     }
 
     // 1. "Eject" current (fast)
     cart.style.transition = 'transform 0.2s ease-in';
     cart.style.transform = 'translateY(-120%)';
+    updateHeaderMarquee(null); // Hide marquee during swap
     
     setTimeout(() => {
         // 2. Load New Data
@@ -61,6 +82,7 @@ function insertCartridge(gameId, silent = false, instant = false) {
 
         // Update UI buttons globally
         if (typeof updateAllPlayButtons === 'function') updateAllPlayButtons();
+        updateHeaderMarquee(gameId); // Show new game marquee
     }, 150);
 }
 
@@ -75,6 +97,7 @@ function ejectCartridge() {
     // 1. "Eject" 
     cart.style.transition = 'transform 0.2s ease-in';
     cart.style.transform = 'translateY(-120%)';
+    updateHeaderMarquee(null); // Restore header title
     
     // 2. Standby LED
     led.style.backgroundColor = '#dc2626'; // Red

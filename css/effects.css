@@ -1,5 +1,27 @@
 /* --- Visual Juice & Special Effects --- */
 
+/* Marquee Animation */
+.marquee-wrapper {
+    display: flex;
+    width: max-content;
+    animation: marquee-loop 20s linear infinite;
+    animation-delay: 4s;
+}
+
+.marquee-content {
+    padding-right: 50px; /* Gap between loops */
+    text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
+}
+
+@keyframes marquee-loop {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+#now-playing-marquee .animate-pulse {
+    box-shadow: 0 0 8px var(--accent);
+}
+
 /* Boot Sequence */
 .boot-skip #boot-overlay { display: none !important; }
 

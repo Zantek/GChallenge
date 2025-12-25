@@ -96,26 +96,31 @@
         <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-6">
                 <div class="flex items-center gap-3 md:gap-4 w-full lg:w-auto">
-                    <div class="min-w-0">
-                        <h1
-                            class="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight text-gaming-text flex items-center gap-2 md:gap-3 truncate">
-                            <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-blue-500 flex-shrink-0"
-                                viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                    <div class="flex flex-col min-w-0 w-fit">
+                        <!-- Main Title -->
+                        <h1 id="main-title" class="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight text-gaming-text flex items-center gap-2 md:gap-3 whitespace-nowrap">
+                            <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-blue-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
                             </svg>
                             <span class="truncate"><span class="text-blue-500">2026</span> Gaming Challenge</span>
                         </h1>
-                        <div class="flex items-center gap-3 mt-1.5">
-                            <div class="bg-blue-600 text-white w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-black text-[10px] md:text-xs lg:text-sm shadow-lg shadow-blue-500/20 shrink-0"
-                                id="level-badge">
-                                L1
-                            </div>
-                            <div class="flex flex-col min-w-0">
-                                <p class="text-gaming-muted text-[10px] md:text-xs lg:text-sm font-medium truncate">
-                                    Track your journey through gaming history</p>
-                                <p class="text-gaming-muted/60 text-[9px] md:text-[10px] mt-0.5" id="xp-text">0 / 500 XP
-                                    to Level 2</p>
+                        <!-- Now Playing Marquee -->
+                        <div id="now-playing-marquee" class="mt-1 opacity-0 transition-all duration-500 w-full max-w-[395px]">
+                            <div class="bg-black/40 border border-emerald-500/30 rounded-md px-3 h-[28px] md:h-[36px] flex items-center gap-3 w-full">
+                                <div class="flex items-center gap-1.5 shrink-0">
+                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+                                    <span class="text-[7px] font-black text-emerald-500 uppercase tracking-tighter">Running</span>
+                                </div>
+                                <div class="flex-grow overflow-hidden relative">
+                                    <div class="flex marquee-wrapper">
+                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-emerald-400 uppercase tracking-widest">
+                                            <!-- Content set by JS -->
+                                        </div>
+                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-emerald-400 uppercase tracking-widest">
+                                            <!-- Content set by JS -->
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -206,15 +211,21 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                            <div id="progress-bar"
-                                class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out"
-                                style="width: 0%"></div>
+                        <div class="flex items-center gap-3 mb-1">
+                            <div id="level-badge" class="bg-gaming-card text-gaming-accent text-[10px] font-black px-2 py-0.5 rounded-md border border-gaming-border shadow-sm shrink-0">L1</div>
+                            <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                                <div id="progress-bar" class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                            </div>
                         </div>
                         <!-- Secondary XP bar -->
-                        <div class="w-full bg-gray-800 rounded-full h-1 mt-1 overflow-hidden">
-                            <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500"
-                                style="width: 0%"></div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-[24px] shrink-0"></div> <!-- Spacer to align with level-badge -->
+                            <div class="w-full">
+                                <div class="w-full bg-gray-800 rounded-full h-1 overflow-hidden">
+                                    <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                                <div id="xp-text" class="text-[7px] font-bold text-gaming-muted uppercase tracking-widest mt-1 text-right">0 / 500 XP to Level 2</div>
+                            </div>
                         </div>
                     </div>
                 </div>
