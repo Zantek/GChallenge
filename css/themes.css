@@ -95,6 +95,45 @@
     --radius: 2px;
 }
 
+[data-theme='candy'] {
+    --bg-primary: #00d2ff;
+    --bg-secondary: #3a7bd5;
+    --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-header: rgba(58, 123, 213, 0.9);
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --accent: #ff00ff;
+    --border: rgba(255, 255, 255, 0.5);
+    --radius: 2rem;
+    --font-main: 'Inter', sans-serif;
+}
+
+[data-theme='arcade'] {
+    --bg-primary: #050505;
+    --bg-secondary: #111111;
+    --bg-card: #000000;
+    --bg-header: #000000;
+    --text-primary: #ff00ff;
+    --text-secondary: #00f2ff;
+    --accent: #ff00ff;
+    --border: #00f2ff;
+    --radius: 0px;
+    --font-main: 'Courier New', monospace;
+}
+
+[data-theme='obsidian'] {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #141414;
+    --bg-card: #0f0f0f;
+    --bg-header: #000000;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent: #ff6600;
+    --border: #222222;
+    --radius: 0px;
+    --font-main: 'Inter', sans-serif;
+}
+
 /* --- Theme Global Overrides --- */
 
 [data-theme='brick'] .bg-gaming-accent { background-color: var(--accent) !important; color: var(--bg-primary) !important; }
@@ -226,6 +265,24 @@
 }
 [data-theme='papercraft'] #marquee-led {
     background-color: #d32f2f !important;
+}
+
+[data-theme='candy'] header .text-gaming-text, [data-theme='candy'] header h1 { color: #ffffff !important; }
+[data-theme='candy'] header h1 .text-blue-500 { color: #ffffff !important; text-shadow: 0 0 10px #ff00ff !important; }
+[data-theme='candy'] #now-playing-marquee .bg-black\/40 {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+    border-color: #ffffff !important;
+    backdrop-filter: blur(5px);
+}
+[data-theme='candy'] #now-playing-marquee .marquee-content,
+[data-theme='candy'] #now-playing-marquee .text-emerald-500,
+[data-theme='candy'] #now-playing-marquee .text-red-500 {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px #ff00ff !important;
+}
+[data-theme='candy'] #marquee-led {
+    background-color: #ff00ff !important;
+    box-shadow: 0 0 10px #ff00ff !important;
 }
 
 /* Legacy Theme Button Overrides (including Share and Active Radio Channels) */

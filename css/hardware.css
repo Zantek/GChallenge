@@ -86,6 +86,48 @@
     filter: grayscale(0.2) contrast(0.9) brightness(1.1) sepia(0.2) !important;
 }
 
+[data-theme='candy'] #console-hardware {
+    background: radial-gradient(circle at top, rgba(0, 210, 255, 0.8), rgba(58, 123, 213, 0.9));
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 12px solid rgba(58, 123, 213, 1);
+    backdrop-filter: blur(10px);
+}
+[data-theme='candy'] #active-cartridge {
+    background-color: rgba(255, 0, 255, 0.2) !important;
+    border: 2px solid rgba(255, 255, 255, 0.6) !important;
+    border-radius: 1rem 1rem 0 0;
+}
+[data-theme='candy'] #cart-label {
+    filter: saturate(1.5) brightness(1.1) !important;
+}
+
+[data-theme='arcade'] #console-hardware {
+    background: #000;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.4), inset 0 0 20px rgba(255, 0, 255, 0.2);
+}
+[data-theme='arcade'] #active-cartridge {
+    background-color: #000 !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 0 0 15px #00f2ff !important;
+}
+[data-theme='arcade'] #cart-label {
+    filter: grayscale(1) invert(1) sepia(1) hue-rotate(250deg) saturate(5) brightness(0.8) !important;
+}
+
+[data-theme='obsidian'] #console-hardware {
+    background: #050505;
+    border: 1px solid #222;
+    border-bottom: 10px solid #000;
+}
+[data-theme='obsidian'] #active-cartridge {
+    background-color: #0f0f0f !important;
+    border: 1px solid #ff6600 !important;
+}
+[data-theme='obsidian'] #cart-label {
+    filter: contrast(1.2) brightness(0.7) grayscale(0.5) !important;
+}
+
 /* Cartridge Animation */
 #active-cartridge {
     will-change: transform;

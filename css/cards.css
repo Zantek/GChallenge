@@ -240,6 +240,99 @@
     box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
 }
 
+/* Candy Style (Glossy Y2K) */
+[data-theme='candy'] .game-card {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(10px);
+    border: 3px solid rgba(255, 255, 255, 0.6) !important;
+    border-radius: 2rem !important;
+    box-shadow: 0 10px 30px rgba(0, 210, 255, 0.2) !important;
+}
+[data-theme='candy'] .game-card-front::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    pointer-events: none;
+    z-index: 5;
+}
+[data-theme='candy'] .play-toggle-btn {
+    background: linear-gradient(to bottom, #ff00ff, #d300d3) !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 4px 15px rgba(255, 0, 255, 0.4) !important;
+}
+[data-theme='candy'] .review-stamp {
+    background: white;
+    border: 4px solid #ff00ff;
+    color: #ff00ff;
+    border-radius: 9999px;
+    font-family: 'Arial Black', sans-serif;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.3);
+}
+[data-theme='candy'] .passport-stamp {
+    background: #00d2ff;
+    border: 2px solid white;
+    color: white;
+    border-radius: 9999px;
+    font-size: 8px;
+}
+
+/* CRT Arcade Style (Neon Vector) */
+[data-theme='arcade'] .game-card {
+    background: #000000 !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 0 0 15px #00f2ff, inset 0 0 10px #00f2ff !important;
+}
+[data-theme='arcade'] .game-card-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+[data-theme='arcade'] .review-stamp {
+    background: rgba(0,0,0,0.9) !important;
+    border: 2px solid #ff00ff !important;
+    color: #ff00ff !important;
+    text-shadow: 0 0 10px #ff00ff;
+    box-shadow: 0 0 15px #ff00ff;
+    font-family: monospace;
+}
+[data-theme='arcade'] .passport-stamp {
+    background: rgba(0,0,0,0.9);
+    border: 1px solid #00f2ff;
+    color: #00f2ff;
+    text-shadow: 0 0 5px #00f2ff;
+}
+
+/* Obsidian Style (Stealth HUD) */
+[data-theme='obsidian'] .game-card {
+    background: #0f0f0f !important;
+    border: 1px solid #222 !important;
+    border-left: 4px solid #333 !important;
+}
+[data-theme='obsidian'] .game-card:hover {
+    border-left-color: #ff6600 !important;
+    background: #141414 !important;
+}
+[data-theme='obsidian'] .review-stamp {
+    background: #000;
+    border: 1px solid #ff6600;
+    color: #ff6600;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+}
+[data-theme='obsidian'] .passport-stamp {
+    background: #141414;
+    border: 1px solid #333;
+    color: #ff6600;
+}
+[data-theme='arcade'] .text-blue-400 { color: #00f2ff !important; }
+[data-theme='arcade'] .text-gaming-text { color: #ff00ff !important; }
+
 /* Hover Overlays */
 .game-card-overlay { transition: opacity 0.5s; opacity: 0; }
 .group:hover .game-card-overlay { opacity: 0.25 !important; }
@@ -285,7 +378,7 @@
 [data-theme='cube'] .passport-stamp { color: #ffffff; border: 4px solid #ffffff; background: #f97316; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
 [data-theme='os'] .passport-stamp { border: 2px solid !important; border-color: #ffffff #808080 #808080 #ffffff !important; background: #c0c0c0; color: #000; border-radius: 0; box-shadow: none; }
 [data-theme='legacy'] .passport-stamp { border: 1px solid #ffffff; background: #000000; color: #ffffff; box-shadow: none; }
-[data-theme='blueprint'] .passport-stamp { border: 1px solid #ffffff; background: transparent; color: #ffffff; box-shadow: none; font-family: monospace; }
+[data-theme='blueprint'] .passport-stamp { border: 1px solid #ffffff; background: rgba(0, 43, 92, 0.8); color: #ffffff; box-shadow: none; font-family: monospace; }
 
 @keyframes stamp-slam {
     0% { transform: scale(3) rotate(0deg); opacity: 0; }
@@ -319,8 +412,14 @@
 .stamp-dropped { color: #ef4444; border-color: #ef4444; }
 
 /* Theme Stamps */
-[data-theme='future'] .review-stamp { font-family: 'Inter', sans-serif; font-style: italic; border-radius: 12px; }
-[data-theme='cube'] .review-stamp { color: #ffffff; border: 4px solid #ffffff; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
+[data-theme='future'] .review-stamp { 
+    background: rgba(15, 23, 42, 0.8); 
+    font-family: 'Inter', sans-serif; font-style: italic; border-radius: 12px; 
+}
+[data-theme='cube'] .review-stamp { 
+    background: #1e1e1e;
+    color: #ffffff; border: 4px solid #ffffff; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; 
+}
 [data-theme='os'] .review-stamp { 
     background: #c0c0c0; 
     border: 2px solid !important; 
@@ -333,7 +432,7 @@
 
 /* Blueprint Style Review Stamps */
 [data-theme='blueprint'] .review-stamp {
-    background: transparent !important;
+    background: rgba(0, 43, 92, 0.8) !important;
     border: 1px dashed var(--accent) !important;
     color: var(--accent) !important;
     border-radius: 0px;

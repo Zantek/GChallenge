@@ -1,6 +1,6 @@
 class ThemeManager {
     constructor() {
-        this.themes = ['future', 'brick', 'cube', 'os', 'legacy', 'blueprint', 'woodgrain', 'papercraft'];
+        this.themes = ['future', 'brick', 'cube', 'os', 'legacy', 'blueprint', 'woodgrain', 'papercraft', 'candy', 'arcade', 'obsidian'];
         this.currentTheme = localStorage.getItem('gamingChallengeTheme') || 'future';
         this.previousTheme = localStorage.getItem('gamingChallengePreviousTheme') || 'future';
         

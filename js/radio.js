@@ -128,6 +128,9 @@ class RadioSystem {
             if (theme === 'blueprint') color = '#00f2ff';
             if (theme === 'woodgrain') color = '#ffbf00';
             if (theme === 'papercraft') color = '#333333';
+            if (theme === 'candy') color = '#ff00ff';
+            if (theme === 'arcade') color = '#ff00ff';
+            if (theme === 'obsidian') color = '#ff6600';
 
             for (let i = 0; i < this.dataArray.length; i++) {
                 barHeight = (this.dataArray[i] / 255) * this.canvas.height * 0.8;

@@ -1161,6 +1161,36 @@ function generateShareCard() {
             font: 'Courier New, monospace',
             radius: 2,
             glow: false
+        },
+        'candy': {
+            bg: ['#00d2ff', '#3a7bd5'],
+            accent: '#ff00ff',
+            secondary: '#ffffff',
+            text: '#1a1a1a',
+            muted: '#4a4a4a',
+            font: 'Inter, sans-serif',
+            radius: 50,
+            glow: true
+        },
+        'arcade': {
+            bg: ['#050505', '#000000'],
+            accent: '#ff00ff',
+            secondary: '#00f2ff',
+            text: '#ff00ff',
+            muted: '#00f2ff',
+            font: 'monospace',
+            radius: 0,
+            glow: true
+        },
+        'obsidian': {
+            bg: ['#0a0a0a', '#000000'],
+            accent: '#ff6600',
+            secondary: '#333333',
+            text: '#e0e0e0',
+            muted: '#a0a0a0',
+            font: 'Inter, sans-serif',
+            radius: 0,
+            glow: false
         }
     };
 
@@ -1241,8 +1271,8 @@ function generateShareCard() {
     ctx.fillText('COMPLETED', 600, 420);
 
     // Details Bar
-    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'woodgrain' ? '#1a0f00' : (currentTheme === 'papercraft' ? '#f4eee1' : '#1e293b'))));
-    if (currentTheme === 'os' || currentTheme === 'blueprint') {
+    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'papercraft' ? '#f4eee1' : (currentTheme === 'arcade' ? '#000000' : (currentTheme === 'obsidian' ? '#0f0f0f' : '#1e293b')))));
+    if (currentTheme === 'os' || currentTheme === 'blueprint' || currentTheme === 'arcade' || currentTheme === 'obsidian') {
         ctx.strokeStyle = s.accent;
         ctx.lineWidth = 2;
         ctx.strokeRect(300, 480, 600, 100);
