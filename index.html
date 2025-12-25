@@ -127,11 +127,11 @@
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="showStats()" class="text-emerald-400 hover:text-emerald-300 transition-colors p-1" title="Gamer Stats">
+                                    <button onclick="showStats(); if(sfx) sfx.playTick()" class="text-emerald-400 hover:text-emerald-300 transition-colors p-1" title="Gamer Stats">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="openSettings()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Settings">
+                                    <button onclick="openSettings(); if(sfx) sfx.playTick()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Settings">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                     </button>
                                 </div>
@@ -456,6 +456,34 @@
                     </label>
                 </div>
 
+                <!-- Radio Configuration -->
+                <div class="pt-4 border-t border-gaming-border space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex flex-col">
+                            <span class="text-sm font-bold text-gaming-text uppercase tracking-wider">LO-FI Radio</span>
+                            <span class="text-[10px] text-gaming-muted italic">Procedural background music</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="setting-radio" onchange="radio.toggle()" checked="false">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div id="radio-channels" class="grid grid-cols-1 gap-2 opacity-50 pointer-events-none transition-opacity">
+                        <span class="text-[8px] font-black text-gaming-muted uppercase tracking-widest text-center">Tune Station:</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="radio.prevChannel()" class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
+                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            </button>
+                            <div class="flex-grow h-10 flex items-center justify-center bg-black/40 border border-white/5 rounded px-4">
+                                <span id="radio-modal-display" class="text-[10px] font-black font-mono text-emerald-400 uppercase tracking-widest text-center">8-bit Chill</span>
+                            </div>
+                            <button onclick="radio.nextChannel()" class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
+                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="pt-4 border-t border-gaming-border space-y-3">
                     <button onclick="location.reload()" class="w-full bg-gaming-accent/10 hover:bg-gaming-accent/20 text-gaming-accent border border-gaming-accent/30 py-2 rounded font-black text-[10px] uppercase tracking-widest transition-all">
                         Reboot System
@@ -773,6 +801,7 @@
     <script src="js/themes.js"></script>
     <script src="js/sfx.js"></script>
     <script src="js/crt.js"></script>
+    <script src="js/radio.js"></script>
     <script src="js/boot.js"></script>
     <script src="js/confetti.js"></script>
     <script src="js/hardware.js"></script>

@@ -129,11 +129,12 @@
 [data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500, [data-theme='legacy'] #progress-text { color: #ffffff !important; }
 [data-theme='legacy'] #level-badge { background-color: #ffffff !important; color: #000000 !important; border-radius: 0.5rem !important; font-weight: 900; }
 
-/* Legacy Theme Button Overrides (including Share) */
+/* Legacy Theme Button Overrides (including Share and Active Radio Channels) */
 [data-theme='legacy'] .bg-blue-600,
+[data-theme='legacy'] .bg-gaming-accent,
 [data-theme='legacy'] .hover\:bg-blue-500:hover {
-    background-color: #000000 !important;
-    color: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
     border: 1px solid #ffffff !important;
 }
 

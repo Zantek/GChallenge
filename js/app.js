@@ -235,7 +235,7 @@ function applyReviewStamp(rating, event) {
     }
 
     // Live Feed Reaction
-    if (window.companion) {
+    if (companion) {
         companion.react(rating);
     }
     
@@ -440,7 +440,7 @@ function toggleDrop(id, event) {
         gameReviews[id] = 'dropped'; // Automatic Stamp
         
         // Live Feed Reaction
-        if (window.companion) {
+        if (companion) {
             companion.react('dropped');
         }
 
@@ -1002,6 +1002,13 @@ function openSettings() {
     document.getElementById('setting-audio').checked = !sfx.muted;
     document.getElementById('setting-boot').checked = !bootSequence.skipBoot;
     
+    const radioToggle = document.getElementById('setting-radio');
+    if (radioToggle) {
+        radioToggle.checked = (radio && radio.isPlaying);
+    }
+    
+    if (radio) radio.updateUI();
+    
     modal.classList.remove('hidden');
     if (sfx) sfx.playTick();
 }
@@ -1158,7 +1165,7 @@ function createCard(game, category = 'core') {
                                     <p class="text-[10px] text-gaming-muted italic mt-1 leading-tight line-clamp-1">"${game.tagline}"</p>
                                 </div>
                                 ${(!isCompleted && !isDropped) ? `
-                                <button onclick="event.stopPropagation(); insertCartridge('${game.id}'); if(window.sfx) sfx.playTick()" 
+                                <button onclick="event.stopPropagation(); insertCartridge('${game.id}'); if(sfx) sfx.playTick()" 
                                         id="play-btn-${game.id}"
                                         class="play-toggle-btn ml-3 shrink-0 w-8 h-8 flex items-center justify-center ${currentlyPlaying === game.id ? 'bg-red-600 shadow-red-500/40' : 'bg-gaming-accent shadow-gaming-accent/40'} text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all group/play" 
                                         title="${currentlyPlaying === game.id ? 'Eject from Console' : 'Load into Console'}">

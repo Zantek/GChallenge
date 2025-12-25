@@ -236,6 +236,7 @@
 /* Legacy Play/Stop Buttons */
 [data-theme='legacy'] .play-toggle-btn {
     background-color: #000 !important;
+    color: #fff !important;
     border: 1px solid #fff !important;
     box-shadow: none !important;
 }

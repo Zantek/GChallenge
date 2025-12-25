@@ -79,6 +79,33 @@ input:checked + .toggle-slider:before { transform: translateX(20px); background-
 }
 [data-theme='legacy'] .stamp-btn span { color: #fff !important; }
 
+/* --- Radio Tuning Buttons Theming --- */
+#radio-channels button:hover { background-color: var(--bg-secondary); }
+
+[data-theme='future'] #radio-channels button:hover {
+    background-color: var(--accent) !important;
+}
+[data-theme='future'] #radio-channels button:hover svg {
+    color: #fff !important;
+}
+
+[data-theme='brick'] #radio-channels button { border-radius: 0; border: 2px solid var(--accent); background: var(--bg-primary); }
+[data-theme='brick'] #radio-channels button:hover { background: var(--accent); }
+[data-theme='brick'] #radio-channels button:hover svg { color: var(--bg-primary); }
+[data-theme='brick'] #radio-channels button svg { color: var(--accent); }
+
+[data-theme='cube'] #radio-channels button { border-radius: 50%; border: 3px solid #fff; background: #ff4500; box-shadow: 4px 4px 0 #4b0082; }
+[data-theme='cube'] #radio-channels button:hover { transform: translate(2px, 2px); box-shadow: 2px 2px 0 #4b0082; }
+
+[data-theme='os'] #radio-channels button { border-radius: 0; border: 2px solid; border-color: #fff #808080 #808080 #fff !important; background: #c0c0c0; }
+[data-theme='os'] #radio-channels button:hover { background: #dcdcdc; }
+[data-theme='os'] #radio-channels button:active { border-color: #808080 #fff #fff #808080 !important; }
+[data-theme='os'] #radio-channels button svg { color: #000; }
+
+[data-theme='legacy'] #radio-channels button { border-radius: 0; border: 1px solid #fff; background: #000; }
+[data-theme='legacy'] #radio-channels button:hover { background: #fff !important; }
+[data-theme='legacy'] #radio-channels button:hover svg { color: #000 !important; }
+
 /* Custom Scrollbar for Card Descriptions */
 .custom-scrollbar::-webkit-scrollbar { width: 4px; }
 .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
