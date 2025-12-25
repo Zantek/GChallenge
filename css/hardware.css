@@ -72,6 +72,20 @@
     filter: sepia(0.5) contrast(1.1) brightness(0.8) !important;
 }
 
+[data-theme='papercraft'] #console-hardware {
+    background-color: #cbbba0;
+    background-image: url('https://www.transparenttextures.com/patterns/cardboard.png');
+    border: 3px solid #a6937c;
+    border-bottom: 12px solid #8c7861;
+}
+[data-theme='papercraft'] #active-cartridge {
+    background-color: #f4eee1 !important;
+    border: 2px solid #333 !important;
+}
+[data-theme='papercraft'] #cart-label {
+    filter: grayscale(0.2) contrast(0.9) brightness(1.1) sepia(0.2) !important;
+}
+
 /* Cartridge Animation */
 #active-cartridge {
     will-change: transform;

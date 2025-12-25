@@ -35,6 +35,10 @@
 [data-theme='woodgrain'] .custom-checkbox:checked { background-color: #ffbf00 !important; border-color: #1a0f00 !important; }
 [data-theme='woodgrain'] .custom-checkbox:checked::before { box-shadow: inset 1em 1em #1a0f00 !important; }
 
+[data-theme='papercraft'] .custom-checkbox { border-radius: 0; border: 2px solid #333; background: #fff; }
+[data-theme='papercraft'] .custom-checkbox:checked { background-color: #333 !important; border-color: #333 !important; }
+[data-theme='papercraft'] .custom-checkbox:checked::before { box-shadow: inset 1em 1em #fff !important; }
+
 /* Scrollbars */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }

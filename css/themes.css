@@ -83,6 +83,18 @@
     --radius: 4px;
 }
 
+[data-theme='papercraft'] {
+    --bg-primary: #e6dfcf;
+    --bg-secondary: #dcd4c3;
+    --bg-card: #f4eee1;
+    --bg-header: #cbbba0;
+    --text-primary: #2c2c2c;
+    --text-secondary: #5a5a5a;
+    --accent: #d32f2f;
+    --border: #333333;
+    --radius: 2px;
+}
+
 /* --- Theme Global Overrides --- */
 
 [data-theme='brick'] .bg-gaming-accent { background-color: var(--accent) !important; color: var(--bg-primary) !important; }
@@ -194,6 +206,26 @@
 [data-theme='woodgrain'] #now-playing-marquee .text-emerald-500,
 [data-theme='woodgrain'] #now-playing-marquee .text-red-500 {
     color: #ffbf00 !important;
+}
+
+[data-theme='papercraft'] header .text-gaming-text, [data-theme='papercraft'] header h1 { color: #2c2c2c !important; }
+[data-theme='papercraft'] #level-badge { 
+    background-color: #d32f2f !important; 
+    color: #ffffff !important; 
+    border: 2px solid #333 !important;
+    font-weight: 900;
+}
+[data-theme='papercraft'] #now-playing-marquee .bg-black\/40 {
+    background-color: #f4eee1 !important;
+    border-color: #333 !important;
+}
+[data-theme='papercraft'] #now-playing-marquee .marquee-content,
+[data-theme='papercraft'] #now-playing-marquee .text-emerald-500,
+[data-theme='papercraft'] #now-playing-marquee .text-red-500 {
+    color: #333 !important;
+}
+[data-theme='papercraft'] #marquee-led {
+    background-color: #d32f2f !important;
 }
 
 /* Legacy Theme Button Overrides (including Share and Active Radio Channels) */

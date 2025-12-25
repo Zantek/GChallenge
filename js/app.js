@@ -1151,6 +1151,16 @@ function generateShareCard() {
             font: 'serif',
             radius: 4,
             glow: false
+        },
+        'papercraft': {
+            bg: ['#e6dfcf', '#cbbba0'],
+            accent: '#d32f2f',
+            secondary: '#333333',
+            text: '#2c2c2c',
+            muted: '#5a5a5a',
+            font: 'Courier New, monospace',
+            radius: 2,
+            glow: false
         }
     };
 
@@ -1231,7 +1241,7 @@ function generateShareCard() {
     ctx.fillText('COMPLETED', 600, 420);
 
     // Details Bar
-    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'woodgrain' ? '#1a0f00' : '#1e293b')));
+    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'woodgrain' ? '#1a0f00' : (currentTheme === 'papercraft' ? '#f4eee1' : '#1e293b'))));
     if (currentTheme === 'os' || currentTheme === 'blueprint') {
         ctx.strokeStyle = s.accent;
         ctx.lineWidth = 2;

@@ -183,6 +183,63 @@
     box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
 }
 
+/* Papercraft Style (Hand-drawn/Cutout) */
+[data-theme='papercraft'] .game-card {
+    background-color: #f4eee1 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png') !important;
+    border: 2px solid #333 !important;
+    border-radius: 2px !important;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.1) !important;
+}
+[data-theme='papercraft'] .game-card-front:hover,
+[data-theme='papercraft'] .game-card-container.simulated-highlight .game-card-front {
+    transform: translateY(-5px) !important;
+}
+[data-theme='papercraft'] .game-card-back {
+    transform: rotateY(180deg) !important;
+}
+[data-theme='papercraft'] .game-card-back:hover,
+[data-theme='papercraft'] .game-card-container.simulated-highlight .game-card-back {
+    transform: rotateY(180deg) translateY(-5px) !important;
+}
+[data-theme='papercraft'] .game-card-front::before {
+    content: "";
+    position: absolute;
+    top: -10px; left: 50%; width: 40px; height: 20px;
+    background: rgba(255,255,255,0.4);
+    transform: translateX(-50%);
+    z-index: 50;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+[data-theme='papercraft'] .review-stamp {
+    background: rgba(244, 238, 225, 0.6) !important;
+    border: 4px solid #d32f2f !important;
+    color: #d32f2f !important;
+    font-family: 'Courier New', Courier, monospace !important;
+    text-transform: uppercase;
+    mix-blend-mode: normal;
+    opacity: 0.9;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    filter: blur(0.3px) contrast(1.2);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+[data-theme='papercraft'] .stamp-masterpiece,
+[data-theme='papercraft'] .stamp-solid,
+[data-theme='papercraft'] .stamp-meh,
+[data-theme='papercraft'] .stamp-dropped {
+    color: #d32f2f !important;
+    border-color: #d32f2f !important;
+}
+[data-theme='papercraft'] .passport-stamp {
+    background: rgba(244, 238, 225, 0.8);
+    border: 3px double #333;
+    color: #333;
+    font-family: 'Courier New', Courier, monospace;
+    opacity: 0.9;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
 /* Hover Overlays */
 .game-card-overlay { transition: opacity 0.5s; opacity: 0; }
 .group:hover .game-card-overlay { opacity: 0.25 !important; }
