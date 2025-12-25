@@ -31,6 +31,10 @@
 [data-theme='blueprint'] .custom-checkbox:checked { background-color: var(--accent) !important; border-color: var(--accent) !important; }
 [data-theme='blueprint'] .custom-checkbox:checked::before { box-shadow: inset 1em 1em #002b5c !important; }
 
+[data-theme='woodgrain'] .custom-checkbox { border-radius: 2px; border-color: #1a0f00; background: #5c4033; }
+[data-theme='woodgrain'] .custom-checkbox:checked { background-color: #ffbf00 !important; border-color: #1a0f00 !important; }
+[data-theme='woodgrain'] .custom-checkbox:checked::before { box-shadow: inset 1em 1em #1a0f00 !important; }
+
 /* Scrollbars */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }

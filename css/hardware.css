@@ -51,6 +51,27 @@
     filter: brightness(0.5) sepia(1) hue-rotate(180deg) saturate(2) !important;
 }
 
+[data-theme='woodgrain'] #console-hardware {
+    background: linear-gradient(to right, #3d2b1f, #5c4033 10%, #5c4033 90%, #3d2b1f);
+    border-bottom: 15px solid #1a0f00;
+    border-radius: 4px;
+}
+[data-theme='woodgrain'] #console-hardware::before {
+    content: "";
+    position: absolute;
+    top: 5px; left: 5px; right: 5px; bottom: 5px;
+    border: 2px solid #ffbf00;
+    opacity: 0.1;
+    pointer-events: none;
+}
+[data-theme='woodgrain'] #active-cartridge {
+    background-color: #1a0f00 !important;
+    border: 2px solid #5c4033 !important;
+}
+[data-theme='woodgrain'] #cart-label {
+    filter: sepia(0.5) contrast(1.1) brightness(0.8) !important;
+}
+
 /* Cartridge Animation */
 #active-cartridge {
     will-change: transform;
