@@ -2,21 +2,36 @@
 let currentlyPlaying = localStorage.getItem('gamingChallengePlaying') || null;
 
 function updateHeaderMarquee(gameId) {
-    const marquee = document.getElementById('now-playing-marquee');
-    const contents = marquee.querySelectorAll('.marquee-content');
+    const box = document.getElementById('marquee-box');
+    const led = document.getElementById('marquee-led');
+    const status = document.getElementById('marquee-status');
+    const contents = document.querySelectorAll('.marquee-content');
 
     if (gameId) {
         const game = allGames.find(g => g.id === gameId);
         if (game) {
-            // Update all content instances
+            // RUNNING STATE
             const text = `Now Playing: ${game.title} [${game.system}] ... Est. Playtime: ${game.length} ... Difficulty: ${game.difficulty}/5 ... "${game.tagline}" ... `;
-            contents.forEach(el => el.innerText = text);
-            // Reveal
-            marquee.style.opacity = '1';
+            contents.forEach(el => {
+                el.innerText = text;
+                el.className = 'marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-emerald-400 uppercase tracking-widest transition-colors';
+            });
+            box.className = 'bg-black/40 border border-emerald-500/30 rounded-md px-3 h-[28px] md:h-[36px] flex items-center gap-3 w-full relative overflow-hidden transition-colors duration-500';
+            led.className = 'w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]';
+            status.innerText = 'Running';
+            status.className = 'text-[7px] font-black text-emerald-500 uppercase tracking-tighter transition-colors';
         }
     } else {
-        // Hide
-        marquee.style.opacity = '0';
+        // STANDBY STATE
+        const text = `System_Idle ... Waiting for ROM ... Insert cartridge to begin session ... `;
+        contents.forEach(el => {
+            el.innerText = text;
+            el.className = 'marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-red-400 uppercase tracking-widest transition-colors';
+        });
+        box.className = 'bg-black/40 border border-red-500/30 rounded-md px-3 h-[28px] md:h-[36px] flex items-center gap-3 w-full relative overflow-hidden transition-colors duration-500';
+        led.className = 'w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]';
+        status.innerText = 'Standby';
+        status.className = 'text-[7px] font-black text-red-500 uppercase tracking-tighter transition-colors';
     }
 }
 

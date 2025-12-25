@@ -2,6 +2,12 @@ class RadioSystem {
     constructor() {
         this.ctx = null;
         this.gainNode = null;
+        this.analyser = null;
+        this.dataArray = null;
+        this.canvas = null;
+        this.canvasCtx = null;
+        this.animationId = null;
+        
         this.currentChannel = 'off';
         this.isPlaying = false; // Always start off
         this.channels = [
@@ -26,8 +32,31 @@ class RadioSystem {
             this.ctx = new AudioContext();
             this.gainNode = this.ctx.createGain();
             this.gainNode.gain.setValueAtTime(0.15, this.ctx.currentTime);
+            
+            // Setup Analyser
+            this.analyser = this.ctx.createAnalyser();
+            this.analyser.fftSize = 128;
+            this.gainNode.connect(this.analyser);
             this.gainNode.connect(this.ctx.destination);
+            
+            const bufferLength = this.analyser.frequencyBinCount;
+            this.dataArray = new Uint8Array(bufferLength);
+
+            // Setup Canvas
+            this.canvas = document.getElementById('radio-visualizer');
+            if (this.canvas) {
+                this.canvasCtx = this.canvas.getContext('2d');
+                this.resizeCanvas();
+                window.addEventListener('resize', () => this.resizeCanvas());
+            }
         }
+    }
+
+    resizeCanvas() {
+        if (!this.canvas) return;
+        const rect = this.canvas.parentElement.getBoundingClientRect();
+        this.canvas.width = rect.width;
+        this.canvas.height = rect.height;
     }
 
     toggle() {
@@ -44,14 +73,62 @@ class RadioSystem {
         if (this.ctx.state === 'suspended') this.ctx.resume();
         this.isPlaying = true;
         this.playChannel(this.channels[this.channelIndex]);
+        this.startVisualizer();
     }
 
     stop() {
         this.isPlaying = false;
         this.clearLoops();
+        if (this.animationId) cancelAnimationFrame(this.animationId);
         if (this.gainNode) {
             this.gainNode.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.5);
         }
+        // Clear canvas after fade
+        setTimeout(() => {
+            if (!this.isPlaying && this.canvasCtx) {
+                this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }, 600);
+    }
+
+    startVisualizer() {
+        if (!this.canvasCtx) return;
+        
+        const draw = () => {
+            if (!this.isPlaying) return;
+            this.animationId = requestAnimationFrame(draw);
+            
+            this.analyser.getByteFrequencyData(this.dataArray);
+            
+            this.canvasCtx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            // Draw reactive bars/waves
+            const barWidth = (this.canvas.width / this.dataArray.length) * 2.5;
+            let barHeight;
+            let x = 0;
+
+            // Get theme color
+            const theme = document.documentElement.getAttribute('data-theme');
+            let color = '#10b981'; // Default emerald
+            if (theme === 'brick') color = '#0f380f';
+            if (theme === 'cube') color = '#ff4500';
+            if (theme === 'os') color = '#000080';
+            if (theme === 'legacy') color = '#ffffff';
+
+            for (let i = 0; i < this.dataArray.length; i++) {
+                barHeight = (this.dataArray[i] / 255) * this.canvas.height * 0.8;
+                
+                this.canvasCtx.fillStyle = color;
+                this.canvasCtx.globalAlpha = 0.2;
+                
+                // Draw mirrored bars from center or just simple bars
+                this.canvasCtx.fillRect(x, this.canvas.height - barHeight, barWidth - 1, barHeight);
+                
+                x += barWidth;
+            }
+        };
+        
+        draw();
     }
 
     nextChannel() {

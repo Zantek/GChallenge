@@ -104,20 +104,23 @@
                             </svg>
                             <span class="truncate"><span class="text-blue-500">2026</span> Gaming Challenge</span>
                         </h1>
-                        <!-- Now Playing Marquee -->
-                        <div id="now-playing-marquee" class="mt-1 opacity-0 transition-all duration-500 w-full max-w-[395px]">
-                            <div class="bg-black/40 border border-emerald-500/30 rounded-md px-3 h-[28px] md:h-[36px] flex items-center gap-3 w-full">
-                                <div class="flex items-center gap-1.5 shrink-0">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
-                                    <span class="text-[7px] font-black text-emerald-500 uppercase tracking-tighter">Running</span>
+                        <!-- Now Playing Marquee (System Monitor) -->
+                        <div id="now-playing-marquee" class="mt-1 transition-all duration-500 w-full max-w-[395px] opacity-100">
+                            <div id="marquee-box" class="bg-black/40 border border-red-500/30 rounded-md px-3 h-[28px] md:h-[36px] flex items-center gap-3 w-full relative overflow-hidden transition-colors duration-500">
+                                <!-- Radio Visualizer Canvas -->
+                                <canvas id="radio-visualizer" class="absolute inset-0 w-full h-full pointer-events-none"></canvas>
+                                
+                                <div class="flex items-center gap-1.5 shrink-0 relative z-10">
+                                    <div id="marquee-led" class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.6)]"></div>
+                                    <span id="marquee-status" class="text-[7px] font-black text-red-500 uppercase tracking-tighter transition-colors">Standby</span>
                                 </div>
                                 <div class="flex-grow overflow-hidden relative">
                                     <div class="flex marquee-wrapper">
-                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-emerald-400 uppercase tracking-widest">
-                                            <!-- Content set by JS -->
+                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-red-400 uppercase tracking-widest transition-colors">
+                                            System_Idle ... Waiting for ROM ...
                                         </div>
-                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-emerald-400 uppercase tracking-widest">
-                                            <!-- Content set by JS -->
+                                        <div class="marquee-content whitespace-nowrap text-[9px] md:text-[11px] font-black font-mono text-red-400 uppercase tracking-widest transition-colors">
+                                            System_Idle ... Waiting for ROM ...
                                         </div>
                                     </div>
                                 </div>
@@ -210,22 +213,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="relative">
-                        <div class="flex items-center gap-3 mb-1">
-                            <div id="level-badge" class="bg-gaming-card text-gaming-accent text-[10px] font-black px-2 py-0.5 rounded-md border border-gaming-border shadow-sm shrink-0">L1</div>
+                    <div class="flex items-start gap-3">
+                        <!-- Left: Level Badge -->
+                        <div class="flex flex-col items-center pt-0.5">
+                            <div id="level-badge" class="min-w-[32px] h-6 bg-gaming-card text-gaming-accent text-xs font-black flex items-center justify-center rounded-md border border-gaming-border shadow-sm">L1</div>
+                        </div>
+                        
+                        <!-- Right: Bar Stack -->
+                        <div class="flex-grow flex flex-col gap-1.5 pt-1">
                             <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
                                 <div id="progress-bar" class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
                             </div>
-                        </div>
-                        <!-- Secondary XP bar -->
-                        <div class="flex items-center gap-3">
-                            <div class="w-[24px] shrink-0"></div> <!-- Spacer to align with level-badge -->
-                            <div class="w-full">
-                                <div class="w-full bg-gray-800 rounded-full h-1 overflow-hidden">
-                                    <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
-                                </div>
-                                <div id="xp-text" class="text-[7px] font-bold text-gaming-muted uppercase tracking-widest mt-1 text-right">0 / 500 XP to Level 2</div>
+                            <div class="w-full bg-gray-800 rounded-full h-1 overflow-hidden">
+                                <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
                             </div>
+                            <div id="xp-text" class="text-[7px] font-bold text-gaming-muted uppercase tracking-widest text-right">0 / 500 XP to Level 2</div>
                         </div>
                     </div>
                 </div>
@@ -235,219 +237,7 @@
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-20">
 
-        <!-- Trophy Room (Showcase) -->
-        <section id="section-trophies"
-            class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming transition-all duration-[500ms] linear overflow-hidden shadow-inner">
-            <div
-                class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gaming-accent/30 to-transparent">
-            </div>
-
-            <div class="p-8">
-                <div class="flex items-center justify-between mb-8">
-                    <div class="flex items-center gap-3">
-                        <button onclick="toggleSection('trophies')"
-                            class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
-                            <svg id="chevron-trophies"
-                                class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="h-8 w-1 bg-yellow-500 rounded-full"></div>
-                        <div>
-                            <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary
-                                Achievements</h3>
-                            <h2 class="text-xl md:text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="grid-container-trophies"
-                    class="transition-all duration-[500ms] linear overflow-hidden max-h-[1000px]">
-                    <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
-                        <!-- Core Master -->
-                        <div id="trophy-core"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
-                            title="Complete all Core Challenge games">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-blue-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.46.81 1.08 1.48 1.8 1.95V15c-1.77 0-3.2 1.43-3.2 3.2V20h10v-1.8c0-1.77-1.43-3.2-3.2-3.2v-3.11c.72-.47 1.34-1.14 1.8-1.95C18.08 9.63 20 7.55 20 5V4c0-1.1-.9-2-2-2zM6 4h2v3H6V4zm12 3h-2V4h2v3z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Core
-                                    Master</span>
-                                <div
-                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-blue-500 transition-colors">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bonus Collector -->
-                        <div id="trophy-bonus"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
-                            title="Complete all Weird Bonus games">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-purple-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Bonus
-                                    Collector</span>
-                                <div
-                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-purple-500 transition-colors">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Zen Master -->
-                        <div id="trophy-zen"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
-                            title="Complete all Zen Garden games">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.84l4.5 4.05v5.11h-2v-3h-5v3h-2v-5.11L12 7.84z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Zen
-                                    Master</span>
-                                <div
-                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-green-500 transition-colors">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Time Lord -->
-                        <div id="trophy-time"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
-                            title="Complete all Time Warp games">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-red-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Time
-                                    Lord</span>
-                                <div
-                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-red-500 transition-colors">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Art Critic -->
-                        <div id="trophy-art"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
-                            title="Complete all Art House games">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art
-                                    Critic</span>
-                                <div
-                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Grand Master -->
-                        <div id="trophy-all"
-                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help scale-110"
-                            title="Complete the entire 2026 Challenge">
-                            <div
-                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-accent transition-all duration-500 ring-4 ring-gaming-accent/10">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-500" fill="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2zm0 4.27l-1.91 3.86-4.27.62 3.09 3.01-.73 4.25L12 15.98l3.82 2.02-.73-4.25 3.09-3.01-4.27-.62L12 6.27z" />
-                                </svg>
-                                <div
-                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="flex flex-col items-center">
-                                <span
-                                    class="text-[9px] md:text-[10px] font-black text-gaming-accent uppercase tracking-widest group-[.unlocked]:text-yellow-400 transition-colors">Grand
-                                    Master</span>
-                                <div
-                                    class="h-1 w-12 bg-gaming-accent/50 rounded-full mt-1 group-[.unlocked]:bg-yellow-500 group-[.unlocked]:animate-pulse transition-colors">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        </section>
+        <!-- Core List Section -->
 
         <!-- Core List Section -->
         <section id="section-core" class="transition-opacity duration-500">
@@ -878,13 +668,11 @@
                 <div class="flex gap-2 p-1 bg-gaming-dark rounded-lg self-start">
                     <button onclick="switchStatsTab('dashboard')" id="tab-dashboard"
                         class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
-                    <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree"
-                        class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill
-                        Tree</button>
-                    <button onclick="switchStatsTab('journey-map')" id="tab-journeymap"
-                        class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey
-                        Map</button>
-                </div>
+                                        <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
+                                        <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
+                                        <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                    </div>
+                    
             </div>
 
             <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
@@ -906,12 +694,23 @@
                             remaining</p>
                     </div>
 
-                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                        <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Favorite
-                            Era</span>
-                        <span id="stat-era" class="text-xl font-black text-gaming-text block truncate">TBD</span>
-                        <p class="text-[10px] text-gaming-muted mt-2">Based on completion count</p>
-                    </div>
+                                            <div id="stat-last-completed-container" class="bg-gaming-card p-4 rounded-gaming border border-gaming-border overflow-hidden relative min-h-[100px] flex flex-col justify-center">
+
+                                                 <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-2 relative z-10">Last Completed</span>
+
+                                                 <div id="stat-last-completed-content" class="relative z-10 flex items-center gap-3">
+
+                                                     <!-- Dynamic Content -->
+
+                                                     <span class="text-sm text-gaming-muted italic">No games completed yet...</span>
+
+                                                 </div>
+
+                                                 <div id="stat-last-completed-bg" class="absolute inset-0 opacity-10 bg-cover bg-center grayscale pointer-events-none"></div>
+
+                                            </div>
+
+                    
 
                     <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
                         <span
@@ -1051,15 +850,14 @@
             </div>
 
 
-            <!-- Journey Map Tab -->
+                        <!-- Journey Map Tab -->
             <div id="stats-tab-journey-map" class="p-6 overflow-y-auto hidden">
                 <div class="flex flex-col gap-6">
                     <div class="text-center">
-                        <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Chronological Odyssey
-                        </h4>
+                        <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Chronological Odyssey</h4>
                         <p class="text-gaming-muted text-xs italic">A trail of your 2026 gaming milestones</p>
                     </div>
-
+                    
                     <div id="journey-canvas-container" class="bg-gaming-dark/30 border border-gaming-border">
                         <div class="journey-trail"></div>
                         <div id="journey-landmarks-list">
@@ -1068,6 +866,284 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Achievements Tab -->
+
+
+                        <div id="stats-tab-achievements" class="p-6 overflow-y-auto hidden">
+
+
+                            <div class="text-center mb-8">
+
+
+                                <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Gamer Milestones</h4>
+
+
+                                <p class="text-gaming-muted text-xs italic">Track your category completion trophies</p>
+
+
+                            </div>
+
+
+                            <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
+
+
+                                <!-- Core Master -->
+
+
+                                <div id="trophy-core" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Core Challenge games">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.46.81 1.08 1.48 1.8 1.95V15c-1.77 0-3.2 1.43-3.2 3.2V20h10v-1.8c0-1.77-1.43-3.2-3.2-3.2v-3.11c.72-.47 1.34-1.14 1.8-1.95C18.08 9.63 20 7.55 20 5V4c0-1.1-.9-2-2-2zM6 4h2v3H6V4zm12 3h-2V4h2v3z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Core Master</span>
+
+
+                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-blue-500 transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+            
+
+
+                                <!-- Bonus Collector -->
+
+
+                                <div id="trophy-bonus" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Weird Bonus games">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Bonus Collector</span>
+
+
+                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-purple-500 transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+            
+
+
+                                <!-- Zen Master -->
+
+
+                                <div id="trophy-zen" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Zen Garden games">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.84l4.5 4.05v5.11h-2v-3h-5v3h-2v-5.11L12 7.84z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Zen Master</span>
+
+
+                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-green-500 transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+            
+
+
+                                <!-- Time Lord -->
+
+
+                                <div id="trophy-time" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Time Warp games">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Time Lord</span>
+
+
+                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-red-500 transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+            
+
+
+                                <!-- Art Critic -->
+
+
+                                <div id="trophy-art" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Art House games">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art Critic</span>
+
+
+                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+            
+
+
+                                <!-- Grand Master -->
+
+
+                                <div id="trophy-all" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help scale-110" title="Complete the entire 2026 Challenge">
+
+
+                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-accent transition-all duration-500 ring-4 ring-gaming-accent/10">
+
+
+                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2zm0 4.27l-1.91 3.86-4.27.62 3.09 3.01-.73 4.25L12 15.98l3.82 2.02-.73-4.25 3.09-3.01-4.27-.62L12 6.27z"/></svg>
+
+
+                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                    <div class="flex flex-col items-center text-center">
+
+
+                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-accent uppercase tracking-widest group-[.unlocked]:text-yellow-400 transition-colors">Grand Master</span>
+
+
+                                        <div class="h-1 w-12 bg-gaming-accent/50 rounded-full mt-1 group-[.unlocked]:bg-yellow-500 group-[.unlocked]:animate-pulse transition-colors"></div>
+
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+            
         </div>
     </div>
     <!-- Review Stamp Modal -->

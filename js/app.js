@@ -326,7 +326,35 @@ function updateProgress(silent = false, skipGrids = false) {
     document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
 
     if (!skipGrids) {
-        // Update Category Grids (Filter out dropped games)
+        // 3. Last Completed Game
+    const lastCompletedContainer = document.getElementById('stat-last-completed-content');
+    const lastCompletedBg = document.getElementById('stat-last-completed-bg');
+    
+    if (completedGames.length > 0) {
+        // Find most recent by sorting copies of dates
+        const lastId = Object.keys(completionDates).sort((a, b) => new Date(completionDates[b]) - new Date(completionDates[a]))[0];
+        const game = allGames.find(g => g.id === lastId);
+        
+        if (game) {
+            const review = gameReviews[game.id] || 'solid';
+            const icons = { 'masterpiece': '💎', 'solid': '⚔️', 'meh': '🧱' };
+            
+            lastCompletedContainer.innerHTML = `
+                <div class="w-12 h-12 rounded border-2 border-gaming-border overflow-hidden shrink-0">
+                    <img src="${game.banner}" class="w-full h-full object-cover">
+                </div>
+                <div class="min-w-0">
+                    <span class="text-base font-black text-gaming-text block truncate leading-tight">${game.title}</span>
+                    <span class="text-[9px] text-emerald-400 font-bold uppercase tracking-widest">${review} - ${formatDate(completionDates[game.id])}</span>
+                </div>
+            `;
+            if (lastCompletedBg) {
+                lastCompletedBg.style.backgroundImage = `url('${game.banner}')`;
+            }
+        }
+    }
+
+    // Update Category Grids (Filter out dropped games)
         const categoryData = {
             'core': { list: coreGames, grid: 'core-grid', count: 'count-core', section: 'section-core' },
             'bonus': { list: bonusGames, grid: 'bonus-grid', count: 'count-bonus', section: 'section-bonus' },
@@ -558,19 +586,21 @@ function switchStatsTab(tab) {
     const dashboard = document.getElementById('stats-tab-dashboard');
     const skillTree = document.getElementById('stats-tab-skill-tree');
     const journeyMap = document.getElementById('stats-tab-journey-map');
+    const achievementsTab = document.getElementById('stats-tab-achievements');
     
     const btnDash = document.getElementById('tab-dashboard');
     const btnSkill = document.getElementById('tab-skilltree');
     const btnJourney = document.getElementById('tab-journeymap');
+    const btnAchievements = document.getElementById('tab-achievements');
 
     // Hide all
-    dashboard.classList.add('hidden');
-    skillTree.classList.add('hidden');
-    journeyMap.classList.add('hidden');
+    [dashboard, skillTree, journeyMap, achievementsTab].forEach(t => {
+        if (t) t.classList.add('hidden');
+    });
     
     // Reset buttons
-    [btnDash, btnSkill, btnJourney].forEach(btn => {
-        btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
+    [btnDash, btnSkill, btnJourney, btnAchievements].forEach(btn => {
+        if (btn) btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
     });
 
     if (tab === 'dashboard') {
@@ -584,6 +614,9 @@ function switchStatsTab(tab) {
         journeyMap.classList.remove('hidden');
         btnJourney.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
         renderJourneyMap();
+    } else if (tab === 'achievements') {
+        achievementsTab.classList.remove('hidden');
+        btnAchievements.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
     }
 }
 
@@ -751,9 +784,6 @@ function showStats() {
     // If no games, keep TBD
     if(completedGames.length === 0) bestEra = "N/A";
     
-    document.getElementById('stat-era').innerText = bestEra;
-
-
     // 4. Review Distribution
     const reviewCounts = {
         'masterpiece': 0,
