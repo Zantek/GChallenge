@@ -293,7 +293,7 @@ class Companion {
             },
             'meh': { 
                 msg: "Mid... but hey, a win is a win!", 
-                anim: '',
+                anim: 'animate-pulse',
                 color: 'text-yellow-500'
             },
             'dropped': { 

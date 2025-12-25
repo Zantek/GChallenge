@@ -557,20 +557,33 @@ function closeStatsModal() {
 function switchStatsTab(tab) {
     const dashboard = document.getElementById('stats-tab-dashboard');
     const skillTree = document.getElementById('stats-tab-skill-tree');
+    const journeyMap = document.getElementById('stats-tab-journey-map');
+    
     const btnDash = document.getElementById('tab-dashboard');
     const btnSkill = document.getElementById('tab-skilltree');
+    const btnJourney = document.getElementById('tab-journeymap');
+
+    // Hide all
+    dashboard.classList.add('hidden');
+    skillTree.classList.add('hidden');
+    journeyMap.classList.add('hidden');
+    
+    // Reset buttons
+    [btnDash, btnSkill, btnJourney].forEach(btn => {
+        btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
+    });
 
     if (tab === 'dashboard') {
         dashboard.classList.remove('hidden');
-        skillTree.classList.add('hidden');
         btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
-        btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
-    } else {
-        dashboard.classList.add('hidden');
+    } else if (tab === 'skill-tree') {
         skillTree.classList.remove('hidden');
-        btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
         btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
         renderSkillTree();
+    } else if (tab === 'journey-map') {
+        journeyMap.classList.remove('hidden');
+        btnJourney.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        renderJourneyMap();
     }
 }
 
@@ -636,6 +649,53 @@ function renderSkillTree() {
         if (xPercent < 50 && yPercent > 50) archetype = "The Cosmic Sage (Logic + Serenity)";
     }
     document.getElementById('archetype-label').innerText = archetype;
+}
+
+function renderJourneyMap() {
+    const container = document.getElementById('journey-landmarks-list');
+    if (!container) return;
+
+    // 1. Get and sort completed games by date
+    const completedList = allGames
+        .filter(g => completedGames.includes(g.id))
+        .sort((a, b) => new Date(completionDates[a.id]) - new Date(completionDates[b.id]));
+
+    if (completedList.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-20 opacity-30">
+                <span class="text-4xl block mb-4">🗺️</span>
+                <p class="text-xs font-bold uppercase tracking-[0.2em]">The map is blank...</p>
+                <p class="text-[10px] italic mt-2 text-gaming-muted">Complete games to draw your 2026 path.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // 2. Generate Landmarks
+    container.innerHTML = completedList.map((game, index) => {
+        const dateStr = formatDate(completionDates[game.id]);
+        const review = gameReviews[game.id] || 'Completed';
+        const icons = {
+            'masterpiece': '💎',
+            'solid': '⚔️',
+            'meh': '🧱',
+            'dropped': '💀'
+        };
+        const icon = icons[review] || '⭐';
+
+        return `
+            <div class="journey-landmark animate-in fade-in slide-in-from-bottom-4 duration-500" style="animation-delay: ${index * 100}ms">
+                <div class="landmark-node" style="border-color: ${game.color.split(' ')[1].replace('to-', '').replace('500', '400')}">
+                    <span class="text-xl">${icon}</span>
+                </div>
+                <div class="landmark-info">
+                    <span class="landmark-date">${dateStr}</span>
+                    <h5 class="landmark-title">${game.title}</h5>
+                    <p class="text-[8px] text-gaming-muted uppercase font-black tracking-widest mt-1">${review}</p>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 function showStats() {
