@@ -670,9 +670,11 @@
                         class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
                                         <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
                                                             <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
-                                                            <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
-                                                            <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Ad Archive</button>
-                                                        </div>
+                                                                                <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                                                                <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Ad Archive</button>
+                                                                                <button onclick="switchStatsTab('prints')" id="tab-prints" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Vintage Prints</button>
+                                                                            </div>
+                                                            
                                                     </div>
                                                     
                                                     <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
@@ -1147,11 +1149,22 @@
             <!-- Ad Archive Tab -->
             <div id="stats-tab-ads" class="p-6 overflow-y-auto hidden">
                 <div class="text-center mb-8">
-                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Retro Ad Archive</h4>
-                    <p class="text-gaming-muted text-xs italic">Unlocked vintage posters from your 2026 collection</p>
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Digital Poster Archive</h4>
+                    <p class="text-gaming-muted text-xs italic">High-fidelity custom posters for your collection</p>
                 </div>
-                <div id="ads-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10">
+                <div id="ads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
                     <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Vintage Prints Tab -->
+            <div id="stats-tab-prints" class="p-6 overflow-y-auto hidden">
+                <div class="text-center mb-8">
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Vintage Press Kit</h4>
+                    <p class="text-gaming-muted text-xs italic">Procedural 90s magazine advertisements</p>
+                </div>
+                <div id="prints-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10">
+                    <!-- Populated by JS (Old Ad logic) -->
                 </div>
             </div>
 
@@ -1267,12 +1280,12 @@
     </div>
 
     <!-- Post-Game Ad Lightbox -->
-    <div id="ad-lightbox" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[100] hidden flex items-center justify-center p-4 cursor-zoom-out" onclick="this.classList.add('hidden')">
-        <div class="max-w-3xl w-full flex flex-col items-center gap-4" onclick="event.stopPropagation()">
-            <div id="lightbox-poster-container" class="w-full transform transition-all duration-500 scale-95 opacity-0">
+    <div id="ad-lightbox" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[100] hidden flex flex-col items-center justify-center p-4 md:p-8 cursor-zoom-out" onclick="this.classList.add('hidden')">
+        <div class="relative max-h-full max-w-full flex flex-col items-center gap-4">
+            <div id="lightbox-poster-container" class="max-h-[85vh] w-auto transform transition-all duration-500 scale-95 opacity-0 flex items-center justify-center">
                 <!-- Poster injected here -->
             </div>
-            <button onclick="document.getElementById('ad-lightbox').classList.add('hidden')" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] transition-all border border-white/10">
+            <button onclick="document.getElementById('ad-lightbox').classList.add('hidden')" class="shrink-0 px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] transition-all border border-white/10">
                 Close Archive View
             </button>
         </div>

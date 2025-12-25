@@ -588,20 +588,22 @@ function switchStatsTab(tab) {
     const journeyMap = document.getElementById('stats-tab-journey-map');
     const achievementsTab = document.getElementById('stats-tab-achievements');
     const adsTab = document.getElementById('stats-tab-ads');
+    const printsTab = document.getElementById('stats-tab-prints');
     
     const btnDash = document.getElementById('tab-dashboard');
     const btnSkill = document.getElementById('tab-skilltree');
     const btnJourney = document.getElementById('tab-journeymap');
     const btnAchievements = document.getElementById('tab-achievements');
     const btnAds = document.getElementById('tab-ads');
+    const btnPrints = document.getElementById('tab-prints');
 
     // Hide ALL tabs first
-    [dashboard, skillTree, journeyMap, achievementsTab, adsTab].forEach(t => {
+    [dashboard, skillTree, journeyMap, achievementsTab, adsTab, printsTab].forEach(t => {
         if (t) t.classList.add('hidden');
     });
     
     // Reset ALL button styles first
-    [btnDash, btnSkill, btnJourney, btnAchievements, btnAds].forEach(btn => {
+    [btnDash, btnSkill, btnJourney, btnAchievements, btnAds, btnPrints].forEach(btn => {
         if (btn) btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
     });
 
@@ -623,16 +625,25 @@ function switchStatsTab(tab) {
         if (adsTab) adsTab.classList.remove('hidden');
         if (btnAds) btnAds.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
         renderAds();
+    } else if (tab === 'prints') {
+        if (printsTab) printsTab.classList.remove('hidden');
+        if (btnPrints) btnPrints.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        renderPrints();
     }
 }
 
-function openAdLightbox(html) {
+function openAdLightbox(html, type = 'poster') {
     const lightbox = document.getElementById('ad-lightbox');
     const container = document.getElementById('lightbox-poster-container');
     if (!lightbox || !container) return;
 
-    // We strip the scale/hover classes for the lightbox view
     container.innerHTML = html;
+    
+    // For posters, ensure the overlay is visible since there's no hover state in lightbox
+    if (type === 'poster') {
+        const overlay = container.querySelector('.opacity-0');
+        if (overlay) overlay.classList.replace('opacity-0', 'opacity-100');
+    }
     
     lightbox.classList.remove('hidden');
     // Animate in
@@ -651,6 +662,40 @@ function renderAds() {
     if (completedGames.length === 0) {
         grid.innerHTML = `
             <div class="col-span-full text-center py-20 opacity-30">
+                <span class="text-4xl block mb-4">🖼️</span>
+                <p class="text-xs font-bold uppercase tracking-[0.2em]">The collection is empty...</p>
+                <p class="text-[10px] italic mt-2 text-gaming-muted">Finish games to unlock custom high-res posters.</p>
+            </div>
+        `;
+        return;
+    }
+
+    grid.innerHTML = completedGames.map(id => {
+        const game = allGames.find(g => g.id === id);
+        if (!game) return '';
+
+        // Derive poster path from banner filename, always forcing .jpg for posters
+        const posterUrl = game.banner.replace('banners/', 'posters/').replace(/-banner\.(jpg|png)$/, '-poster.jpg');
+
+        return `
+            <div class="group relative aspect-[2/3] bg-gaming-card border border-gaming-border rounded-lg overflow-hidden shadow-2xl transition-all cursor-zoom-in" onclick="openAdLightbox(this.innerHTML, 'poster')">
+                <img src="${posterUrl}" class="w-full h-full object-cover transition-transform duration-1000">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h5 class="text-white font-bold text-sm">${game.title}</h5>
+                    <p class="text-gaming-accent font-black text-[8px] uppercase tracking-widest">${game.system} Edition</p>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderPrints() {
+    const grid = document.getElementById('prints-grid');
+    if (!grid) return;
+
+    if (completedGames.length === 0) {
+        grid.innerHTML = `
+            <div class="col-span-full text-center py-20 opacity-30">
                 <span class="text-4xl block mb-4">📺</span>
                 <p class="text-xs font-bold uppercase tracking-[0.2em]">The archive is offline...</p>
                 <p class="text-[10px] italic mt-2 text-gaming-muted">Finish games to unlock vintage marketing material.</p>
@@ -664,46 +709,29 @@ function renderAds() {
         if (!game) return '';
 
         const phrases = [
-            "ONLY FOR THE BOLD.",
-            "THE FUTURE IS HERE.",
-            "PREPARE FOR BATTLE.",
-            "BETTER THAN REALITY.",
-            "PLAY IT LOUD.",
-            "DO YOU HAVE THE SKILL?",
-            "TOTAL DOMINATION.",
-            "UNBELIEVABLE POWER."
+            "ONLY FOR THE BOLD.", "THE FUTURE IS HERE.", "PREPARE FOR BATTLE.", 
+            "BETTER THAN REALITY.", "PLAY IT LOUD.", "DO YOU HAVE THE SKILL?", 
+            "TOTAL DOMINATION.", "UNBELIEVABLE POWER."
         ];
         const phrase = phrases[Math.floor(Math.random() * phrases.length)];
 
         return `
-            <div class="retro-ad-poster group relative bg-white p-4 shadow-2xl transition-transform hover:-rotate-1 hover:scale-[1.02] cursor-zoom-in" onclick="openAdLightbox(this.innerHTML)">
+            <div class="retro-ad-poster group relative bg-white p-4 shadow-2xl transition-transform hover:-rotate-1 hover:scale-[1.02] cursor-zoom-in" onclick="openAdLightbox(this.innerHTML, 'print')">
                 <!-- Inner Red Border (90s Style) -->
-                <div class="border-4 border-red-600 p-1 h-full flex flex-col">
+                <div class="bg-white border-4 border-red-600 p-1 h-full flex flex-col">
                     <div class="bg-black flex-grow relative overflow-hidden">
                         <img src="${game.banner}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                        <!-- Corner 'burst' badge -->
-                        <div class="absolute -top-2 -right-2 bg-yellow-400 text-black font-black text-[8px] p-2 rounded-full rotate-12 border-2 border-black shadow-lg z-20">
-                            HOT!
-                        </div>
+                        <div class="absolute -top-2 -right-2 bg-yellow-400 text-black font-black text-[8px] p-2 rounded-full rotate-12 border-2 border-black shadow-lg z-20">HOT!</div>
                     </div>
                     
                     <div class="py-4 px-2 text-black flex flex-col gap-2">
-                        <h5 class="text-2xl font-black italic uppercase leading-none tracking-tighter" style="font-family: 'Arial Black', sans-serif">
-                            ${game.title}
-                        </h5>
-                        <p class="text-[10px] font-black uppercase bg-red-600 text-white inline-block px-2 self-start">
-                            ${game.system}
-                        </p>
+                        <h5 class="text-2xl font-black italic uppercase leading-none tracking-tighter" style="font-family: 'Arial Black', sans-serif">${game.title}</h5>
+                        <p class="text-[10px] font-black uppercase bg-red-600 text-white inline-block px-2 self-start">${game.system}</p>
                         <div class="h-1 w-12 bg-black"></div>
-                        <p class="text-[14px] font-black uppercase leading-tight mt-2">
-                            ${phrase}
-                        </p>
-                        <p class="text-[8px] font-bold leading-tight opacity-70">
-                            Experience the cutting-edge graphics and revolutionary gameplay of ${game.title}. Available now at all leading software retailers.
-                        </p>
+                        <p class="text-[14px] font-black uppercase leading-tight mt-2">${phrase}</p>
+                        <p class="text-[8px] font-bold leading-tight opacity-70">Experience the cutting-edge graphics and revolutionary gameplay of ${game.title}. Available now at all leading software retailers.</p>
                     </div>
                 </div>
-                <!-- Grimy Overlay -->
                 <div class="absolute inset-0 opacity-10 pointer-events-none mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]"></div>
             </div>
         `;
