@@ -59,6 +59,18 @@
     --radius: 0.5rem;
 }
 
+[data-theme='blueprint'] {
+    --bg-primary: #002b5c;
+    --bg-secondary: #003d7a;
+    --bg-card: rgba(0, 43, 92, 0.5);
+    --bg-header: #001f42;
+    --text-primary: #ffffff;
+    --text-secondary: #8da9c4;
+    --accent: #00f2ff;
+    --border: #ffffff;
+    --radius: 0px;
+}
+
 /* --- Theme Global Overrides --- */
 
 [data-theme='brick'] .bg-gaming-accent { background-color: var(--accent) !important; color: var(--bg-primary) !important; }
@@ -139,6 +151,21 @@
 [data-theme='legacy'] h1, [data-theme='legacy'] h2, [data-theme='legacy'] h3, [data-theme='legacy'] h1 span { color: #ffffff !important; letter-spacing: -0.05em; }
 [data-theme='legacy'] .text-gaming-accent, [data-theme='legacy'] .text-blue-500, [data-theme='legacy'] #progress-text { color: #ffffff !important; }
 [data-theme='legacy'] #level-badge { background-color: #ffffff !important; color: #000000 !important; border-radius: 0.5rem !important; font-weight: 900; }
+
+[data-theme='blueprint'] #now-playing-marquee .bg-black\/40 {
+    background-color: #001f42 !important;
+    border-color: var(--accent) !important;
+}
+[data-theme='blueprint'] #now-playing-marquee .marquee-content,
+[data-theme='blueprint'] #now-playing-marquee .text-emerald-400,
+[data-theme='blueprint'] #now-playing-marquee .text-red-500 {
+    color: var(--accent) !important;
+}
+[data-theme='blueprint'] #marquee-status,
+[data-theme='blueprint'] #marquee-led {
+    color: var(--accent) !important;
+    /* background-color: var(--accent) !important; */
+}
 
 /* Legacy Theme Button Overrides (including Share and Active Radio Channels) */
 [data-theme='legacy'] .bg-blue-600,

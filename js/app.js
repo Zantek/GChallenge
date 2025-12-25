@@ -133,10 +133,13 @@ function toggleSection(key) {
 
     if (isCollapsed) {
         container.style.maxHeight = '0px';
+        container.style.paddingTop = '0px';
+        container.style.paddingBottom = '0px';
         chevron.style.transform = 'rotate(-90deg)';
     } else {
-        // Use a large enough value for the content, but keep it consistent
         container.style.maxHeight = ''; 
+        container.style.paddingTop = '';
+        container.style.paddingBottom = '';
         chevron.style.transform = 'rotate(0deg)';
     }
 
@@ -153,6 +156,8 @@ function applyInitialCollapses() {
         if (collapsedSections[key]) {
             container.style.transition = 'none'; // Instant on load
             container.style.maxHeight = '0px';
+            container.style.paddingTop = '0px';
+            container.style.paddingBottom = '0px';
             chevron.style.transform = 'rotate(-90deg)';
             setTimeout(() => container.style.transition = '', 50);
         }
@@ -1126,6 +1131,16 @@ function generateShareCard() {
             font: 'Courier New, monospace',
             radius: 0,
             glow: false
+        },
+        'blueprint': {
+            bg: ['#002b5c', '#001f42'],
+            accent: '#00f2ff',
+            secondary: '#ffffff',
+            text: '#ffffff',
+            muted: '#8da9c4',
+            font: 'monospace',
+            radius: 0,
+            glow: false
         }
     };
 
@@ -1206,9 +1221,9 @@ function generateShareCard() {
     ctx.fillText('COMPLETED', 600, 420);
 
     // Details Bar
-    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : '#1e293b');
-    if (currentTheme === 'os') {
-        ctx.strokeStyle = '#000000';
+    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : '#1e293b'));
+    if (currentTheme === 'os' || currentTheme === 'blueprint') {
+        ctx.strokeStyle = s.accent;
         ctx.lineWidth = 2;
         ctx.strokeRect(300, 480, 600, 100);
         ctx.fillRect(300, 480, 600, 100);

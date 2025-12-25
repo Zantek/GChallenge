@@ -132,6 +132,28 @@
 }
 [data-theme='legacy'] .game-card-container { margin-left: 1px; }
 [data-theme='legacy'] .game-card { border: 1px solid #ffffff !important; }
+[data-theme='blueprint'] .game-card { 
+    border: 1px solid #ffffff !important; 
+    background: transparent !important; 
+    border-style: double !important;
+    border-width: 3px !important;
+}
+[data-theme='blueprint'] .game-card-front::after {
+    content: "SCHEMATIC_V2.0";
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    font-size: 6px;
+    color: var(--accent);
+    font-weight: 900;
+    opacity: 0.5;
+}
+[data-theme='blueprint'] .review-stamp {
+    background: transparent;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    border-radius: 0;
+}
 
 /* Hover Overlays */
 .game-card-overlay { transition: opacity 0.5s; opacity: 0; }
@@ -178,6 +200,7 @@
 [data-theme='cube'] .passport-stamp { color: #ffffff; border: 4px solid #ffffff; background: #f97316; border-radius: 9999px; box-shadow: 4px 4px 0px #4b0082; font-family: 'Arial Black', sans-serif; }
 [data-theme='os'] .passport-stamp { border: 2px solid !important; border-color: #ffffff #808080 #808080 #ffffff !important; background: #c0c0c0; color: #000; border-radius: 0; box-shadow: none; }
 [data-theme='legacy'] .passport-stamp { border: 1px solid #ffffff; background: #000000; color: #ffffff; box-shadow: none; }
+[data-theme='blueprint'] .passport-stamp { border: 1px solid #ffffff; background: transparent; color: #ffffff; box-shadow: none; font-family: monospace; }
 
 @keyframes stamp-slam {
     0% { transform: scale(3) rotate(0deg); opacity: 0; }
@@ -222,6 +245,23 @@
     color: #000;
 }
 [data-theme='legacy'] .review-stamp { background: #ffffff; color: #000 !important; border: 1px solid #000; border-radius: 0px; }
+
+/* Blueprint Style Review Stamps */
+[data-theme='blueprint'] .review-stamp {
+    background: transparent !important;
+    border: 1px dashed var(--accent) !important;
+    color: var(--accent) !important;
+    border-radius: 0px;
+    box-shadow: none;
+    font-family: monospace;
+}
+[data-theme='blueprint'] .stamp-masterpiece,
+[data-theme='blueprint'] .stamp-solid,
+[data-theme='blueprint'] .stamp-meh,
+[data-theme='blueprint'] .stamp-dropped {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
 
 /* Brick Style Review Stamps */
 [data-theme='brick'] .review-stamp {

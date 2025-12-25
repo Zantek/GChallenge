@@ -36,6 +36,21 @@
     border-radius: 0;
 }
 
+[data-theme='blueprint'] #console-hardware {
+    background: #002b5c;
+    border: 1px solid #ffffff;
+    border-bottom-width: 10px;
+    border-radius: 0;
+}
+[data-theme='blueprint'] #active-cartridge {
+    background: transparent !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 0;
+}
+[data-theme='blueprint'] #cart-label {
+    filter: brightness(0.5) sepia(1) hue-rotate(180deg) saturate(2) !important;
+}
+
 /* Cartridge Animation */
 #active-cartridge {
     will-change: transform;
