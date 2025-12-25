@@ -1224,16 +1224,14 @@ function createCard(game, category = 'core') {
                                     <h3 class="text-base font-bold text-gaming-text leading-tight truncate">${game.title}</h3>
                                     <p class="text-[10px] text-gaming-muted italic mt-1 leading-tight line-clamp-1">"${game.tagline}"</p>
                                 </div>
-                                ${(!isCompleted && !isDropped) ? `
                                 <button onclick="event.stopPropagation(); insertCartridge('${game.id}'); if(sfx) sfx.playTick()" 
                                         id="play-btn-${game.id}"
-                                        class="play-toggle-btn ml-3 shrink-0 w-8 h-8 flex items-center justify-center ${currentlyPlaying === game.id ? 'bg-red-600 shadow-red-500/40' : 'bg-gaming-accent shadow-gaming-accent/40'} text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all group/play" 
+                                        class="play-toggle-btn ml-3 shrink-0 w-8 h-8 flex items-center justify-center ${currentlyPlaying === game.id ? 'bg-red-600 shadow-red-500/40' : 'bg-gaming-accent shadow-gaming-accent/40'} text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all group/play ${(isCompleted || isDropped) ? 'hidden' : ''}" 
                                         title="${currentlyPlaying === game.id ? 'Eject from Console' : 'Load into Console'}">
                                     <svg class="w-4 h-4 fill-current transition-transform ${currentlyPlaying === game.id ? '' : 'group-hover/play:translate-x-0.5'}" viewBox="0 0 24 24">
                                         ${currentlyPlaying === game.id ? '<rect x="6" y="6" width="12" height="12"/>' : '<path d="M8 5v14l11-7z"/>'}
                                     </svg>
                                 </button>
-                                ` : ''}
                             </div>
                         </div>
 

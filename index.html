@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2026 Gaming Challenge</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%233b82f6%22><path d=%22M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z%22/></svg>">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%233b82f6%22><path d=%22M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z%22/></svg>">
     <script src="js/tailwindcss.js"></script>
     <script>
         tailwind.config = {
@@ -57,6 +59,7 @@
         }
     </script>
 </head>
+
 <body class="min-h-screen pb-12 relative bg-gaming-dark text-gaming-text transition-colors duration-300">
 
     <!-- Boot Sequence Overlay -->
@@ -64,8 +67,11 @@
         <div id="boot-prompt" class="flex flex-col items-center gap-10">
             <button onclick="bootSequence.start()" class="group transition-all duration-500 hover:scale-110 relative">
                 <!-- Glowing Aura -->
-                <div class="absolute inset-0 rounded-full bg-white/5 group-hover:bg-emerald-500/10 blur-xl transition-all"></div>
-                <svg width="96" height="96" viewBox="0 0 16 16" fill="currentColor" class="text-white/80 group-hover:text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all">
+                <div
+                    class="absolute inset-0 rounded-full bg-white/5 group-hover:bg-emerald-500/10 blur-xl transition-all">
+                </div>
+                <svg width="96" height="96" viewBox="0 0 16 16" fill="currentColor"
+                    class="text-white/80 group-hover:text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all">
                     <!-- 8-Bit Power Icon Shape -->
                     <rect x="7" y="1" width="2" height="6" />
                     <rect x="4" y="3" width="2" height="2" />
@@ -76,7 +82,8 @@
                 </svg>
             </button>
             <div class="flex flex-col items-center gap-3">
-                <span class="text-[10px] font-black uppercase tracking-[0.6em] text-white/40 group-hover:text-white animate-pulse transition-colors">System_Initialize</span>
+                <span
+                    class="text-[10px] font-black uppercase tracking-[0.6em] text-white/40 group-hover:text-white animate-pulse transition-colors">System_Initialize</span>
                 <div class="h-1.5 w-1.5 bg-white/20 group-hover:bg-white animate-bounce"></div>
             </div>
         </div>
@@ -84,61 +91,115 @@
     </div>
 
     <!-- Header & Progress -->
-    <header class="bg-gaming-header border-b border-gaming-border sticky top-0 z-40 shadow-lg transition-colors duration-300">
+    <header
+        class="bg-gaming-header border-b border-gaming-border sticky top-0 z-40 shadow-lg transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row justify-between items-center gap-4 lg:gap-6">
                 <div class="flex items-center gap-3 md:gap-4 w-full lg:w-auto">
                     <div class="min-w-0">
-                        <h1 class="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight text-gaming-text flex items-center gap-2 md:gap-3 truncate">
-                            <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-blue-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                        <h1
+                            class="text-lg md:text-2xl lg:text-3xl font-extrabold tracking-tight text-gaming-text flex items-center gap-2 md:gap-3 truncate">
+                            <svg class="w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 text-blue-500 flex-shrink-0"
+                                viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
                             </svg>
                             <span class="truncate"><span class="text-blue-500">2026</span> Gaming Challenge</span>
                         </h1>
                         <div class="flex items-center gap-3 mt-1.5">
-                            <div class="bg-blue-600 text-white w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-black text-[10px] md:text-xs lg:text-sm shadow-lg shadow-blue-500/20 shrink-0" id="level-badge">
+                            <div class="bg-blue-600 text-white w-6 h-6 md:w-8 md:h-8 lg:w-10 lg:h-10 rounded-lg md:rounded-xl flex items-center justify-center font-black text-[10px] md:text-xs lg:text-sm shadow-lg shadow-blue-500/20 shrink-0"
+                                id="level-badge">
                                 L1
                             </div>
                             <div class="flex flex-col min-w-0">
-                                <p class="text-gaming-muted text-[10px] md:text-xs lg:text-sm font-medium truncate">Track your journey through gaming history</p>
-                                <p class="text-gaming-muted/60 text-[9px] md:text-[10px] mt-0.5" id="xp-text">0 / 500 XP to Level 2</p>
+                                <p class="text-gaming-muted text-[10px] md:text-xs lg:text-sm font-medium truncate">
+                                    Track your journey through gaming history</p>
+                                <p class="text-gaming-muted/60 text-[9px] md:text-[10px] mt-0.5" id="xp-text">0 / 500 XP
+                                    to Level 2</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="w-full lg:w-3/5 flex flex-col gap-2 md:gap-3">
                     <div class="flex flex-col sm:flex-row justify-between items-center gap-2 md:gap-3">
-                        <span class="text-[10px] md:text-xs text-gaming-muted uppercase tracking-widest font-bold hidden md:block">Total Completion</span>
-                        <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3 md:gap-4 lg:gap-6">
-                            <span id="progress-text" class="text-xs md:text-sm font-bold text-blue-400 whitespace-nowrap">0/36 Games</span>
-                            
+                        <span
+                            class="text-[10px] md:text-xs text-gaming-muted uppercase tracking-widest font-bold hidden md:block">Total
+                            Completion</span>
+                        <div
+                            class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3 md:gap-4 lg:gap-6">
+                            <span id="progress-text"
+                                class="text-xs md:text-sm font-bold text-blue-400 whitespace-nowrap">0/36 Games</span>
+
                             <div class="flex items-center gap-2 md:gap-3">
                                 <!-- Tools Toolbar -->
-                                <div class="bg-gaming-card/80 backdrop-blur rounded-full px-2 py-1 md:px-3 md:py-1.5 flex items-center gap-1.5 md:gap-3 border border-gaming-border shadow-sm">
-                                    <button id="crt-btn" onclick="crtManager.toggle(); if(sfx) sfx.playTick()" class="text-orange-400 hover:text-orange-300 transition-colors p-1" title="Toggle CRT Mode">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                <div
+                                    class="bg-gaming-card/80 backdrop-blur rounded-full px-2 py-1 md:px-3 md:py-1.5 flex items-center gap-1.5 md:gap-3 border border-gaming-border shadow-sm">
+                                    <button id="crt-btn" onclick="crtManager.toggle(); if(sfx) sfx.playTick()"
+                                        class="text-orange-400 hover:text-orange-300 transition-colors p-1"
+                                        title="Toggle CRT Mode">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                            </path>
+                                        </svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="themeManager.nextTheme()" class="text-yellow-400 hover:text-yellow-300 transition-colors p-1" title="Switch Console Skin">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656l-1.172 1.172m-5.656-5.656l1.172 1.172m-1.172-1.172L10 9"></path></svg>
+                                    <button onclick="themeManager.nextTheme()"
+                                        class="text-yellow-400 hover:text-yellow-300 transition-colors p-1"
+                                        title="Switch Console Skin">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656l-1.172 1.172m-5.656-5.656l1.172 1.172m-1.172-1.172L10 9">
+                                            </path>
+                                        </svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="startRandomizer()" class="text-purple-400 hover:text-purple-300 transition-colors p-1" title="What should I play?">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <button onclick="startRandomizer()"
+                                        class="text-purple-400 hover:text-purple-300 transition-colors p-1"
+                                        title="What should I play?">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                            </path>
+                                        </svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="showStats(); if(sfx) sfx.playTick()" class="text-emerald-400 hover:text-emerald-300 transition-colors p-1" title="Gamer Stats">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z"></path></svg>
+                                    <button onclick="showStats(); if(sfx) sfx.playTick()"
+                                        class="text-emerald-400 hover:text-emerald-300 transition-colors p-1"
+                                        title="Gamer Stats">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z">
+                                            </path>
+                                        </svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="openSettings(); if(sfx) sfx.playTick()" class="text-blue-400 hover:text-blue-300 transition-colors p-1" title="Settings">
-                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    <button onclick="openSettings(); if(sfx) sfx.playTick()"
+                                        class="text-blue-400 hover:text-blue-300 transition-colors p-1"
+                                        title="Settings">
+                                        <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
+                                            </path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
                                     </button>
                                 </div>
 
-                                <button onclick="generateShareCard(); if(sfx) sfx.playTick()" class="bg-blue-600 hover:bg-blue-500 text-white text-[10px] md:text-xs font-bold py-1.5 px-2 md:px-3 rounded-full transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-lg shadow-blue-500/20">
-                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                <button onclick="generateShareCard(); if(sfx) sfx.playTick()"
+                                    class="bg-blue-600 hover:bg-blue-500 text-white text-[10px] md:text-xs font-bold py-1.5 px-2 md:px-3 rounded-full transition-colors flex items-center gap-1.5 uppercase tracking-wider shadow-lg shadow-blue-500/20">
+                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                        </path>
+                                    </svg>
                                     <span class="hidden xl:inline">Share</span>
                                 </button>
                             </div>
@@ -146,11 +207,14 @@
                     </div>
                     <div class="relative">
                         <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-                            <div id="progress-bar" class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out" style="width: 0%"></div>
+                            <div id="progress-bar"
+                                class="bg-gradient-to-r from-blue-600 via-indigo-500 to-emerald-400 h-3 rounded-full transition-all duration-700 ease-out"
+                                style="width: 0%"></div>
                         </div>
                         <!-- Secondary XP bar -->
                         <div class="w-full bg-gray-800 rounded-full h-1 mt-1 overflow-hidden">
-                            <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            <div id="xp-bar" class="bg-yellow-500 h-1 rounded-full transition-all duration-500"
+                                style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -159,132 +223,249 @@
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 space-y-20">
-        
+
         <!-- Trophy Room (Showcase) -->
-        <section id="section-trophies" class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming transition-all duration-[500ms] linear overflow-hidden shadow-inner">
-            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gaming-accent/30 to-transparent"></div>
-            
+        <section id="section-trophies"
+            class="relative bg-gaming-card/30 border border-gaming-border rounded-gaming transition-all duration-[500ms] linear overflow-hidden shadow-inner">
+            <div
+                class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gaming-accent/30 to-transparent">
+            </div>
+
             <div class="p-8">
                 <div class="flex items-center justify-between mb-8">
                     <div class="flex items-center gap-3">
-                        <button onclick="toggleSection('trophies')" class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
-                            <svg id="chevron-trophies" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <button onclick="toggleSection('trophies')"
+                            class="p-1 hover:bg-white/10 rounded transition-colors group" title="Toggle Section">
+                            <svg id="chevron-trophies"
+                                class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
                         </button>
                         <div class="h-8 w-1 bg-yellow-500 rounded-full"></div>
                         <div>
-                            <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary Achievements</h3>
+                            <h3 class="text-gaming-accent text-[8px] font-black uppercase tracking-[0.3em]">Honorary
+                                Achievements</h3>
                             <h2 class="text-xl md:text-2xl font-bold text-gaming-text">The Trophy Showcase</h2>
                         </div>
                     </div>
                 </div>
 
-                <div id="grid-container-trophies" class="transition-all duration-[500ms] linear overflow-hidden max-h-[1000px]">
+                <div id="grid-container-trophies"
+                    class="transition-all duration-[500ms] linear overflow-hidden max-h-[1000px]">
                     <div class="flex flex-wrap justify-center gap-8 md:gap-12 py-6">
-                    <!-- Core Master -->
-                    <div id="trophy-core" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Core Challenge games">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-blue-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.46.81 1.08 1.48 1.8 1.95V15c-1.77 0-3.2 1.43-3.2 3.2V20h10v-1.8c0-1.77-1.43-3.2-3.2-3.2v-3.11c.72-.47 1.34-1.14 1.8-1.95C18.08 9.63 20 7.55 20 5V4c0-1.1-.9-2-2-2zM6 4h2v3H6V4zm12 3h-2V4h2v3z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Core Master -->
+                        <div id="trophy-core"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
+                            title="Complete all Core Challenge games">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-blue-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.46.81 1.08 1.48 1.8 1.95V15c-1.77 0-3.2 1.43-3.2 3.2V20h10v-1.8c0-1.77-1.43-3.2-3.2-3.2v-3.11c.72-.47 1.34-1.14 1.8-1.95C18.08 9.63 20 7.55 20 5V4c0-1.1-.9-2-2-2zM6 4h2v3H6V4zm12 3h-2V4h2v3z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Core
+                                    Master</span>
+                                <div
+                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-blue-500 transition-colors">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Core Master</span>
-                            <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-blue-500 transition-colors"></div>
-                        </div>
-                    </div>
 
-                    <!-- Bonus Collector -->
-                    <div id="trophy-bonus" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Weird Bonus games">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-purple-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Bonus Collector -->
+                        <div id="trophy-bonus"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
+                            title="Complete all Weird Bonus games">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-purple-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Bonus
+                                    Collector</span>
+                                <div
+                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-purple-500 transition-colors">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Bonus Collector</span>
-                            <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-purple-500 transition-colors"></div>
-                        </div>
-                    </div>
 
-                    <!-- Zen Master -->
-                    <div id="trophy-zen" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Zen Garden games">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.84l4.5 4.05v5.11h-2v-3h-5v3h-2v-5.11L12 7.84z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Zen Master -->
+                        <div id="trophy-zen"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
+                            title="Complete all Zen Garden games">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 3L2 12h3v8h14v-8h3L12 3zm0 4.84l4.5 4.05v5.11h-2v-3h-5v3h-2v-5.11L12 7.84z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Zen
+                                    Master</span>
+                                <div
+                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-green-500 transition-colors">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Zen Master</span>
-                            <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-green-500 transition-colors"></div>
-                        </div>
-                    </div>
 
-                    <!-- Time Lord -->
-                    <div id="trophy-time" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Time Warp games">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-red-500" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Time Lord -->
+                        <div id="trophy-time"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
+                            title="Complete all Time Warp games">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-red-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Time
+                                    Lord</span>
+                                <div
+                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-red-500 transition-colors">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Time Lord</span>
-                            <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-red-500 transition-colors"></div>
-                        </div>
-                    </div>
 
-                    <!-- Art Critic -->
-                    <div id="trophy-art" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Art House games">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Art Critic -->
+                        <div id="trophy-art"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help"
+                            title="Complete all Art House games">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art
+                                    Critic</span>
+                                <div
+                                    class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors">
+                                </div>
                             </div>
                         </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art Critic</span>
-                            <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors"></div>
-                        </div>
-                    </div>
 
-                    <!-- Grand Master -->
-                    <div id="trophy-all" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help scale-110" title="Complete the entire 2026 Challenge">
-                        <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-accent transition-all duration-500 ring-4 ring-gaming-accent/10">
-                            <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2zm0 4.27l-1.91 3.86-4.27.62 3.09 3.01-.73 4.25L12 15.98l3.82 2.02-.73-4.25 3.09-3.01-4.27-.62L12 6.27z"/></svg>
-                            <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
-                                <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <!-- Grand Master -->
+                        <div id="trophy-all"
+                            class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help scale-110"
+                            title="Complete the entire 2026 Challenge">
+                            <div
+                                class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-accent transition-all duration-500 ring-4 ring-gaming-accent/10">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-yellow-500" fill="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2zm0 4.27l-1.91 3.86-4.27.62 3.09 3.01-.73 4.25L12 15.98l3.82 2.02-.73-4.25 3.09-3.01-4.27-.62L12 6.27z" />
+                                </svg>
+                                <div
+                                    class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                    <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                    </svg>
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <span class="text-[9px] md:text-[10px] font-black text-gaming-accent uppercase tracking-widest group-[.unlocked]:text-yellow-400 transition-colors">Grand Master</span>
-                            <div class="h-1 w-12 bg-gaming-accent/50 rounded-full mt-1 group-[.unlocked]:bg-yellow-500 group-[.unlocked]:animate-pulse transition-colors"></div>
+                            <div class="flex flex-col items-center">
+                                <span
+                                    class="text-[9px] md:text-[10px] font-black text-gaming-accent uppercase tracking-widest group-[.unlocked]:text-yellow-400 transition-colors">Grand
+                                    Master</span>
+                                <div
+                                    class="h-1 w-12 bg-gaming-accent/50 rounded-full mt-1 group-[.unlocked]:bg-yellow-500 group-[.unlocked]:animate-pulse transition-colors">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
 
         <!-- Core List Section -->
         <section id="section-core" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md::items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('core')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
-                        <svg id="chevron-core" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button onclick="toggleSection('core')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-core" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-blue-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">The Core Challenge</h2>
-                    <span id="count-core" class="list-count-badge bg-blue-900 text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">12 Games</span>
+                    <span id="count-core"
+                        class="list-count-badge bg-blue-900 text-blue-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">12
+                        Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('core')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('core')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('core')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('core')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
             <div id="grid-container-core" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
-                <div id="core-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pb-4"></div>
+                <div id="core-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pb-4">
+                </div>
             </div>
         </section>
 
@@ -294,7 +475,8 @@
                 <div class="w-full border-t border-gaming-border"></div>
             </div>
             <div class="relative flex justify-center">
-                <span class="bg-gaming-dark px-4 text-xs font-black uppercase tracking-widest text-gaming-muted flex items-center gap-2">
+                <span
+                    class="bg-gaming-dark px-4 text-xs font-black uppercase tracking-widest text-gaming-muted flex items-center gap-2">
                     <span class="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
                     Bonus Content
                     <span class="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse"></span>
@@ -306,16 +488,25 @@
         <section id="section-bonus" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('bonus')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
-                        <svg id="chevron-bonus" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button onclick="toggleSection('bonus')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-bonus" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-purple-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">The Weird Bonus</h2>
-                    <span id="count-bonus" class="list-count-badge bg-purple-900 text-purple-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
+                    <span id="count-bonus"
+                        class="list-count-badge bg-purple-900 text-purple-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
+                        Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('bonus')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('bonus')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('bonus')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('bonus')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
             <div id="grid-container-bonus" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
@@ -324,21 +515,30 @@
         </section>
 
         <!-- Extra Gimmick Lists -->
-        
+
         <!-- Zen Garden -->
         <section id="section-zen" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('zen')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
-                        <svg id="chevron-zen" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button onclick="toggleSection('zen')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-zen" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-green-400 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">🧘 The Zen Bonus List</h2>
-                    <span id="count-zen" class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
+                    <span id="count-zen"
+                        class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
+                        Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('zen')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('zen')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('zen')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('zen')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
             <div id="grid-container-zen" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
@@ -350,16 +550,25 @@
         <section id="section-time" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('time')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
-                        <svg id="chevron-time" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button onclick="toggleSection('time')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-time" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-red-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">⏱️ The Time Warp Bonus List</h2>
-                    <span id="count-time" class="list-count-badge bg-red-900 text-red-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
+                    <span id="count-time"
+                        class="list-count-badge bg-red-900 text-red-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
+                        Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('time')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('time')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('time')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('time')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
             <div id="grid-container-time" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
@@ -371,16 +580,25 @@
         <section id="section-art" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('art')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
-                        <svg id="chevron-art" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <button onclick="toggleSection('art')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-art" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-orange-500 rounded-full"></div>
                     <h2 class="text-2xl font-bold text-gaming-text">🎨 The Art House Bonus List</h2>
-                    <span id="count-art" class="list-count-badge bg-orange-900 text-orange-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
+                    <span id="count-art"
+                        class="list-count-badge bg-orange-900 text-orange-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
+                        Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('art')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('art')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('art')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('art')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
             <div id="grid-container-art" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
@@ -391,11 +609,19 @@
         <!-- The Graveyard (DNF) Section -->
         <section id="graveyard-section" class="hidden pt-12 border-t border-gaming-border/30">
             <div class="flex items-center justify-center gap-3 mb-8">
-                <svg class="w-8 h-8 text-gaming-muted opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-                <h2 class="text-2xl font-black text-gaming-muted uppercase tracking-[0.2em] opacity-50">The Graveyard</h2>
-                <svg class="w-8 h-8 text-gaming-muted opacity-50" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                <svg class="w-8 h-8 text-gaming-muted opacity-50" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </svg>
+                <h2 class="text-2xl font-black text-gaming-muted uppercase tracking-[0.2em] opacity-50">The Graveyard
+                </h2>
+                <svg class="w-8 h-8 text-gaming-muted opacity-50" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                        d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </svg>
             </div>
-            <p class="text-center text-gaming-muted text-xs mb-8 italic">"No Backlog Guilt. Wisdom is knowing when to move on."</p>
+            <p class="text-center text-gaming-muted text-xs mb-8 italic">"No Backlog Guilt. Wisdom is knowing when to
+                move on."</p>
             <div id="graveyard-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 opacity-60"></div>
         </section>
 
@@ -405,17 +631,28 @@
     <footer class="text-center mt-12 mb-8 text-gaming-muted space-y-6">
         <div class="flex justify-center items-center gap-4 text-xs font-medium">
             <button onclick="exportData()" class="hover:text-blue-400 transition-colors flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z">
+                    </path>
+                </svg>
                 Export Save
             </button>
             <span class="text-gaming-muted/20">|</span>
             <button onclick="importData()" class="hover:text-emerald-400 transition-colors flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+                </svg>
                 Import Save
             </button>
             <span class="text-gaming-muted/20">|</span>
             <button onclick="resetProgress()" class="hover:text-red-400 transition-colors flex items-center gap-1">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                </svg>
                 Reset
             </button>
         </div>
@@ -423,15 +660,21 @@
     </footer>
 
     <!-- Settings Modal -->
-    <div id="settings-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeSettings()">
-        <div class="bg-gaming-card border-4 border-gaming-border rounded-gaming max-w-sm w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors" onclick="event.stopPropagation()">
+    <div id="settings-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"
+        onclick="closeSettings()">
+        <div class="bg-gaming-card border-4 border-gaming-border rounded-gaming max-w-sm w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors"
+            onclick="event.stopPropagation()">
             <div class="p-6 border-b border-gaming-border flex justify-between items-center bg-gaming-dark/50">
                 <h3 class="text-lg font-black text-gaming-text uppercase tracking-widest">System Config</h3>
                 <button onclick="closeSettings()" class="text-gaming-muted hover:text-gaming-text">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
-            
+
             <div class="p-8 space-y-6">
                 <!-- Audio Toggle -->
                 <div class="flex items-center justify-between">
@@ -469,27 +712,44 @@
                             <span class="toggle-slider"></span>
                         </label>
                     </div>
-                    <div id="radio-channels" class="grid grid-cols-1 gap-2 opacity-50 pointer-events-none transition-opacity">
-                        <span class="text-[8px] font-black text-gaming-muted uppercase tracking-widest text-center">Tune Station:</span>
+                    <div id="radio-channels"
+                        class="grid grid-cols-1 gap-2 opacity-50 pointer-events-none transition-opacity">
+                        <span class="text-[8px] font-black text-gaming-muted uppercase tracking-widest text-center">Tune
+                            Station:</span>
                         <div class="flex items-center gap-2">
-                            <button onclick="radio.prevChannel()" class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
-                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                            <button onclick="radio.prevChannel()"
+                                class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
+                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
                             </button>
-                            <div class="flex-grow h-10 flex items-center justify-center bg-black/40 border border-white/5 rounded px-4">
-                                <span id="radio-modal-display" class="text-[10px] font-black font-mono text-emerald-400 uppercase tracking-widest text-center">8-bit Chill</span>
+                            <div
+                                class="flex-grow h-10 flex items-center justify-center bg-black/40 border border-white/5 rounded px-4">
+                                <span id="radio-modal-display"
+                                    class="text-[10px] font-black font-mono text-emerald-400 uppercase tracking-widest text-center">8-bit
+                                    Chill</span>
                             </div>
-                            <button onclick="radio.nextChannel()" class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
-                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                            <button onclick="radio.nextChannel()"
+                                class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
+                                <svg class="w-4 h-4 text-gaming-text" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="pt-4 border-t border-gaming-border space-y-3">
-                    <button onclick="location.reload()" class="w-full bg-gaming-accent/10 hover:bg-gaming-accent/20 text-gaming-accent border border-gaming-accent/30 py-2 rounded font-black text-[10px] uppercase tracking-widest transition-all">
+                    <button onclick="location.reload()"
+                        class="w-full bg-gaming-accent/10 hover:bg-gaming-accent/20 text-gaming-accent border border-gaming-accent/30 py-2 rounded font-black text-[10px] uppercase tracking-widest transition-all">
                         Reboot System
                     </button>
-                    <button onclick="resetProgress()" class="w-full bg-red-900/10 hover:bg-red-900/20 text-red-400 border border-red-900/30 py-2 rounded font-black text-[10px] uppercase tracking-widest transition-all">
+                    <button onclick="resetProgress()"
+                        class="w-full bg-red-900/10 hover:bg-red-900/20 text-red-400 border border-red-900/30 py-2 rounded font-black text-[10px] uppercase tracking-widest transition-all">
                         Factory Reset
                     </button>
                 </div>
@@ -498,27 +758,36 @@
     </div>
 
     <!-- Info Modal -->
-    <div id="detail-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-start sm:items-center justify-center p-4 overflow-y-auto" onclick="closeModal()">
-        <div class="bg-gaming-card border border-gaming-border rounded-gaming max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors duration-300 my-auto" onclick="event.stopPropagation()">
+    <div id="detail-modal"
+        class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-start sm:items-center justify-center p-4 overflow-y-auto"
+        onclick="closeModal()">
+        <div class="bg-gaming-card border border-gaming-border rounded-gaming max-w-xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 transition-colors duration-300 my-auto"
+            onclick="event.stopPropagation()">
             <div id="modal-banner" class="h-48 w-full bg-gradient-to-br flex items-center justify-center">
-                 <h2 id="modal-title-big" class="text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4"></h2>
+                <h2 id="modal-title-big" class="text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4">
+                </h2>
             </div>
             <div class="p-8">
                 <div class="flex justify-between items-start mb-6">
                     <div>
                         <h3 id="modal-title" class="text-2xl font-bold text-gaming-text mb-1"></h3>
                         <div class="flex gap-2">
-                            <span id="modal-genre" class="text-xs font-semibold text-blue-400 uppercase tracking-widest bg-blue-900/30 px-2 py-0.5 rounded"></span>
-                            <span id="modal-year" class="text-xs font-semibold text-gaming-muted bg-gaming-dark px-2 py-0.5 rounded"></span>
+                            <span id="modal-genre"
+                                class="text-xs font-semibold text-blue-400 uppercase tracking-widest bg-blue-900/30 px-2 py-0.5 rounded"></span>
+                            <span id="modal-year"
+                                class="text-xs font-semibold text-gaming-muted bg-gaming-dark px-2 py-0.5 rounded"></span>
                         </div>
                     </div>
                     <button onclick="closeModal()" class="text-gaming-muted hover:text-gaming-text transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
-                
+
                 <p id="modal-description" class="text-gaming-muted leading-relaxed mb-8"></p>
-                
+
                 <div class="grid grid-cols-2 gap-4 border-t border-gaming-border pt-6">
                     <div>
                         <span class="text-xs text-gaming-muted block">Platform</span>
@@ -531,9 +800,13 @@
                 </div>
 
                 <div id="modal-actions" class="mt-8 flex justify-end">
-                    <a id="modal-wiki" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2">
+                    <a id="modal-wiki" target="_blank"
+                        class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2">
                         Wikipedia Page
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -541,118 +814,149 @@
     </div>
 
     <!-- Share Modal -->
-    <div id="share-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeShareModal()">
-        <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col transition-colors duration-300" onclick="event.stopPropagation()">
+    <div id="share-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"
+        onclick="closeShareModal()">
+        <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col transition-colors duration-300"
+            onclick="event.stopPropagation()">
             <div class="p-6 border-b border-gaming-border flex justify-between items-center">
                 <h3 class="text-xl font-bold text-gaming-text">Share Your Progress</h3>
                 <button onclick="closeShareModal()" class="text-gaming-muted hover:text-gaming-text">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
             <div class="p-8 flex flex-col items-center gap-6 bg-black/20">
-                <img id="share-image" src="" alt="Summary Card" class="w-full rounded-gaming shadow-2xl border border-gaming-border/50">
-                <p class="text-sm text-gaming-muted text-center">Right-click (or long press) to copy, or use the button below.</p>
-                <a id="download-link" href="#" download="gaming-challenge-2026-summary.png" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"></path></svg>
+                <img id="share-image" src="" alt="Summary Card"
+                    class="w-full rounded-gaming shadow-2xl border border-gaming-border/50">
+                <p class="text-sm text-gaming-muted text-center">Right-click (or long press) to copy, or use the button
+                    below.</p>
+                <a id="download-link" href="#" download="gaming-challenge-2026-summary.png"
+                    class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4-4m0 0l-4 4m4-4v12"></path>
+                    </svg>
                     Download Image
                 </a>
             </div>
         </div>
     </div>
 
-        <!-- Stats Modal -->
-        <div id="stats-modal" class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4" onclick="closeStatsModal()">
-            <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh] transition-colors duration-300" onclick="event.stopPropagation()">
-                            <div class="p-6 border-b border-gaming-border flex flex-col gap-4 bg-gaming-card/50">
-                                <div class="flex justify-between items-center">
-                                    <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2"> 
-                                        <span class="text-emerald-400">Gamer Profile</span> 2026
-                                    </h3>
-                                    <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                                    </button>
-                                </div>
-                                                <!-- Tabs -->
-                                                <div class="flex gap-2 p-1 bg-gaming-dark rounded-lg self-start">
-                                                    <button onclick="switchStatsTab('dashboard')" id="tab-dashboard" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
-                                                    <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
-                                                    <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
-                                                </div>
-                                            </div>
-                                            
-                                            <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
-                                
-                                <!-- Dashboard Content (Existing) -->
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                
-                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                            <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Time Invested</span>
-                            <div class="flex items-end gap-2">
-                                <span id="stat-hours-done" class="text-3xl font-black text-gaming-text">0</span>
-                                <span class="text-sm text-gaming-muted mb-1">Hours</span>   
-                            </div>
-                            <div class="w-full bg-gaming-dark h-1 mt-2 rounded-full overflow-hidden">
-                                 <div id="stat-hours-bar" class="bg-emerald-500 h-1 transition-all" style="width: 0%"></div>
-                            </div>
-                            <p class="text-[10px] text-gaming-muted mt-2"><span id="stat-hours-left">0</span> hours remaining</p>
+    <!-- Stats Modal -->
+    <div id="stats-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-md z-50 hidden flex items-center justify-center p-4"
+        onclick="closeStatsModal()">
+        <div class="bg-gaming-dark border border-gaming-border rounded-gaming max-w-4xl w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200 flex flex-col max-h-[90vh] transition-colors duration-300"
+            onclick="event.stopPropagation()">
+            <div class="p-6 border-b border-gaming-border flex flex-col gap-4 bg-gaming-card/50">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gaming-text flex items-center gap-2">
+                        <span class="text-emerald-400">Gamer Profile</span> 2026
+                    </h3>
+                    <button onclick="closeStatsModal()" class="text-gaming-muted hover:text-gaming-text">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <!-- Tabs -->
+                <div class="flex gap-2 p-1 bg-gaming-dark rounded-lg self-start">
+                    <button onclick="switchStatsTab('dashboard')" id="tab-dashboard"
+                        class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
+                    <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree"
+                        class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill
+                        Tree</button>
+                    <button onclick="switchStatsTab('journey-map')" id="tab-journeymap"
+                        class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey
+                        Map</button>
+                </div>
+            </div>
+
+            <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
+
+                <!-- Dashboard Content (Existing) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                        <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Time
+                            Invested</span>
+                        <div class="flex items-end gap-2">
+                            <span id="stat-hours-done" class="text-3xl font-black text-gaming-text">0</span>
+                            <span class="text-sm text-gaming-muted mb-1">Hours</span>
                         </div>
-    
-                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                             <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Favorite Era</span>
-                             <span id="stat-era" class="text-xl font-black text-gaming-text block truncate">TBD</span>
-                             <p class="text-[10px] text-gaming-muted mt-2">Based on completion count</p>
+                        <div class="w-full bg-gaming-dark h-1 mt-2 rounded-full overflow-hidden">
+                            <div id="stat-hours-bar" class="bg-emerald-500 h-1 transition-all" style="width: 0%"></div>
                         </div>
-    
-                        <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
-                            <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Completion Rate</span>
-                            <span id="stat-rate" class="text-3xl font-black text-gaming-text">0%</span>
-                            <p class="text-[10px] text-gaming-muted mt-2" id="stat-count">0 / 0 Games</p>
-                       </div>
+                        <p class="text-[10px] text-gaming-muted mt-2"><span id="stat-hours-left">0</span> hours
+                            remaining</p>
                     </div>
-    
-                                                    <!-- Review Stamp Distribution -->
-    
-                                                    <div>
-    
-                                                        <h4 class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
-    
-                                                            Review Distribution
-    
-                                                            <div class="h-px bg-gaming-border flex-grow"></div>
-    
-                                                        </h4>
-    
-                                                        <div id="review-stamp-bars" class="space-y-3">
-    
-                                                            <!-- Populated by JS -->
-    
-                                                        </div>
-    
-                                                    </div>
-    
-                                    
-    
-                                                </div>
-    
-                                    
-    
-                                                <!-- Skill Tree Tab -->
-    
-                                                <div id="stats-tab-skill-tree" class="p-6 overflow-y-auto hidden">
-    
-                                                    <div class="flex flex-col items-center gap-8 py-4">
-    
-                                                        <div class="text-center">
-    
-                                                            <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Character Archetype</h4>
-    
-                                                            <p id="archetype-label" class="text-emerald-400 font-bold italic">The Novice Adventurer</p>
-    
-                                                        </div>
-    
-                                    
-    
-                    <div id="skill-tree-viz" class="relative w-full max-w-sm aspect-square bg-gaming-dark/50 rounded-xl border-2 border-gaming-border p-0 flex items-center justify-center overflow-hidden shadow-inner">
+
+                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                        <span class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Favorite
+                            Era</span>
+                        <span id="stat-era" class="text-xl font-black text-gaming-text block truncate">TBD</span>
+                        <p class="text-[10px] text-gaming-muted mt-2">Based on completion count</p>
+                    </div>
+
+                    <div class="bg-gaming-card p-4 rounded-gaming border border-gaming-border">
+                        <span
+                            class="text-xs text-gaming-muted uppercase tracking-widest font-bold block mb-1">Completion
+                            Rate</span>
+                        <span id="stat-rate" class="text-3xl font-black text-gaming-text">0%</span>
+                        <p class="text-[10px] text-gaming-muted mt-2" id="stat-count">0 / 0 Games</p>
+                    </div>
+                </div>
+
+                <!-- Review Stamp Distribution -->
+
+                <div>
+
+                    <h4
+                        class="text-sm text-gaming-muted uppercase tracking-widest font-bold mb-4 flex items-center gap-2">
+
+                        Review Distribution
+
+                        <div class="h-px bg-gaming-border flex-grow"></div>
+
+                    </h4>
+
+                    <div id="review-stamp-bars" class="space-y-3">
+
+                        <!-- Populated by JS -->
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+
+
+            <!-- Skill Tree Tab -->
+
+            <div id="stats-tab-skill-tree" class="p-6 overflow-y-auto hidden">
+
+                <div class="flex flex-col items-center gap-8 py-4">
+
+                    <div class="text-center">
+
+                        <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Character Archetype
+                        </h4>
+
+                        <p id="archetype-label" class="text-emerald-400 font-bold italic">The Novice Adventurer</p>
+
+                    </div>
+
+
+
+                    <div id="skill-tree-viz"
+                        class="relative w-full max-w-sm aspect-square bg-gaming-dark/50 rounded-xl border-2 border-gaming-border p-0 flex items-center justify-center overflow-hidden shadow-inner">
                         <!-- Grid Lines -->
                         <div class="absolute inset-0 grid grid-cols-2 grid-rows-2">
                             <div class="border-r border-b border-gaming-border/30"></div>
@@ -662,118 +966,150 @@
                         </div>
 
                         <!-- Axes Labels -->
-                        <div class="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-red-400 uppercase tracking-tighter opacity-50">Combat</div>
-                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-emerald-400 uppercase tracking-tighter opacity-50">Wisdom</div>
-                        <div class="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black text-purple-400 uppercase tracking-tighter opacity-50">Intelligence</div>
-                        <div class="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 text-[10px] font-black text-blue-400 uppercase tracking-tighter opacity-50">Agility</div>
+                        <div
+                            class="absolute top-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-red-400 uppercase tracking-tighter opacity-50">
+                            Combat</div>
+                        <div
+                            class="absolute bottom-2 left-1/2 -translate-x-1/2 text-[10px] font-black text-emerald-400 uppercase tracking-tighter opacity-50">
+                            Wisdom</div>
+                        <div
+                            class="absolute left-2 top-1/2 -translate-y-1/2 -rotate-90 text-[10px] font-black text-purple-400 uppercase tracking-tighter opacity-50">
+                            Intelligence</div>
+                        <div
+                            class="absolute right-2 top-1/2 -translate-y-1/2 rotate-90 text-[10px] font-black text-blue-400 uppercase tracking-tighter opacity-50">
+                            Agility</div>
 
                         <!-- Quadrant Flavor Text -->
-                        <div class="absolute top-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Berserker</div>
-                        <div class="absolute top-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Tactician</div>
-                        <div class="absolute bottom-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Acrobat</div>
-                        <div class="absolute bottom-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The Scholar</div>
+                        <div class="absolute top-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The
+                            Berserker</div>
+                        <div class="absolute top-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The
+                            Tactician</div>
+                        <div class="absolute bottom-8 right-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The
+                            Acrobat</div>
+                        <div class="absolute bottom-8 left-8 text-[8px] font-bold text-gaming-muted/20 uppercase">The
+                            Scholar</div>
 
                         <!-- Player Avatar Dot -->
-                        <div id="player-avatar" class="absolute z-20 w-8 h-8 bg-gaming-text rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-1000 ease-out border-2 border-white" style="left: 50%; top: 50%; transform: translate(-50%, -50%)">
+                        <div id="player-avatar"
+                            class="absolute z-20 w-8 h-8 bg-gaming-text rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.5)] transition-all duration-1000 ease-out border-2 border-white"
+                            style="left: 50%; top: 50%; transform: translate(-50%, -50%)">
                             <span class="text-sm">👤</span>
                         </div>
                     </div>
-    
-                                    
-    
-                                                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
-    
-                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
-    
-                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Agility</span>
-    
-                                                                <span id="skill-val-agility" class="text-xl font-black text-blue-400">0</span>
-    
-                                                            </div>
-    
-                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
-    
-                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Combat</span>
-    
-                                                                <span id="skill-val-combat" class="text-xl font-black text-red-400">0</span>
-    
-                                                            </div>
-    
-                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
-    
-                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Intelligence</span>
-    
-                                                                <span id="skill-val-intelligence" class="text-xl font-black text-purple-400">0</span>
-    
-                                                            </div>
-    
-                                                            <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
-    
-                                                                <span class="text-[10px] text-gaming-muted uppercase font-black block">Wisdom</span>
-    
-                                                                <span id="skill-val-wisdom" class="text-xl font-black text-emerald-400">0</span>
-    
-                                                            </div>
-    
-                                                        </div>
-    
-                                                    </div>
-    
-                                                </div>
-    
-                                    
+
+
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full">
+
+                        <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+
+                            <span class="text-[10px] text-gaming-muted uppercase font-black block">Agility</span>
+
+                            <span id="skill-val-agility" class="text-xl font-black text-blue-400">0</span>
+
+                        </div>
+
+                        <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+
+                            <span class="text-[10px] text-gaming-muted uppercase font-black block">Combat</span>
+
+                            <span id="skill-val-combat" class="text-xl font-black text-red-400">0</span>
+
+                        </div>
+
+                        <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+
+                            <span class="text-[10px] text-gaming-muted uppercase font-black block">Intelligence</span>
+
+                            <span id="skill-val-intelligence" class="text-xl font-black text-purple-400">0</span>
+
+                        </div>
+
+                        <div class="bg-gaming-card/50 p-3 rounded-lg border border-gaming-border text-center">
+
+                            <span class="text-[10px] text-gaming-muted uppercase font-black block">Wisdom</span>
+
+                            <span id="skill-val-wisdom" class="text-xl font-black text-emerald-400">0</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
             <!-- Journey Map Tab -->
             <div id="stats-tab-journey-map" class="p-6 overflow-y-auto hidden">
                 <div class="flex flex-col gap-6">
                     <div class="text-center">
-                        <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Chronological Odyssey</h4>
+                        <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Chronological Odyssey
+                        </h4>
                         <p class="text-gaming-muted text-xs italic">A trail of your 2026 gaming milestones</p>
                     </div>
-                    
+
                     <div id="journey-canvas-container" class="bg-gaming-dark/30 border border-gaming-border">
                         <div class="journey-trail"></div>
                         <div id="journey-landmarks-list">
                             <!-- Populated by JS -->
                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-        </div>
-                                <!-- Review Stamp Modal -->
-                        <div id="review-modal" class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4" onclick="closeReviewModal()">
-                    
-            <div class="bg-gaming-card border-4 border-gaming-border rounded-gaming max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200" onclick="event.stopPropagation()">
-                <div class="p-6 text-center border-b border-gaming-border">
-                    <h3 class="text-xl font-black text-gaming-text uppercase tracking-widest">Seal the Record</h3>
-                    <p class="text-gaming-muted text-xs mt-1">Select a stamp to finalize this entry</p>
-                </div>
-                            <div class="p-8 grid grid-cols-3 gap-4">
-                                <button onclick="applyReviewStamp('masterpiece', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-emerald-500/30 transition-all">
-                                    <div class="w-12 h-12 border-4 border-emerald-500 rounded-lg flex items-center justify-center text-emerald-500 font-black text-[8px] rotate-[-12deg] uppercase">Masterpiece</div>
-                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Masterpiece</span>
-                                </button>
-                                <button onclick="applyReviewStamp('solid', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-blue-500/30 transition-all">
-                                    <div class="w-12 h-12 border-4 border-blue-500 rounded-lg flex items-center justify-center text-blue-500 font-black text-[8px] rotate-[8deg] uppercase">Solid</div>
-                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Solid Play</span>
-                                </button>
-                                <button onclick="applyReviewStamp('meh', event)" class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-yellow-500/30 transition-all">
-                                    <div class="w-12 h-12 border-4 border-yellow-500 rounded-lg flex items-center justify-center text-yellow-500 font-black text-[8px] rotate-[-5deg] uppercase">Meh</div>
-                                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Average</span>
-                                </button>
-                            </div>
-                
-                <div class="p-4 bg-gaming-dark/30 text-center">
-                    <button onclick="closeReviewModal()" class="text-gaming-muted hover:text-gaming-text text-[10px] uppercase font-bold tracking-widest">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Companion Container -->
+    </div>
+    <!-- Review Stamp Modal -->
+    <div id="review-modal"
+        class="fixed inset-0 bg-black/90 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-4"
+        onclick="closeReviewModal()">
+
+        <div class="bg-gaming-card border-4 border-gaming-border rounded-gaming max-w-md w-full shadow-2xl overflow-hidden animate-in fade-in zoom-in duration-200"
+            onclick="event.stopPropagation()">
+            <div class="p-6 text-center border-b border-gaming-border">
+                <h3 class="text-xl font-black text-gaming-text uppercase tracking-widest">Seal the Record</h3>
+                <p class="text-gaming-muted text-xs mt-1">Select a stamp to finalize this entry</p>
+            </div>
+            <div class="p-8 grid grid-cols-3 gap-4">
+                <button onclick="applyReviewStamp('masterpiece', event)"
+                    class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-emerald-500/30 transition-all">
+                    <div
+                        class="w-12 h-12 border-4 border-emerald-500 rounded-lg flex items-center justify-center text-emerald-500 font-black text-[8px] rotate-[-12deg] uppercase">
+                        Masterpiece</div>
+                    <span
+                        class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Masterpiece</span>
+                </button>
+                <button onclick="applyReviewStamp('solid', event)"
+                    class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-blue-500/30 transition-all">
+                    <div
+                        class="w-12 h-12 border-4 border-blue-500 rounded-lg flex items-center justify-center text-blue-500 font-black text-[8px] rotate-[8deg] uppercase">
+                        Solid</div>
+                    <span class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Solid
+                        Play</span>
+                </button>
+                <button onclick="applyReviewStamp('meh', event)"
+                    class="stamp-btn flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-gaming-dark/50 border-2 border-transparent hover:border-yellow-500/30 transition-all">
+                    <div
+                        class="w-12 h-12 border-4 border-yellow-500 rounded-lg flex items-center justify-center text-yellow-500 font-black text-[8px] rotate-[-5deg] uppercase">
+                        Meh</div>
+                    <span
+                        class="text-[8px] font-bold text-gaming-muted uppercase tracking-widest text-center">Average</span>
+                </button>
+            </div>
+
+            <div class="p-4 bg-gaming-dark/30 text-center">
+                <button onclick="closeReviewModal()"
+                    class="text-gaming-muted hover:text-gaming-text text-[10px] uppercase font-bold tracking-widest">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- Companion Container -->
     <div id="companion-container" class="fixed bottom-6 right-6 z-30"></div>
 
     <!-- Console Hardware -->
     <div id="console-container" class="fixed bottom-6 left-6 z-30 pointer-events-none sm:pointer-events-auto">
-        <div id="console-hardware" class="relative w-44 h-28 bg-[#2a2a2a] rounded-t-xl border-b-[10px] border-[#151515] shadow-2xl transition-all duration-500">
+        <div id="console-hardware"
+            class="relative w-44 h-28 bg-[#2a2a2a] rounded-t-xl border-b-[10px] border-[#151515] shadow-2xl transition-all duration-500">
             <!-- Top Detail/Vents -->
             <div class="absolute top-2 left-4 right-4 flex justify-between px-2 opacity-30">
                 <div class="flex gap-1">
@@ -787,21 +1123,28 @@
                     <div class="w-1 h-4 bg-black rounded-full"></div>
                 </div>
             </div>
-            
+
             <!-- The Slot -->
-            <div class="absolute top-8 left-4 right-4 h-12 bg-[#111] rounded shadow-inner flex items-center justify-center">
+            <div
+                class="absolute top-8 left-4 right-4 h-12 bg-[#111] rounded shadow-inner flex items-center justify-center">
                 <!-- Cartridge (Removable) -->
-                <div id="active-cartridge" class="w-36 h-24 bg-[#444] rounded-t-md transform translate-y-[-120%] flex flex-col overflow-hidden border-x-2 border-t-2 border-black/40">
-                    <div id="cart-label" class="w-full h-16 bg-cover bg-center border-b border-black/20 grayscale-[0.2] relative overflow-hidden"></div>
+                <div id="active-cartridge"
+                    class="w-36 h-24 bg-[#444] rounded-t-md transform translate-y-[-120%] flex flex-col overflow-hidden border-x-2 border-t-2 border-black/40">
+                    <div id="cart-label"
+                        class="w-full h-16 bg-cover bg-center border-b border-black/20 grayscale-[0.2] relative overflow-hidden">
+                    </div>
                     <div class="flex-grow bg-[#555] px-2 py-1 flex items-center">
-                        <span id="cart-title" class="w-full text-[7px] font-black uppercase truncate text-white/40 tracking-tighter font-mono"></span>
+                        <span id="cart-title"
+                            class="w-full text-[7px] font-black uppercase truncate text-white/40 tracking-tighter font-mono"></span>
                     </div>
                 </div>
             </div>
 
             <!-- Front Branding & LED -->
             <div class="absolute bottom-2 left-5 flex items-center gap-3">
-                <div id="console-led" class="w-2.5 h-2.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.6)] transition-all duration-500"></div>
+                <div id="console-led"
+                    class="w-2.5 h-2.5 rounded-full bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.6)] transition-all duration-500">
+                </div>
                 <div class="flex flex-col leading-none">
                     <span id="console-status-text" class="text-[5px] font-bold text-white/10 uppercase">Standby</span>
                 </div>
@@ -828,4 +1171,5 @@
     <script src="js/achievements.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
