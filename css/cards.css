@@ -137,11 +137,22 @@
 .game-card-overlay { transition: opacity 0.5s; opacity: 0; }
 .group:hover .game-card-overlay { opacity: 0.25 !important; }
 
-[data-theme='brick'] .game-card-overlay { background-color: var(--accent) !important; mix-blend-mode: color; }
-[data-theme='cube'] .game-card-overlay { background: linear-gradient(to bottom right, #ff4500, #4b0082) !important; }
+/* Future theme uses the per-game gradient (default) */
+[data-theme='future'] .game-card-overlay { background-image: inherit; }
+
+[data-theme='brick'] .game-card-overlay { 
+    background-color: var(--accent) !important; 
+    background-image: none !important;
+    mix-blend-mode: color; 
+}
+[data-theme='cube'] .game-card-overlay { 
+    background: linear-gradient(to bottom right, #ff4500, #4b0082) !important; 
+}
 [data-theme='cube'] .group:hover .game-card-overlay { opacity: 0.3 !important; }
 [data-theme='os'] .group:hover img { filter: brightness(1.1) contrast(1.1) !important; }
+[data-theme='os'] .game-card-overlay { background-image: none !important; }
 [data-theme='legacy'] .group:hover img { filter: grayscale(1) brightness(1.1) contrast(1.2) !important; }
+[data-theme='legacy'] .game-card-overlay { background-image: none !important; }
 
 /* --- Passport Stamp --- */
 .passport-stamp {
