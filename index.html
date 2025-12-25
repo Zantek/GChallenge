@@ -669,13 +669,14 @@
                     <button onclick="switchStatsTab('dashboard')" id="tab-dashboard"
                         class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
                                         <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
-                                        <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
-                                        <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
-                                    </div>
-                    
-            </div>
-
-            <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
+                                                            <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
+                                                            <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                                            <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Ad Archive</button>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
+                                        
 
                 <!-- Dashboard Content (Existing) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -1143,6 +1144,18 @@
                         </div>
 
 
+            <!-- Ad Archive Tab -->
+            <div id="stats-tab-ads" class="p-6 overflow-y-auto hidden">
+                <div class="text-center mb-8">
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Retro Ad Archive</h4>
+                    <p class="text-gaming-muted text-xs italic">Unlocked vintage posters from your 2026 collection</p>
+                </div>
+                <div id="ads-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+
             
         </div>
     </div>
@@ -1250,6 +1263,18 @@
                 <div class="w-6 h-4 bg-black rounded-sm border border-white/10"></div>
                 <div class="w-6 h-4 bg-black rounded-sm border border-white/10"></div>
             </div>
+        </div>
+    </div>
+
+    <!-- Post-Game Ad Lightbox -->
+    <div id="ad-lightbox" class="fixed inset-0 bg-black/95 backdrop-blur-xl z-[100] hidden flex items-center justify-center p-4 cursor-zoom-out" onclick="this.classList.add('hidden')">
+        <div class="max-w-3xl w-full flex flex-col items-center gap-4" onclick="event.stopPropagation()">
+            <div id="lightbox-poster-container" class="w-full transform transition-all duration-500 scale-95 opacity-0">
+                <!-- Poster injected here -->
+            </div>
+            <button onclick="document.getElementById('ad-lightbox').classList.add('hidden')" class="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] transition-all border border-white/10">
+                Close Archive View
+            </button>
         </div>
     </div>
 
