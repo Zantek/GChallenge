@@ -195,14 +195,17 @@ class Companion {
     updateLevel(newLevel) {
         if (newLevel !== this.level) {
             this.level = newLevel;
-            // Play evolution sound?
+            // Play evolution sound
             if (window.sfx && !window.sfx.muted) {
-                // Simple evolution jingle
                 window.sfx.playTone(400, 'square', 0.1, 0, 0.1);
                 window.sfx.playTone(600, 'square', 0.1, 0.1, 0.1);
                 window.sfx.playTone(800, 'square', 0.2, 0.2, 0.1);
             }
             this.render();
+            // Re-trigger reaction if one was active or pending
+            if (this.lastReactionType) {
+                setTimeout(() => this.react(this.lastReactionType), 100);
+            }
         }
     }
 
@@ -276,6 +279,7 @@ class Companion {
     }
 
     react(type) {
+        this.lastReactionType = type;
         const bubble = document.getElementById('companion-bubble');
         const sprite = document.getElementById('companion-sprite');
         if (!bubble || !sprite) return;
