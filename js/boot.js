@@ -13,15 +13,11 @@ class BootSequence {
         this.skipBoot = localStorage.getItem('skipBootSequence') === 'true';
         
         if (!this.bootEnabled || this.skipBoot) {
-            if (this.overlay) {
-                this.overlay.style.display = 'none';
-                this.overlay.remove();
-            }
+            if (this.overlay) this.overlay.remove();
             return;
         }
         
         if (this.overlay) {
-            this.overlay.style.display = 'flex';
             // Show prompt, hide terminal
             this.prompt.classList.remove('hidden');
             this.terminal.classList.add('hidden');

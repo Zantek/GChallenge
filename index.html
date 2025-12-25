@@ -49,11 +49,17 @@
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/effects.css">
     <link rel="stylesheet" href="css/hardware.css">
+    <script>
+        // Critical: Check boot preference before body renders to prevent FOUC
+        if (localStorage.getItem('skipBootSequence') === 'true') {
+            document.documentElement.classList.add('boot-skip');
+        }
+    </script>
 </head>
 <body class="min-h-screen pb-12 relative bg-gaming-dark text-gaming-text transition-colors duration-300">
 
     <!-- Boot Sequence Overlay -->
-    <div id="boot-overlay" style="display: none" class="flex items-center justify-center">
+    <div id="boot-overlay" class="flex items-center justify-center">
         <div id="boot-prompt" class="flex flex-col items-center gap-10">
             <button onclick="bootSequence.start()" class="group transition-all duration-500 hover:scale-110 relative">
                 <!-- Glowing Aura -->
