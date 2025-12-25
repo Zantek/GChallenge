@@ -38,14 +38,70 @@
     transition: all 0.3s ease;
     cursor: pointer;
 }
-.game-card:hover {
+.game-card-front:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
+.game-card-back:hover {
+    transform: rotateY(180deg) translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
 .game-card.completed { border-color: #10b981; opacity: 0.8; }
+
 .game-card.dropped { filter: grayscale(0.8) sepia(0.2); opacity: 0.5; }
 
+/* Grid Container Padding for Hover Room */
+[id^="grid-container-"] {
+    padding-top: 10px;
+}
+
+/* Simulated Hover Highlight (Used when jumping from console) */
+
+.game-card-container.simulated-highlight .game-card-front {
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+}
+
+.game-card-container.simulated-highlight .game-card-back {
+
+    transform: rotateY(180deg) translateY(-5px);
+
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+}
+
+
+
+.game-card-container.simulated-highlight .game-card-overlay {
+
+    opacity: 0.25 !important;
+
+}
+
+.game-card-container.simulated-highlight img {
+
+    transform: scale(1.1);
+
+}
+
+
+
+/* Theme-Specific Simulated Hover */
+
+[data-theme='os'] .game-card-container.simulated-highlight img { filter: brightness(1.1) contrast(1.1) !important; }
+
+[data-theme='legacy'] .game-card-container.simulated-highlight img { filter: grayscale(1) brightness(1.1) contrast(1.2) !important; }
+
+
+
 /* Theme Overrides for Cards */
+
+
+
+
 [data-theme='brick'] .game-card { border: 2px solid var(--border); image-rendering: pixelated; }
 [data-theme='cube'] .game-card { border: 4px solid var(--border); box-shadow: 8px 8px 0px rgba(0,0,0,0.2); }
 [data-theme='os'] .game-card { 

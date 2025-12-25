@@ -87,3 +87,29 @@ function ejectCartridge() {
     if (typeof updateAllPlayButtons === 'function') updateAllPlayButtons();
     if (sfx) sfx.playFlip(); // Use thump sound for eject
 }
+
+function scrollToActiveGame(event) {
+    if (event) event.stopPropagation();
+    if (!currentlyPlaying) return;
+    const container = document.getElementById(`card-${currentlyPlaying}`);
+    if (container) {
+        const rect = container.getBoundingClientRect();
+        const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);
+        
+        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        const triggerHighlight = () => {
+            container.classList.add('simulated-highlight');
+            setTimeout(() => {
+                container.classList.remove('simulated-highlight');
+            }, 600);
+        };
+
+        if (isInView) {
+            triggerHighlight();
+        } else {
+            // Wait for scroll if it was off-screen
+            setTimeout(triggerHighlight, 400);
+        }
+    }
+}

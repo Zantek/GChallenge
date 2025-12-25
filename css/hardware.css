@@ -42,6 +42,12 @@
     opacity: 1 !important;
     background-color: #444 !important;
     z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#active-cartridge:hover {
+    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent) !important;
+    filter: brightness(1.1);
 }
 
 /* --- Theme-Specific Cartridges --- */

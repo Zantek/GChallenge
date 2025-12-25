@@ -1171,6 +1171,14 @@ function closeModal() {
     document.getElementById('detail-modal').classList.add('hidden');
 }
 
+function flipCard(id, event) {
+    const container = document.getElementById(`card-${id}`);
+    if (container) {
+        container.classList.toggle('flipped');
+        if (sfx) sfx.playFlip();
+    }
+}
+
 function createCard(game, category = 'core') {
     const isCompleted = completedGames.includes(game.id);
     const isDropped = droppedGames.includes(game.id);
@@ -1194,10 +1202,10 @@ function createCard(game, category = 'core') {
     }
 
     return `
-        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="this.classList.toggle('flipped'); if(sfx) sfx.playFlip()">
+        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="flipCard('${game.id}', event)">
             <div class="game-card-inner">
                 <!-- FRONT FACE -->
-                <div class="game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
+                <div class="game-card game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
                     <div class="relative h-40 overflow-hidden shrink-0">
                         <div class="game-card-overlay absolute inset-0 opacity-0 group-hover:opacity-25 transition-opacity duration-500 z-10 ${document.documentElement.getAttribute('data-theme') === 'future' ? 'bg-gradient-to-br ' + game.color : ''}"></div>
                         
@@ -1266,7 +1274,7 @@ function createCard(game, category = 'core') {
                 </div>
 
                 <!-- BACK FACE -->
-                <div class="game-card-back bg-gaming-card border-2 border-gaming-accent p-4 flex flex-col gap-3 shadow-2xl relative">
+                <div class="game-card game-card-back bg-gaming-card border-2 border-gaming-accent p-4 flex flex-col gap-3 shadow-2xl relative">
                     <div class="absolute top-4 right-4 opacity-20 scale-150">
                          ${getSystemIcon(game.system)}
                     </div>
