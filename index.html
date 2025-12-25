@@ -670,12 +670,11 @@
                         class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
                                         <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
                                                             <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
-                                                                                <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
-                                                                                <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Ad Archive</button>
-                                                                                <button onclick="switchStatsTab('prints')" id="tab-prints" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Vintage Prints</button>
-                                                                            </div>
-                                                            
-                                                    </div>
+                                                                                                    <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                                                                                    <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Poster Gallery</button>
+                                                                                                    <button onclick="switchStatsTab('prints')" id="tab-prints" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Press Clippings</button>
+                                                                                                </div>
+                                                                                                                                    </div>
                                                     
                                                     <div id="stats-tab-dashboard" class="p-6 overflow-y-auto space-y-8">
                                         
@@ -1149,7 +1148,7 @@
             <!-- Ad Archive Tab -->
             <div id="stats-tab-ads" class="p-6 overflow-y-auto hidden">
                 <div class="text-center mb-8">
-                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Digital Poster Archive</h4>
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Poster Gallery</h4>
                     <p class="text-gaming-muted text-xs italic">High-fidelity custom posters for your collection</p>
                 </div>
                 <div id="ads-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-10">
@@ -1160,7 +1159,7 @@
             <!-- Vintage Prints Tab -->
             <div id="stats-tab-prints" class="p-6 overflow-y-auto hidden">
                 <div class="text-center mb-8">
-                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Vintage Press Kit</h4>
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">Press Clippings</h4>
                     <p class="text-gaming-muted text-xs italic">Procedural 90s magazine advertisements</p>
                 </div>
                 <div id="prints-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8 pb-10">
@@ -1247,7 +1246,7 @@
 
                             
 
-                                <div id="cart-label" class="w-full h-16 bg-cover bg-center border-b border-black/20 grayscale-[0.2] relative overflow-hidden"></div>
+                                <div id="cart-label" class="w-full h-16 bg-cover bg-top border-b border-black/20 grayscale-[0.2] relative overflow-hidden"></div>
 
                                 <div class="flex-grow bg-[#555] px-2 py-1 flex items-center">
 

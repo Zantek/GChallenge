@@ -263,6 +263,9 @@ function toggleGame(id, event) {
     if (droppedGames.includes(id)) return;
 
     if (completedGames.includes(id)) {
+        if (!confirm("Are you sure you want to unmark this game as complete? Your review and completion date will be lost.")) {
+            return;
+        }
         completedGames = completedGames.filter(gameId => gameId !== id);
         delete completionDates[id];
         delete gameReviews[id];
@@ -645,7 +648,7 @@ function switchStatsTab(tab) {
     } else if (tab === 'prints') {
         if (printsTab) printsTab.classList.remove('hidden');
         if (btnPrints) btnPrints.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
-        renderPrints();
+        renderClippings();
     }
 }
 
@@ -725,7 +728,7 @@ function renderAds() {
     }).join('');
 }
 
-function renderPrints() {
+function renderClippings() {
     const grid = document.getElementById('prints-grid');
     if (!grid) return;
 
@@ -1295,7 +1298,7 @@ function showDetails(id) {
     
     banner.style.backgroundImage = `url('${imgUrl}')`;
     banner.style.backgroundSize = 'cover';
-    banner.style.backgroundPosition = 'center';
+    banner.style.backgroundPosition = 'top center';
     banner.className = `h-48 w-full bg-gradient-to-br ${game.color} flex items-center justify-center relative overflow-hidden`;
     
     // Completion Stamp in Modal
@@ -1398,7 +1401,7 @@ function createCard(game, category = 'core') {
                         ${stampHtml}
                         ${(isDropped || gameReviews[game.id]) ? `<div class="review-stamp stamp-${isDropped ? 'dropped' : gameReviews[game.id]}">${isDropped ? 'dropped' : gameReviews[game.id]}</div>` : ''}
                         ${isDropped ? '<div class="absolute inset-0 bg-black/40 z-20 flex items-center justify-center"><svg class="w-12 h-12 text-white/30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg></div>' : ''}
-                        <img src="${imgUrl}" alt="${game.title}" class="w-full h-full object-cover shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                        <img src="${imgUrl}" alt="${game.title}" class="w-full h-full object-cover object-top shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
                         <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-2 py-1 rounded z-20 font-mono border border-white/20" style="transform: translateZ(1px)">
                             ${game.length}
                         </div>

@@ -11,13 +11,24 @@ class RadioSystem {
         this.currentChannel = 'off';
         this.isPlaying = false; // Always start off
         this.channels = [
+            'Quest Start',
             '8-bit Chill', 
             'Cyber Pop', 
             'Star Voyager', 
             'Glitch Hack', 
             'Lofi Dreams', 
             'Neon Dusk',
-            'Boss Battle'
+            'Boss Battle',
+            'Ocean Waves',
+            'Rainy Day',
+            'Cyber Club',
+            'Haunted',
+            'Jungle Quest',
+            'Industrial',
+            'Nebula',
+            'Funky Chip',
+            'Sunrise',
+            'Vaporwave'
         ];
         this.channelIndex = 0;
         
@@ -162,6 +173,7 @@ class RadioSystem {
         this.gainNode.gain.setValueAtTime(0.15, this.ctx.currentTime);
 
         switch (name) {
+            case 'Quest Start': this.startQuestStart(); break;
             case '8-bit Chill': this.start8BitChill(); break;
             case 'Cyber Pop': this.startCyberPop(); break;
             case 'Star Voyager': this.startStarVoyager(); break;
@@ -169,6 +181,16 @@ class RadioSystem {
             case 'Lofi Dreams': this.startLofiDreams(); break;
             case 'Neon Dusk': this.startNeonDusk(); break;
             case 'Boss Battle': this.startBossBattle(); break;
+            case 'Ocean Waves': this.startOceanWaves(); break;
+            case 'Rainy Day': this.startRainyDay(); break;
+            case 'Cyber Club': this.startCyberClub(); break;
+            case 'Haunted': this.startHaunted(); break;
+            case 'Jungle Quest': this.startJungleQuest(); break;
+            case 'Industrial': this.startIndustrial(); break;
+            case 'Nebula': this.startNebula(); break;
+            case 'Funky Chip': this.startFunkyChip(); break;
+            case 'Sunrise': this.startSunrise(); break;
+            case 'Vaporwave': this.startVaporwave(); break;
         }
     }
 
@@ -181,6 +203,23 @@ class RadioSystem {
     }
 
     // --- Generative Logic ---
+
+    startQuestStart() {
+        const scale = [261.63, 329.63, 392.00, 523.25, 493.88, 392.00, 329.63, 349.23]; // C Major hero theme
+        let step = 0;
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(scale[step % scale.length], this.ctx.currentTime);
+            g.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.2);
+            step++;
+        }, 200);
+    }
 
     start8BitChill() {
         const scale = [261.63, 293.66, 311.13, 349.23, 392.00, 415.30, 466.16]; // C Minor
@@ -356,6 +395,196 @@ class RadioSystem {
             osc.stop(this.ctx.currentTime + 0.15);
             step++;
         }, 125);
+    }
+
+    startOceanWaves() {
+        // Create noise buffer
+        const bufferSize = 2 * this.ctx.sampleRate;
+        const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+            output[i] = Math.random() * 2 - 1;
+        }
+
+        const noise = this.ctx.createBufferSource();
+        noise.buffer = noiseBuffer;
+        noise.loop = true;
+
+        const filter = this.ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        
+        // LFO for wave motion
+        const lfo = this.ctx.createOscillator();
+        const lfoGain = this.ctx.createGain();
+        lfo.frequency.setValueAtTime(0.15, this.ctx.currentTime);
+        lfoGain.gain.setValueAtTime(400, this.ctx.currentTime);
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+        lfo.start();
+
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0.05, this.ctx.currentTime);
+
+        noise.connect(filter);
+        filter.connect(g);
+        g.connect(this.gainNode);
+        noise.start();
+        this.droneOscillators.push(noise, lfo);
+    }
+
+    startRainyDay() {
+        // High-frequency noise bursts
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(300 + Math.random() * 50, this.ctx.currentTime);
+            g.gain.setValueAtTime(0.01, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+            osc.connect(g);
+            g.connect(this.gainNode);
+            osc.start();
+            osc.stop(this.ctx.currentTime + 0.1);
+        }, 100);
+        this.startOceanWaves(); // Layer with muffled noise
+    }
+
+    startCyberClub() {
+        let step = 0;
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            // Kick
+            const kick = this.ctx.createOscillator();
+            const kg = this.ctx.createGain();
+            kick.frequency.setValueAtTime(150, this.ctx.currentTime);
+            kick.frequency.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + 0.1);
+            kg.gain.setValueAtTime(0.2, this.ctx.currentTime);
+            kg.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.1);
+            kick.connect(kg); kg.connect(this.gainNode);
+            kick.start(); kick.stop(this.ctx.currentTime + 0.1);
+
+            // Snare/Hat on offbeats
+            if (step % 2 === 1) {
+                const hat = this.ctx.createOscillator();
+                const hg = this.ctx.createGain();
+                hat.type = 'square';
+                hat.frequency.setValueAtTime(10000, this.ctx.currentTime);
+                hg.gain.setValueAtTime(0.02, this.ctx.currentTime);
+                hg.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.05);
+                hat.connect(hg); hg.connect(this.gainNode);
+                hat.start(); hat.stop(this.ctx.currentTime + 0.05);
+            }
+            step++;
+        }, 250);
+    }
+
+    startHaunted() {
+        const frequencies = [200, 250, 300];
+        frequencies.forEach(f => {
+            const osc = this.ctx.createOscillator();
+            const lfo = this.ctx.createOscillator();
+            const lfoGain = this.ctx.createGain();
+            osc.type = 'sine';
+            lfo.frequency.setValueAtTime(3 + Math.random(), this.ctx.currentTime);
+            lfoGain.gain.setValueAtTime(10, this.ctx.currentTime);
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            const g = this.ctx.createGain();
+            g.gain.setValueAtTime(0.02, this.ctx.currentTime);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); lfo.start();
+            this.droneOscillators.push(osc, lfo);
+        });
+    }
+
+    startJungleQuest() {
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(Math.random() > 0.5 ? 800 : 1200, this.ctx.currentTime);
+            g.gain.setValueAtTime(0.03, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.1);
+        }, 400);
+    }
+
+    startIndustrial() {
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(40 + Math.random() * 20, this.ctx.currentTime);
+            const g = this.ctx.createGain();
+            g.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            g.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.4);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.4);
+        }, 500);
+    }
+
+    startNebula() {
+        [110, 164, 220].forEach(f => {
+            const osc = this.ctx.createOscillator();
+            const g = this.ctx.createGain();
+            osc.frequency.setValueAtTime(f, this.ctx.currentTime);
+            g.gain.setValueAtTime(0, this.ctx.currentTime);
+            g.gain.linearRampToValueAtTime(0.03, this.ctx.currentTime + 4);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start();
+            this.droneOscillators.push(osc);
+        });
+    }
+
+    startFunkyChip() {
+        const bass = [55, 65, 73, 82];
+        let step = 0;
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(bass[step % bass.length], this.ctx.currentTime);
+            const g = this.ctx.createGain();
+            g.gain.setValueAtTime(0.05, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.2);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); osc.stop(this.ctx.currentTime + 0.2);
+            step++;
+        }, 200);
+    }
+
+    startSunrise() {
+        const scale = [523, 587, 659, 783, 880];
+        this.melodyTimer = setInterval(() => {
+            if (!this.isPlaying) return;
+            const osc = this.ctx.createOscillator();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(scale[Math.floor(Math.random()*scale.length)], this.ctx.currentTime);
+            const g = this.ctx.createGain();
+            g.gain.setValueAtTime(0.03, this.ctx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 1);
+            osc.connect(g); g.connect(this.gainNode);
+            osc.start(); osc.stop(this.ctx.currentTime + 1);
+        }, 1000);
+    }
+
+    startVaporwave() {
+        const f = 130.81;
+        const osc = this.ctx.createOscillator();
+        const lfo = this.ctx.createOscillator();
+        const lfoG = this.ctx.createGain();
+        lfo.frequency.setValueAtTime(0.5, this.ctx.currentTime);
+        lfoG.gain.setValueAtTime(5, this.ctx.currentTime);
+        lfo.connect(lfoG); lfoG.connect(osc.frequency);
+        osc.frequency.setValueAtTime(f, this.ctx.currentTime);
+        const g = this.ctx.createGain();
+        g.gain.setValueAtTime(0.04, this.ctx.currentTime);
+        osc.connect(g); g.connect(this.gainNode);
+        osc.start(); lfo.start();
+        this.droneOscillators.push(osc, lfo);
     }
 
     updateUI() {
