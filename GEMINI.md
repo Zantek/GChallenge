@@ -8,10 +8,10 @@ A highly immersive, responsive web-based application designed to track progress 
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
-- **Interactive Instruction Manual:** A physical "Book Spine" sitting next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, pro tips, a full 48-game catalog, and system credits. The manual's material and ink live-update to match the active console skin.
+- **Interactive Instruction Manual:** A physical "Book Spine" sitting next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, 10 pro tips, a full 48-game catalog, and system credits. The manual's material, textures, and ink live-update to match the active console skin.
 - **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now with theme-optimized backgrounds for maximum legibility on all 11 skins.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with themed backgrounds for maximum legibility on all 11 skins.
 - **Gamer Profile & RPG Stats:** 
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
     - **Journey Map:** A chronological vertical trail visualizing your 2026 milestones.
@@ -21,17 +21,17 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
 - **Reactive Companion (buddy.exe):** An 8-bit desktop pet with 100+ lines of dialogue that evolves based on your progress.
-- **Console Skins:** 11 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, etc.) selectable via a visual theme picker.
+- **Console Skins:** 11 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, etc.). The **Blueprint** skin features a global high-fidelity drafting grid and schematic-style cards.
 
 ## 🏆 Challenge Lists (48 Games Total)
 
 - **Core Challenge:** 12 legendary titles defining the gaming landscape.
-- **The Weird Bonus:** Experimental and quirky titles.
+- **The Weird Bonus List:** Experimental and quirky titles.
 - **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
 - **Paperwork List:** Satisfyingly tactile simulation and organization games.
 - **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
-- **Zen Garden:** Meditative, low-stress experiences.
-- **Art House:** Visually striking and intellectually stimulating masterpieces.
+- **Zen Bonus List:** Meditative, low-stress experiences.
+- **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
@@ -48,6 +48,4 @@ A highly immersive, responsive web-based application designed to track progress 
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
 - [x] Implement Hardware Persistence for last-used cartridges.
 - [x] Modularize CSS and optimize section transitions.
-- [ ] **Alignment Personality:** Make buddy.exe dialogue change based on current alignment quadrant.
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.
-- [ ] **Hardware Peripheral:** Add a functional "Memory Card" slot for data Export/Import.

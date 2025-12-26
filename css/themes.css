@@ -71,6 +71,14 @@
     --radius: 0px;
 }
 
+[data-theme='blueprint'] body {
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px) !important;
+    background-size: 40px 40px !important;
+    background-attachment: fixed;
+}
+
 [data-theme='woodgrain'] {
     --bg-primary: #3d2b1f;
     --bg-secondary: #5c4033;

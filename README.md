@@ -8,10 +8,10 @@ A highly immersive, responsive web-based application designed to track progress 
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
-- **Interactive Instruction Manual:** A physical "Book Spine" trigger next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
+- **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits. The manual's textures and ink live-update to match the active console skin.
 - **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 11 themes.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with high-contrast backgrounds for all 11 themes.
 - **Gamer Profile & RPG Stats:** 
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
     - **Journey Map:** A chronological vertical trail visualizing your 2026 milestones.
@@ -25,12 +25,12 @@ A highly immersive, responsive web-based application designed to track progress 
 ## 🏆 Challenge Lists (48 Games Total)
 
 - **Core Challenge:** 12 legendary titles defining the gaming landscape.
-- **The Weird Bonus:** Experimental and quirky titles.
+- **The Weird Bonus List:** Experimental and quirky titles.
 - **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
 - **Paperwork List:** Satisfyingly tactile simulation and organization games.
-- **Time Warp List:** Games focused on time manipulation and loops.
-- **Zen Garden:** Meditative, low-stress experiences.
-- **Art House:** Visually striking and intellectually stimulating masterpieces.
+- **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
+- **Zen Bonus List:** Meditative, low-stress experiences.
+- **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
@@ -54,6 +54,4 @@ Since this is a static web project, no build or installation steps are required.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
 - [x] Implement Hardware Persistence for last-used cartridges.
 - [x] Modularize CSS and optimize section transitions.
-- [ ] **Alignment Personality:** Make buddy.exe dialogue change based on current alignment quadrant.
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.
-- [ ] **Hardware Peripheral:** Add a functional "Memory Card" slot for data Export/Import.

@@ -134,9 +134,10 @@
 [data-theme='legacy'] .game-card { border: 1px solid #ffffff !important; }
 [data-theme='blueprint'] .game-card { 
     border: 1px solid #ffffff !important; 
-    background: transparent !important; 
+    background: rgba(0, 43, 92, 0.8) !important; 
     border-style: double !important;
     border-width: 3px !important;
+    backdrop-filter: blur(5px);
 }
 [data-theme='blueprint'] .game-card-front::after {
     content: "SCHEMATIC_V2.0";

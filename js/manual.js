@@ -448,79 +448,18 @@ class InstructionManual {
     applyTheme() {
         const theme = document.documentElement.getAttribute('data-theme') || 'future';
         const pages = document.querySelectorAll('.manual-page');
-        const leftPage = document.getElementById('manual-page-left');
-        const rightPage = document.getElementById('manual-page-right');
-
-        // Reset
+        
         pages.forEach(p => {
+            p.setAttribute('data-manual-theme', theme);
+            // Clear old inline styles to allow CSS to take over
             p.style.backgroundColor = "";
             p.style.color = "";
             p.style.borderColor = "";
             p.style.fontFamily = "";
-            p.classList.remove('border-2', 'border-4', 'border-double');
+            p.style.boxShadow = "";
         });
 
         const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
-
-        if (theme === 'blueprint') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#002b5c";
-                p.style.color = "#ffffff";
-                p.style.borderColor = "#ffffff";
-                p.classList.add('border-2', 'border-double');
-                p.style.fontFamily = "monospace";
-            });
-        } else if (theme === 'arcade') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#000000";
-                p.style.color = "#ff00ff";
-                p.style.borderColor = "#00f2ff";
-                p.classList.add('border-2');
-                p.style.fontFamily = "monospace";
-                p.style.boxShadow = "inset 0 0 20px rgba(255, 0, 255, 0.2)";
-            });
-        } else if (theme === 'os') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#c0c0c0";
-                p.style.color = "#000000";
-                p.style.borderColor = "#ffffff #808080 #808080 #ffffff";
-                p.classList.add('border-4');
-                p.style.fontFamily = "Tahoma, sans-serif";
-            });
-        } else if (theme === 'papercraft') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#f4eee1";
-                p.style.color = "#333333";
-                p.style.borderColor = "#333333";
-                p.classList.add('border-2');
-                p.style.fontFamily = "Courier New, monospace";
-            });
-        } else if (theme === 'woodgrain') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#fdf5e6";
-                p.style.color = "#1a0f00";
-                p.style.borderColor = "#1a0f00";
-                p.classList.add('border-4');
-                p.style.fontFamily = "serif";
-            });
-        } else if (theme === 'legacy') {
-            pages.forEach(p => {
-                p.style.backgroundColor = "#000000";
-                p.style.color = "#ffffff";
-                p.style.borderColor = "#ffffff";
-                p.classList.add('border-2');
-                p.style.fontFamily = "monospace";
-            });
-        } else {
-            // Default (Future/Brick/Cube/Candy)
-            pages.forEach(p => {
-                p.style.backgroundColor = "#ffffff";
-                p.style.color = "#1a1a1a";
-                p.style.borderColor = "rgba(0,0,0,0.1)";
-                p.classList.add('border-2');
-            });
-        }
-
         // Apply accent color to class-labeled spans
         document.querySelectorAll('.text-accent').forEach(el => {
             el.style.color = accentColor;
