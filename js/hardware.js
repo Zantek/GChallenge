@@ -90,6 +90,17 @@ function insertCartridge(gameId, silent = false, instant = false) {
         cart.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out';
         cart.style.transform = 'translateY(-24px)';
         cart.style.opacity = '1';
+
+        // 4. Power Surge Effect
+        const isSurgeEnabled = localStorage.getItem('enablePowerSurge') === 'true';
+        if (isSurgeEnabled && !silent) {
+            document.body.classList.add('power-surge-active');
+            if (sfx) sfx.playSurge();
+            setTimeout(() => {
+                document.body.classList.remove('power-surge-active');
+            }, 200);
+        }
+
         if (!silent && sfx) {
             setTimeout(() => { sfx.playInsert(); }, 300);
         }

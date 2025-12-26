@@ -357,10 +357,12 @@ function updateProgress(silent = false, skipGrids = false) {
     document.getElementById('progress-text').innerText = `${stats.completed}/${stats.total} Games`;
     
     if (stats.droppedCount > 0) {
-        document.getElementById('progress-text').innerText += ` (${stats.droppedCount} Dropped)`;
+        document.getElementById('progress-text').innerText += ` (${stats.droppedCount} DNF)`;
     }
     
-    document.getElementById('level-badge').innerText = `L${stats.level}`;
+    // Update all level badge instances (mobile + desktop)
+    const levelBadges = document.querySelectorAll('#level-badge');
+    levelBadges.forEach(badge => badge.innerText = `L${stats.level}`);
     document.getElementById('xp-bar').style.width = `${stats.xpPercentage}%`;
     document.getElementById('xp-text').innerText = `${Math.floor(stats.currentLevelXP)} / ${stats.xpPerLevel} XP to Level ${stats.level + 1}`;
 
@@ -624,6 +626,7 @@ function closeStatsModal() {
 }
 
 function switchStatsTab(tab) {
+    const modalInner = document.querySelector('#stats-modal > div');
     const dashboard = document.getElementById('stats-tab-dashboard');
     const skillTree = document.getElementById('stats-tab-skill-tree');
     const worldMap = document.getElementById('stats-tab-world-map');
@@ -632,6 +635,10 @@ function switchStatsTab(tab) {
     const adsTab = document.getElementById('stats-tab-ads');
     const printsTab = document.getElementById('stats-tab-prints');
     
+    // 1. Record Old Height
+    const oldHeight = modalInner.offsetHeight;
+    modalInner.style.height = oldHeight + 'px';
+
     const btnDash = document.getElementById('tab-dashboard');
     const btnSkill = document.getElementById('tab-skilltree');
     const btnWorld = document.getElementById('tab-worldmap');
@@ -647,36 +654,57 @@ function switchStatsTab(tab) {
     
     // Reset ALL button styles first
     [btnDash, btnSkill, btnWorld, btnJourney, btnAchievements, btnAds, btnPrints].forEach(btn => {
-        if (btn) btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
+        if (btn) btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all shrink-0";
     });
 
     if (tab === 'dashboard') {
         dashboard.classList.remove('hidden');
-        btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnDash.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
     } else if (tab === 'skill-tree') {
         skillTree.classList.remove('hidden');
-        btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
         renderSkillTree();
     } else if (tab === 'world-map') {
         worldMap.classList.remove('hidden');
-        btnWorld.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnWorld.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
         renderWorldMap();
     } else if (tab === 'journey-map') {
         journeyMap.classList.remove('hidden');
-        btnJourney.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnJourney.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
         renderJourneyMap();
     } else if (tab === 'achievements') {
         achievementsTab.classList.remove('hidden');
-        btnAchievements.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        btnAchievements.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
     } else if (tab === 'ads') {
         if (adsTab) adsTab.classList.remove('hidden');
-        if (btnAds) btnAds.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        if (btnAds) btnAds.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
         renderAds();
     } else if (tab === 'prints') {
         if (printsTab) printsTab.classList.remove('hidden');
-        if (btnPrints) btnPrints.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        if (btnPrints) btnPrints.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all shrink-0";
         renderClippings();
     }
+
+    // 2. Measure New Height and Animate
+    requestAnimationFrame(() => {
+        // Temporarily remove fixed height to get the natural height of new content
+        modalInner.style.height = 'auto';
+        const newHeight = modalInner.offsetHeight;
+        
+        // Snap back to old height for the transition to start
+        modalInner.style.height = oldHeight + 'px';
+        
+        // Force reflow
+        modalInner.offsetHeight;
+        
+        // Set to new height
+        modalInner.style.height = newHeight + 'px';
+        
+        // Clean up after animation
+        setTimeout(() => {
+            modalInner.style.height = '';
+        }, 500);
+    });
 }
 
 function openAdLightbox(html, type = 'poster') {
@@ -1498,6 +1526,11 @@ function openSettings() {
     document.getElementById('setting-audio').checked = !sfx.muted;
     document.getElementById('setting-boot').checked = !bootSequence.skipBoot;
     
+    const surgeToggle = document.getElementById('setting-surge');
+    if (surgeToggle) {
+        surgeToggle.checked = (localStorage.getItem('enablePowerSurge') === 'true');
+    }
+    
     const radioToggle = document.getElementById('setting-radio');
     if (radioToggle) {
         // Radio ALWAYS starts off on page load, so force it to reflect reality
@@ -1519,6 +1552,12 @@ function toggleBootSetting() {
     const isEnabled = document.getElementById('setting-boot').checked;
     bootSequence.skipBoot = !isEnabled;
     localStorage.setItem('skipBootSequence', !isEnabled);
+    if (sfx) sfx.playTick();
+}
+
+function toggleSurgeSetting() {
+    const isEnabled = document.getElementById('setting-surge').checked;
+    localStorage.setItem('enablePowerSurge', isEnabled);
     if (sfx) sfx.playTick();
 }
 

@@ -110,6 +110,12 @@ class SoundFX {
         this.playTone(1046.50, 'square', 1, chordTime, vol * 0.5);
     }
 
+    playSurge() {
+        if (this.muted) return;
+        this.playTone(60, 'sawtooth', 0.2, 0, 0.2); // Low heavy thump
+        this.playTone(120, 'sine', 0.1, 0.05, 0.1); // Resonance
+    }
+
     playThud() {
         if (this.muted) return;
         this.init();
