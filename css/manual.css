@@ -2,7 +2,6 @@
 
 #manual-trigger {
     transform-origin: bottom center;
-    z-index: 100 !important;
     opacity: 1 !important;
 }
 
