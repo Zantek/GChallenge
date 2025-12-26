@@ -9,6 +9,14 @@
     --border: #1e293b;
     --radius: 0.75rem;
     --font-main: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 [data-theme='brick'] {

@@ -8,13 +8,14 @@ A highly immersive, responsive web-based application designed to track progress 
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
-- **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits. The manual's textures and ink live-update to match the active console skin.
+- **Interactive Instruction Manual:** A physical "Book Spine" trigger next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
+- **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
 - **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with high-contrast backgrounds for all 11 themes.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 11 themes.
 - **Gamer Profile & RPG Stats:** 
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
-    - **Journey Map:** A chronological vertical trail visualizing your 2026 milestones.
+    - **The Trail:** A chronological vertical trail visualizing your 2026 milestones.
     - **Achievements:** A dedicated vault for category completion trophies.
 - **Dual Media Archives:**
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
@@ -28,13 +29,14 @@ A highly immersive, responsive web-based application designed to track progress 
 - **The Weird Bonus List:** Experimental and quirky titles.
 - **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
 - **Paperwork List:** Satisfyingly tactile simulation and organization games.
-- **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
+- **Time Warp List:** Games focused on time manipulation and loops.
 - **Zen Bonus List:** Meditative, low-stress experiences.
 - **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
 - **Architecture:** Vanilla JavaScript SPA with a modular CSS structure.
+- **UX Refinements:** Global **Smooth Scrolling** and **Selection Lock** for a native "app" feel.
 - **Audio:** Custom procedural 8-bit sound engine using the Web Audio API.
 - **Visuals:** Pure CSS shapes for hardware; Canvas API for real-time frequency analysis and particle physics.
 - **Data:** Persistent state management using `localStorage` with Base64-encoded Full System Saves.
@@ -50,8 +52,9 @@ Since this is a static web project, no build or installation steps are required.
 - [x] Implement 11 unique Console Skins and Visual Theme Picker.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
+- [x] Implement Super Mario World style linear Overworld Map.
 - [x] Implement Permanent System Monitor and Now Playing marquee.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
 - [x] Implement Hardware Persistence for last-used cartridges.
-- [x] Modularize CSS and optimize section transitions.
+- [x] Refine global UX (Smooth Scroll, Selection Lock).
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.

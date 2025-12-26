@@ -632,6 +632,7 @@ function closeStatsModal() {
 function switchStatsTab(tab) {
     const dashboard = document.getElementById('stats-tab-dashboard');
     const skillTree = document.getElementById('stats-tab-skill-tree');
+    const worldMap = document.getElementById('stats-tab-world-map');
     const journeyMap = document.getElementById('stats-tab-journey-map');
     const achievementsTab = document.getElementById('stats-tab-achievements');
     const adsTab = document.getElementById('stats-tab-ads');
@@ -639,18 +640,19 @@ function switchStatsTab(tab) {
     
     const btnDash = document.getElementById('tab-dashboard');
     const btnSkill = document.getElementById('tab-skilltree');
+    const btnWorld = document.getElementById('tab-worldmap');
     const btnJourney = document.getElementById('tab-journeymap');
     const btnAchievements = document.getElementById('tab-achievements');
     const btnAds = document.getElementById('tab-ads');
     const btnPrints = document.getElementById('tab-prints');
 
     // Hide ALL tabs first
-    [dashboard, skillTree, journeyMap, achievementsTab, adsTab, printsTab].forEach(t => {
+    [dashboard, skillTree, worldMap, journeyMap, achievementsTab, adsTab, printsTab].forEach(t => {
         if (t) t.classList.add('hidden');
     });
     
     // Reset ALL button styles first
-    [btnDash, btnSkill, btnJourney, btnAchievements, btnAds, btnPrints].forEach(btn => {
+    [btnDash, btnSkill, btnWorld, btnJourney, btnAchievements, btnAds, btnPrints].forEach(btn => {
         if (btn) btn.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all";
     });
 
@@ -661,6 +663,10 @@ function switchStatsTab(tab) {
         skillTree.classList.remove('hidden');
         btnSkill.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
         renderSkillTree();
+    } else if (tab === 'world-map') {
+        worldMap.classList.remove('hidden');
+        btnWorld.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
+        renderWorldMap();
     } else if (tab === 'journey-map') {
         journeyMap.classList.remove('hidden');
         btnJourney.className = "px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all";
@@ -866,6 +872,137 @@ function renderSkillTree() {
         if (xPercent < 50 && yPercent > 50) archetype = "The Cosmic Sage (Logic + Serenity)";
     }
     document.getElementById('archetype-label').innerText = archetype;
+}
+
+function renderWorldMap() {
+    const container = document.getElementById('world-map-landscape');
+    if (!container) return;
+
+    // 1. Define World Sequence (Matching the Dashboard Order)
+    // Master game order for the map
+    const masterPath = [
+        ...coreGames,
+        ...bonusGames,      // Weird
+        ...microQuestGames,
+        ...paperworkGames,
+        ...timeGames,
+        ...zenGames,
+        ...artGames
+    ];
+
+    const worldDefinitions = [
+        { id: 'core', name: 'World 1: The Core', count: 12, color: '#3b82f6' },
+        { id: 'weird', name: 'World 2: The Glitch', count: 6, color: '#a855f7' },
+        { id: 'micro', name: 'World 3: Adventure Valley', count: 6, color: '#10b981' },
+        { id: 'paper', name: 'World 4: Bureaucracy Peak', count: 6, color: '#991b1b' },
+        { id: 'time', name: 'World 5: Chronos Tower', count: 6, color: '#ef4444' },
+        { id: 'zen', name: 'World 6: Serene Heights', count: 6, color: '#34d399' },
+        { id: 'art', name: 'World 7: The Gallery', count: 6, color: '#f97316' }
+    ];
+
+    // 2. Map Nodes to a Winding Path (S-Curve logic)
+    // We'll use a 6-column grid for the map, snaking back and forth
+    const cols = 8;
+    const nodes = masterPath.map((game, index) => {
+        const row = Math.floor(index / cols);
+        const col = index % cols;
+        
+        // Reverse X direction on odd rows to create the snake effect
+        const isReversed = row % 2 !== 0;
+        const xPos = isReversed ? (cols - 1 - col) : col;
+        
+        // Calculate % coordinates with padding
+        // X: 10% to 90%
+        // Y: 10% to 90%
+        const totalRows = Math.ceil(masterPath.length / cols);
+        const x = 10 + (xPos * (80 / (cols - 1)));
+        const y = 10 + (row * (80 / (totalRows - 1)));
+
+        return {
+            id: game.id,
+            title: game.title,
+            x, y,
+            isCompleted: completedGames.includes(game.id),
+            color: game.color.split(' ')[1].replace('to-', '').replace('500', '400')
+        };
+    });
+
+    // 3. Render Layers
+    let html = '';
+
+    // Draw Connecting Path Lines (Under nodes)
+    nodes.forEach((node, i) => {
+        if (i === 0) return;
+        const prev = nodes[i-1];
+        // Calculate distance and angle for the line
+        const dx = node.x - prev.x;
+        const dy = node.y - prev.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+        
+        // Solid line if completed, dashed if not
+        const isPathUnlocked = node.isCompleted && prev.isCompleted;
+        const lineStyle = isPathUnlocked ? 'border-solid border-white/40' : 'border-dashed border-white/10';
+
+        html += `
+            <div class="absolute h-[2px] border-t-2 ${lineStyle} origin-left pointer-events-none" 
+                 style="width: ${dist}%; left: ${prev.x}%; top: ${prev.y}%; transform: rotate(${angle}deg); z-index: 5">
+            </div>
+        `;
+    });
+
+    // Draw World Labels (at the start of each category)
+    let processedCount = 0;
+    worldDefinitions.forEach(w => {
+        const startNode = nodes[processedCount];
+        if (startNode) {
+            html += `
+                <div class="absolute font-black text-[10px] uppercase tracking-[0.2em] text-white/20 whitespace-nowrap"
+                     style="left: ${startNode.x}%; top: ${startNode.y}%; transform: translate(-50%, -250%)">
+                    ${w.name}
+                </div>
+            `;
+        }
+        processedCount += w.count;
+    });
+
+    // Render Nodes
+    const lastCompletedId = Object.keys(completionDates).sort((a, b) => new Date(completionDates[b]) - new Date(completionDates[a]))[0];
+
+    nodes.forEach((node) => {
+        const isCurrent = node.id === lastCompletedId;
+        const nodeColor = node.isCompleted ? node.color : '#333';
+        const nodeScale = node.isCompleted ? 'scale-100 hover:scale-125' : 'scale-75 opacity-40';
+
+        html += `
+            <div class="absolute group/node cursor-pointer z-10 ${nodeScale} transition-all duration-300" 
+                 style="left: ${node.x}%; top: ${node.y}%; transform: translate(-50%, -50%)"
+                 title="${node.title}"
+                 onclick="showDetails('${node.id}')">
+                
+                <!-- Node Shape -->
+                <div class="w-4 h-4 rounded-sm border-2 border-white shadow-[0_0_10px_rgba(0,0,0,0.5)] flex items-center justify-center"
+                     style="background-color: ${nodeColor}; transform: rotate(45deg)">
+                    <div class="w-1.5 h-1.5 bg-white/30 rounded-full" style="transform: rotate(-45deg)"></div>
+                </div>
+
+                ${isCurrent ? `
+                    <div class="absolute -top-8 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                        <div class="text-xs animate-bounce drop-shadow-lg">🚩</div>
+                        <div class="bg-white text-black text-[6px] font-black px-1 rounded uppercase tracking-tighter">HERE</div>
+                    </div>
+                    <div class="absolute -inset-3 rounded-full border border-white/30 animate-ping"></div>
+                ` : ''}
+
+                <!-- Hover Label -->
+                <div class="absolute top-full left-1/2 -translate-x-1/2 mt-3 px-2 py-1 bg-black/90 text-white text-[8px] font-black rounded opacity-0 group-hover/node:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-white/10 z-50">
+                    ${node.title}
+                </div>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
 }
 
 function renderJourneyMap() {

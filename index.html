@@ -610,7 +610,7 @@
     </div>
 
     <!-- Instruction Manual Trigger (sitting next to console) -->
-    <div id="manual-trigger" class="fixed bottom-10 left-56 z-[100] pointer-events-auto group" onclick="openManual()">
+    <div id="manual-trigger" class="fixed bottom-10 left-56 pointer-events-auto group" onclick="openManual()">
         <!-- The Spine -->
         <div class="relative w-6 h-20 bg-slate-700 backdrop-blur-md rounded-sm border-2 border-white/20 shadow-2xl transition-all duration-500 hover:scale-110 hover:-rotate-3 cursor-pointer flex flex-col items-center justify-center overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-white/10"></div>
@@ -780,9 +780,11 @@
                 <div class="flex gap-2 p-1 bg-gaming-dark rounded-lg self-start">
                     <button onclick="switchStatsTab('dashboard')" id="tab-dashboard"
                         class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md bg-gaming-card text-gaming-text transition-all">Dashboard</button>
-                                        <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
-                                                            <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Journey Map</button>
-                                                                                                    <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                                            <button onclick="switchStatsTab('skill-tree')" id="tab-skilltree" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Skill Tree</button>
+                                                            <button onclick="switchStatsTab('world-map')" id="tab-worldmap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">World Map</button>
+                                                            <button onclick="switchStatsTab('journey-map')" id="tab-journeymap" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">The Trail</button>
+                                                            <button onclick="switchStatsTab('achievements')" id="tab-achievements" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Achievements</button>
+                                        
                                                                                                     <button onclick="switchStatsTab('ads')" id="tab-ads" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Poster Gallery</button>
                                                                                                     <button onclick="switchStatsTab('prints')" id="tab-prints" class="px-4 py-1.5 text-xs font-bold uppercase tracking-widest rounded-md text-gaming-muted hover:text-gaming-text transition-all">Press Clippings</button>
                                                                                                 </div>
@@ -964,7 +966,22 @@
             </div>
 
 
-                        <!-- Journey Map Tab -->
+                        <!-- World Map Tab -->
+            <div id="stats-tab-world-map" class="p-6 overflow-y-auto hidden h-full">
+                <div class="text-center mb-6">
+                    <h4 class="text-lg font-black text-gaming-text uppercase tracking-widest">2026 Overworld</h4>
+                    <p class="text-gaming-muted text-xs italic">A visual landscape of your conquered sectors</p>
+                </div>
+                
+                <div class="relative w-full aspect-video bg-black/40 rounded-xl border border-gaming-border overflow-hidden shadow-2xl" id="world-map-canvas-container">
+                    <!-- Biomes and Nodes injected here -->
+                    <div id="world-map-landscape" class="absolute inset-0 transition-transform duration-1000">
+                        <!-- Biome Layers -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journey Map Tab -->
             <div id="stats-tab-journey-map" class="p-6 overflow-y-auto hidden">
                 <div class="flex flex-col gap-6">
                     <div class="text-center">
