@@ -7,7 +7,8 @@ A highly immersive, responsive web-based application designed to track progress 
 ## 🎮 Core Features
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
-- **Universal Retro Console:** A virtual top-loading hardware interface. Clicking "Play" visually inserts a dynamic cartridge into the slot, switching the console from Standby (Red) to Active (Green). Cartridges feature a **Smart Jump** interaction—click the inserted game to instantly locate its card on the shelf.
+- **Universal Retro Console:** A virtual top-loading hardware interface. Clicking "Play" visually inserts a dynamic cartridge into the slot. Features **Hardware Persistence**—the ejected cartridge always displays the last-played game's label and title.
+- **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
 - **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, accompanied by a satisfying "thud" and theme-synced confetti.
 - **Gamer Profile & RPG Stats:** 
@@ -21,8 +22,18 @@ A highly immersive, responsive web-based application designed to track progress 
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations (Quest Start, Cyber Pop, 8-bit Chill, etc.) with a beat-reactive oscilloscope visualizer integrated into the system monitor.
 - **Reactive Companion (buddy.exe):** An 8-bit desktop pet with 100+ lines of dialogue that evolves based on your progress.
 - **Retro Boot Sequence:** A fake BIOS startup with technical diagnostic text and 8-bit sound effects, featuring a tactile "Power On" interaction.
-- **Console Skins:** 11 unique visual identities including **Blueprint**, **Woodgrain**, **Papercraft**, **Candy**, **Arcade**, and **Obsidian**, selectable via a visual theme picker.
+- **Console Skins:** 11 unique visual identities including **Blueprint**, **Woodgrain**, **Papercraft**, **Candy**, **Arcade**, and **Obsidian**, selectable via a **Visual Theme Picker** in settings.
 - **CRT Mode:** A toggleable visual filter adding scanlines, screen curvature, and chromatic aberration.
+
+## 🏆 Challenge Lists (48 Games Total)
+
+- **Core Challenge:** 12 legendary titles defining the gaming landscape.
+- **The Weird Bonus:** Experimental and quirky titles.
+- **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
+- **Paperwork List:** Satisfyingly tactile simulation and organization games.
+- **Time Warp List:** Games focused on time manipulation and loops.
+- **Zen Garden:** Meditative, low-stress experiences.
+- **Art House:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
@@ -46,7 +57,8 @@ Since this is a static web project, no build or installation steps are required.
 - [x] Implement High-Res Poster Gallery and Press Clippings archive.
 - [x] Implement Gamer Alignment Chart and 100+ Buddy interactions.
 - [x] Modularize CSS and optimize section transitions.
-- [x] Finalize the 2026 Core Challenge game list.
+- [x] Finalize the 2026 Expanded Challenge (48 Games).
+- [x] Implement Hardware Persistence for last-used cartridges.
 - [ ] **Alignment Personality:** Make buddy.exe dialogue change based on current alignment quadrant.
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.
 - [ ] **Hardware Peripheral:** Add a functional "Memory Card" slot for data Export/Import.

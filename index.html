@@ -298,7 +298,7 @@
                         </svg>
                     </button>
                     <div class="list-accent-bar h-8 w-1 bg-purple-500 rounded-full"></div>
-                    <h2 class="text-2xl font-bold text-gaming-text">The Weird Bonus</h2>
+                    <h2 class="text-2xl font-bold text-gaming-text">The Weird Bonus List</h2>
                     <span id="count-bonus"
                         class="list-count-badge bg-purple-900 text-purple-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
                         Games</span>
@@ -315,35 +315,45 @@
             </div>
         </section>
 
-        <!-- Extra Gimmick Lists -->
-
-        <!-- Zen Garden -->
-        <section id="section-zen" class="transition-opacity duration-500">
+        <!-- Micro-Quest Section -->
+        <section id="section-micro" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
                 <div class="flex items-center gap-3">
-                    <button onclick="toggleSection('zen')" class="p-1 hover:bg-white/10 rounded transition-colors"
-                        title="Toggle Section">
-                        <svg id="chevron-zen" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
-                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
+                    <button onclick="toggleSection('micro')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-micro" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
-                    <div class="list-accent-bar h-8 w-1 bg-green-400 rounded-full"></div>
-                    <h2 class="text-2xl font-bold text-gaming-text">🧘 The Zen Bonus List</h2>
-                    <span id="count-zen"
-                        class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
-                        Games</span>
+                    <div class="list-accent-bar h-8 w-1 bg-emerald-500 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gaming-text">⚔️ The Micro-Quest List</h2>
+                    <span id="count-micro" class="list-count-badge bg-emerald-900 text-emerald-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
                 </div>
                 <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
-                    <button onclick="dropCategory('zen')"
-                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
-                    <button onclick="reviveCategory('zen')"
-                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                    <button onclick="dropCategory('micro')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('micro')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
                 </div>
             </div>
-            <div id="grid-container-zen" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
-                <div id="zen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            <div id="grid-container-micro" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
+                <div id="micro-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
+        </section>
+
+        <!-- Paperwork Section -->
+        <section id="section-paper" class="transition-opacity duration-500">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('paper')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-paper" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="list-accent-bar h-8 w-1 bg-red-800 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gaming-text">📂 The Paperwork List</h2>
+                    <span id="count-paper" class="list-count-badge bg-red-900 text-red-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6 Games</span>
+                </div>
+                <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
+                    <button onclick="dropCategory('paper')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('paper')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                </div>
+            </div>
+            <div id="grid-container-paper" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
+                <div id="paper-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
             </div>
         </section>
 
@@ -377,6 +387,36 @@
             </div>
         </section>
 
+        <!-- Zen Garden -->
+        <section id="section-zen" class="transition-opacity duration-500">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('zen')" class="p-1 hover:bg-white/10 rounded transition-colors"
+                        title="Toggle Section">
+                        <svg id="chevron-zen" class="w-5 h-5 text-gaming-muted transition-transform duration-300"
+                            fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="list-accent-bar h-8 w-1 bg-green-400 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gaming-text">🧘 The Zen Bonus List</h2>
+                    <span id="count-zen"
+                        class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">6
+                        Games</span>
+                </div>
+                <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
+                    <button onclick="dropCategory('zen')"
+                        class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('zen')"
+                        class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                </div>
+            </div>
+            <div id="grid-container-zen" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
+                <div id="zen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
+        </section>
+
         <!-- Art House -->
         <section id="section-art" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
@@ -406,6 +446,8 @@
                 <div id="art-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
             </div>
         </section>
+
+        
 
         <!-- The Graveyard (DNF) Section -->
         <section id="graveyard-section" class="hidden pt-12 border-t border-gaming-border/30">
