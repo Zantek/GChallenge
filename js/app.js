@@ -810,53 +810,41 @@ function renderClippings() {
     }).join('');
 }
 
-function renderSkillTree() {
-    const skills = {
-        agility: 0,
-        combat: 0,
-        intelligence: 0,
-        wisdom: 0
-    };
-
+function calculateAlignment() {
+    const skills = { agility: 0, combat: 0, intelligence: 0, wisdom: 0 };
     let totalCompleted = 0;
 
-    // Mapping logic
     allGames.forEach(g => {
         if (!completedGames.includes(g.id)) return;
         totalCompleted++;
-
         const genre = g.genre.toLowerCase();
-        if (genre.includes('platformer') || genre.includes('parkour') || genre.includes('rhythm')) {
-            skills.agility++;
-        } else if (genre.includes('shooter') || genre.includes('action') || genre.includes('beat')) {
-            skills.combat++;
-        } else if (genre.includes('puzzle') || genre.includes('logic') || genre.includes('geometry')) {
-            skills.intelligence++;
-        } else {
-            skills.wisdom++;
-        }
+        if (genre.includes('platformer') || genre.includes('parkour') || genre.includes('rhythm')) skills.agility++;
+        else if (genre.includes('shooter') || genre.includes('action') || genre.includes('beat')) skills.combat++;
+        else if (genre.includes('puzzle') || genre.includes('logic') || genre.includes('geometry')) skills.intelligence++;
+        else skills.wisdom++;
     });
+
+    let x = 0; let y = 0;
+    if (totalCompleted > 0) {
+        x = (skills.agility - skills.intelligence) / totalCompleted * 50;
+        y = (skills.combat - skills.wisdom) / totalCompleted * 50;
+    }
+    return { x, y, totalCompleted, skills };
+}
+
+function renderSkillTree() {
+    const alignment = calculateAlignment();
+    const skills = alignment.skills;
+    const totalCompleted = alignment.totalCompleted;
 
     // Update Numerical Displays
     Object.keys(skills).forEach(s => {
         document.getElementById(`skill-val-${s}`).innerText = skills[s];
     });
 
-    // Calculate Coordinates (-50 to 50 scale, where 0 is center)
-    // X-Axis: Intelligence (Left) vs Agility (Right)
-    // Y-Axis: Combat (Top) vs Wisdom (Bottom)
-    
-    let xPercent = 50;
-    let yPercent = 50;
-
-    if (totalCompleted > 0) {
-        const xBalance = (skills.agility - skills.intelligence) / totalCompleted;
-        const yBalance = (skills.combat - skills.wisdom) / totalCompleted;
-
-        // Map balance (-1 to 1) to percentage (10% to 90% to keep away from edges)
-        xPercent = 50 + (xBalance * 40);
-        yPercent = 50 - (yBalance * 40); // Subtract because CSS top:0 is top
-    }
+    // Calculate Percentages for Avatar
+    let xPercent = 50 + (alignment.x * 0.8); // Scale to 10-90% range
+    let yPercent = 50 - (alignment.y * 0.8);
 
     // Update Avatar Position
     const avatar = document.getElementById('player-avatar');
@@ -1120,6 +1108,47 @@ function showStats() {
             totalReviews++;
         }
     });
+
+    // --- Membership Card Logic ---
+    const membershipCard = document.querySelector('.membership-card');
+    const cardId = document.getElementById('card-member-id');
+    const cardGenres = document.getElementById('card-genres');
+    const cardRankIcon = document.getElementById('card-rank-icon');
+
+    if (membershipCard) {
+        membershipCard.setAttribute('data-card-theme', themeManager.currentTheme);
+    }
+
+    // 1. Calculate Member ID (Based on Alignment + Stats)
+    // We'll use a derived string from alignment if calculated, or just stats
+    const stats_m = calculateStats();
+    const alignment = calculateAlignment(); // Need to ensure this is available or moved
+    const idString = `${Math.abs(alignment.x).toString().padStart(3, '0')}-${Math.abs(alignment.y).toString().padStart(3, '0')}-${stats_m.level.toString().padStart(3, '0')}`;
+    if (cardId) cardId.innerText = idString;
+
+    // 2. Favorite Sections (Top 3 Genres)
+    const genreCounts = {};
+    allGames.forEach(g => {
+        if (completedGames.includes(g.id)) {
+            genreCounts[g.genre] = (genreCounts[g.genre] || 0) + 1;
+        }
+    });
+    const topGenres = Object.entries(genreCounts)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(pair => pair[0]);
+
+    if (cardGenres) {
+        if (topGenres.length > 0) {
+            cardGenres.innerHTML = topGenres.map(g => `<span class="text-[7px] px-1.5 py-0.5 bg-white/5 rounded border border-white/10 text-white/60">${g}</span>`).join('');
+        } else {
+            cardGenres.innerHTML = `<span class="text-[7px] px-1.5 py-0.5 bg-white/5 rounded border border-white/10 text-white/60">TBD</span>`;
+        }
+    }
+
+    // 3. Rank Icon
+    const icons = ['💎', '🏆', '⭐', '🎖️', '🎮'];
+    if (cardRankIcon) cardRankIcon.innerText = icons[stats_m.level % icons.length];
 
     const container = document.getElementById('review-stamp-bars');
     if (container) {

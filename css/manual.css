@@ -81,7 +81,7 @@
     background-color: #fdf5e6;
     color: #1a0f00;
     border: 4px solid #1a0f00;
-    font-family: serif;
+    font-family: "Courier New", Courier, monospace;
     background-image: linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.02) 100%);
     background-size: 100% 30px;
 }

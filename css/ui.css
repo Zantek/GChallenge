@@ -55,7 +55,109 @@
 [data-theme='obsidian'] #progress-bar { background-color: #ff6600 !important; }
 [data-theme='obsidian'] #xp-bar { background-color: #333 !important; }
 
-/* Scrollbars */
+.membership-card-container {
+    perspective: 1000px;
+}
+
+.membership-card {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Blueprint Card */
+.membership-card[data-card-theme='blueprint'] {
+    background-color: #002b5c !important;
+    border: 2px double #ffffff !important;
+    background-image: 
+        linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px) !important;
+    background-size: 15px 15px !important;
+}
+
+/* Arcade Card */
+.membership-card[data-card-theme='arcade'] {
+    background-color: #000000 !important;
+    border: 2px solid #ff00ff !important;
+    box-shadow: 0 0 20px #ff00ff, inset 0 0 10px #ff00ff !important;
+}
+.membership-card[data-card-theme='arcade'] #membership-card-inner {
+    color: #ff00ff !important;
+}
+
+/* Woodgrain Card */
+.membership-card[data-card-theme='woodgrain'] {
+    background-color: #fdf5e6 !important;
+    border: 4px solid #1a0f00 !important;
+}
+.membership-card[data-card-theme='woodgrain'] #membership-card-inner h5,
+.membership-card[data-card-theme='woodgrain'] #membership-card-inner span,
+.membership-card[data-card-theme='woodgrain'] #membership-card-inner div {
+    color: #1a0f00 !important;
+}
+
+/* Papercraft Card */
+.membership-card[data-card-theme='papercraft'] {
+    background-color: #f4eee1 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png') !important;
+    border: 2px solid #333 !important;
+    border-radius: 2px !important;
+}
+.membership-card[data-card-theme='papercraft'] #membership-card-inner h5,
+.membership-card[data-card-theme='papercraft'] #membership-card-inner span,
+.membership-card[data-card-theme='papercraft'] #membership-card-inner div {
+    color: #333 !important;
+}
+
+/* Candy Card */
+.membership-card[data-card-theme='candy'] {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7)) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 2rem !important;
+    box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3) !important;
+}
+.membership-card[data-card-theme='candy'] #membership-card-inner h5,
+.membership-card[data-card-theme='candy'] #membership-card-inner span,
+.membership-card[data-card-theme='candy'] #membership-card-inner div {
+    color: #1a1a1a !important;
+}
+
+/* OS Card */
+.membership-card[data-card-theme='os'] {
+    background-color: #c0c0c0 !important;
+    border: 2px solid !important;
+    border-color: #ffffff #808080 #808080 #ffffff !important;
+    border-radius: 0 !important;
+}
+.membership-card[data-card-theme='os'] #membership-card-inner h5,
+.membership-card[data-card-theme='os'] #membership-card-inner span,
+.membership-card[data-card-theme='os'] #membership-card-inner div {
+    color: #000000 !important;
+}
+
+/* Brick Card */
+.membership-card[data-card-theme='brick'] {
+    background-color: #8bac0f !important;
+    border: 4px solid #0f380f !important;
+    image-rendering: pixelated;
+}
+.membership-card[data-card-theme='brick'] #membership-card-inner h5,
+.membership-card[data-card-theme='brick'] #membership-card-inner span,
+.membership-card[data-card-theme='brick'] #membership-card-inner div {
+    color: #0f380f !important;
+}
+
+/* Legacy Card */
+.membership-card[data-card-theme='legacy'] {
+    background-color: #000000 !important;
+    border: 1px solid #ffffff !important;
+    border-radius: 0.5rem !important;
+}
+
+/* Hover Shimmer Refinement */
+.membership-card:hover #card-shimmer {
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent) !important;
+    transform: translateX(100%);
+}
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--bg-header); border-radius: 10px; }

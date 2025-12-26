@@ -79,6 +79,22 @@ class RadioSystem {
         this.updateUI();
     }
 
+    next() {
+        if (!this.isPlaying) this.start();
+        this.channelIndex = (this.channelIndex + 1) % this.channels.length;
+        this.playChannel(this.channels[this.channelIndex]);
+        this.updateUI();
+        if (window.sfx) sfx.playTick();
+    }
+
+    prev() {
+        if (!this.isPlaying) this.start();
+        this.channelIndex = (this.channelIndex - 1 + this.channels.length) % this.channels.length;
+        this.playChannel(this.channels[this.channelIndex]);
+        this.updateUI();
+        if (window.sfx) sfx.playTick();
+    }
+
     start() {
         this.init();
         if (this.ctx.state === 'suspended') this.ctx.resume();
@@ -597,7 +613,8 @@ class RadioSystem {
         const toggle = document.getElementById('setting-radio');
         const channelList = document.getElementById('radio-channels');
         const modalDisplay = document.getElementById('radio-modal-display');
-        
+        const marqueeSvg = document.getElementById('marquee-radio-svg');
+
         if (!toggle || !channelList) return;
 
         toggle.checked = this.isPlaying;
@@ -610,6 +627,19 @@ class RadioSystem {
 
         if (modalDisplay) {
             modalDisplay.innerText = this.channels[this.channelIndex];
+        }
+        
+        // Update Marquee SVG if it exists
+        if (marqueeSvg) {
+            if (this.isPlaying) {
+                marqueeSvg.classList.remove('text-red-500');
+                marqueeSvg.classList.add('text-emerald-400');
+                marqueeSvg.style.filter = 'drop-shadow(0 0 5px rgba(16, 185, 129, 0.6))';
+            } else {
+                marqueeSvg.classList.remove('text-emerald-400');
+                marqueeSvg.classList.add('text-red-500');
+                marqueeSvg.style.filter = 'none';
+            }
         }
     }
 }

@@ -464,6 +464,21 @@ class InstructionManual {
         document.querySelectorAll('.text-accent').forEach(el => {
             el.style.color = accentColor;
         });
+
+        // Theme-specific footer text coloring
+        const footer = document.querySelector('.manual-page .bg-current');
+        if (footer) {
+            if (theme === 'blueprint' || theme === 'arcade' || theme === 'legacy') {
+                footer.style.backgroundColor = accentColor;
+                footer.style.color = "#000000";
+            } else if (theme === 'os' || theme === 'woodgrain' || theme === 'papercraft' || theme === 'brick') {
+                footer.style.backgroundColor = "#333";
+                footer.style.color = "#ffffff";
+            } else {
+                footer.style.backgroundColor = accentColor;
+                footer.style.color = "#ffffff";
+            }
+        }
     }
 }
 
