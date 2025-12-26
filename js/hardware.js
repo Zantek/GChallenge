@@ -56,11 +56,15 @@ function insertCartridge(gameId, silent = false, instant = false) {
     const encodedTitle = encodeURIComponent(game.title);
     const imgUrl = game.banner || `https://placehold.co/600x350/222/eee?text=${encodedTitle}`;
 
+    localStorage.setItem('lastCartridgeBanner', game.banner || '');
+    localStorage.setItem('lastCartridgeTitle', game.title || '');
+
     if (instant) {
         cart.style.transition = 'none';
         label.style.backgroundImage = `url('${imgUrl}')`;
         title.innerText = game.title.length > 25 ? game.title.substring(0, 22) + "..." : game.title;
         cart.style.transform = 'translateY(-24px)';
+        cart.style.opacity = '1';
         led.style.backgroundColor = '#10b981';
         led.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.8)';
         status.innerText = 'Running_ROM';
@@ -72,8 +76,9 @@ function insertCartridge(gameId, silent = false, instant = false) {
     }
 
     // 1. "Eject" current (fast)
-    cart.style.transition = 'transform 0.2s ease-in';
+    cart.style.transition = 'transform 0.2s ease-in, opacity 0.2s ease-in';
     cart.style.transform = 'translateY(-120%)';
+    cart.style.opacity = '0';
     updateHeaderMarquee(null); // Hide marquee during swap
     
     setTimeout(() => {
@@ -82,8 +87,9 @@ function insertCartridge(gameId, silent = false, instant = false) {
         title.innerText = game.title.length > 25 ? game.title.substring(0, 22) + "..." : game.title;
         
         // 3. "Insert" New (Neatly into slot)
-        cart.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        cart.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out';
         cart.style.transform = 'translateY(-24px)';
+        cart.style.opacity = '1';
         if (!silent && sfx) {
             setTimeout(() => { sfx.playInsert(); }, 300);
         }
@@ -101,7 +107,16 @@ function insertCartridge(gameId, silent = false, instant = false) {
     }, 150);
 }
 
-function ejectCartridge() {
+function ejectCartridge(silent = false) {
+    // Before clearing, save the last info for persistence
+    if (currentlyPlaying) {
+        const game = allGames.find(g => g.id === currentlyPlaying);
+        if (game) {
+            localStorage.setItem('lastCartridgeBanner', game.banner || '');
+            localStorage.setItem('lastCartridgeTitle', game.title || '');
+        }
+    }
+
     currentlyPlaying = null;
     localStorage.removeItem('gamingChallengePlaying');
 
@@ -110,8 +125,9 @@ function ejectCartridge() {
     const status = document.getElementById('console-status-text');
 
     // 1. "Eject" 
-    cart.style.transition = 'transform 0.2s ease-in';
+    cart.style.transition = silent ? 'none' : 'transform 0.2s ease-in, opacity 0.2s ease-in';
     cart.style.transform = 'translateY(-120%)';
+    cart.style.opacity = '0';
     updateHeaderMarquee(null); // Restore header title
     
     // 2. Standby LED
@@ -123,7 +139,7 @@ function ejectCartridge() {
 
     // Update UI buttons globally
     if (typeof updateAllPlayButtons === 'function') updateAllPlayButtons();
-    if (sfx) sfx.playFlip(); // Use thump sound for eject
+    if (!silent && sfx) sfx.playFlip(); // Use thump sound for eject
 }
 
 function scrollToActiveGame(event) {

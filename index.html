@@ -501,6 +501,14 @@
                     </label>
                 </div>
 
+                <!-- Theme Selection Grid -->
+                <div class="pt-4 border-t border-gaming-border space-y-3">
+                    <span class="text-[10px] font-black text-gaming-muted uppercase tracking-[0.2em]">Select Console Skin:</span>
+                    <div id="theme-picker-grid" class="flex flex-wrap gap-2">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
                 <!-- Radio Configuration -->
                 <div class="pt-4 border-t border-gaming-border space-y-4">
                     <div class="flex items-center justify-between">
@@ -1236,17 +1244,21 @@
                 </div>
             </div>
 
-                        <!-- The Slot -->
+                                    <!-- The Slot -->
 
-                        <div class="absolute top-8 left-4 right-4 h-12 bg-[#111] rounded shadow-inner flex items-center justify-center">
+                                    <div class="absolute top-8 left-4 right-4 h-12 bg-[#111] rounded shadow-inner flex items-center justify-center">
 
-                                            <!-- Cartridge (Removable) -->
+                                                                        <!-- Cartridge (Removable) -->
 
-                                            <div id="active-cartridge" class="w-36 h-24 bg-[#444] rounded-t-md transform translate-y-[-120%] flex flex-col overflow-hidden border-x-2 border-t-2 border-black/40 cursor-pointer" onclick="scrollToActiveGame(event)">
+                                                                        <div id="active-cartridge" class="w-36 h-24 bg-[#444] rounded-t-md translate-y-[-120%] flex flex-col overflow-hidden border-x-2 border-t-2 border-black/40 cursor-pointer transition-all duration-500" onclick="scrollToActiveGame(event)">
 
-                            
+                                                        
 
-                                <div id="cart-label" class="w-full h-16 bg-cover bg-top border-b border-black/20 grayscale-[0.2] relative overflow-hidden"></div>
+                                        
+
+                                            <div id="cart-label" class="w-full h-16 bg-cover bg-top border-b border-black/20 grayscale-[0.2] relative overflow-hidden"></div>
+
+                        
 
                                 <div class="flex-grow bg-[#555] px-2 py-1 flex items-center">
 

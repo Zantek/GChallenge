@@ -63,8 +63,50 @@ class ThemeManager {
         this.currentTheme = theme;
         localStorage.setItem('gamingChallengeTheme', theme);
         
+        this.updatePickerUI();
+
         // Dispatch event
         document.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
+    }
+
+    setTheme(theme) {
+        if (this.currentTheme === theme) return;
+        this.applyTheme(theme);
+        if (typeof sfx !== 'undefined') sfx.playTick();
+    }
+
+    updatePickerUI() {
+        const grid = document.getElementById('theme-picker-grid');
+        if (!grid) return;
+
+        const themeColors = {
+            'future': '#3b82f6',
+            'brick': '#306230',
+            'cube': '#ff4500',
+            'os': '#000080',
+            'legacy': '#ffffff',
+            'blueprint': '#00f2ff',
+            'woodgrain': '#5c4033',
+            'papercraft': '#d32f2f',
+            'candy': '#ff00ff',
+            'arcade': '#ff00ff',
+            'obsidian': '#ff6600'
+        };
+
+        grid.innerHTML = this.themes.map(t => {
+            const isActive = this.currentTheme === t;
+            return `
+                <button onclick="themeManager.setTheme('${t}')" 
+                        class="flex flex-col items-center gap-1 group">
+                    <div class="w-10 h-10 rounded-lg transition-all border-2 ${isActive ? 'border-white scale-110 shadow-lg' : 'border-white/10 hover:border-white/30'}"
+                        style="background-color: ${themeColors[t] || '#333'}"
+                        title="${t.charAt(0).toUpperCase() + t.slice(1)}">
+                        ${isActive ? '<div class="w-full h-full flex items-center justify-center bg-black/20"><div class="w-2 h-2 bg-white rounded-full"></div></div>' : ''}
+                    </div>
+                    <span class="text-[7px] font-black uppercase tracking-tighter ${isActive ? 'text-white' : 'text-gaming-muted'} group-hover:text-white transition-colors">${t}</span>
+                </button>
+            `;
+        }).join('');
     }
 
     nextTheme() {

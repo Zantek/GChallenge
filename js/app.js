@@ -1318,9 +1318,11 @@ function openSettings() {
     
     const radioToggle = document.getElementById('setting-radio');
     if (radioToggle) {
+        // Radio ALWAYS starts off on page load, so force it to reflect reality
         radioToggle.checked = (radio && radio.isPlaying);
     }
     
+    if (themeManager) themeManager.updatePickerUI();
     if (radio) radio.updateUI();
     
     modal.classList.remove('hidden');
@@ -1635,6 +1637,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const gameId = currentlyPlaying;
             currentlyPlaying = null; // Reset temporarily so insert doesn't eject
             insertCartridge(gameId, true, true); // Silent & Instant load
+        }, 100);
+    } else {
+        // Populate ejected cart with last known game info
+        const lastBanner = localStorage.getItem('lastCartridgeBanner');
+        const lastTitle = localStorage.getItem('lastCartridgeTitle');
+        if (lastBanner) {
+            document.getElementById('cart-label').style.backgroundImage = `url('${lastBanner}')`;
+            document.getElementById('cart-title').innerText = lastTitle || '';
+        }
+        
+        setTimeout(() => {
+            ejectCartridge(true); // Silent & Instant eject/hide
         }, 100);
     }
     document.getElementById('core-grid').innerHTML = coreGames.map(game => createCard(game, 'core')).join('');
