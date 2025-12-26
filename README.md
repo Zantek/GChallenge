@@ -7,23 +7,20 @@ A highly immersive, responsive web-based application designed to track progress 
 ## 🎮 Core Features
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
-- **Universal Retro Console:** A virtual top-loading hardware interface. Clicking "Play" visually inserts a dynamic cartridge into the slot. Features **Hardware Persistence**—the ejected cartridge always displays the last-played game's label and title.
+- **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
+- **Interactive Instruction Manual:** A physical "Book Spine" trigger next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
 - **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, accompanied by a satisfying "thud" and theme-synced confetti.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 11 themes.
 - **Gamer Profile & RPG Stats:** 
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
     - **Journey Map:** A chronological vertical trail visualizing your 2026 milestones.
     - **Achievements:** A dedicated vault for category completion trophies.
-    - **Last Completed:** A dynamic dashboard highlight showing your most recent victory with banner previews.
 - **Dual Media Archives:**
-    - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game, accessible via an integrated **Lightbox**.
+    - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
-- **LO-FI Radio & Visualizer:** 18 unique procedural stations (Quest Start, Cyber Pop, 8-bit Chill, etc.) with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-- **Reactive Companion (buddy.exe):** An 8-bit desktop pet with 100+ lines of dialogue that evolves based on your progress.
-- **Retro Boot Sequence:** A fake BIOS startup with technical diagnostic text and 8-bit sound effects, featuring a tactile "Power On" interaction.
-- **Console Skins:** 11 unique visual identities including **Blueprint**, **Woodgrain**, **Papercraft**, **Candy**, **Arcade**, and **Obsidian**, selectable via a **Visual Theme Picker** in settings.
-- **CRT Mode:** A toggleable visual filter adding scanlines, screen curvature, and chromatic aberration.
+- **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
+- **Console Skins:** 11 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, etc.) selectable via a visual theme picker in settings.
 
 ## 🏆 Challenge Lists (48 Games Total)
 
@@ -52,13 +49,11 @@ Since this is a static web project, no build or installation steps are required.
 ## 📝 Development TODOs
 - [x] Implement 11 unique Console Skins and Visual Theme Picker.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
+- [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Permanent System Monitor and Now Playing marquee.
-- [x] Implement Chronological Journey Map and Achievements vault.
-- [x] Implement High-Res Poster Gallery and Press Clippings archive.
-- [x] Implement Gamer Alignment Chart and 100+ Buddy interactions.
-- [x] Modularize CSS and optimize section transitions.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
 - [x] Implement Hardware Persistence for last-used cartridges.
+- [x] Modularize CSS and optimize section transitions.
 - [ ] **Alignment Personality:** Make buddy.exe dialogue change based on current alignment quadrant.
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.
 - [ ] **Hardware Peripheral:** Add a functional "Memory Card" slot for data Export/Import.
