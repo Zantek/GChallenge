@@ -153,13 +153,9 @@ function toggleSection(key) {
 
     if (isCollapsed) {
         container.style.maxHeight = '0px';
-        container.style.paddingTop = '0px';
-        container.style.paddingBottom = '0px';
         chevron.style.transform = 'rotate(-90deg)';
     } else {
-        container.style.maxHeight = ''; 
-        container.style.paddingTop = '';
-        container.style.paddingBottom = '';
+        container.style.maxHeight = '5000px'; 
         chevron.style.transform = 'rotate(0deg)';
     }
 
@@ -176,8 +172,6 @@ function applyInitialCollapses() {
         if (collapsedSections[key]) {
             container.style.transition = 'none'; // Instant on load
             container.style.maxHeight = '0px';
-            container.style.paddingTop = '0px';
-            container.style.paddingBottom = '0px';
             chevron.style.transform = 'rotate(-90deg)';
             setTimeout(() => container.style.transition = '', 50);
         }
@@ -1633,7 +1627,7 @@ function createCard(game, category = 'core') {
     const stampHtml = isCompleted ? `<div class="passport-stamp absolute top-4 left-4 z-30 pointer-events-none">${formatDate(completionDates[game.id])}</div>` : '';
     
     const hltbUrl = `https://howlongtobeat.com/?q=${encodedTitle}`;
-    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay Trailer')}`;
+    const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay')}`;
     
     const categoryNames = { 'core': 'Core', 'bonus': 'Bonus', 'zen': 'Zen', 'time': 'Time', 'art': 'Art' };
 

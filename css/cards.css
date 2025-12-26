@@ -52,7 +52,11 @@
 
 /* Grid Container Padding for Hover Room */
 [id^="grid-container-"] {
-    padding-top: 10px;
+    padding-top: 40px;
+}
+
+[id^="grid-container-"][style*="max-height: 0px"] {
+    padding-top: 0 !important;
 }
 
 /* Simulated Hover Highlight (Used when jumping from console) */
