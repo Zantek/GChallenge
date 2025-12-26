@@ -13,6 +13,7 @@
 }
 
 body {
+    font-family: var(--font-main);
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -29,6 +30,7 @@ body {
     --accent: #0f380f;
     --border: #0f380f;
     --radius: 0px;
+    --font-main: monospace;
 }
 
 [data-theme='cube'] {
@@ -41,6 +43,7 @@ body {
     --accent: #ff4500;
     --border: #4b0082;
     --radius: 2rem;
+    --font-main: 'Verdana', sans-serif;
 }
 
 [data-theme='os'] {
@@ -53,6 +56,7 @@ body {
     --accent: #000080;
     --border: #808080;
     --radius: 0px;
+    --font-main: 'Tahoma', sans-serif;
 }
 
 [data-theme='legacy'] {
@@ -65,6 +69,7 @@ body {
     --accent: #ffffff;
     --border: #333333;
     --radius: 0.5rem;
+    --font-main: monospace;
 }
 
 [data-theme='blueprint'] {
@@ -77,6 +82,7 @@ body {
     --accent: #00f2ff;
     --border: #ffffff;
     --radius: 0px;
+    --font-main: monospace;
 }
 
 [data-theme='blueprint'] body {
@@ -97,6 +103,7 @@ body {
     --accent: #ffbf00;
     --border: #1a0f00;
     --radius: 4px;
+    --font-main: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
 }
 
 [data-theme='papercraft'] {
@@ -109,6 +116,7 @@ body {
     --accent: #d32f2f;
     --border: #333333;
     --radius: 2px;
+    --font-main: "Courier New", Courier, monospace;
 }
 
 [data-theme='candy'] {
