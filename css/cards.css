@@ -380,6 +380,57 @@
 [data-theme='navigator'] .review-stamp { background: #05070a; border: 1px solid #00f2ff; color: #00f2ff; border-radius: 4px; text-shadow: 0 0 10px #00f2ff; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
 [data-theme='navigator'] .passport-stamp { background: #05070a; border: 1px solid #1e90ff; color: #00f2ff; font-family: 'Audiowide', cursive; }
 
+[data-theme='glacier'] .review-stamp { background: rgba(255, 255, 255, 0.8); border: 2px solid #bae6fd; color: #0369a1; border-radius: 12px; }
+[data-theme='glacier'] .passport-stamp { background: rgba(255, 255, 255, 0.9); border: 1px solid #bae6fd; color: #0ea5e9; }
+
+[data-theme='nomad'] .review-stamp { background: #451a03; border: 3px solid #f59e0b; color: #f59e0b; border-radius: 0; font-family: 'Stardos Stencil', cursive; }
+[data-theme='nomad'] .passport-stamp { background: #78350f; border: 1px solid #fbbf24; color: #fef3c7; font-family: 'Stardos Stencil', cursive; }
+
+[data-theme='prism'] .review-stamp { background: white; border: 2px solid; border-image: linear-gradient(45deg, #ec4899, #8b5cf6) 1; color: #0f172a; border-radius: 0; }
+[data-theme='prism'] .passport-stamp { background: white; border: 1px solid #000; color: #000; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-weight: 900; }
+
+[data-theme='invader'] .review-stamp { background: #000; border: 1px solid #22c55e; color: #22c55e; border-radius: 0; font-family: 'Press Start 2P', cursive; text-shadow: 0 0 5px #22c55e; }
+[data-theme='invader'] .passport-stamp { background: #000; border: 1px solid #22c55e; color: #22c55e; font-family: 'Press Start 2P', cursive; font-size: 6px; }
+
+[data-theme='virtual'] .review-stamp { background: #000; border: 1px solid #ff0000; color: #ff0000; font-family: 'DotGothic16', sans-serif; text-shadow: 0 0 5px #ff0000; }
+[data-theme='virtual'] .passport-stamp { background: #000; border: 1px solid #ff0000; color: #ff0000; font-family: 'DotGothic16', sans-serif; }
+
+[data-theme='quest'] .review-stamp { background: #000080; border: 2px solid #ffffff; color: #ffffff; font-family: 'Pixelify Sans', cursive; box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+[data-theme='quest'] .passport-stamp { background: #0000ff; border: 1px solid #ffde00; color: #ffde00; font-family: 'Pixelify Sans', cursive; }
+
+[data-theme='genesis'] .review-stamp { background: #1a1a1a; border: 2px solid #ffde00; color: #ffde00; font-family: 'Exo 2', sans-serif; font-style: italic; }
+[data-theme='genesis'] .passport-stamp { background: #000; border: 1px solid #00f2ff; color: #00f2ff; font-family: 'Exo 2', sans-serif; }
+
+[data-theme='spectrum'] .review-stamp { background: #000; border: 2px solid #ffff00; color: #ffff00; font-family: 'JetBrains Mono', monospace; }
+[data-theme='spectrum'] .passport-stamp { background: #000; border: 1px solid #00ffff; color: #00ffff; }
+
+[data-theme='famicom'] .review-stamp { background: #f2f0e9; border: 3px solid #ffde00; color: #991b1b; font-family: 'DotGothic16', sans-serif; border-radius: 4px; box-shadow: 2px 2px 0px #991b1b; }
+[data-theme='famicom'] .passport-stamp { background: #991b1b; border: 1px solid #ffde00; color: #f2f0e9; }
+
+[data-theme='web1'] .review-stamp { background: #c0c0c0; border: 2px solid !important; border-color: #808080 #fff #fff #808080 !important; color: #0000ff; text-decoration: underline; font-family: serif; }
+[data-theme='web1'] .passport-stamp { background: #c0c0c0; border: 1px solid #000; color: #000; font-family: serif; font-size: 8px; }
+
+[data-theme='gamegear'] .review-stamp { background: rgba(0,0,0,0.8); border: 2px solid #a855f7; color: #a855f7; text-shadow: 0 0 10px #a855f7; border-radius: 12px; }
+[data-theme='gamegear'] .passport-stamp { background: #111827; border: 1px solid #3b82f6; color: #3b82f6; font-family: 'Exo 2', sans-serif; }
+
+[data-theme='manga'] .review-stamp { background: #fff; border: 4px solid #000; color: #000; font-family: 'Balsamiq Sans', cursive; font-weight: 900; }
+[data-theme='manga'] .passport-stamp { background: #000; border: none; color: #fff; }
+
+[data-theme='museum'] .review-stamp { background: #fff; border: 1px solid #d4af37; color: #d4af37; font-family: 'Cormorant Garamond', serif; font-style: italic; border-radius: 0; }
+[data-theme='museum'] .passport-stamp { background: #fff; border: 1px double #d4af37; color: #1a1a1a; font-family: 'Cormorant Garamond', serif; }
+
+[data-theme='craft'] .review-stamp { background: #fcd34d; border: 3px dashed #fff; color: #1d4ed8; font-family: 'Comfortaa', cursive; border-radius: 50%; }
+[data-theme='craft'] .passport-stamp { background: #fff; border: 2px solid #3b82f6; color: #3b82f6; font-family: 'Comfortaa', cursive; }
+
+[data-theme='street'] .review-stamp { background: #000; border: 3px solid #22c55e; color: #22c55e; font-family: 'Archivo Black', sans-serif; transform: translate(-50%, -50%) rotate(5deg); }
+[data-theme='street'] .passport-stamp { background: #22c55e; border: 2px solid #000; color: #000; transform: rotate(-5deg); }
+
+[data-theme='noir'] .review-stamp { background: #000; border: 1px solid #e5e5e5; color: #e5e5e5; font-family: 'JetBrains Mono', monospace; opacity: 0.7; }
+[data-theme='noir'] .passport-stamp { background: #1a1a1a; border: none; color: #737373; font-family: 'JetBrains Mono', monospace; text-transform: lowercase; }
+
+[data-theme='tokyo'] .review-stamp { background: rgba(0,0,0,0.8); border: 2px solid #d946ef; color: #f0abfc; text-shadow: 0 0 10px #d946ef; font-family: 'DotGothic16', sans-serif; }
+[data-theme='tokyo'] .passport-stamp { background: #000; border: 1px solid #d946ef; color: #d946ef; font-family: 'DotGothic16', sans-serif; }
+
 /* Overgrown Style (Nature Reclaimed) */
 [data-theme='overgrown'] .game-card {
     background-color: #1a2421 !important;
@@ -443,6 +494,255 @@
     background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 1px, transparent 1px);
     background-size: 20px 20px;
     pointer-events: none;
+}
+
+/* Glacier Style (Frosted Ice) */
+[data-theme='glacier'] .game-card {
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    box-shadow: 0 15px 35px rgba(3, 105, 161, 0.1) !important;
+}
+[data-theme='glacier'] .game-card-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 50%, rgba(255,255,255,0.2) 100%);
+    pointer-events: none;
+}
+
+/* Nomad Style (Wasteland Scrap) */
+[data-theme='nomad'] .game-card {
+    background-color: #92400e !important;
+    border: 4px solid #451a03 !important;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 5px 5px 0px rgba(0,0,0,0.3) !important;
+}
+[data-theme='nomad'] .game-card-front::after {
+    content: "SCRAP_ID: " attr(id);
+    position: absolute;
+    bottom: 5px; right: 5px;
+    font-size: 6px;
+    color: #fef3c7;
+    opacity: 0.2;
+}
+
+/* Prism Style (Iridescent Shard) */
+[data-theme='prism'] .game-card {
+    background: white !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+[data-theme='prism'] .game-card-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Invader Style (Glitch Terminal) */
+[data-theme='invader'] .game-card {
+    background-color: #000000 !important;
+    border: 1px solid #22c55e !important;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2), inset 0 0 10px rgba(34, 197, 94, 0.1) !important;
+}
+[data-theme='invader'] .game-card-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(transparent 0px, transparent 2px, rgba(34, 197, 94, 0.03) 2px, rgba(34, 197, 94, 0.03) 4px);
+    pointer-events: none;
+}
+
+/* Virtual Style (Redline Vector) */
+[data-theme='virtual'] .game-card {
+    background-color: #000000 !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2), inset 0 0 5px rgba(255, 0, 0, 0.1) !important;
+}
+[data-theme='virtual'] .game-card-front::before {
+    content: "";
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Quest Style (16-Bit JRPG) */
+[data-theme='quest'] .game-card {
+    background: linear-gradient(to bottom, #0000ff, #000040) !important;
+    border: 3px double #ffffff !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 0 2px #000080 !important;
+    border-radius: 4px !important;
+}
+[data-theme='quest'] .game-card-front::after {
+    content: "Lv.99";
+    position: absolute;
+    bottom: 4px; right: 4px;
+    font-size: 8px;
+    color: #ffde00;
+    font-weight: 900;
+    opacity: 0.5;
+}
+
+/* Genesis Style (Blast Processing) */
+[data-theme='genesis'] .game-card-front {
+    background-color: #1a1a1a !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 5px 5px 0px #000, inset 0 0 10px rgba(0, 242, 255, 0.1) !important;
+}
+[data-theme='genesis'] .game-card-back {
+    background-color: #1a1a1a !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 5px 5px 0px #000, inset 0 0 10px rgba(0, 242, 255, 0.1) !important;
+}
+
+/* Spectrum Style (Attribute Clash) */
+[data-theme='spectrum'] .game-card {
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+    box-shadow: 8px 8px 0px #00ffff, -8px -8px 0px #ff00ff !important;
+}
+[data-theme='spectrum'] .game-card-front::after {
+    content: "LOAD";
+    position: absolute;
+    top: 2px; right: 2px;
+    font-size: 6px;
+    color: #ffff00;
+}
+
+/* Famicom Style (Imperial Red) */
+[data-theme='famicom'] .game-card {
+    background-color: #f2f0e9 !important;
+    border: 2px solid #991b1b !important;
+    box-shadow: inset 0 0 0 4px #ffde00, 0 10px 20px rgba(0,0,0,0.2) !important;
+}
+[data-theme='famicom'] .game-card-front::after {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 12px;
+    background: #ffde00;
+    opacity: 0.2;
+}
+
+/* Web-1.0 Style (Netscape) */
+[data-theme='web1'] .game-card {
+    background-color: #c0c0c0 !important;
+    border: 2px solid !important;
+    border-color: #fff #808080 #808080 #fff !important;
+}
+[data-theme='web1'] .game-card-front::before {
+    content: "href='game_details.htm'";
+    display: block;
+    height: 14px;
+    background: #000080;
+    color: #fff;
+    font-size: 7px;
+    padding: 1px 4px;
+}
+
+/* Game Gear Style (Neon Backlit) */
+[data-theme='gamegear'] .game-card {
+    background-color: #1f2937 !important;
+    border: 2px solid #a855f7 !important;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.3), inset 0 0 10px rgba(59, 130, 246, 0.2) !important;
+}
+
+/* Manga Style (Monochrome Speed) */
+[data-theme='manga'] .game-card {
+    background-color: #fff !important;
+    border: 4px solid #000 !important;
+    box-shadow: 10px 10px 0px #000 !important;
+}
+[data-theme='manga'] .game-card-front img {
+    filter: grayscale(1) contrast(1.5) !important;
+}
+
+/* Museum Style (Classical Marble) */
+[data-theme='museum'] .game-card {
+    background-color: #fff !important;
+    border: 1px solid #d4af37 !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05), inset 0 0 0 2px #ffffff !important;
+}
+[data-theme='museum'] .game-card-front::after {
+    content: "";
+    position: absolute; inset: 0;
+    border: 10px solid transparent;
+    border-image: url('https://www.transparenttextures.com/patterns/white-diamond.png') 30 stretch;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Craft Style (Hand-Stitched) */
+[data-theme='craft'] .game-card {
+    background-color: #60a5fa !important;
+    border: 4px dashed #fff !important;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.2) !important;
+    border-radius: 1.5rem !important;
+}
+[data-theme='craft'] .game-card-front img {
+    border-radius: 1rem;
+    padding: 4px;
+}
+
+/* Street Style (Urban Graffiti) */
+[data-theme='street'] .game-card {
+    background-color: #4b5563 !important;
+    border: 2px solid #22c55e !important;
+    box-shadow: 10px 10px 0px #111827 !important;
+}
+[data-theme='street'] .game-card-front::after {
+    content: "REBEL";
+    position: absolute;
+    bottom: 10px; left: -10px;
+    font-family: 'Archivo Black', sans-serif;
+    color: #22c55e;
+    font-size: 14px;
+    transform: rotate(-15deg);
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Noir Style (Detective Cinema) */
+[data-theme='noir'] .game-card {
+    background-color: #111111 !important;
+    border: 1px solid #262626 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8) !important;
+}
+[data-theme='noir'] .game-card-front img {
+    filter: grayscale(1) contrast(1.2) brightness(0.7) !important;
+}
+[data-theme='noir'] .game-card-front::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, transparent 20%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+}
+
+/* Tokyo Style (Midnight City) */
+[data-theme='tokyo'] .game-card {
+    background-color: #581c87 !important;
+    border: 2px solid #d946ef !important;
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.2), inset 0 0 15px rgba(217, 70, 239, 0.1) !important;
+}
+[data-theme='tokyo'] .game-card-front::after {
+    content: "ネオン";
+    position: absolute;
+    top: 5px; right: 5px;
+    font-size: 8px;
+    color: #f0abfc;
+    opacity: 0.4;
+}
+[data-theme='genesis'] .game-card-front::after {
+    content: "16-BIT";
+    position: absolute;
+    top: 4px; left: 4px;
+    font-size: 6px;
+    color: #ffde00;
+    font-weight: 900;
+    opacity: 0.4;
 }
 [data-theme='arcade'] .text-blue-400 { color: #00f2ff !important; }
 [data-theme='arcade'] .text-gaming-text { color: #ff00ff !important; }
@@ -763,6 +1063,151 @@
     border: 1px solid #d32f2f !important;
 }
 
+/* Glacier Play/Stop Buttons */
+[data-theme='glacier'] .play-toggle-btn {
+    background-color: #0ea5e9 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3) !important;
+}
+
+/* Nomad Play/Stop Buttons */
+[data-theme='nomad'] .play-toggle-btn {
+    background-color: #f59e0b !important;
+    color: #451a03 !important;
+    border: 2px solid #451a03 !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.3) !important;
+}
+
+/* Prism Play/Stop Buttons */
+[data-theme='prism'] .play-toggle-btn {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.3) !important;
+}
+
+/* Invader Play/Stop Buttons */
+[data-theme='invader'] .play-toggle-btn {
+    background-color: #000 !important;
+    color: #22c55e !important;
+    border: 1px solid #22c55e !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 10px #22c55e !important;
+}
+[data-theme='invader'] .play-toggle-btn:hover {
+    background-color: #22c55e !important;
+    color: #000 !important;
+}
+
+/* Virtual Play/Stop Buttons */
+[data-theme='virtual'] .play-toggle-btn {
+    background-color: #000 !important;
+    color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 10px #ff0000 !important;
+}
+
+/* Quest Play/Stop Buttons */
+[data-theme='quest'] .play-toggle-btn {
+    background-color: #000080 !important;
+    color: #ffde00 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+}
+
+/* Genesis Play/Stop Buttons */
+[data-theme='genesis'] .play-toggle-btn {
+    background-color: #1a1a1a !important;
+    color: #ffde00 !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 4px 4px 0px #000 !important;
+    transform: skewX(-2deg);
+}
+
+/* Spectrum Play/Stop Buttons */
+[data-theme='spectrum'] .play-toggle-btn {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border: 2px solid #fff !important;
+    border-radius: 0 !important;
+}
+
+/* Famicom Play/Stop Buttons */
+[data-theme='famicom'] .play-toggle-btn {
+    background-color: #991b1b !important;
+    color: #fff !important;
+    border: 2px solid #ffde00 !important;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5) !important;
+}
+
+/* Web-1.0 Play/Stop Buttons */
+[data-theme='web1'] .play-toggle-btn {
+    background-color: #c0c0c0 !important;
+    color: #000 !important;
+    border: 2px solid !important;
+    border-color: #fff #808080 #808080 #fff !important;
+    border-radius: 0 !important;
+}
+
+/* Game Gear Play/Stop Buttons */
+[data-theme='gamegear'] .play-toggle-btn {
+    background-color: #3b82f6 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.5) !important;
+}
+
+/* Manga Play/Stop Buttons */
+[data-theme='manga'] .play-toggle-btn {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 4px solid #000 !important;
+    box-shadow: 5px 5px 0px rgba(0,0,0,0.2) !important;
+}
+
+/* Museum Play/Stop Buttons */
+[data-theme='museum'] .play-toggle-btn {
+    background-color: #d4af37 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Craft Play/Stop Buttons */
+[data-theme='craft'] .play-toggle-btn {
+    background-color: #fcd34d !important;
+    color: #1d4ed8 !important;
+    border: 3px dashed #fff !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Street Play/Stop Buttons */
+[data-theme='street'] .play-toggle-btn {
+    background-color: #22c55e !important;
+    color: #000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: 4px 4px 0px #111827 !important;
+}
+
+/* Noir Play/Stop Buttons */
+[data-theme='noir'] .play-toggle-btn {
+    background-color: #e5e5e5 !important;
+    color: #000 !important;
+    border: 1px solid #000 !important;
+    border-radius: 0 !important;
+}
+
+/* Tokyo Play/Stop Buttons */
+[data-theme='tokyo'] .play-toggle-btn {
+    background-color: #d946ef !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+    box-shadow: 0 0 15px #d946ef !important;
+}
+
 /* Ink-Wash Card Back Buttons */
 [data-theme='inkwash'] .game-card-back .bg-red-600,
 [data-theme='inkwash'] .game-card-back .bg-gray-700,
@@ -813,4 +1258,231 @@
     background-color: #00f2ff !important;
     color: #05070a !important;
     box-shadow: 0 0 15px #00f2ff !important;
+}
+
+/* Glacier Card Back Buttons */
+[data-theme='glacier'] .game-card-back .bg-red-600,
+[data-theme='glacier'] .game-card-back .bg-gray-700,
+[data-theme='glacier'] .game-card-back .bg-blue-600,
+[data-theme='glacier'] .game-card-back .help-btn {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    color: #0369a1 !important;
+    border: 1px solid #bae6fd !important;
+    box-shadow: none !important;
+    backdrop-filter: blur(5px);
+}
+[data-theme='glacier'] .game-card-back button:hover,
+[data-theme='glacier'] .game-card-back a:hover {
+    background-color: #0ea5e9 !important;
+    color: #ffffff !important;
+}
+
+/* Nomad Card Back Buttons */
+[data-theme='nomad'] .game-card-back .bg-red-600,
+[data-theme='nomad'] .game-card-back .bg-gray-700,
+[data-theme='nomad'] .game-card-back .bg-blue-600,
+[data-theme='nomad'] .game-card-back .help-btn {
+    background-color: #451a03 !important;
+    color: #fef3c7 !important;
+    border: 2px solid #92400e !important;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.3) !important;
+}
+[data-theme='nomad'] .game-card-back button:hover,
+[data-theme='nomad'] .game-card-back a:hover {
+    background-color: #92400e !important;
+    color: #ffffff !important;
+}
+
+/* Prism Card Back Buttons */
+[data-theme='prism'] .game-card-back .bg-red-600,
+[data-theme='prism'] .game-card-back .bg-gray-700,
+[data-theme='prism'] .game-card-back .bg-blue-600,
+[data-theme='prism'] .game-card-back .help-btn {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border: 1px solid #000 !important;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important;
+    border-radius: 0 !important;
+}
+[data-theme='prism'] .game-card-back button:hover,
+[data-theme='prism'] .game-card-back a:hover {
+    background: linear-gradient(45deg, #ef4444, #3b82f6) !important;
+    color: #ffffff !important;
+    border-color: transparent !important;
+}
+
+/* Invader Card Back Buttons */
+[data-theme='invader'] .game-card-back .bg-red-600,
+[data-theme='invader'] .game-card-back .bg-gray-700,
+[data-theme='invader'] .game-card-back .bg-blue-600,
+[data-theme='invader'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #22c55e !important;
+    border: 1px solid #22c55e !important;
+    border-radius: 0 !important;
+    font-family: 'Press Start 2P', cursive !important;
+    font-size: 7px !important;
+}
+[data-theme='invader'] .game-card-back button:hover,
+[data-theme='invader'] .game-card-back a:hover {
+    background-color: #22c55e !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px #22c55e !important;
+}
+
+/* Virtual Card Back Buttons */
+[data-theme='virtual'] .game-card-back .bg-red-600,
+[data-theme='virtual'] .game-card-back .bg-gray-700,
+[data-theme='virtual'] .game-card-back .bg-blue-600,
+[data-theme='virtual'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 5px #ff0000 !important;
+    border-radius: 0 !important;
+}
+
+/* Quest Card Back Buttons */
+[data-theme='quest'] .game-card-back .bg-red-600,
+[data-theme='quest'] .game-card-back .bg-gray-700,
+[data-theme='quest'] .game-card-back .bg-blue-600,
+[data-theme='quest'] .game-card-back .help-btn {
+    background-color: #0000ff !important;
+    color: #ffffff !important;
+    border: 2px solid #ffffff !important;
+    font-family: 'Pixelify Sans', cursive !important;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.5) !important;
+}
+
+/* Genesis Card Back Buttons */
+[data-theme='genesis'] .game-card-back .bg-red-600,
+[data-theme='genesis'] .game-card-back .bg-gray-700,
+[data-theme='genesis'] .game-card-back .bg-blue-600,
+[data-theme='genesis'] .game-card-back .help-btn {
+    background-color: #1a1a1a !important;
+    color: #00f2ff !important;
+    border: 1px solid #00f2ff !important;
+    font-family: 'Exo 2', sans-serif !important;
+    font-weight: 900 !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    transform: skewX(-2deg);
+}
+
+/* Spectrum Card Back Buttons */
+[data-theme='spectrum'] .game-card-back .bg-red-600,
+[data-theme='spectrum'] .game-card-back .bg-gray-700,
+[data-theme='spectrum'] .game-card-back .bg-blue-600,
+[data-theme='spectrum'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #00ffff !important;
+    border: 1px solid #fff !important;
+    border-radius: 0 !important;
+}
+
+/* Famicom Card Back Buttons */
+[data-theme='famicom'] .game-card-back .bg-red-600,
+[data-theme='famicom'] .game-card-back .bg-gray-700,
+[data-theme='famicom'] .game-card-back .bg-blue-600,
+[data-theme='famicom'] .game-card-back .help-btn {
+    background-color: #991b1b !important;
+    color: #ffde00 !important;
+    border: 2px solid #ffde00 !important;
+    border-radius: 2px !important;
+}
+
+/* Web-1.0 Card Back Buttons */
+[data-theme='web1'] .game-card-back .bg-red-600,
+[data-theme='web1'] .game-card-back .bg-gray-700,
+[data-theme='web1'] .game-card-back .bg-blue-600,
+[data-theme='web1'] .game-card-back .help-btn {
+    background-color: #c0c0c0 !important;
+    color: #0000ff !important;
+    border: 2px solid !important;
+    border-color: #fff #808080 #808080 #fff !important;
+    border-radius: 0 !important;
+    text-decoration: underline !important;
+}
+
+/* Game Gear Card Back Buttons */
+[data-theme='gamegear'] .game-card-back .bg-red-600,
+[data-theme='gamegear'] .game-card-back .bg-gray-700,
+[data-theme='gamegear'] .game-card-back .bg-blue-600,
+[data-theme='gamegear'] .game-card-back .help-btn {
+    background-color: #111827 !important;
+    color: #a855f7 !important;
+    border: 1px solid #3b82f6 !important;
+    box-shadow: 0 0 5px #a855f7 !important;
+}
+
+/* Manga Card Back Buttons */
+[data-theme='manga'] .game-card-back .bg-red-600,
+[data-theme='manga'] .game-card-back .bg-gray-700,
+[data-theme='manga'] .game-card-back .bg-blue-600,
+[data-theme='manga'] .game-card-back .help-btn {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 3px solid #000 !important;
+    box-shadow: 4px 4px 0px #000 !important;
+    font-family: 'Balsamiq Sans', cursive !important;
+    font-weight: 900 !important;
+}
+
+/* Museum Card Back Buttons */
+[data-theme='museum'] .game-card-back .bg-red-600,
+[data-theme='museum'] .game-card-back .bg-gray-700,
+[data-theme='museum'] .game-card-back .bg-blue-600,
+[data-theme='museum'] .game-card-back .help-btn {
+    background-color: #fff !important;
+    color: #d4af37 !important;
+    border: 1px solid #d4af37 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    border-radius: 0 !important;
+}
+
+/* Craft Card Back Buttons */
+[data-theme='craft'] .game-card-back .bg-red-600,
+[data-theme='craft'] .game-card-back .bg-gray-700,
+[data-theme='craft'] .game-card-back .bg-blue-600,
+[data-theme='craft'] .game-card-back .help-btn {
+    background-color: #fcd34d !important;
+    color: #1d4ed8 !important;
+    border: 2px solid #fff !important;
+    font-family: 'Comfortaa', cursive !important;
+    border-radius: 1rem !important;
+}
+
+/* Street Card Back Buttons */
+[data-theme='street'] .game-card-back .bg-red-600,
+[data-theme='street'] .game-card-back .bg-gray-700,
+[data-theme='street'] .game-card-back .bg-blue-600,
+[data-theme='street'] .game-card-back .help-btn {
+    background-color: #111827 !important;
+    color: #22c55e !important;
+    border: 2px solid #22c55e !important;
+    font-family: 'Archivo Black', sans-serif !important;
+}
+
+/* Noir Card Back Buttons */
+[data-theme='noir'] .game-card-back .bg-red-600,
+[data-theme='noir'] .game-card-back .bg-gray-700,
+[data-theme='noir'] .game-card-back .bg-blue-600,
+[data-theme='noir'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #e5e5e5 !important;
+    border: 1px solid #404040 !important;
+    font-family: 'JetBrains Mono', monospace !important;
+    opacity: 0.8 !important;
+}
+
+/* Tokyo Card Back Buttons */
+[data-theme='tokyo'] .game-card-back .bg-red-600,
+[data-theme='tokyo'] .game-card-back .bg-gray-700,
+[data-theme='tokyo'] .game-card-back .bg-blue-600,
+[data-theme='tokyo'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #f0abfc !important;
+    border: 1px solid #d946ef !important;
+    text-shadow: 0 0 5px #d946ef !important;
+    font-family: 'DotGothic16', sans-serif !important;
 }

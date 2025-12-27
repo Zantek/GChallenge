@@ -1428,6 +1428,176 @@ function generateShareCard() {
             font: 'Audiowide',
             radius: 4,
             glow: true
+        },
+        'glacier': {
+            bg: ['#e0f2fe', '#bae6fd'],
+            accent: '#0ea5e9',
+            secondary: '#ffffff',
+            text: '#0369a1',
+            muted: '#075985',
+            font: 'Quicksand',
+            radius: 20,
+            glow: true
+        },
+        'nomad': {
+            bg: ['#451a03', '#78350f'],
+            accent: '#f59e0b',
+            secondary: '#92400e',
+            text: '#fef3c7',
+            muted: '#fbbf24',
+            font: 'Stardos Stencil',
+            radius: 0,
+            glow: false
+        },
+        'prism': {
+            bg: ['#ffffff', '#f8fafc'],
+            accent: '#ec4899',
+            secondary: '#8b5cf6',
+            text: '#0f172a',
+            muted: '#475569',
+            font: 'Montserrat',
+            radius: 0,
+            glow: false
+        },
+        'invader': {
+            bg: ['#000000', '#0a0a0a'],
+            accent: '#22c55e',
+            secondary: '#166534',
+            text: '#22c55e',
+            muted: '#166534',
+            font: 'Press Start 2P',
+            radius: 0,
+            glow: true
+        },
+        'virtual': {
+            bg: ['#000000', '#000000'],
+            accent: '#ff0000',
+            secondary: '#800000',
+            text: '#ff0000',
+            muted: '#800000',
+            font: 'DotGothic16',
+            radius: 0,
+            glow: true
+        },
+        'quest': {
+            bg: ['#0000ff', '#000040'],
+            accent: '#ffde00',
+            secondary: '#ffffff',
+            text: '#ffffff',
+            muted: '#a0a0a0',
+            font: 'Pixelify Sans',
+            radius: 4,
+            glow: false
+        },
+        'genesis': {
+            bg: ['#1a1a1a', '#000000'],
+            accent: '#00f2ff',
+            secondary: '#ffde00',
+            text: '#00f2ff',
+            muted: '#0077ff',
+            font: 'Exo 2',
+            radius: 0,
+            glow: true
+        },
+        'spectrum': {
+            bg: ['#000000', '#000000'],
+            accent: '#ffff00',
+            secondary: '#ff00ff',
+            text: '#ffffff',
+            muted: '#00ffff',
+            font: 'JetBrains Mono',
+            radius: 0,
+            glow: false
+        },
+        'famicom': {
+            bg: ['#f2f0e9', '#991b1b'],
+            accent: '#ffde00',
+            secondary: '#991b1b',
+            text: '#1a1a1a',
+            muted: '#991b1b',
+            font: 'DotGothic16',
+            radius: 4,
+            glow: false
+        },
+        'web1': {
+            bg: ['#c0c0c0', '#808080'],
+            accent: '#0000ff',
+            secondary: '#000080',
+            text: '#000000',
+            muted: '#0000ff',
+            font: 'Cormorant Garamond',
+            radius: 0,
+            glow: false
+        },
+        'gamegear': {
+            bg: ['#1f2937', '#111827'],
+            accent: '#a855f7',
+            secondary: '#3b82f6',
+            text: '#a855f7',
+            muted: '#3b82f6',
+            font: 'Exo 2',
+            radius: 20,
+            glow: true
+        },
+        'manga': {
+            bg: ['#ffffff', '#f3f4f6'],
+            accent: '#000000',
+            secondary: '#000000',
+            text: '#000000',
+            muted: '#4b5563',
+            font: 'Balsamiq Sans',
+            radius: 0,
+            glow: false
+        },
+        'museum': {
+            bg: ['#f5f5f5', '#e5e5e5'],
+            accent: '#d4af37',
+            secondary: '#d4af37',
+            text: '#1a1a1a',
+            muted: '#71717a',
+            font: 'Cormorant Garamond',
+            radius: 0,
+            glow: false
+        },
+        'craft': {
+            bg: ['#3b82f6', '#2563eb'],
+            accent: '#fcd34d',
+            secondary: '#ffffff',
+            text: '#ffffff',
+            muted: '#bfdbfe',
+            font: 'Comfortaa',
+            radius: 20,
+            glow: false
+        },
+        'street': {
+            bg: ['#374151', '#111827'],
+            accent: '#22c55e',
+            secondary: '#111827',
+            text: '#ffffff',
+            muted: '#9ca3af',
+            font: 'Archivo Black',
+            radius: 4,
+            glow: false
+        },
+        'noir': {
+            bg: ['#0a0a0a', '#000000'],
+            accent: '#ffffff',
+            secondary: '#404040',
+            text: '#e5e5e5',
+            muted: '#737373',
+            font: 'JetBrains Mono',
+            radius: 0,
+            glow: false
+        },
+        'tokyo': {
+            bg: ['#2e1065', '#000000'],
+            accent: '#d946ef',
+            secondary: '#7e22ce',
+            text: '#f0abfc',
+            muted: '#c084fc',
+            font: 'DotGothic16',
+            radius: 8,
+            glow: true
         }
     };
 

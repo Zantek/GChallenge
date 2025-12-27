@@ -112,7 +112,18 @@
     box-shadow: 0 0 15px #00f2ff !important;
 }
 [data-theme='arcade'] #cart-label {
-    filter: grayscale(1) invert(1) sepia(1) hue-rotate(250deg) saturate(5) brightness(0.8) !important;
+    filter: none !important;
+    position: relative;
+}
+[data-theme='arcade'] #cart-label::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 255, 0, 0.06));
+    background-size: 100% 4px, 3px 100%;
+    pointer-events: none;
+    z-index: 10;
 }
 
 [data-theme='obsidian'] #console-hardware {
@@ -163,6 +174,75 @@
 [data-theme='navigator'] #console-hardware { background-color: #05070a; border: 1px solid #1e90ff; border-bottom: 10px solid #000; box-shadow: 0 0 20px rgba(30, 144, 255, 0.3); }
 [data-theme='navigator'] #active-cartridge { background-color: #0b0e14 !important; border: 1px solid #00f2ff !important; box-shadow: 0 0 10px #00f2ff; }
 [data-theme='navigator'] #cart-label { filter: hue-rotate(180deg) brightness(0.8) contrast(1.2) !important; }
+
+[data-theme='glacier'] #console-hardware { background: rgba(255, 255, 255, 0.3); border: 1px solid rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px); border-bottom: 10px solid #bae6fd; }
+[data-theme='glacier'] #active-cartridge { background: rgba(255, 255, 255, 0.5) !important; border: 1px solid #ffffff !important; }
+[data-theme='glacier'] #cart-label { filter: brightness(1.2) contrast(0.8) saturate(0.5) !important; }
+
+[data-theme='nomad'] #console-hardware { background-color: #78350f; border: 4px solid #451a03; border-bottom: 15px solid #000; background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); }
+[data-theme='nomad'] #active-cartridge { background-color: #92400e !important; border: 2px solid #f59e0b !important; }
+[data-theme='nomad'] #cart-label { filter: sepia(0.8) contrast(1.2) brightness(0.7) !important; }
+
+[data-theme='prism'] #console-hardware { background: #ffffff; border: 1px solid rgba(0,0,0,0.1); border-bottom: 10px solid #000; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+[data-theme='prism'] #active-cartridge { background: #ffffff !important; border: 1px solid #000 !important; }
+[data-theme='prism'] #cart-label { filter: contrast(1.1) saturate(1.2) !important; }
+
+[data-theme='invader'] #console-hardware { background-color: #000; border: 1px solid #22c55e; border-bottom: 10px solid #22c55e; }
+[data-theme='invader'] #active-cartridge { background-color: #000 !important; border: 1px solid #22c55e !important; box-shadow: 0 0 15px #22c55e; }
+[data-theme='invader'] #cart-label { filter: grayscale(1) contrast(1.5) brightness(0.8) !important; mix-blend-mode: color-dodge; }
+
+[data-theme='virtual'] #console-hardware { background-color: #000; border: 2px solid #ff0000; border-bottom: 8px solid #ff0000; }
+[data-theme='virtual'] #active-cartridge { background-color: #000 !important; border: 1px solid #ff0000 !important; }
+[data-theme='virtual'] #cart-label { filter: grayscale(1) brightness(0.5) contrast(2) sepia(1) hue-rotate(-50deg) saturate(5) !important; }
+
+[data-theme='quest'] #console-hardware { background: linear-gradient(135deg, #0000ff, #000040); border: 2px solid #ffffff; border-bottom: 10px solid #000020; }
+[data-theme='quest'] #active-cartridge { background-color: #0000ff !important; border: 2px solid #ffde00 !important; }
+[data-theme='quest'] #cart-label { filter: brightness(1.1) contrast(1.1) saturate(1.2) !important; }
+
+[data-theme='genesis'] #console-hardware { background-color: #1a1a1a; border: 2px solid #333; border-bottom: 12px solid #000; box-shadow: inset 0 0 20px #000; }
+[data-theme='genesis'] #active-cartridge { background-color: #111 !important; border: 2px solid #00f2ff !important; }
+[data-theme='genesis'] #cart-label { filter: contrast(1.3) saturate(1.5) !important; }
+
+[data-theme='spectrum'] #console-hardware { background-color: #000; border: 2px solid #fff; border-bottom: 8px solid #fff; }
+[data-theme='spectrum'] #console-hardware::after { content: ""; position: absolute; top: 0; right: 10px; width: 20px; height: 100%; background: linear-gradient(to bottom, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff); opacity: 0.5; }
+[data-theme='spectrum'] #active-cartridge { background-color: #000 !important; border: 1px solid #fff !important; }
+[data-theme='spectrum'] #cart-label { filter: contrast(2) saturate(2) brightness(0.8) !important; }
+
+[data-theme='famicom'] #console-hardware { background-color: #f2f0e9; border: 2px solid #991b1b; border-bottom: 12px solid #991b1b; box-shadow: inset 0 0 0 2px #ffde00; }
+[data-theme='famicom'] #active-cartridge { background-color: #f2f0e9 !important; border: 2px solid #991b1b !important; }
+[data-theme='famicom'] #cart-label { filter: sepia(0.2) contrast(1.1) !important; }
+
+[data-theme='web1'] #console-hardware { background-color: #c0c0c0; border: 2px solid !important; border-color: #fff #808080 #808080 #fff !important; }
+[data-theme='web1'] #active-cartridge { background-color: #c0c0c0 !important; border: 2px solid !important; border-color: #808080 #fff #fff #808080 !important; }
+[data-theme='web1'] #cart-label { filter: grayscale(1) contrast(1.2) !important; }
+
+[data-theme='gamegear'] #console-hardware { background-color: #111827; border: 2px solid #3b82f6; border-bottom: 15px solid #000; border-radius: 2rem !important; }
+[data-theme='gamegear'] #active-cartridge { background-color: #1f2937 !important; border: 2px solid #a855f7 !important; }
+[data-theme='gamegear'] #cart-label { filter: contrast(1.2) brightness(0.9) saturate(1.5) !important; }
+
+[data-theme='manga'] #console-hardware { background-color: #fff; border: 4px solid #000; border-bottom: 12px solid #000; }
+[data-theme='manga'] #active-cartridge { background-color: #fff !important; border: 3px solid #000 !important; }
+[data-theme='manga'] #cart-label { filter: grayscale(1) contrast(2) !important; }
+
+[data-theme='museum'] #console-hardware { background-color: #fff; border: 1px solid #d4af37; border-bottom: 10px solid #d4af37; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+[data-theme='museum'] #active-cartridge { background-color: #fff !important; border: 1px solid #d4af37 !important; }
+[data-theme='museum'] #cart-label { filter: sepia(0.5) contrast(0.9) brightness(1.1) !important; }
+
+[data-theme='craft'] #console-hardware { background-color: #1d4ed8; border: 4px dashed #fff; border-bottom: 15px solid #1e3a8a; border-radius: 2rem !important; }
+[data-theme='craft'] #active-cartridge { background-color: #3b82f6 !important; border: 2px dashed #fff !important; }
+[data-theme='craft'] #cart-label { filter: saturate(0.8) brightness(1.1) !important; border-radius: 1rem; }
+
+[data-theme='street'] #console-hardware { background-color: #111827; border: 3px solid #22c55e; border-bottom: 12px solid #000; background-image: url('https://www.transparenttextures.com/patterns/asphalt-dark.png'); }
+[data-theme='street'] #active-cartridge { background-color: #374151 !important; border: 2px solid #22c55e !important; }
+[data-theme='street'] #cart-label { filter: contrast(1.2) brightness(0.8) !important; }
+
+[data-theme='noir'] #console-hardware { background-color: #000; border: 1px solid #404040; border-bottom: 10px solid #000; }
+[data-theme='noir'] #active-cartridge { background-color: #111 !important; border: 1px solid #e5e5e5 !important; }
+[data-theme='noir'] #cart-label { filter: grayscale(1) contrast(1.5) brightness(0.6) !important; }
+
+[data-theme='tokyo'] #console-hardware { background-color: #000; border: 2px solid #d946ef; border-bottom: 12px solid #000; box-shadow: 0 0 20px rgba(217, 70, 239, 0.3); }
+[data-theme='tokyo'] #active-cartridge { background-color: #2e1065 !important; border: 2px solid #f0abfc !important; box-shadow: 0 0 10px #d946ef; }
+[data-theme='tokyo'] #cart-label { filter: hue-rotate(280deg) saturate(1.5) !important; }
 
 /* Cartridge Animation */
 #active-cartridge {

@@ -231,6 +231,146 @@ body {
     background-attachment: fixed;
 }
 
+/* Glacier Background */
+[data-theme='glacier'] body {
+    background-image: 
+        radial-gradient(circle at 50% -20%, #ffffff 0%, transparent 80%),
+        linear-gradient(to bottom, #e0f2fe, #bae6fd) !important;
+    background-attachment: fixed;
+}
+
+/* Nomad Background */
+[data-theme='nomad'] body {
+    background-color: #451a03 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png') !important;
+    background-attachment: fixed;
+}
+
+/* Prism Background */
+[data-theme='prism'] body {
+    background-image: 
+        linear-gradient(135deg, rgba(255,0,0,0.05), rgba(0,255,0,0.05), rgba(0,0,255,0.05)) !important;
+    background-attachment: fixed;
+}
+
+/* Invader Background */
+[data-theme='invader'] body {
+    background-color: #000000 !important;
+    background-image: linear-gradient(rgba(34, 197, 94, 0.05) 50%, transparent 50%) !important;
+    background-size: 100% 4px !important;
+    background-attachment: fixed;
+}
+
+/* Virtual Background */
+[data-theme='virtual'] body {
+    background-color: #000000 !important;
+    background-image: 
+        repeating-linear-gradient(transparent 0px, transparent 2px, rgba(255, 0, 0, 0.05) 2px, rgba(255, 0, 0, 0.05) 4px),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(rgba(255, 0, 0, 0.02) 1px, transparent 1px) !important;
+    background-size: 100% 4px, 40px 40px, 40px 40px !important;
+    background-attachment: fixed;
+}
+
+/* Quest Background */
+[data-theme='quest'] body {
+    background-color: #000040 !important;
+    background-image: 
+        radial-gradient(circle at 50% 50%, #000080 0%, #000020 100%) !important;
+    background-attachment: fixed;
+}
+
+/* Genesis Background */
+[data-theme='genesis'] body {
+    background-color: #000000 !important;
+    background-image: 
+        linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(45deg, rgba(30, 58, 138, 0.1) 25%, transparent 25%, transparent 50%, rgba(30, 58, 138, 0.1) 50%, rgba(30, 58, 138, 0.1) 75%, transparent 75%, transparent) !important;
+    background-size: 20px 20px, 20px 20px, 60px 60px !important;
+    background-attachment: fixed;
+}
+
+/* Spectrum Background */
+[data-theme='spectrum'] body {
+    background-color: #000 !important;
+    background-image: 
+        linear-gradient(90deg, rgba(255,0,255,0.05) 50%, transparent 50%),
+        linear-gradient(rgba(0,255,255,0.05) 50%, transparent 50%) !important;
+    background-size: 64px 64px !important;
+    background-attachment: fixed;
+}
+
+/* Famicom Background */
+[data-theme='famicom'] body {
+    background-color: #f2f0e9 !important;
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(153, 27, 27, 0.02) 0%, transparent 100%) !important;
+    background-attachment: fixed;
+}
+
+/* Web-1.0 Background */
+[data-theme='web1'] body {
+    background-color: #c0c0c0 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/cubes.png') !important;
+    background-attachment: fixed;
+}
+
+/* Game Gear Background */
+[data-theme='gamegear'] body {
+    background-color: #1f2937 !important;
+    background-image: 
+        radial-gradient(circle at 50% 50%, #111827 0%, #000 100%) !important;
+    background-attachment: fixed;
+}
+
+/* Manga Background */
+[data-theme='manga'] body {
+    background-color: #fff !important;
+    background-image: 
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%, transparent 50%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.05) 75%, transparent 75%, transparent) !important;
+    background-size: 100px 100px !important;
+    background-attachment: fixed;
+}
+
+/* Museum Background */
+[data-theme='museum'] body {
+    background-color: #f5f5f5 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/white-diamond.png') !important;
+    background-attachment: fixed;
+}
+
+/* Craft Background */
+[data-theme='craft'] body {
+    background-color: #3b82f6 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/denim.png') !important;
+    background-attachment: fixed;
+}
+
+/* Street Background */
+[data-theme='street'] body {
+    background-color: #374151 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/asphalt-dark.png') !important;
+    background-attachment: fixed;
+}
+
+/* Noir Background */
+[data-theme='noir'] body {
+    background-color: #0a0a0a !important;
+    background-image: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000 100%) !important;
+    background-attachment: fixed;
+}
+
+/* Tokyo Background */
+[data-theme='tokyo'] body {
+    background-color: #2e1065 !important;
+    background-image: 
+        linear-gradient(rgba(217, 70, 239, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(217, 70, 239, 0.05) 1px, transparent 1px) !important;
+    background-size: 50px 50px !important;
+    background-attachment: fixed;
+}
+
 [data-theme='overgrown'] {
     --bg-primary: #1a2421;
     --bg-secondary: #2d3a35;
@@ -285,6 +425,227 @@ body {
     --border: #1e90ff;
     --radius: 0.25rem;
     --font-main: 'Audiowide', cursive;
+}
+
+[data-theme='glacier'] {
+    --bg-primary: #e0f2fe;
+    --bg-secondary: #f0f9ff;
+    --bg-card: rgba(255, 255, 255, 0.6);
+    --bg-header: rgba(224, 242, 254, 0.9);
+    --text-primary: #0369a1;
+    --text-secondary: #075985;
+    --accent: #0ea5e9;
+    --border: #bae6fd;
+    --radius: 1.5rem;
+    --font-main: 'Quicksand', sans-serif;
+}
+
+[data-theme='nomad'] {
+    --bg-primary: #451a03;
+    --bg-secondary: #78350f;
+    --bg-card: #92400e;
+    --bg-header: #451a03;
+    --text-primary: #fef3c7;
+    --text-secondary: #fbbf24;
+    --accent: #f59e0b;
+    --border: #b45309;
+    --radius: 2px;
+    --font-main: 'Stardos Stencil', cursive;
+}
+
+[data-theme='prism'] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: rgba(255, 255, 255, 0.8);
+    --bg-header: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #ec4899;
+    --border: rgba(0,0,0,0.1);
+    --radius: 0px;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+[data-theme='invader'] {
+    --bg-primary: #000000;
+    --bg-secondary: #0a0a0a;
+    --bg-card: #000000;
+    --bg-header: #000000;
+    --text-primary: #22c55e;
+    --text-secondary: #166534;
+    --accent: #22c55e;
+    --border: #22c55e;
+    --radius: 0px;
+    --font-main: 'Press Start 2P', cursive;
+}
+
+[data-theme='virtual'] {
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-card: #000000;
+    --bg-header: #000000;
+    --text-primary: #ff0000;
+    --text-secondary: #800000;
+    --accent: #ff0000;
+    --border: #ff0000;
+    --radius: 0px;
+    --font-main: 'DotGothic16', sans-serif;
+}
+
+[data-theme='quest'] {
+    --bg-primary: #000080;
+    --bg-secondary: #0000a0;
+    --bg-card: linear-gradient(to bottom, #0000ff, #000040);
+    --bg-header: #000080;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #ffde00;
+    --border: #ffffff;
+    --radius: 4px;
+    --font-main: 'Pixelify Sans', cursive;
+}
+
+[data-theme='genesis'] {
+    --bg-primary: #000000;
+    --bg-secondary: #111111;
+    --bg-card: #1a1a1a;
+    --bg-header: #000000;
+    --text-primary: #00f2ff;
+    --text-secondary: #0077ff;
+    --accent: #ffde00;
+    --border: #00f2ff;
+    --radius: 0px;
+    --font-main: 'Exo 2', sans-serif;
+}
+
+[data-theme='spectrum'] {
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-card: #000000;
+    --bg-header: #000000;
+    --text-primary: #ffffff;
+    --text-secondary: #00ffff;
+    --accent: #ffff00;
+    --border: #ffffff;
+    --radius: 0px;
+    --font-main: 'JetBrains Mono', monospace;
+}
+
+[data-theme='famicom'] {
+    --bg-primary: #f2f0e9;
+    --bg-secondary: #991b1b;
+    --bg-card: #f2f0e9;
+    --bg-header: #991b1b;
+    --text-primary: #1a1a1a;
+    --text-secondary: #991b1b;
+    --accent: #ffde00;
+    --border: #ffde00;
+    --radius: 2px;
+    --font-main: 'DotGothic16', sans-serif;
+}
+
+[data-theme='web1'] {
+    --bg-primary: #c0c0c0;
+    --bg-secondary: #808080;
+    --bg-card: #c0c0c0;
+    --bg-header: #000080;
+    --text-primary: #000000;
+    --text-secondary: #0000ff;
+    --accent: #0000ff;
+    --border: #ffffff;
+    --radius: 0px;
+    --font-main: 'Cormorant Garamond', serif;
+}
+
+[data-theme='gamegear'] {
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-card: #374151;
+    --bg-header: #000000;
+    --text-primary: #a855f7;
+    --text-secondary: #3b82f6;
+    --accent: #a855f7;
+    --border: #3b82f6;
+    --radius: 1rem;
+    --font-main: 'Exo 2', sans-serif;
+}
+
+[data-theme='manga'] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f3f4f6;
+    --bg-card: #ffffff;
+    --bg-header: #000000;
+    --text-primary: #000000;
+    --text-secondary: #4b5563;
+    --accent: #000000;
+    --border: #000000;
+    --radius: 0px;
+    --font-main: 'Balsamiq Sans', cursive;
+}
+
+[data-theme='museum'] {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #e5e5e5;
+    --bg-card: #ffffff;
+    --bg-header: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #71717a;
+    --accent: #d4af37;
+    --border: #d4af37;
+    --radius: 2px;
+    --font-main: 'Cormorant Garamond', serif;
+}
+
+[data-theme='craft'] {
+    --bg-primary: #3b82f6;
+    --bg-secondary: #2563eb;
+    --bg-card: #60a5fa;
+    --bg-header: #1d4ed8;
+    --text-primary: #ffffff;
+    --text-secondary: #bfdbfe;
+    --accent: #fcd34d;
+    --border: #ffffff;
+    --radius: 1rem;
+    --font-main: 'Comfortaa', cursive;
+}
+
+[data-theme='street'] {
+    --bg-primary: #374151;
+    --bg-secondary: #1f2937;
+    --bg-card: #4b5563;
+    --bg-header: #111827;
+    --text-primary: #ffffff;
+    --text-secondary: #9ca3af;
+    --accent: #22c55e;
+    --border: #22c55e;
+    --radius: 4px;
+    --font-main: 'Archivo Black', sans-serif;
+}
+
+[data-theme='noir'] {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #111111;
+    --bg-header: #000000;
+    --text-primary: #e5e5e5;
+    --text-secondary: #737373;
+    --accent: #ffffff;
+    --border: #262626;
+    --radius: 0px;
+    --font-main: 'JetBrains Mono', monospace;
+}
+
+[data-theme='tokyo'] {
+    --bg-primary: #2e1065;
+    --bg-secondary: #4c1d95;
+    --bg-card: #581c87;
+    --bg-header: #000000;
+    --text-primary: #f0abfc;
+    --text-secondary: #c084fc;
+    --accent: #e879f9;
+    --border: #d946ef;
+    --radius: 0.5rem;
+    --font-main: 'DotGothic16', sans-serif;
 }
 
 [data-theme='future'] {
@@ -351,6 +712,14 @@ body {
 
 [data-theme='brick'] img {
     filter: sepia(1) hue-rotate(40deg) saturate(2) brightness(0.9) contrast(1.2) !important;
+}
+
+[data-theme='virtual'] .game-card-front img,
+[data-theme='virtual'] .game-card-back img,
+[data-theme='virtual'] #modal-banner,
+[data-theme='virtual'] .w-12 img,
+[data-theme='virtual'] #cart-label {
+    filter: grayscale(1) brightness(0.5) contrast(2) sepia(1) hue-rotate(-50deg) saturate(10) !important;
 }
 
 [data-theme='os'] .bg-blue-600 { background-color: #000080 !important; }
@@ -461,6 +830,32 @@ body {
 [data-theme='hero'] .text-gaming-text\/10 { color: rgba(0,0,0,0.2) !important; }
 [data-theme='hero'] .text-yellow-500 { color: #000 !important; } /* Make filled stars black for contrast */
 
+/* --- Glacier Global Overrides --- */
+[data-theme='glacier'] header { backdrop-filter: blur(10px); }
+[data-theme='glacier'] .bg-gaming-dark { background-color: rgba(224, 242, 254, 0.5) !important; }
+[data-theme='glacier'] #now-playing-marquee .bg-black\/40 { background-color: rgba(255,255,255,0.4) !important; border-color: #bae6fd !important; }
+[data-theme='glacier'] #now-playing-marquee .marquee-content { color: #0369a1 !important; }
+[data-theme='glacier'] #level-badge { background-color: #ffffff !important; color: #0ea5e9 !important; border: 1px solid #bae6fd !important; }
+
+/* --- Nomad Global Overrides --- */
+[data-theme='nomad'] header .text-gaming-muted { color: #fcd34d !important; }
+[data-theme='nomad'] #now-playing-marquee .bg-black\/40 { background-color: #451a03 !important; border: 2px solid #92400e !important; }
+[data-theme='nomad'] #now-playing-marquee .marquee-content { color: #fbbf24 !important; }
+[data-theme='nomad'] #level-badge { background-color: #f59e0b !important; color: #451a03 !important; border-radius: 0 !important; }
+
+/* --- Prism Global Overrides --- */
+[data-theme='prism'] header { background: linear-gradient(to right, #ffffff, #f8fafc) !important; border-bottom: 2px solid; border-image: linear-gradient(to right, #ff0000, #00ff00, #0000ff) 1; }
+[data-theme='prism'] #now-playing-marquee .bg-black\/40 { background-color: #ffffff !important; border: 1px solid #000 !important; }
+[data-theme='prism'] #now-playing-marquee .marquee-content { background: linear-gradient(to right, #ef4444, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+
+/* --- Invader Global Overrides --- */
+[data-theme='invader'] header { border-bottom: 2px solid #22c55e; }
+[data-theme='invader'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 1px solid #22c55e !important; }
+[data-theme='invader'] #now-playing-marquee .marquee-content { color: #22c55e !important; text-shadow: 0 0 5px #22c55e; }
+[data-theme='invader'] #level-badge { background-color: #22c55e !important; color: #000 !important; }
+[data-theme='invader'] .text-gaming-text\/10 { color: rgba(34, 197, 94, 0.1) !important; }
+[data-theme='invader'] .text-yellow-500 { color: #22c55e !important; }
+
 /* Hero Header Readability */
 [data-theme='hero'] header h1,
 [data-theme='hero'] header h1 span,
@@ -473,6 +868,87 @@ body {
     color: #ffde00 !important;
     filter: drop-shadow(2px 2px 0px #000) !important;
 }
+
+/* --- Virtual Global Overrides --- */
+[data-theme='virtual'] header { border-bottom: 2px solid #ff0000; }
+[data-theme='virtual'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 1px solid #ff0000 !important; }
+[data-theme='virtual'] #now-playing-marquee .marquee-content { color: #ff0000 !important; text-shadow: 0 0 10px #ff0000; }
+[data-theme='virtual'] #level-badge { background-color: #000 !important; color: #ff0000 !important; border: 1px solid #ff0000 !important; }
+[data-theme='virtual'] .text-gaming-text\/10 { color: rgba(255, 0, 0, 0.1) !important; }
+[data-theme='virtual'] .text-yellow-500 { color: #ff0000 !important; }
+
+/* --- Quest Global Overrides --- */
+[data-theme='quest'] header { background: linear-gradient(to bottom, #0000ff, #000080) !important; border-bottom: 3px double #ffffff !important; }
+[data-theme='quest'] #now-playing-marquee .bg-black\/40 { background-color: #000040 !important; border: 2px solid #ffffff !important; }
+[data-theme='quest'] #now-playing-marquee .marquee-content { color: #ffffff !important; font-family: 'Pixelify Sans', cursive !important; }
+[data-theme='quest'] #level-badge { background-color: #ffffff !important; color: #000080 !important; border-radius: 4px !important; border: 2px solid #ffde00 !important; }
+
+/* --- Genesis Global Overrides --- */
+[data-theme='genesis'] header { border-bottom: 4px solid #333; background: linear-gradient(to bottom, #1a1a1a, #000000) !important; }
+[data-theme='genesis'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 1px solid #00f2ff !important; }
+[data-theme='genesis'] #now-playing-marquee .marquee-content { color: #ffde00 !important; font-family: 'Exo 2', sans-serif !important; font-weight: 900 !important; font-style: italic !important; }
+[data-theme='genesis'] #level-badge { background-color: #ffde00 !important; color: #000 !important; border-radius: 4px !important; }
+
+/* --- Spectrum Global Overrides --- */
+[data-theme='spectrum'] header { border-bottom: 4px solid #fff; }
+[data-theme='spectrum'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 2px solid #00ffff !important; }
+[data-theme='spectrum'] #now-playing-marquee .marquee-content { color: #ffff00 !important; font-family: 'JetBrains Mono', monospace !important; }
+[data-theme='spectrum'] #level-badge { background-color: #ff00ff !important; color: #000 !important; border-radius: 0 !important; }
+
+/* --- Famicom Global Overrides --- */
+[data-theme='famicom'] header { border-bottom: 4px solid #ffde00; }
+[data-theme='famicom'] #now-playing-marquee .bg-black\/40 { background-color: #f2f0e9 !important; border: 2px solid #991b1b !important; }
+[data-theme='famicom'] #now-playing-marquee .marquee-content { color: #991b1b !important; font-family: 'DotGothic16', sans-serif !important; font-weight: 900 !important; }
+[data-theme='famicom'] #level-badge { background-color: #ffde00 !important; color: #991b1b !important; border: 1px solid #991b1b !important; }
+
+/* --- Web-1.0 Global Overrides --- */
+[data-theme='web1'] header { background-color: #000080 !important; border-bottom: 2px solid #fff; }
+[data-theme='web1'] header h1, [data-theme='web1'] header span, [data-theme='web1'] header #progress-text { color: #fff !important; }
+[data-theme='web1'] #now-playing-marquee .bg-black\/40 { background-color: #c0c0c0 !important; border: 2px solid !important; border-color: #808080 #fff #fff #808080 !important; }
+[data-theme='web1'] #now-playing-marquee .marquee-content { color: #000 !important; font-family: 'Times New Roman', serif !important; text-decoration: underline; }
+[data-theme='web1'] #level-badge { background-color: #c0c0c0 !important; color: #000 !important; border: 2px solid !important; border-color: #fff #808080 #808080 #fff !important; }
+
+/* --- Game Gear Global Overrides --- */
+[data-theme='gamegear'] header { border-bottom: 4px solid #3b82f6; }
+[data-theme='gamegear'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 1px solid #a855f7 !important; }
+[data-theme='gamegear'] #now-playing-marquee .marquee-content { color: #3b82f6 !important; font-family: 'Exo 2', sans-serif !important; font-weight: 900 !important; }
+[data-theme='gamegear'] #level-badge { background-color: #a855f7 !important; color: #fff !important; }
+
+/* --- Manga Global Overrides --- */
+[data-theme='manga'] header { border-bottom: 4px solid #000; }
+[data-theme='manga'] #now-playing-marquee .bg-black\/40 { background-color: #fff !important; border: 2px solid #000 !important; }
+[data-theme='manga'] #now-playing-marquee .marquee-content { color: #000 !important; font-family: 'Balsamiq Sans', cursive !important; font-weight: 900 !important; }
+[data-theme='manga'] #level-badge { background-color: #000 !important; color: #fff !important; }
+
+/* --- Museum Global Overrides --- */
+[data-theme='museum'] header { border-bottom: 2px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+[data-theme='museum'] #now-playing-marquee .bg-black\/40 { background-color: #ffffff !important; border: 1px solid #d4af37 !important; }
+[data-theme='museum'] #now-playing-marquee .marquee-content { color: #d4af37 !important; font-family: 'Cormorant Garamond', serif !important; font-style: italic !important; }
+[data-theme='museum'] #level-badge { background-color: #d4af37 !important; color: #fff !important; border-radius: 0 !important; }
+
+/* --- Craft Global Overrides --- */
+[data-theme='craft'] header { border-bottom: 4px dashed #fff; background-color: #1d4ed8 !important; }
+[data-theme='craft'] #now-playing-marquee .bg-black\/40 { background-color: #3b82f6 !important; border: 2px solid #fff !important; }
+[data-theme='craft'] #now-playing-marquee .marquee-content { color: #fff !important; font-family: 'Comfortaa', cursive !important; }
+[data-theme='craft'] #level-badge { background-color: #fcd34d !important; color: #1d4ed8 !important; border: 2px solid #fff !important; }
+
+/* --- Street Global Overrides --- */
+[data-theme='street'] header { border-bottom: 4px solid #22c55e; }
+[data-theme='street'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 2px solid #22c55e !important; }
+[data-theme='street'] #now-playing-marquee .marquee-content { color: #22c55e !important; font-family: 'Archivo Black', sans-serif !important; }
+[data-theme='street'] #level-badge { background-color: #22c55e !important; color: #000 !important; transform: rotate(-2deg); }
+
+/* --- Noir Global Overrides --- */
+[data-theme='noir'] header { border-bottom: 1px solid #404040; background-color: #000 !important; }
+[data-theme='noir'] #now-playing-marquee .bg-black\/40 { background-color: #111 !important; border: 1px solid #404040 !important; }
+[data-theme='noir'] #now-playing-marquee .marquee-content { color: #e5e5e5 !important; font-family: 'JetBrains Mono', monospace !important; opacity: 0.8 !important; }
+[data-theme='noir'] #level-badge { background-color: #e5e5e5 !important; color: #000 !important; border-radius: 0 !important; }
+
+/* --- Tokyo Global Overrides --- */
+[data-theme='tokyo'] header { border-bottom: 3px solid #d946ef; box-shadow: 0 0 20px rgba(217, 70, 239, 0.3); }
+[data-theme='tokyo'] #now-playing-marquee .bg-black\/40 { background-color: #000 !important; border: 1px solid #d946ef !important; }
+[data-theme='tokyo'] #now-playing-marquee .marquee-content { color: #f0abfc !important; text-shadow: 0 0 10px #d946ef; }
+[data-theme='tokyo'] #level-badge { background-color: #d946ef !important; color: #000 !important; box-shadow: 0 0 10px #d946ef; }
 [data-theme='hero'] header .text-gaming-muted,
 [data-theme='hero'] header .text-gaming-text {
     color: rgba(255, 255, 255, 0.8) !important;

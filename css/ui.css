@@ -166,6 +166,211 @@ html, body {
     border-radius: 0.5rem !important;
 }
 
+/* Glacier Card */
+.membership-card[data-card-theme='glacier'] {
+    background: rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    color: #0369a1 !important;
+}
+.membership-card[data-card-theme='glacier'] #membership-card-inner h5,
+.membership-card[data-card-theme='glacier'] #membership-card-inner span,
+.membership-card[data-card-theme='glacier'] #membership-card-inner div {
+    color: #0369a1 !important;
+}
+
+/* Nomad Card */
+.membership-card[data-card-theme='nomad'] {
+    background-color: #78350f !important;
+    background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png') !important;
+    border: 4px solid #451a03 !important;
+}
+.membership-card[data-card-theme='nomad'] #membership-card-inner h5,
+.membership-card[data-card-theme='nomad'] #membership-card-inner span,
+.membership-card[data-card-theme='nomad'] #membership-card-inner div {
+    color: #fef3c7 !important;
+}
+
+/* Prism Card */
+.membership-card[data-card-theme='prism'] {
+    background: #ffffff !important;
+    border: none !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+.membership-card[data-card-theme='prism']::after {
+    content: "";
+    position: absolute; inset: 0;
+    border: 2px solid transparent;
+    border-image: linear-gradient(45deg, #ff0000, #00ff00, #0000ff) 1;
+    pointer-events: none;
+}
+
+/* Invader Card */
+.membership-card[data-card-theme='invader'] {
+    background-color: #000 !important;
+    border: 1px solid #22c55e !important;
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.2) !important;
+}
+.membership-card[data-card-theme='invader'] #membership-card-inner {
+    color: #22c55e !important;
+}
+
+/* Virtual Card */
+.membership-card[data-card-theme='virtual'] {
+    background-color: #000 !important;
+    border: 1px solid #ff0000 !important;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.2) !important;
+}
+.membership-card[data-card-theme='virtual'] #membership-card-inner {
+    color: #ff0000 !important;
+}
+
+/* Quest Card */
+.membership-card[data-card-theme='quest'] {
+    background: linear-gradient(to bottom, #0000ff, #000040) !important;
+    border: 2px double #ffffff !important;
+}
+.membership-card[data-card-theme='quest'] #membership-card-inner h5,
+.membership-card[data-card-theme='quest'] #membership-card-inner span,
+.membership-card[data-card-theme='quest'] #membership-card-inner div {
+    color: #ffffff !important;
+}
+
+/* Genesis Card */
+.membership-card[data-card-theme='genesis'] {
+    background-color: #1a1a1a !important;
+    border: 2px solid #00f2ff !important;
+    box-shadow: 5px 5px 0px #000 !important;
+}
+.membership-card[data-card-theme='genesis'] #membership-card-inner {
+    color: #ffde00 !important;
+}
+
+/* Spectrum Card */
+.membership-card[data-card-theme='spectrum'] {
+    background-color: #000 !important;
+    border: 2px solid #fff !important;
+    box-shadow: 8px 8px 0px #ff00ff !important;
+}
+.membership-card[data-card-theme='spectrum'] #membership-card-inner {
+    color: #00ffff !important;
+}
+
+/* Famicom Card */
+.membership-card[data-card-theme='famicom'] {
+    background-color: #f2f0e9 !important;
+    border: 2px solid #991b1b !important;
+    box-shadow: inset 0 0 0 4px #ffde00 !important;
+}
+.membership-card[data-card-theme='famicom'] #membership-card-inner h5,
+.membership-card[data-card-theme='famicom'] #membership-card-inner span,
+.membership-card[data-card-theme='famicom'] #membership-card-inner div {
+    color: #991b1b !important;
+}
+
+/* Web-1.0 Card */
+.membership-card[data-card-theme='web1'] {
+    background-color: #c0c0c0 !important;
+    border: 2px solid !important;
+    border-color: #fff #808080 #808080 #fff !important;
+}
+.membership-card[data-card-theme='web1'] #membership-card-inner h5,
+.membership-card[data-card-theme='web1'] #membership-card-inner span,
+.membership-card[data-card-theme='web1'] #membership-card-inner div {
+    color: #0000ff !important;
+    text-decoration: underline;
+}
+
+/* Game Gear Card */
+.membership-card[data-card-theme='gamegear'] {
+    background-color: #111827 !important;
+    border: 2px solid #3b82f6 !important;
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.3) !important;
+}
+.membership-card[data-card-theme='gamegear'] #membership-card-inner {
+    color: #a855f7 !important;
+}
+
+/* Manga Card */
+.membership-card[data-card-theme='manga'] {
+    background-color: #ffffff !important;
+    border: 4px solid #000 !important;
+    box-shadow: 10px 10px 0px #000 !important;
+}
+.membership-card[data-card-theme='manga'] #membership-card-inner {
+    color: #000000 !important;
+}
+
+/* Museum Card */
+.membership-card[data-card-theme='museum'] {
+    background-color: #ffffff !important;
+    border: 1px solid #d4af37 !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05) !important;
+}
+.membership-card[data-card-theme='museum'] #membership-card-inner {
+    color: #1a1a1a !important;
+}
+
+/* Craft Card */
+.membership-card[data-card-theme='craft'] {
+    background-color: #3b82f6 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/denim.png') !important;
+    border: 4px dashed #fff !important;
+    border-radius: 1.5rem !important;
+}
+.membership-card[data-card-theme='craft'] #membership-card-inner {
+    color: #ffffff !important;
+}
+
+/* Street Card */
+.membership-card[data-card-theme='street'] {
+    background-color: #4b5563 !important;
+    border: 2px solid #22c55e !important;
+    box-shadow: 10px 10px 0px #111827 !important;
+}
+.membership-card[data-card-theme='street'] #membership-card-inner {
+    color: #ffffff !important;
+}
+
+/* Noir Card */
+.membership-card[data-card-theme='noir'] {
+    background-color: #111 !important;
+    border: 1px solid #404040 !important;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5) !important;
+}
+.membership-card[data-card-theme='noir'] #membership-card-inner {
+    color: #e5e5e5 !important;
+}
+
+/* Tokyo Card */
+.membership-card[data-card-theme='tokyo'] {
+    background-color: #2e1065 !important;
+    border: 2px solid #d946ef !important;
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3) !important;
+}
+.membership-card[data-card-theme='tokyo'] #membership-card-inner {
+    color: #f0abfc !important;
+}
+
+/* Progress & XP Bar Overrides */
+[data-theme='glacier'] #progress-bar, [data-theme='glacier'] #xp-bar { background-color: #0ea5e9 !important; }
+[data-theme='nomad'] #progress-bar, [data-theme='nomad'] #xp-bar { background-color: #f59e0b !important; }
+[data-theme='prism'] #progress-bar, [data-theme='prism'] #xp-bar { background: linear-gradient(to right, #ec4899, #8b5cf6) !important; }
+[data-theme='invader'] #progress-bar, [data-theme='invader'] #xp-bar { background-color: #22c55e !important; box-shadow: 0 0 10px #22c55e; }
+[data-theme='virtual'] #progress-bar, [data-theme='virtual'] #xp-bar { background-color: #ff0000 !important; box-shadow: 0 0 10px #ff0000; }
+[data-theme='quest'] #progress-bar, [data-theme='quest'] #xp-bar { background-color: #ffde00 !important; border: 1px solid #ffffff; }
+[data-theme='genesis'] #progress-bar, [data-theme='genesis'] #xp-bar { background-color: #00f2ff !important; box-shadow: 0 0 10px #00f2ff; }
+[data-theme='spectrum'] #progress-bar, [data-theme='spectrum'] #xp-bar { background-color: #ffff00 !important; }
+[data-theme='famicom'] #progress-bar, [data-theme='famicom'] #xp-bar { background-color: #991b1b !important; }
+[data-theme='web1'] #progress-bar, [data-theme='web1'] #xp-bar { background-color: #000080 !important; }
+[data-theme='gamegear'] #progress-bar, [data-theme='gamegear'] #xp-bar { background-color: #3b82f6 !important; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5); }
+[data-theme='manga'] #progress-bar, [data-theme='manga'] #xp-bar { background-color: #000 !important; }
+[data-theme='museum'] #progress-bar, [data-theme='museum'] #xp-bar { background-color: #d4af37 !important; }
+[data-theme='craft'] #progress-bar, [data-theme='craft'] #xp-bar { background-color: #fcd34d !important; border: 2px dashed #fff; }
+[data-theme='street'] #progress-bar, [data-theme='street'] #xp-bar { background-color: #22c55e !important; box-shadow: 4px 4px 0px #000; }
+[data-theme='noir'] #progress-bar, [data-theme='noir'] #xp-bar { background-color: #e5e5e5 !important; opacity: 0.8; }
+[data-theme='tokyo'] #progress-bar, [data-theme='tokyo'] #xp-bar { background-color: #d946ef !important; box-shadow: 0 0 10px #d946ef; }
+
 /* Hover Shimmer Refinement */
 .membership-card:hover #card-shimmer {
     background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent) !important;
@@ -192,7 +397,8 @@ html, body {
 }
 [data-theme='os'] .bg-gray-700, [data-theme='os'] .bg-gray-800 { 
     background-color: #ffffff !important; 
-    border: 1px solid #808080 !important; 
+    border: 2px solid !important;
+    border-color: #808080 #ffffff #ffffff #808080 !important;
     border-radius: 0 !important; 
 }
 [data-theme='os'] .bg-gray-700:hover { background-color: #ffffff !important; }
