@@ -1394,6 +1394,14 @@
     <!-- Companion Container -->
     <div id="companion-container" class="fixed bottom-6 right-6 z-30"></div>
 
+    <!-- Ghost Cartridge for Drag & Drop -->
+    <div id="ghost-cartridge" class="fixed pointer-events-none z-[200] opacity-0 w-36 h-24 bg-[#444] rounded-t-md flex flex-col overflow-hidden border-x-2 border-t-2 border-black/40 shadow-2xl transition-opacity duration-200">
+        <div id="ghost-cart-label" class="w-full h-16 bg-cover bg-top border-b border-black/20 grayscale-[0.2]"></div>
+        <div class="flex-grow bg-[#555] px-2 py-1 flex items-center">
+            <span id="ghost-cart-title" class="w-full text-[7px] font-black uppercase truncate text-white/40 tracking-tighter font-mono"></span>
+        </div>
+    </div>
+
     <!-- Console Hardware -->
     <div id="console-container" class="fixed bottom-6 left-6 z-30 pointer-events-none sm:pointer-events-auto">
         <div id="console-hardware"

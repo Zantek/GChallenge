@@ -1,4 +1,116 @@
-// --- Console Hardware Logic ---
+// --- Hardware Drag & Drop Logic ---
+window.hardwareDrag = {
+    isDragging: false,
+    dragStarted: false, // NEW: Track if we've actually moved enough to drag
+    currentGameId: null,
+    ghost: null,
+    startX: 0,
+    startY: 0,
+
+    startCardDrag(e, gameId) {
+        if (e.button !== 0) return;
+        
+        // Don't drag if they clicked a button or interactive element inside the card
+        if (e.target.closest('button') || e.target.closest('a') || e.target.closest('input')) {
+            return;
+        }
+
+        const game = allGames.find(g => g.id === gameId);
+        if (!game) return;
+
+        this.currentGameId = gameId;
+        this.isDragging = true;
+        this.dragStarted = false; // Reset threshold
+        this.startX = e.clientX;
+        this.startY = e.clientY;
+
+        // Global listeners
+        this.moveHandler = this.doCardDrag.bind(this);
+        this.upHandler = this.endCardDrag.bind(this);
+        document.addEventListener('mousemove', this.moveHandler);
+        document.addEventListener('mouseup', this.upHandler);
+    },
+
+    doCardDrag(e) {
+        if (!this.isDragging) return;
+
+        // Check Threshold (10px)
+        if (!this.dragStarted) {
+            const dist = Math.hypot(e.clientX - this.startX, e.clientY - this.startY);
+            if (dist > 10) {
+                this.dragStarted = true;
+                // Once we cross threshold, we MUST prevent default to stop browser image dragging
+                e.preventDefault(); 
+                
+                // Initialize Ghost
+                this.ghost = document.getElementById('ghost-cartridge');
+                const label = document.getElementById('ghost-cart-label');
+                const title = document.getElementById('ghost-cart-title');
+                const game = allGames.find(g => g.id === this.currentGameId);
+
+                if (this.ghost && game) {
+                    label.style.backgroundImage = `url('${game.banner}')`;
+                    title.innerText = game.title;
+                    this.ghost.style.opacity = '1';
+                }
+            } else {
+                return; // Haven't moved enough yet
+            }
+        }
+
+        if (!this.ghost) return;
+
+        this.ghost.style.left = `${e.clientX - 72}px`;
+        this.ghost.style.top = `${e.clientY - 48}px`;
+        this.ghost.style.opacity = '1';
+
+        // Check distance to console
+        const consoleEl = document.getElementById('console-hardware');
+        const rect = consoleEl.getBoundingClientRect();
+        const dist = Math.hypot(e.clientX - (rect.left + rect.width/2), e.clientY - (rect.top + rect.height/2));
+
+        if (dist < 150) {
+            this.ghost.style.transform = 'scale(1) rotate(0deg)';
+            this.ghost.style.boxShadow = '0 0 30px var(--accent)';
+        } else {
+            this.ghost.style.transform = 'scale(0.8) rotate(-5deg)';
+            this.ghost.style.boxShadow = '0 20px 50px rgba(0,0,0,0.5)';
+        }
+    },
+
+    endCardDrag(e) {
+        if (!this.isDragging) return;
+        this.isDragging = false;
+
+        document.removeEventListener('mousemove', this.moveHandler);
+        document.removeEventListener('mouseup', this.upHandler);
+
+        if (!this.dragStarted) return; // If they didn't drag past threshold, do nothing (click handles it)
+        const consoleEl = document.getElementById('console-hardware');
+        const rect = consoleEl.getBoundingClientRect();
+        
+        // Simple hit-test
+        const isOverConsole = (
+            e.clientX >= rect.left - 50 && 
+            e.clientX <= rect.right + 50 && 
+            e.clientY >= rect.top - 50 && 
+            e.clientY <= rect.bottom + 50
+        );
+
+        if (isOverConsole) {
+            insertCartridge(this.currentGameId);
+            if (sfx) sfx.playDing();
+        }
+
+        // Hide ghost
+        if (this.ghost) {
+            this.ghost.style.opacity = '0';
+            this.ghost.style.transform = 'scale(0.5)';
+        }
+    }
+};
+
+// --- Original Cartridge Logic (Modified) ---
 let currentlyPlaying = localStorage.getItem('gamingChallengePlaying') || null;
 
 function updateHeaderMarquee(gameId) {

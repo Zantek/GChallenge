@@ -1869,7 +1869,9 @@ function createCard(game, category = 'core') {
     }
 
     return `
-        <div id="card-${game.id}" class="game-card-container ${statusClass}" onclick="flipCard('${game.id}', event)">
+        <div id="card-${game.id}" class="game-card-container ${statusClass}" 
+             onclick="flipCard('${game.id}', event)" 
+             onmousedown="if(window.hardwareDrag) hardwareDrag.startCardDrag(event, '${game.id}')">
             <div class="game-card-inner">
                 <!-- FRONT FACE -->
                 <div class="game-card game-card-front bg-gaming-card border border-gaming-border flex flex-col group transition-all duration-300">
@@ -1879,7 +1881,7 @@ function createCard(game, category = 'core') {
                         ${stampHtml}
                         ${(isDropped || gameReviews[game.id]) ? `<div class="review-stamp stamp-${isDropped ? 'dropped' : gameReviews[game.id]}">${isDropped ? 'dropped' : gameReviews[game.id]}</div>` : ''}
                         ${isDropped ? '<div class="absolute inset-0 bg-black/40 z-20 flex items-center justify-center"><svg class="w-12 h-12 text-white/30" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg></div>' : ''}
-                        <img src="${imgUrl}" alt="${game.title}" class="w-full h-full object-cover object-top shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                        <img src="${imgUrl}" alt="${game.title}" draggable="false" class="w-full h-full object-cover object-top shadow-inner group-hover:scale-110 transition-transform duration-700 ease-in-out">
                         <div class="absolute bottom-2 right-2 bg-black/80 text-white text-[10px] px-2 py-1 rounded z-20 font-mono border border-white/20" style="transform: translateZ(1px)">
                             ${game.length}
                         </div>
