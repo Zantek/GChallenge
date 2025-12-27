@@ -908,6 +908,7 @@
 [data-theme='brick'] .bg-red-600,
 [data-theme='brick'] .bg-gray-700,
 [data-theme='brick'] .bg-blue-600,
+[data-theme='brick'] .help-btn,
 [data-theme='brick'] a[href*="howlongtobeat"] {
     background-color: var(--accent) !important;
     color: var(--bg-primary) !important;
@@ -916,6 +917,7 @@
 [data-theme='brick'] .bg-red-600:hover,
 [data-theme='brick'] .bg-gray-700:hover,
 [data-theme='brick'] .bg-blue-600:hover,
+[data-theme='brick'] .help-btn:hover,
 [data-theme='brick'] a[href*="howlongtobeat"]:hover {
     filter: brightness(1.5);
 }
@@ -924,6 +926,7 @@
 [data-theme='os'] .bg-red-600,
 [data-theme='os'] .bg-gray-700,
 [data-theme='os'] .bg-blue-600,
+[data-theme='os'] .help-btn,
 [data-theme='os'] a[href*="howlongtobeat"] {
     background-color: #c0c0c0 !important;
     color: #000000 !important;
@@ -934,8 +937,94 @@
 [data-theme='os'] .bg-red-600:hover,
 [data-theme='os'] .bg-gray-700:hover,
 [data-theme='os'] .bg-blue-600:hover,
+[data-theme='os'] .help-btn:hover,
 [data-theme='os'] a[href*="howlongtobeat"]:hover {
     border-color: #808080 #ffffff #ffffff #808080 !important;
+}
+
+/* Blueprint Card Back Buttons */
+[data-theme='blueprint'] .game-card-back .bg-red-600,
+[data-theme='blueprint'] .game-card-back .bg-gray-700,
+[data-theme='blueprint'] .game-card-back .bg-blue-600,
+[data-theme='blueprint'] .game-card-back .help-btn {
+    background-color: #002b5c !important;
+    color: #00f2ff !important;
+    border: 1px solid #00f2ff !important;
+    box-shadow: none !important;
+}
+[data-theme='blueprint'] .game-card-back button:hover,
+[data-theme='blueprint'] .game-card-back a:hover {
+    background-color: #00f2ff !important;
+    color: #002b5c !important;
+}
+
+/* Future Card Back Buttons */
+[data-theme='future'] .game-card-back .bg-red-600,
+[data-theme='future'] .game-card-back .bg-gray-700,
+[data-theme='future'] .game-card-back .bg-blue-600,
+[data-theme='future'] .game-card-back .help-btn {
+    background-color: #1e293b !important;
+    color: #3b82f6 !important;
+    border: 1px solid #3b82f6 !important;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.1) !important;
+}
+[data-theme='future'] .game-card-back button:hover,
+[data-theme='future'] .game-card-back a:hover {
+    background-color: #3b82f6 !important;
+    color: #ffffff !important;
+}
+
+/* Candy Card Back Buttons */
+[data-theme='candy'] .game-card-back .bg-red-600,
+[data-theme='candy'] .game-card-back .bg-gray-700,
+[data-theme='candy'] .game-card-back .bg-blue-600,
+[data-theme='candy'] .game-card-back .help-btn {
+    background-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ff00ff !important;
+    border: 2px solid #ffffff !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 10px rgba(255, 0, 255, 0.1) !important;
+}
+[data-theme='candy'] .game-card-back button:hover,
+[data-theme='candy'] .game-card-back a:hover {
+    background-color: #ff00ff !important;
+    color: #ffffff !important;
+}
+
+/* Arcade Card Back Buttons */
+[data-theme='arcade'] .game-card-back .bg-red-600,
+[data-theme='arcade'] .game-card-back .bg-gray-700,
+[data-theme='arcade'] .game-card-back .bg-blue-600,
+[data-theme='arcade'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #ff00ff !important;
+    border: 2px solid #ff00ff !important;
+    box-shadow: 0 0 10px #ff00ff !important;
+    border-radius: 0 !important;
+}
+[data-theme='arcade'] .game-card-back button:hover,
+[data-theme='arcade'] .game-card-back a:hover {
+    background-color: #ff00ff !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px #ff00ff !important;
+}
+
+/* Obsidian Card Back Buttons */
+[data-theme='obsidian'] .game-card-back .bg-red-600,
+[data-theme='obsidian'] .game-card-back .bg-gray-700,
+[data-theme='obsidian'] .game-card-back .bg-blue-600,
+[data-theme='obsidian'] .game-card-back .help-btn {
+    background-color: #000 !important;
+    color: #ff6600 !important;
+    border: 1px solid #333 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+[data-theme='obsidian'] .game-card-back button:hover,
+[data-theme='obsidian'] .game-card-back a:hover {
+    background-color: #ff6600 !important;
+    color: #000 !important;
+    border-color: #ff6600 !important;
 }
 
 /* Hydraulic Card Back Buttons */
@@ -1485,4 +1574,38 @@
     border: 1px solid #d946ef !important;
     text-shadow: 0 0 5px #d946ef !important;
     font-family: 'DotGothic16', sans-serif !important;
+}
+
+/* Woodgrain Card Back Buttons */
+[data-theme='woodgrain'] .game-card-back .bg-red-600,
+[data-theme='woodgrain'] .game-card-back .bg-gray-700,
+[data-theme='woodgrain'] .game-card-back .bg-blue-600,
+[data-theme='woodgrain'] .game-card-back .help-btn {
+    background-color: #4a3728 !important;
+    color: #ffbf00 !important;
+    border: 2px solid #1a0f00 !important;
+    font-family: 'DM Serif Display', serif !important;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3) !important;
+}
+[data-theme='woodgrain'] .game-card-back button:hover,
+[data-theme='woodgrain'] .game-card-back a:hover {
+    background-color: #ffbf00 !important;
+    color: #1a0f00 !important;
+}
+
+/* Papercraft Card Back Buttons */
+[data-theme='papercraft'] .game-card-back .bg-red-600,
+[data-theme='papercraft'] .game-card-back .bg-gray-700,
+[data-theme='papercraft'] .game-card-back .bg-blue-600,
+[data-theme='papercraft'] .game-card-back .help-btn {
+    background-color: #f4eee1 !important;
+    color: #d32f2f !important;
+    border: 2px solid #333 !important;
+    font-family: 'Special Elite', cursive !important;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.1) !important;
+}
+[data-theme='papercraft'] .game-card-back button:hover,
+[data-theme='papercraft'] .game-card-back a:hover {
+    background-color: #333 !important;
+    color: #f4eee1 !important;
 }
