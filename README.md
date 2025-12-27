@@ -6,14 +6,14 @@ A highly immersive, responsive web-based application designed to track progress 
 
 ## 🎮 Core Features
 
-- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions.
+- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Includes a **Help Button** linking to curated game guides.
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
-- **Interactive Instruction Manual:** A physical "Book Spine" trigger next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
+- **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
-- **Smart Jump Interaction:** Click the inserted game on the console to instantly locate and highlight its card on the shelf.
-- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED and infinite-loop ticker tape.
+- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls**.
 - **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 11 themes.
 - **Gamer Profile & RPG Stats:** 
+    - **Membership Card:** A tactile "Gemini Video Rental" ID featuring your Member ID (derived from alignment), top genres, and rank icons.
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
     - **The Trail:** A chronological vertical trail visualizing your 2026 milestones.
     - **Achievements:** A dedicated vault for category completion trophies.
@@ -29,7 +29,7 @@ A highly immersive, responsive web-based application designed to track progress 
 - **The Weird Bonus List:** Experimental and quirky titles.
 - **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
 - **Paperwork List:** Satisfyingly tactile simulation and organization games.
-- **Time Warp List:** Games focused on time manipulation and loops.
+- **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
 - **Zen Bonus List:** Meditative, low-stress experiences.
 - **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
@@ -54,6 +54,7 @@ Since this is a static web project, no build or installation steps are required.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.
 - [x] Implement Permanent System Monitor and Now Playing marquee.
+- [x] Implement Physical Membership Card and Dynamic ID system.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
 - [x] Implement Hardware Persistence for last-used cartridges.
 - [x] Refine global UX (Smooth Scroll, Selection Lock).
