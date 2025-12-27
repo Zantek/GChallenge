@@ -2063,8 +2063,17 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('cart-title').innerText = lastTitle || '';
         }
         
+        // Ensure constants are accessible or use the values directly
+        const EJECTED_Y = -60; 
+        
         setTimeout(() => {
-            ejectCartridge(true); // Silent & Instant eject/hide
+            const cart = document.getElementById('active-cartridge');
+            if (cart) {
+                cart.style.transition = 'none';
+                cart.style.transform = `translateY(${EJECTED_Y}px)`;
+                cart.style.opacity = '1';
+            }
+            ejectCartridge(true); // Sync internal state
         }, 100);
     }
     document.getElementById('core-grid').innerHTML = coreGames.map(game => createCard(game, 'core')).join('');

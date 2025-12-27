@@ -46,6 +46,7 @@ function insertCartridge(gameId, silent = false, instant = false) {
 
     currentlyPlaying = gameId;
     localStorage.setItem('gamingChallengePlaying', gameId);
+    localStorage.setItem('gamingChallengeLastPlayedId', gameId);
 
     const cart = document.getElementById('active-cartridge');
     const label = document.getElementById('cart-label');
@@ -61,9 +62,10 @@ function insertCartridge(gameId, silent = false, instant = false) {
 
     if (instant) {
         cart.style.transition = 'none';
+        cart.style.userSelect = 'none'; // Prevent text selection while dragging
         label.style.backgroundImage = `url('${imgUrl}')`;
         title.innerText = game.title.length > 25 ? game.title.substring(0, 22) + "..." : game.title;
-        cart.style.transform = 'translateY(-24px)';
+        cart.style.transform = `translateY(${CARTRIDGE_INSERTED_Y}px)`;
         cart.style.opacity = '1';
         led.style.backgroundColor = '#10b981';
         led.style.boxShadow = '0 0 10px rgba(16, 185, 129, 0.8)';
@@ -88,7 +90,8 @@ function insertCartridge(gameId, silent = false, instant = false) {
         
         // 3. "Insert" New (Neatly into slot)
         cart.style.transition = 'transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out';
-        cart.style.transform = 'translateY(-24px)';
+        cart.style.userSelect = 'none';
+        cart.style.transform = `translateY(${CARTRIDGE_INSERTED_Y}px)`;
         cart.style.opacity = '1';
 
         // 4. Power Surge Effect
@@ -136,9 +139,13 @@ function ejectCartridge(silent = false) {
     const status = document.getElementById('console-status-text');
 
     // 1. "Eject" 
-    cart.style.transition = silent ? 'none' : 'transform 0.2s ease-in, opacity 0.2s ease-in';
-    cart.style.transform = 'translateY(-120%)';
-    cart.style.opacity = '0';
+    cart.style.transition = silent ? 'none' : 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-in';
+    
+    // If silent (boot), keep it visible but in the waiting position
+    cart.style.transform = `translateY(${CARTRIDGE_EJECTED_Y}px)`;
+    cart.style.opacity = '1';
+    if (silent) cart.style.transition = 'none';
+    
     updateHeaderMarquee(null); // Restore header title
     
     // 2. Standby LED
@@ -150,8 +157,95 @@ function ejectCartridge(silent = false) {
 
     // Update UI buttons globally
     if (typeof updateAllPlayButtons === 'function') updateAllPlayButtons();
-    if (!silent && sfx) sfx.playFlip(); // Use thump sound for eject
+    
+    if (!silent && sfx) {
+        sfx.playTone(150, 'square', 0.1, 0, 0.1); // Tactile "THUMP"
+        setTimeout(() => { sfx.playTick(); }, 100);
+    }
 }
+
+let isDraggingCartridge = false;
+let dragStartY = 0;
+let dragInitialY = -24; 
+const CARTRIDGE_INSERTED_Y = -24;
+const CARTRIDGE_EJECTED_Y = -60;
+
+function startCartridgeDrag(e) {
+    if (e.button !== 0) return; // Only left click
+    isDraggingCartridge = true;
+    dragStartY = e.clientY;
+    
+    // Identify where we are starting from
+    dragInitialY = currentlyPlaying ? CARTRIDGE_INSERTED_Y : CARTRIDGE_EJECTED_Y;
+    
+    const cart = document.getElementById('active-cartridge');
+    cart.style.transition = 'none'; // Instant response during drag
+    
+    document.addEventListener('mousemove', doCartridgeDrag);
+    document.addEventListener('mouseup', endCartridgeDrag);
+    
+    e.preventDefault();
+}
+
+function doCartridgeDrag(e) {
+    if (!isDraggingCartridge) return;
+    
+    const deltaY = e.clientY - dragStartY;
+    const cart = document.getElementById('active-cartridge');
+    
+    const newY = dragInitialY + deltaY;
+    
+    // Constraints: 
+    // - Don't go higher than -120px (leaving console)
+    // - Don't go lower than 0px (sinking into console)
+    const clampedY = Math.max(-120, Math.min(0, newY));
+    cart.style.transform = `translateY(${clampedY}px)`;
+}
+
+function endCartridgeDrag(e) {
+    if (!isDraggingCartridge) return;
+    isDraggingCartridge = false;
+    
+    const deltaY = e.clientY - dragStartY;
+    const cart = document.getElementById('active-cartridge');
+    
+    document.removeEventListener('mousemove', doCartridgeDrag);
+    document.removeEventListener('mouseup', endCartridgeDrag);
+
+    // Logic based on direction and state
+    if (currentlyPlaying) {
+        // We are playing: Drag UP to eject
+        if (deltaY < -40) {
+            ejectCartridge();
+        } else if (Math.abs(deltaY) < 5) {
+            scrollToActiveGame(e);
+        } else {
+            // Snap back to inserted
+            cart.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            cart.style.transform = `translateY(${CARTRIDGE_INSERTED_Y}px)`;
+        }
+    } else {
+        // We are NOT playing: Drag DOWN to slam in
+        if (deltaY > 30) {
+            const lastId = localStorage.getItem('gamingChallengeLastPlayedId');
+            if (lastId) {
+                insertCartridge(lastId);
+            } else {
+                cart.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                cart.style.transform = `translateY(${CARTRIDGE_EJECTED_Y}px)`;
+            }
+        } else if (Math.abs(deltaY) < 5) {
+            scrollToActiveGame(e);
+        } else {
+            // Snap back to raised/ejected
+            cart.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            cart.style.transform = `translateY(${CARTRIDGE_EJECTED_Y}px)`;
+        }
+    }
+}
+
+// Attach startDrag to ThemeManager for index.html access or keep global
+themeManager.startCartridgeDrag = startCartridgeDrag;
 
 function scrollToActiveGame(event) {
     if (event) event.stopPropagation();
