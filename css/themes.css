@@ -70,7 +70,7 @@ body {
     --accent: #0f380f;
     --border: #0f380f;
     --radius: 0px;
-    --font-main: monospace;
+    --font-main: 'DotGothic16', monospace;
 }
 
 [data-theme='cube'] {
@@ -83,7 +83,7 @@ body {
     --accent: #ff4500;
     --border: #4b0082;
     --radius: 2rem;
-    --font-main: 'Verdana', sans-serif;
+    --font-main: 'Archivo Black', sans-serif;
 }
 
 [data-theme='os'] {
@@ -96,7 +96,7 @@ body {
     --accent: #000080;
     --border: #808080;
     --radius: 0px;
-    --font-main: 'Tahoma', sans-serif;
+    --font-main: 'IBM Plex Mono', monospace;
 }
 
 [data-theme='legacy'] {
@@ -109,7 +109,7 @@ body {
     --accent: #ffffff;
     --border: #333333;
     --radius: 0.5rem;
-    --font-main: monospace;
+    --font-main: 'JetBrains Mono', monospace;
 }
 
 [data-theme='blueprint'] {
@@ -122,7 +122,7 @@ body {
     --accent: #00f2ff;
     --border: #ffffff;
     --radius: 0px;
-    --font-main: monospace;
+    --font-main: 'Space Mono', monospace;
 }
 
 [data-theme='blueprint'] body {
@@ -143,7 +143,7 @@ body {
     --accent: #ffbf00;
     --border: #1a0f00;
     --radius: 4px;
-    --font-main: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+    --font-main: 'DM Serif Display', serif;
 }
 
 [data-theme='papercraft'] {
@@ -156,7 +156,7 @@ body {
     --accent: #d32f2f;
     --border: #333333;
     --radius: 2px;
-    --font-main: "Courier New", Courier, monospace;
+    --font-main: 'Special Elite', cursive;
 }
 
 [data-theme='candy'] {
@@ -169,7 +169,7 @@ body {
     --accent: #ff00ff;
     --border: rgba(255, 255, 255, 0.5);
     --radius: 2rem;
-    --font-main: 'Inter', sans-serif;
+    --font-main: 'Comfortaa', cursive;
 }
 
 [data-theme='arcade'] {
@@ -182,7 +182,7 @@ body {
     --accent: #ff00ff;
     --border: #00f2ff;
     --radius: 0px;
-    --font-main: 'Courier New', monospace;
+    --font-main: 'Silkscreen', cursive;
 }
 
 [data-theme='obsidian'] {
@@ -195,6 +195,10 @@ body {
     --accent: #ff6600;
     --border: #222222;
     --radius: 0px;
+    --font-main: 'Chakra Petch', sans-serif;
+}
+
+[data-theme='future'] {
     --font-main: 'Inter', sans-serif;
 }
 
