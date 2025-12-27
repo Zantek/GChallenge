@@ -12,6 +12,41 @@
     scroll-behavior: smooth;
 }
 
+.help-btn { background-color: #d97706; } /* Default Amber */
+.help-btn:hover { background-color: #b45309; }
+
+[data-theme='hydraulic'] {
+    --bg-primary: #1f2937;
+    --bg-secondary: #111827;
+    --bg-card: #374151;
+    --bg-header: #000000;
+    --text-primary: #fbbf24;
+    --text-secondary: #d1d5db;
+    --accent: #fbbf24;
+    --border: #111827;
+    --radius: 0px;
+    --font-main: "Arial Black", Gadget, sans-serif;
+}
+
+[data-theme='hydraulic'] h1, 
+[data-theme='hydraulic'] h2, 
+[data-theme='hydraulic'] h3,
+[data-theme='hydraulic'] .font-bold,
+[data-theme='hydraulic'] .font-black {
+    font-family: "Arial Black", Gadget, sans-serif !important;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+}
+
+[data-theme='hydraulic'] body {
+    background-image: 
+        repeating-linear-gradient(45deg, rgba(251, 191, 36, 0.02) 0px, rgba(251, 191, 36, 0.02) 20px, transparent 20px, transparent 40px) !important;
+    background-attachment: fixed;
+}
+
+[data-theme='hydraulic'] .help-btn { background-color: #fbbf24 !important; color: #000 !important; }
+[data-theme='hydraulic'] .help-btn:hover { background-color: #f59e0b !important; }
+
 body {
     font-family: var(--font-main);
     user-select: none;
@@ -313,15 +348,19 @@ body {
 [data-theme='legacy'] .bg-blue-600,
 [data-theme='legacy'] .bg-gaming-accent,
 [data-theme='legacy'] .hover\:bg-blue-500:hover,
-[data-theme='legacy'] .poster-btn:hover {
+[data-theme='legacy'] .poster-btn:hover,
+[data-theme='legacy'] .help-btn:hover {
     background-color: #ffffff !important;
     color: #000000 !important;
     border: 1px solid #ffffff !important;
 }
 [data-theme='legacy'] .poster-btn:hover span,
-[data-theme='legacy'] .poster-btn:hover svg {
+[data-theme='legacy'] .poster-btn:hover svg,
+[data-theme='legacy'] .help-btn:hover span,
+[data-theme='legacy'] .help-btn:hover svg {
     color: #000000 !important;
 }
+[data-theme='legacy'] .help-btn { background-color: #000 !important; border: 1px solid #fff !important; }
 
 /* Legacy Toolbar Transparency */
 [data-theme='legacy'] header .bg-gaming-card\/80 {

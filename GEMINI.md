@@ -10,8 +10,8 @@ A highly immersive, responsive web-based application designed to track progress 
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
 - **Interactive Instruction Manual:** A physical "Book Spine" sitting next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, 10 pro tips, a full 48-game catalog, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
-- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Power/Tune).
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with themed backgrounds for all 11 skins.
+- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with themed backgrounds for all 12 skins.
 - **Gamer Profile & RPG Stats:** 
     - **Membership Card:** A tactile "Gemini Video Rental" ID featuring your Member ID (derived from alignment), top genres, and rank icons.
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
@@ -21,7 +21,7 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-- **Console Skins:** 11 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, etc.) with global background refinements (e.g., Blueprint drafting grid).
+- **Console Skins:** 12 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, **Hydraulic**, etc.) with global background refinements. The **Hydraulic** skin features industrial "Arial Black" typography and heavy machinery aesthetics.
 
 ## 🏆 Challenge Lists (48 Games Total)
 
@@ -42,7 +42,7 @@ A highly immersive, responsive web-based application designed to track progress 
 - **Data:** Persistent state management using `localStorage` with Base64-encoded Full System Saves.
 
 ## 📝 Development TODOs
-- [x] Implement 11 unique Console Skins and Visual Theme Picker.
+- [x] Implement 12 unique Console Skins and Visual Theme Picker.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.

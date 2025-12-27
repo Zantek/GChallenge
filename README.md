@@ -6,12 +6,12 @@ A highly immersive, responsive web-based application designed to track progress 
 
 ## 🎮 Core Features
 
-- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Includes a **Help Button** linking to curated game guides.
+- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Includes a **Help Button** linking directly to curated game guides.
 - **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
 - **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
-- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls**.
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 11 themes.
+- **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 12 themes.
 - **Gamer Profile & RPG Stats:** 
     - **Membership Card:** A tactile "Gemini Video Rental" ID featuring your Member ID (derived from alignment), top genres, and rank icons.
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
@@ -21,7 +21,7 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-- **Console Skins:** 11 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, etc.) selectable via a visual theme picker in settings.
+- **Console Skins:** 12 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, **Hydraulic**, etc.) selectable via a visual theme picker in settings.
 
 ## 🏆 Challenge Lists (48 Games Total)
 
@@ -49,7 +49,7 @@ Since this is a static web project, no build or installation steps are required.
 2. For the best experience, use a local server (e.g., `npx serve .` or VS Code Live Server).
 
 ## 📝 Development TODOs
-- [x] Implement 11 unique Console Skins and Visual Theme Picker.
+- [x] Implement 12 unique Console Skins and Visual Theme Picker.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.

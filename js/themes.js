@@ -1,6 +1,6 @@
 class ThemeManager {
     constructor() {
-        this.themes = ['future', 'brick', 'cube', 'os', 'legacy', 'blueprint', 'woodgrain', 'papercraft', 'candy', 'arcade', 'obsidian'];
+        this.themes = ['future', 'brick', 'cube', 'os', 'legacy', 'blueprint', 'woodgrain', 'papercraft', 'candy', 'arcade', 'obsidian', 'hydraulic'];
         this.currentTheme = localStorage.getItem('gamingChallengeTheme') || 'future';
         this.previousTheme = localStorage.getItem('gamingChallengePreviousTheme') || 'future';
         
@@ -90,7 +90,8 @@ class ThemeManager {
             'papercraft': '#d32f2f',
             'candy': '#ff00ff',
             'arcade': '#ff00ff',
-            'obsidian': '#ff6600'
+            'obsidian': '#ff6600',
+            'hydraulic': '#fbbf24'
         };
 
         grid.innerHTML = this.themes.map(t => {

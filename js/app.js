@@ -1378,6 +1378,16 @@ function generateShareCard() {
             font: 'Inter, sans-serif',
             radius: 0,
             glow: false
+        },
+        'hydraulic': {
+            bg: ['#1f2937', '#111827'],
+            accent: '#fbbf24',
+            secondary: '#374151',
+            text: '#fbbf24',
+            muted: '#9ca3af',
+            font: 'monospace',
+            radius: 0,
+            glow: false
         }
     };
 
@@ -1458,8 +1468,8 @@ function generateShareCard() {
     ctx.fillText('COMPLETED', 600, 420);
 
     // Details Bar
-    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'woodgrain' ? '#1a0f00' : (currentTheme === 'papercraft' ? '#f4eee1' : (currentTheme === 'arcade' ? '#000000' : (currentTheme === 'obsidian' ? '#0f0f0f' : '#1e293b'))))));
-    if (currentTheme === 'os' || currentTheme === 'blueprint' || currentTheme === 'arcade' || currentTheme === 'obsidian') {
+    ctx.fillStyle = currentTheme === 'os' ? '#ffffff' : (currentTheme === 'brick' ? s.secondary : (currentTheme === 'blueprint' ? '#001f42' : (currentTheme === 'woodgrain' ? '#1a0f00' : (currentTheme === 'papercraft' ? '#f4eee1' : (currentTheme === 'arcade' ? '#000000' : (currentTheme === 'obsidian' ? '#0f0f0f' : (currentTheme === 'hydraulic' ? '#111827' : '#1e293b')))))));
+    if (currentTheme === 'os' || currentTheme === 'blueprint' || currentTheme === 'arcade' || currentTheme === 'obsidian' || currentTheme === 'hydraulic') {
         ctx.strokeStyle = s.accent;
         ctx.lineWidth = 2;
         ctx.strokeRect(300, 480, 600, 100);
@@ -1603,7 +1613,7 @@ function showDetails(id) {
                     Wikipedia
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                 </a>
-                <a href="${game.guide}" target="_blank" class="bg-amber-600 hover:bg-amber-500 text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 shadow-lg shadow-amber-500/20">
+                <a href="${game.guide}" target="_blank" class="help-btn text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 shadow-lg">
                     Help
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </a>
@@ -1776,7 +1786,7 @@ function createCard(game, category = 'core') {
                             <a href="${game.wiki}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
                                 Wiki
                             </a>
-                            <a href="${game.guide}" target="_blank" onclick="event.stopPropagation()" class="flex-1 bg-amber-600 hover:bg-amber-500 text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
+                            <a href="${game.guide}" target="_blank" onclick="event.stopPropagation()" class="flex-1 help-btn text-white py-1 rounded text-[9px] font-bold text-center flex items-center justify-center gap-1">
                                 Help
                             </a>
                         </div>
