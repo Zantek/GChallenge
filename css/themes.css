@@ -38,6 +38,11 @@
     text-transform: uppercase;
 }
 
+/* Hydraulic Theme Difficulty Stars */
+[data-theme='hydraulic'] .text-gaming-text\/10 {
+    color: rgba(0, 0, 0, 0.3) !important;
+}
+
 [data-theme='hydraulic'] body {
     background-image: 
         repeating-linear-gradient(45deg, rgba(251, 191, 36, 0.02) 0px, rgba(251, 191, 36, 0.02) 20px, transparent 20px, transparent 40px) !important;
