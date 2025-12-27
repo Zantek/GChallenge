@@ -1385,9 +1385,49 @@ function generateShareCard() {
             secondary: '#374151',
             text: '#fbbf24',
             muted: '#9ca3af',
-            font: 'monospace',
+            font: 'Russo One',
             radius: 0,
             glow: false
+        },
+        'overgrown': {
+            bg: ['#1a2421', '#0f1412'],
+            accent: '#4ade80',
+            secondary: '#2d3a35',
+            text: '#d1dace',
+            muted: '#8a9a85',
+            font: 'Cormorant Garamond',
+            radius: 8,
+            glow: false
+        },
+        'inkwash': {
+            bg: ['#f2f0e9', '#e8e4d9'],
+            accent: '#d32f2f',
+            secondary: '#1a1a1a',
+            text: '#1a1a1a',
+            muted: '#4a4a4a',
+            font: 'ZCOOL XiaoWei',
+            radius: 0,
+            glow: false
+        },
+        'hero': {
+            bg: ['#ffde00', '#ff0000'],
+            accent: '#000000',
+            secondary: '#0000ff',
+            text: '#000000',
+            muted: '#333333',
+            font: 'Balsamiq Sans',
+            radius: 0,
+            glow: false
+        },
+        'navigator': {
+            bg: ['#0b0e14', '#05070a'],
+            accent: '#00f2ff',
+            secondary: '#1e90ff',
+            text: '#00f2ff',
+            muted: '#708090',
+            font: 'Audiowide',
+            radius: 4,
+            glow: true
         }
     };
 

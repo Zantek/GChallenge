@@ -168,9 +168,9 @@
                                         </svg>
                                     </button>
                                     <div class="w-px h-4 bg-gaming-border"></div>
-                                    <button onclick="themeManager.nextTheme()"
+                                    <button onclick="themeManager.openThemeBrowser()"
                                         class="text-yellow-400 hover:text-yellow-300 transition-colors p-1"
-                                        title="Switch Console Skin">
+                                        title="Browse Console Skins">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -555,25 +555,7 @@
                     </label>
                 </div>
 
-                <!-- Power Surge Toggle -->
-                <div class="flex items-center justify-between">
-                    <div class="flex flex-col">
-                        <span class="text-sm font-bold text-gaming-text uppercase tracking-wider">Power Surge</span>
-                        <span class="text-[10px] text-gaming-muted italic">Electrical brown-out on boot</span>
-                    </div>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="setting-surge" onchange="toggleSurgeSetting()">
-                        <span class="toggle-slider"></span>
-                    </label>
-                </div>
-
-                <!-- Theme Selection Grid -->
-                <div class="pt-4 border-t border-gaming-border space-y-3">
-                    <span class="text-[10px] font-black text-gaming-muted uppercase tracking-[0.2em]">Select Console Skin:</span>
-                    <div id="theme-picker-grid" class="flex flex-wrap gap-2">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
+                <!-- Theme Selection Button (Removed) -->
 
                 <!-- Radio Configuration -->
                 <div class="pt-4 border-t border-gaming-border space-y-4">
@@ -1489,6 +1471,30 @@
     </div>
 
     <div id="crt-vignette" class="hidden"></div>
+
+    <!-- Theme Browser Sidebar -->
+    <div id="theme-browser" class="fixed inset-y-0 right-0 w-80 bg-[#0f172a] border-l border-white/10 z-[60] shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col pointer-events-auto font-sans">
+        <!-- Sidebar Header (Fixed Style) -->
+        <div class="p-6 border-b border-white/10 bg-[#1e293b] flex justify-between items-center shrink-0">
+            <div class="flex flex-col">
+                <h3 class="text-white font-black text-sm uppercase tracking-widest leading-none">Skin Selector</h3>
+                <span class="text-[9px] text-blue-400 font-bold uppercase tracking-[0.2em] mt-2">Global Catalog v2.6</span>
+            </div>
+            <button onclick="themeManager.closeThemeBrowser()" class="text-white/40 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Sidebar Content (Scrollable) -->
+        <div id="theme-browser-list" class="flex-grow overflow-y-auto p-4 space-y-3 custom-scrollbar bg-[#0f172a]">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-white/10 bg-[#1e293b] shrink-0 text-center">
+            <p class="text-[8px] text-white/30 uppercase font-black tracking-widest">Select a skin to apply in real-time</p>
+        </div>
+    </div>
 
     <script src="js/themes.js"></script>
     <script src="js/sfx.js"></script>

@@ -1,5 +1,18 @@
 /* --- General UI Components --- */
 
+html, body {
+    overscroll-behavior: contain;
+}
+
+/* Scrollable containers should contain their own scroll */
+.overflow-y-auto, 
+.overflow-auto,
+#theme-browser-list,
+.manual-page,
+#detail-modal > div {
+    overscroll-behavior: contain;
+}
+
 /* Custom Checkbox */
 .custom-checkbox {
     appearance: none;

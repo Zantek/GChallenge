@@ -198,6 +198,95 @@ body {
     --font-main: 'Chakra Petch', sans-serif;
 }
 
+/* Overgrown Background */
+[data-theme='overgrown'] body {
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(74, 222, 128, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(74, 222, 128, 0.05) 0%, transparent 50%) !important;
+    background-attachment: fixed;
+}
+
+/* Ink-Wash Background */
+[data-theme='inkwash'] body {
+    background-color: #f2f0e9 !important;
+    background-image: url('https://www.transparenttextures.com/patterns/parchment.png') !important;
+    background-attachment: fixed;
+}
+
+/* Hero Background */
+[data-theme='hero'] body {
+    background-image: 
+        radial-gradient(#000000 1px, transparent 1px) !important;
+    background-size: 20px 20px !important;
+    background-attachment: fixed;
+}
+
+/* Navigator Background */
+[data-theme='navigator'] body {
+    background-image: 
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px) !important;
+    background-size: 100px 100px, 150px 150px !important;
+    background-position: 0 0, 50px 50px !important;
+    background-attachment: fixed;
+}
+
+[data-theme='overgrown'] {
+    --bg-primary: #1a2421;
+    --bg-secondary: #2d3a35;
+    --bg-card: rgba(26, 36, 33, 0.8);
+    --bg-header: #0f1412;
+    --text-primary: #d1dace;
+    --text-secondary: #8a9a85;
+    --accent: #4ade80;
+    --border: #3d4a44;
+    --radius: 0.5rem;
+    --font-main: 'Cormorant Garamond', serif;
+}
+
+[data-theme='inkwash'] {
+    --bg-primary: #f2f0e9;
+    --bg-secondary: #e8e4d9;
+    --bg-card: #f2f0e9;
+    --bg-header: #e5e5e5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --accent: #d32f2f;
+    --border: #1a1a1a;
+    --radius: 0px;
+    --font-main: 'ZCOOL XiaoWei', serif;
+}
+
+[data-theme='inkwash'] header {
+    box-shadow: inset 0 -1px 0 0 #1a1a1a !important;
+}
+
+[data-theme='hero'] {
+    --bg-primary: #ffde00;
+    --bg-secondary: #ff0000;
+    --bg-card: #ffffff;
+    --bg-header: #0000ff;
+    --text-primary: #000000;
+    --text-secondary: #333333;
+    --accent: #ff0000;
+    --border: #000000;
+    --radius: 0px;
+    --font-main: 'Balsamiq Sans', cursive;
+}
+
+[data-theme='navigator'] {
+    --bg-primary: #0b0e14;
+    --bg-secondary: #1a1f2b;
+    --bg-card: rgba(11, 14, 20, 0.9);
+    --bg-header: #05070a;
+    --text-primary: #00f2ff;
+    --text-secondary: #708090;
+    --accent: #00f2ff;
+    --border: #1e90ff;
+    --radius: 0.25rem;
+    --font-main: 'Audiowide', cursive;
+}
+
 [data-theme='future'] {
     --font-main: 'Inter', sans-serif;
 }
@@ -313,6 +402,100 @@ body {
 [data-theme='woodgrain'] #now-playing-marquee .text-emerald-500,
 [data-theme='woodgrain'] #now-playing-marquee .text-red-500 {
     color: #ffbf00 !important;
+}
+
+/* --- Ink-Wash Global Overrides --- */
+[data-theme='inkwash'] .text-gaming-muted,
+[data-theme='inkwash'] .text-gaming-muted\/60 { color: #4a4a4a !important; opacity: 1 !important; }
+[data-theme='inkwash'] .text-blue-400,
+[data-theme='inkwash'] .text-emerald-400,
+[data-theme='inkwash'] .text-yellow-500,
+[data-theme='inkwash'] .text-red-400 { color: #1a1a1a !important; }
+[data-theme='inkwash'] .bg-gaming-dark\/50 { background-color: rgba(0,0,0,0.05) !important; border-top: 1px solid #1a1a1a !important; }
+[data-theme='inkwash'] #level-badge { background-color: #1a1a1a !important; color: #f2f0e9 !important; }
+[data-theme='inkwash'] #now-playing-marquee .bg-black\/40 { background-color: #f2f0e9 !important; border-color: #1a1a1a !important; }
+[data-theme='inkwash'] #now-playing-marquee .marquee-content { color: #1a1a1a !important; }
+[data-theme='inkwash'] .text-gaming-text\/10 { color: rgba(0,0,0,0.1) !important; }
+
+/* Ink-Wash Header Readability */
+[data-theme='inkwash'] header h1,
+[data-theme='inkwash'] header h1 span,
+[data-theme='inkwash'] header #progress-text,
+[data-theme='inkwash'] header #xp-text,
+[data-theme='inkwash'] header .text-gaming-muted,
+[data-theme='inkwash'] header .text-gaming-text {
+    color: #1a1a1a !important;
+}
+[data-theme='inkwash'] header button.bg-blue-600,
+[data-theme='inkwash'] header button.bg-gaming-card\/80 {
+    background-color: #1a1a1a !important;
+    color: #f2f0e9 !important;
+    border: 1px solid #1a1a1a !important;
+}
+[data-theme='inkwash'] header button:hover {
+    background-color: #d32f2f !important;
+    border-color: #d32f2f !important;
+}
+[data-theme='inkwash'] header svg {
+    color: #1a1a1a !important;
+}
+[data-theme='inkwash'] header .bg-gaming-dark {
+    background-color: rgba(0,0,0,0.1) !important;
+}
+[data-theme='inkwash'] header #progress-bar,
+[data-theme='inkwash'] header #xp-bar {
+    background-color: #1a1a1a !important;
+}
+
+/* --- Hero Global Overrides --- */
+[data-theme='hero'] .text-gaming-muted,
+[data-theme='hero'] .text-gaming-muted\/60 { color: #000000 !important; opacity: 0.7 !important; }
+[data-theme='hero'] .text-blue-400,
+[data-theme='hero'] .text-emerald-400,
+[data-theme='hero'] .text-yellow-500,
+[data-theme='hero'] .text-red-400 { color: #000000 !important; font-weight: 900 !important; }
+[data-theme='hero'] .bg-gaming-dark\/50 { background-color: #ffde00 !important; border-top: 2px solid #000 !important; }
+[data-theme='hero'] #level-badge { background-color: #ff0000 !important; color: #ffffff !important; border: 2px solid #000 !important; }
+[data-theme='hero'] #now-playing-marquee .bg-black\/40 { background-color: #ffffff !important; border: 2px solid #000 !important; }
+[data-theme='hero'] #now-playing-marquee .marquee-content { color: #000 !important; font-family: 'Luckiest Guy', cursive !important; }
+[data-theme='hero'] .text-gaming-text\/10 { color: rgba(0,0,0,0.2) !important; }
+[data-theme='hero'] .text-yellow-500 { color: #000 !important; } /* Make filled stars black for contrast */
+
+/* Hero Header Readability */
+[data-theme='hero'] header h1,
+[data-theme='hero'] header h1 span,
+[data-theme='hero'] header #progress-text,
+[data-theme='hero'] header #xp-text {
+    color: #ffffff !important;
+    text-shadow: 2px 2px 0px #000 !important;
+}
+[data-theme='hero'] header svg {
+    color: #ffde00 !important;
+    filter: drop-shadow(2px 2px 0px #000) !important;
+}
+[data-theme='hero'] header .text-gaming-muted,
+[data-theme='hero'] header .text-gaming-text {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+[data-theme='hero'] header button.bg-blue-600,
+[data-theme='hero'] header button.bg-gaming-card\/80 {
+    background-color: #ffde00 !important;
+    color: #000000 !important;
+    border: 2px solid #000 !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    font-family: 'Luckiest Guy', cursive !important;
+}
+[data-theme='hero'] header button:hover {
+    background-color: #ff0000 !important;
+    color: #ffffff !important;
+}
+[data-theme='hero'] header #progress-bar,
+[data-theme='hero'] header #xp-bar {
+    background-color: #ffde00 !important;
+}
+[data-theme='hero'] header .bg-gaming-dark {
+    background-color: rgba(0,0,0,0.3) !important;
+    border: 1px solid #000 !important;
 }
 
 [data-theme='papercraft'] header .text-gaming-text, [data-theme='papercraft'] header h1 { color: #2c2c2c !important; }

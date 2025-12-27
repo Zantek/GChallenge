@@ -18,9 +18,9 @@
 }
 .game-card-front, .game-card-back {
     position: absolute;
-    inset: -1px;
-    width: calc(100% + 2px);
-    height: calc(100% + 2px);
+    inset: 0;
+    width: 100%;
+    height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: var(--radius);
@@ -53,6 +53,8 @@
 /* Grid Container Padding for Hover Room */
 [id^="grid-container-"] {
     padding-top: 40px;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 [id^="grid-container-"][style*="max-height: 0px"] {
@@ -365,6 +367,83 @@
     color: #fbbf24;
     font-family: monospace;
 }
+
+[data-theme='overgrown'] .review-stamp { background: #1a2421; border: 2px solid #4ade80; color: #4ade80; border-radius: 9999px; box-shadow: 0 0 10px rgba(74, 222, 128, 0.2); }
+[data-theme='overgrown'] .passport-stamp { background: #1a2421; border: 1px solid #8a9a85; color: #d1dace; }
+
+[data-theme='inkwash'] .review-stamp { background: #f2f0e9; border: 2px solid #d32f2f; color: #d32f2f; border-radius: 0; font-family: 'ZCOOL XiaoWei', serif; box-shadow: none; }
+[data-theme='inkwash'] .passport-stamp { background: #f2f0e9; border: none; color: #1a1a1a; text-decoration: underline; padding: 2px 10px; font-family: 'ZCOOL XiaoWei', serif; }
+
+[data-theme='hero'] .review-stamp { background: #ffffff; border: 4px solid #000; color: #000; font-family: 'Luckiest Guy', cursive; border-radius: 0; box-shadow: 5px 5px 0px #000; }
+[data-theme='hero'] .passport-stamp { background: #ffde00; border: 2px solid #000; color: #000; font-family: 'Luckiest Guy', cursive; }
+
+[data-theme='navigator'] .review-stamp { background: #05070a; border: 1px solid #00f2ff; color: #00f2ff; border-radius: 4px; text-shadow: 0 0 10px #00f2ff; box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+[data-theme='navigator'] .passport-stamp { background: #05070a; border: 1px solid #1e90ff; color: #00f2ff; font-family: 'Audiowide', cursive; }
+
+/* Overgrown Style (Nature Reclaimed) */
+[data-theme='overgrown'] .game-card {
+    background-color: #1a2421 !important;
+    border: 2px solid #3d4a44 !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4), inset 0 0 20px rgba(74, 222, 128, 0.05) !important;
+}
+[data-theme='overgrown'] .game-card-front::after {
+    content: "🌿";
+    position: absolute;
+    top: 4px; right: 4px;
+    font-size: 10px;
+    opacity: 0.3;
+}
+
+/* Ink-Wash Style (Sumi-e) */
+[data-theme='inkwash'] .game-card {
+    background-color: #f2f0e9 !important;
+    border: none !important;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.05), inset 0 0 0 1px #1a1a1a !important;
+}
+[data-theme='inkwash'] .game-card-front::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 4px solid #1a1a1a;
+    mask-image: radial-gradient(black, transparent);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+/* Hero Style (Comic / Pop Art) */
+[data-theme='hero'] .game-card {
+    background-color: #ffffff !important;
+    border: 4px solid #000 !important;
+    box-shadow: 8px 8px 0px #ff0000 !important;
+}
+[data-theme='hero'] .game-card-front::after {
+    content: "NEW!";
+    position: absolute;
+    top: 10px; right: -15px;
+    background: #ffde00;
+    color: #000;
+    padding: 2px 20px;
+    font-size: 8px;
+    font-family: 'Bangers', cursive;
+    transform: rotate(45deg);
+    border: 2px solid #000;
+}
+
+/* Navigator Style (Astro-Chart) */
+[data-theme='navigator'] .game-card {
+    background-color: rgba(11, 14, 20, 0.9) !important;
+    border: 1px solid #1e90ff !important;
+    box-shadow: 0 0 15px rgba(30, 144, 255, 0.2), inset 0 0 10px rgba(30, 144, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+}
+[data-theme='navigator'] .game-card-front::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
 [data-theme='arcade'] .text-blue-400 { color: #00f2ff !important; }
 [data-theme='arcade'] .text-gaming-text { color: #ff00ff !important; }
 
@@ -627,4 +706,111 @@
 }
 [data-theme='os'] .play-toggle-btn.bg-red-600 {
     background-color: #c0c0c0 !important;
+}
+
+/* Hero Play/Stop Buttons */
+[data-theme='hero'] .play-toggle-btn {
+    background-color: #ff0000 !important;
+    color: #fff !important;
+    border: 3px solid #000 !important;
+    box-shadow: 4px 4px 0px #000 !important;
+}
+[data-theme='hero'] .play-toggle-btn:hover {
+    background-color: #0000ff !important;
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000 !important;
+}
+[data-theme='hero'] .play-toggle-btn.bg-red-600 {
+    background-color: #ffffff !important;
+    color: #ff0000 !important;
+}
+
+/* Hero Card Back Buttons */
+[data-theme='hero'] .game-card-back .bg-red-600,
+[data-theme='hero'] .game-card-back .bg-gray-700,
+[data-theme='hero'] .game-card-back .bg-blue-600,
+[data-theme='hero'] .game-card-back .help-btn {
+    background-color: #ffde00 !important;
+    color: #000 !important;
+    border: 3px solid #000 !important;
+    box-shadow: 3px 3px 0px #000 !important;
+    font-family: 'Balsamiq Sans', cursive !important;
+}
+[data-theme='hero'] .game-card-back .bg-red-600:hover,
+[data-theme='hero'] .game-card-back .bg-gray-700:hover,
+[data-theme='hero'] .game-card-back .bg-blue-600:hover,
+[data-theme='hero'] .game-card-back .help-btn:hover {
+    background-color: #ff0000 !important;
+    color: #fff !important;
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0px #000 !important;
+}
+
+/* Ink-Wash Play/Stop Buttons */
+[data-theme='inkwash'] .play-toggle-btn {
+    background-color: #1a1a1a !important;
+    color: #f2f0e9 !important;
+    border: 1px solid #1a1a1a !important;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.1) !important;
+}
+[data-theme='inkwash'] .play-toggle-btn:hover {
+    background-color: #d32f2f !important;
+    border-color: #d32f2f !important;
+}
+[data-theme='inkwash'] .play-toggle-btn.bg-red-600 {
+    background-color: #f2f0e9 !important;
+    color: #d32f2f !important;
+    border: 1px solid #d32f2f !important;
+}
+
+/* Ink-Wash Card Back Buttons */
+[data-theme='inkwash'] .game-card-back .bg-red-600,
+[data-theme='inkwash'] .game-card-back .bg-gray-700,
+[data-theme='inkwash'] .game-card-back .bg-blue-600,
+[data-theme='inkwash'] .game-card-back .help-btn {
+    background-color: #f2f0e9 !important;
+    color: #1a1a1a !important;
+    border: 1px solid #1a1a1a !important;
+    font-family: 'ZCOOL XiaoWei', serif !important;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.05) !important;
+}
+[data-theme='inkwash'] .game-card-back .bg-red-600:hover,
+[data-theme='inkwash'] .game-card-back .bg-gray-700:hover,
+[data-theme='inkwash'] .game-card-back .bg-blue-600:hover,
+[data-theme='inkwash'] .game-card-back .help-btn:hover {
+    background-color: #1a1a1a !important;
+    color: #f2f0e9 !important;
+}
+
+/* Overgrown Card Back Buttons */
+[data-theme='overgrown'] .game-card-back .bg-red-600,
+[data-theme='overgrown'] .game-card-back .bg-gray-700,
+[data-theme='overgrown'] .game-card-back .bg-blue-600,
+[data-theme='overgrown'] .game-card-back .help-btn {
+    background-color: #2d3a35 !important;
+    color: #d1dace !important;
+    border: 1px solid #4ade80 !important;
+    box-shadow: none !important;
+}
+[data-theme='overgrown'] .game-card-back button:hover,
+[data-theme='overgrown'] .game-card-back a:hover {
+    background-color: #4ade80 !important;
+    color: #1a2421 !important;
+}
+
+/* Navigator Card Back Buttons */
+[data-theme='navigator'] .game-card-back .bg-red-600,
+[data-theme='navigator'] .game-card-back .bg-gray-700,
+[data-theme='navigator'] .game-card-back .bg-blue-600,
+[data-theme='navigator'] .game-card-back .help-btn {
+    background-color: #05070a !important;
+    color: #00f2ff !important;
+    border: 1px solid #1e90ff !important;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.1) !important;
+}
+[data-theme='navigator'] .game-card-back button:hover,
+[data-theme='navigator'] .game-card-back a:hover {
+    background-color: #00f2ff !important;
+    color: #05070a !important;
+    box-shadow: 0 0 15px #00f2ff !important;
 }

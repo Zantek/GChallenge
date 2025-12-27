@@ -148,6 +148,22 @@
     filter: contrast(1.2) brightness(0.8) sepia(0.3) !important;
 }
 
+[data-theme='overgrown'] #console-hardware { background-color: #1a2421; border: 3px solid #3d4a44; border-bottom: 12px solid #0f1412; }
+[data-theme='overgrown'] #active-cartridge { background-color: #2d3a35 !important; border: 2px solid #4ade80 !important; }
+[data-theme='overgrown'] #cart-label { filter: grayscale(0.2) sepia(0.5) hue-rotate(80deg) brightness(0.7) !important; }
+
+[data-theme='inkwash'] #console-hardware { background-color: #e8e4d9; border: 2px solid #1a1a1a; border-bottom: 10px solid #1a1a1a; }
+[data-theme='inkwash'] #active-cartridge { background-color: #f2f0e9 !important; border: 1px solid #1a1a1a !important; }
+[data-theme='inkwash'] #cart-label { filter: grayscale(1) contrast(1.2) !important; mix-blend-mode: multiply; }
+
+[data-theme='hero'] #console-hardware { background-color: #0000ff; border: 4px solid #000; border-bottom: 15px solid #000; }
+[data-theme='hero'] #active-cartridge { background-color: #ff0000 !important; border: 3px solid #000 !important; }
+[data-theme='hero'] #cart-label { filter: saturate(2) contrast(1.2) !important; }
+
+[data-theme='navigator'] #console-hardware { background-color: #05070a; border: 1px solid #1e90ff; border-bottom: 10px solid #000; box-shadow: 0 0 20px rgba(30, 144, 255, 0.3); }
+[data-theme='navigator'] #active-cartridge { background-color: #0b0e14 !important; border: 1px solid #00f2ff !important; box-shadow: 0 0 10px #00f2ff; }
+[data-theme='navigator'] #cart-label { filter: hue-rotate(180deg) brightness(0.8) contrast(1.2) !important; }
+
 /* Cartridge Animation */
 #active-cartridge {
     will-change: transform;
