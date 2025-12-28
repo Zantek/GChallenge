@@ -591,32 +591,50 @@ function startRandomizer() {
         return;
     }
 
-    // Open Modal in "Loading" state
+    // Open Modal and RESET all fields to avoid lingering data
     const modal = document.getElementById('detail-modal');
+    
+    document.getElementById('modal-title-big').innerText = "PICKING...";
+    document.getElementById('modal-title').innerText = "Scanning Database...";
+    document.getElementById('modal-genre').innerText = "";
+    document.getElementById('modal-year').innerText = "";
+    document.getElementById('modal-description').innerHTML = `<p class="italic opacity-80">The system is currently scanning your available backlog to determine the optimal next challenge. Stand by for hardware synchronization...</p>`;
+    document.getElementById('modal-system').innerHTML = "---";
+    document.getElementById('modal-length').innerText = "---";
+    document.getElementById('modal-actions').innerHTML = "";
+    
+    const banner = document.getElementById('modal-banner');
+    banner.style.backgroundImage = 'none';
+    banner.style.backgroundColor = 'var(--bg-header)';
+    
+    // Update big title directly to preserve genre/year elements in the banner
+    const bigTitle = document.getElementById('modal-title-big');
+    bigTitle.innerText = "PICKING...";
+    bigTitle.className = "relative text-5xl font-black text-white drop-shadow-2xl text-center px-6 z-20 animate-pulse";
+    
+    // Clear any existing stamp
+    const existingStamp = banner.querySelector('.passport-stamp');
+    if (existingStamp) existingStamp.remove();
+    
     modal.classList.remove('hidden');
     
     let ticks = 0;
-    const maxTicks = 20; // How many spins
-    const intervalTime = 50; // Speed of spin
+    const maxTicks = 25; // More ticks for better suspense
+    const intervalTime = 60; // Slightly slower for readability
 
-    // Slot Machine Loop
     const timer = setInterval(() => {
-        // Pick random game
         const randomGame = available[Math.floor(Math.random() * available.length)];
         
-        // Update Modal Visuals Rapidly
-        document.getElementById('modal-title-big').innerText = "???"; 
         document.getElementById('modal-title').innerText = randomGame.title;
-        document.getElementById('modal-banner').style.backgroundImage = 'none';
-        document.getElementById('modal-banner').className = `h-48 w-full bg-gradient-to-br ${randomGame.color} flex items-center justify-center relative overflow-hidden`;
+        banner.style.backgroundColor = 'var(--bg-header)';
+        banner.className = `h-64 w-full flex items-center justify-center relative overflow-hidden shrink-0 border-b-2 border-gaming-border transition-colors duration-100`;
         
         sfx.playTick();
         ticks++;
 
         if (ticks >= maxTicks) {
             clearInterval(timer);
-            // Show Final Result
-            showDetails(randomGame.id);
+            showDetails(randomGame.id, false);
             if (sfx) sfx.playDing();
         }
     }, intervalTime);
@@ -1747,7 +1765,7 @@ function toggleBootSetting() {
     if (sfx) sfx.playTick();
 }
 
-function showDetails(id) {
+function showDetails(id, showDropButton = true) {
     const game = allGames.find(g => g.id === id);
     if (!game) return;
 
@@ -1757,7 +1775,6 @@ function showDetails(id) {
     document.getElementById('modal-year').innerText = game.year;
     document.getElementById('modal-description').innerText = game.desc;
     document.getElementById('modal-length').innerText = game.length;
-    document.getElementById('modal-wiki').href = game.wiki;
     
     document.getElementById('modal-system').innerHTML = `
         <div class="flex items-center gap-2">
@@ -1773,23 +1790,22 @@ function showDetails(id) {
     banner.style.backgroundImage = `url('${imgUrl}')`;
     banner.style.backgroundSize = 'cover';
     banner.style.backgroundPosition = 'top center';
-    banner.className = `h-48 w-full bg-gradient-to-br ${game.color} flex items-center justify-center relative overflow-hidden`;
     
-    // Completion Stamp in Modal
-    let stampHtml = '';
-    if (completionDates[id]) {
-        stampHtml = `
-            <div class="absolute top-4 left-4 z-20">
-                <div class="passport-stamp">${formatDate(completionDates[id])}</div>
-            </div>
-        `;
-    }
+    // Handle Big Title
+    const bigTitle = document.getElementById('modal-title-big');
+    bigTitle.innerText = game.title;
+    bigTitle.className = "relative text-5xl font-black text-white drop-shadow-2xl text-center px-6 z-20 uppercase tracking-tighter";
 
-    banner.innerHTML = `
-        <div class="absolute inset-0 bg-black/40 z-0"></div>
-        ${stampHtml}
-        <h2 id="modal-title-big" class="hidden text-4xl font-black text-gaming-text drop-shadow-lg text-center px-4 z-10">${game.title}</h2>
-    `;
+    // Handle Completion Stamp (Clear old, add new if needed)
+    const existingStamp = banner.querySelector('.passport-stamp');
+    if (existingStamp) existingStamp.remove();
+
+    if (completionDates[id]) {
+        const stampDiv = document.createElement('div');
+        stampDiv.className = "absolute top-4 left-4 z-40";
+        stampDiv.innerHTML = `<div class="passport-stamp">${formatDate(completionDates[id])}</div>`;
+        banner.appendChild(stampDiv);
+    }
 
     const hltbUrl = `https://howlongtobeat.com/?q=${encodeURIComponent(game.title)}`;
     const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(game.title + ' Gameplay')}`;
@@ -1798,36 +1814,32 @@ function showDetails(id) {
     const isDropped = droppedGames.includes(id);
     const isCompleted = completedGames.includes(id);
 
-    const dropButtonHtml = !isCompleted ? `
-        <button onclick="toggleDrop('${id}')" class="text-gaming-muted hover:text-red-400 transition-colors flex items-center gap-2 text-[10px] font-black uppercase tracking-widest">
+    const dropButtonHtml = (showDropButton && !isCompleted) ? `
+        <button onclick="toggleDrop('${id}')" class="text-gaming-muted hover:text-red-400 transition-colors flex items-center gap-2 text-[10px] font-black uppercase tracking-widest mt-2">
             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5zM9 7a3 3 0 0 1 6 0v3H9V7zm3 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
             ${isDropped ? 'Revive Game' : 'Drop Game'}
         </button>
-    ` : '<div></div>';
+    ` : '';
 
     modalActions.innerHTML = `
-        <div class="flex flex-col sm:flex-row gap-6 justify-between items-center w-full mt-6 border-t border-gaming-border pt-6">
-            <div class="flex justify-center w-full sm:w-auto order-2 sm:order-1">
-                ${dropButtonHtml}
-            </div>
-            <div class="flex flex-wrap gap-3 justify-center sm:justify-end items-center w-full sm:w-auto order-1 sm:order-2">
-                <a href="${ytUrl}" target="_blank" class="bg-red-600 hover:bg-red-500 text-white px-4 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 text-sm shadow-lg shadow-red-500/20">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2z"/></svg>
-                    Trailer
+        <div class="flex flex-col gap-3 w-full mt-6 border-t border-gaming-border pt-6">
+            <div class="flex gap-2">
+                <a href="${ytUrl}" target="_blank" class="flex-1 bg-red-600 hover:bg-red-500 text-white py-2.5 rounded-lg font-bold transition-all flex items-center justify-center gap-2 text-sm shadow-lg shadow-red-500/20">
+                    YouTube
                 </a>
-                <a href="${hltbUrl}" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 px-4 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 text-sm">
-                    <svg class="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg>
+                <a href="${hltbUrl}" target="_blank" class="flex-1 bg-gray-700 hover:bg-gray-600 text-white border border-gray-600 py-2.5 rounded-lg font-bold transition-all flex items-center justify-center gap-2 text-sm">
                     HLTB
                 </a>
-                <a id="modal-wiki" href="${game.wiki}" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2">
-                    Wikipedia
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </div>
+            <div class="flex gap-2">
+                <a id="modal-wiki" href="${game.wiki}" target="_blank" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-lg font-bold transition-all flex items-center justify-center gap-2 text-sm">
+                    Wiki
                 </a>
-                <a href="${game.guide}" target="_blank" class="help-btn text-white px-6 py-2 rounded-lg font-bold transition-colors flex items-center gap-2 shadow-lg">
+                <a href="${game.guide}" target="_blank" class="flex-1 help-btn text-white py-2.5 rounded-lg font-bold transition-all flex items-center justify-center gap-2 text-sm shadow-lg">
                     Help
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                 </a>
             </div>
+            ${dropButtonHtml ? `<div class="flex justify-center mt-2">${dropButtonHtml}</div>` : ''}
         </div>
     `;
 
