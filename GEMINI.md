@@ -6,12 +6,22 @@ A highly immersive, responsive web-based application designed to track progress 
 
 ## 🎮 Core Features
 
-- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Now includes a **Help Button** linking directly to curated game guides.
-- **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
-- **Interactive Instruction Manual:** A physical "Book Spine" sitting next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, 10 pro tips, a full 48-game catalog, and system credits.
+- **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Includes a **Help Button** linking directly to curated game guides.
+- **High-Fidelity Virtual Console:** A tactile hardware interface featuring **Physical Interaction Logic**.
+    - **Drag-to-Play:** Physically grab any game card and drop its "Ghost Cartridge" into the console to start playing.
+    - **Physical Pull:** Drag the active cartridge upwards to stop playing; the hardware sits in a visible "Raised" standby state.
+    - **Slam-to-Play:** Slam an ejected cartridge back down to resume your last session.
+    - **Persistence:** The console remembers the last-played game's label and title even when ejected.
+- **Tabbed Theme Browser:** A professional real-time sidebar selector for the **32 unique console skins**. Sorted into high-fidelity collections: 
+    - **System:** Future, OS, Legacy, Blueprint, Quest, Candy, Arcade, Obsidian, Navigator, Glacier.
+    - **Retro:** Famicom, Genesis, Game Gear, Spectrum, Virtual, Brick, Woodgrain, Invader.
+    - **Art:** Overgrown, Ink-Wash, Manga, Museum, Noir, Tokyo, Nomad, Street.
+    - **Modern:** Cube, Papercraft, Hydraulic, Prism, Hero, Craft.
+
+- **Interactive Instruction Manual:** A physical "Book Spine" sitter next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, 10 pro tips, a full 48-game catalog, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with themed backgrounds for all 12 skins.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, optimized with high-contrast backgrounds for all 32 skins.
 - **Gamer Profile & RPG Stats:** 
     - **Membership Card:** A tactile "Gemini Video Rental" ID featuring your Member ID (derived from alignment), top genres, and rank icons.
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
@@ -21,34 +31,23 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-- **Console Skins:** 12 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, **Hydraulic**, etc.) with global background refinements. The **Hydraulic** skin features industrial "Arial Black" typography and heavy machinery aesthetics.
-
-## 🏆 Challenge Lists (48 Games Total)
-
-- **Core Challenge:** 12 legendary titles defining the gaming landscape.
-- **The Weird Bonus List:** Experimental and quirky titles.
-- **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
-- **Paperwork List:** Satisfyingly tactile simulation and organization games.
-- **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
-- **Zen Bonus List:** Meditative, low-stress experiences.
-- **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
 - **Architecture:** Vanilla JavaScript SPA with a modular CSS structure.
-- **UX Refinements:** Global **Smooth Scrolling** and **Selection Lock** for a native "app" feel.
-- **Audio:** Custom procedural 8-bit sound engine using the Web Audio API.
+- **UX Refinements:** Global **Overscroll Containment** and **Selection Lock** for a native "app" feel.
+- **Typography:** 20+ local TrueType fonts for 100% offline thematic fidelity.
 - **Visuals:** Pure CSS shapes for hardware; Canvas API for real-time frequency analysis and particle physics.
 - **Data:** Persistent state management using `localStorage` with Base64-encoded Full System Saves.
 
 ## 📝 Development TODOs
-- [x] Implement 12 unique Console Skins and Visual Theme Picker.
+- [x] Implement 32 unique Console Skins and Tabbed Sidebar Browser.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.
 - [x] Implement Permanent System Monitor and Now Playing marquee.
 - [x] Implement Physical Membership Card and Dynamic ID system.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
-- [x] Implement Hardware Persistence for last-used cartridges.
-- [x] Refine global UX (Smooth Scroll, Selection Lock).
+- [x] Implement Immersive Drag-to-Play Hardware Interactions.
+- [x] Refine global UX (Smooth Scroll, Overscroll Contain).
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.

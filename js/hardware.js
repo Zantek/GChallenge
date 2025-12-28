@@ -278,6 +278,7 @@ function ejectCartridge(silent = false) {
 
 let isDraggingCartridge = false;
 let dragStartY = 0;
+let dragStartX = 0; // NEW
 let dragInitialY = -24; 
 const CARTRIDGE_INSERTED_Y = -24;
 const CARTRIDGE_EJECTED_Y = -60;
@@ -286,6 +287,7 @@ function startCartridgeDrag(e) {
     if (e.button !== 0) return; // Only left click
     isDraggingCartridge = true;
     dragStartY = e.clientY;
+    dragStartX = e.clientX; // NEW
     
     // Identify where we are starting from
     dragInitialY = currentlyPlaying ? CARTRIDGE_INSERTED_Y : CARTRIDGE_EJECTED_Y;
@@ -319,17 +321,20 @@ function endCartridgeDrag(e) {
     isDraggingCartridge = false;
     
     const deltaY = e.clientY - dragStartY;
+    const deltaX = Math.abs(e.clientX - dragStartX); // Need to track dragStartX too
     const cart = document.getElementById('active-cartridge');
     
     document.removeEventListener('mousemove', doCartridgeDrag);
     document.removeEventListener('mouseup', endCartridgeDrag);
 
-    // Logic based on direction and state
+    // Threshold Logic
+    const isClick = Math.abs(deltaY) < 10 && deltaX < 10;
+
     if (currentlyPlaying) {
         // We are playing: Drag UP to eject
         if (deltaY < -40) {
             ejectCartridge();
-        } else if (Math.abs(deltaY) < 5) {
+        } else if (isClick) {
             scrollToActiveGame(e);
         } else {
             // Snap back to inserted
@@ -346,7 +351,7 @@ function endCartridgeDrag(e) {
                 cart.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 cart.style.transform = `translateY(${CARTRIDGE_EJECTED_Y}px)`;
             }
-        } else if (Math.abs(deltaY) < 5) {
+        } else if (isClick) {
             scrollToActiveGame(e);
         } else {
             // Snap back to raised/ejected
@@ -361,8 +366,12 @@ themeManager.startCartridgeDrag = startCartridgeDrag;
 
 function scrollToActiveGame(event) {
     if (event) event.stopPropagation();
-    if (!currentlyPlaying) return;
-    const container = document.getElementById(`card-${currentlyPlaying}`);
+    
+    // Fallback: If not playing, find the last game that was in the slot
+    const targetId = currentlyPlaying || localStorage.getItem('gamingChallengeLastPlayedId');
+    if (!targetId) return;
+
+    const container = document.getElementById(`card-${targetId}`);
     if (container) {
         const rect = container.getBoundingClientRect();
         const isInView = (rect.top >= 0 && rect.bottom <= window.innerHeight);

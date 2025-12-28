@@ -2050,6 +2050,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Sync initial console state
     if (currentlyPlaying) {
+        localStorage.setItem('gamingChallengeLastPlayedId', currentlyPlaying);
         // Need a slight delay to ensure console elements are ready or just call it
         setTimeout(() => {
             const gameId = currentlyPlaying;

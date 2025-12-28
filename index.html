@@ -157,9 +157,9 @@
                             <div class="flex items-center gap-2 md:gap-3">
                                 <!-- Tools Toolbar -->
                                 <div class="bg-gaming-card/80 backdrop-blur rounded-full px-2 py-0.5 md:px-3 md:py-1.5 flex items-center gap-1 md:gap-3 border border-gaming-border shadow-sm">
-                                    <button id="crt-btn" onclick="crtManager.toggle(); if(sfx) sfx.playTick()"
+                                    <button id="expansion-trigger" onclick="expansionManager.openSidebar(); if(sfx) sfx.playTick()"
                                         class="text-orange-400 hover:text-orange-300 transition-colors p-1"
-                                        title="Toggle CRT Mode">
+                                        title="Expansion Paks">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -1508,6 +1508,30 @@
         <!-- Sidebar Footer -->
         <div class="p-4 border-t border-white/10 bg-[#1e293b] shrink-0 text-center">
             <p class="text-[8px] uppercase font-black tracking-widest" style="color: rgba(255,255,255,0.3) !important">Select a skin to apply in real-time</p>
+        </div>
+    </div>
+
+    <!-- Expansion Pak Sidebar -->
+    <div id="expansion-sidebar" class="fixed inset-y-0 right-0 w-80 bg-[#0f172a] border-l border-white/10 z-[60] shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col pointer-events-auto font-sans">
+        <!-- Sidebar Header (Fixed Style) -->
+        <div class="p-6 border-b border-white/10 bg-[#1e293b] flex justify-between items-center shrink-0">
+            <div class="flex flex-col">
+                <h3 class="font-black text-sm uppercase tracking-widest leading-none" style="color: #ffffff !important">Expansion Paks</h3>
+                <span class="text-[9px] font-bold uppercase tracking-[0.2em] mt-2" style="color: #fb923c !important">Hardware Modules v1.0</span>
+            </div>
+            <button onclick="expansionManager.closeSidebar()" class="text-white/40 hover:text-white transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+
+        <!-- Sidebar Content (Scrollable) -->
+        <div id="expansion-list" class="flex-grow overflow-y-auto custom-scrollbar bg-[#0f172a] overscroll-contain">
+            <!-- Populated by JS -->
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-white/10 bg-[#1e293b] shrink-0 text-center">
+            <p class="text-[8px] uppercase font-black tracking-widest" style="color: rgba(255,255,255,0.3) !important">Enable modules to enhance console output</p>
         </div>
     </div>
 

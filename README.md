@@ -7,11 +7,19 @@ A highly immersive, responsive web-based application designed to track progress 
 ## 🎮 Core Features
 
 - **3D Box Flipper:** Every game is presented as a physical box art that flips in 3D to reveal detailed stats, Metacritic scores, and descriptions. Includes a **Help Button** linking directly to curated game guides.
-- **Universal Retro Console:** A virtual top-loading hardware interface with Hardware Persistence—the ejected cartridge always displays the last-played game's label and title.
+- **High-Fidelity Virtual Console:** A tactile hardware interface featuring **Physical Interaction Logic**.
+    - **Drag-to-Play:** Physically grab a game card and drop its "Ghost Cartridge" into the console to start playing.
+    - **Tactile Eject:** Pull the cartridge upwards to stop playing; the hardware sits in a visible "Raised" standby state.
+    - **Slam-to-Play:** Slam an ejected cartridge back down to resume your last session.
+- **Tabbed Theme Browser:** A professional real-time sidebar selector for the **32 unique console skins**. Sorted into high-fidelity collections: 
+    - **System:** Future, OS, Legacy, Blueprint, Quest, Candy, Arcade, Obsidian, Navigator, Glacier.
+    - **Retro:** Famicom, Genesis, Game Gear, Spectrum, Virtual, Brick, Woodgrain, Invader.
+    - **Art:** Overgrown, Ink-Wash, Manga, Museum, Noir, Tokyo, Nomad, Street.
+    - **Modern:** Cube, Papercraft, Hydraulic, Prism, Hero, Craft.
 - **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
-- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 12 themes.
+- **Tactile Review System:** "Seal the Record" by slamming theme-specific rubber stamps onto the box art, now optimized with high-contrast backgrounds for all 32 themes.
 - **Gamer Profile & RPG Stats:** 
     - **Membership Card:** A tactile "Gemini Video Rental" ID featuring your Member ID (derived from alignment), top genres, and rank icons.
     - **Alignment Chart:** A 2D coordinate grid tracking your gaming personality (Body vs. Mind, Action vs. Logic).
@@ -21,7 +29,6 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-- **Console Skins:** 12 unique visual identities (Blueprint, Woodgrain, Papercraft, Candy, Arcade, Obsidian, **Hydraulic**, etc.) selectable via a visual theme picker in settings.
 
 ## 🏆 Challenge Lists (48 Games Total)
 
@@ -36,7 +43,8 @@ A highly immersive, responsive web-based application designed to track progress 
 ## 🛠️ Technical Overview
 
 - **Architecture:** Vanilla JavaScript SPA with a modular CSS structure.
-- **UX Refinements:** Global **Smooth Scrolling** and **Selection Lock** for a native "app" feel.
+- **UX Refinements:** Global **Overscroll Containment** and **Selection Lock** for a native "app" feel.
+- **Typography:** 20+ local TrueType fonts for 100% offline thematic fidelity.
 - **Audio:** Custom procedural 8-bit sound engine using the Web Audio API.
 - **Visuals:** Pure CSS shapes for hardware; Canvas API for real-time frequency analysis and particle physics.
 - **Data:** Persistent state management using `localStorage` with Base64-encoded Full System Saves.
@@ -49,13 +57,13 @@ Since this is a static web project, no build or installation steps are required.
 2. For the best experience, use a local server (e.g., `npx serve .` or VS Code Live Server).
 
 ## 📝 Development TODOs
-- [x] Implement 12 unique Console Skins and Visual Theme Picker.
+- [x] Implement 32 unique Console Skins and Tabbed Sidebar Browser.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.
 - [x] Implement Permanent System Monitor and Now Playing marquee.
 - [x] Implement Physical Membership Card and Dynamic ID system.
 - [x] Finalize the 2026 Expanded Challenge (48 Games).
-- [x] Implement Hardware Persistence for last-used cartridges.
-- [x] Refine global UX (Smooth Scroll, Selection Lock).
+- [x] Implement Immersive Drag-to-Play Hardware Interactions.
+- [x] Refine global UX (Smooth Scroll, Overscroll Contain).
 - [ ] **Year-End Recap:** Create a generator that compiles all stamps into a single "Collection Mosaic" image.
