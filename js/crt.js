@@ -1,6 +1,7 @@
 class ExpansionManager {
     constructor() {
         this.activeModule = localStorage.getItem('gamingChallengeActiveFX') || null;
+        this.activeCategory = 'retro';
         
         // Canvas storage
         this.fxCanvas = null;
@@ -8,9 +9,7 @@ class ExpansionManager {
         this.fxAnimId = null;
         
         // State data
-        this.stars = [];
-        this.raindrops = [];
-        this.fogClouds = [];
+        this.particles = [];
         this.lightningTimeout = null;
 
         this.init();
@@ -48,18 +47,52 @@ class ExpansionManager {
         if (sidebar) sidebar.classList.add('translate-x-full');
     }
 
+    switchCategory(catId) {
+        if (this.activeCategory === catId) return;
+        this.activeCategory = catId;
+        if (typeof sfx !== 'undefined') sfx.playTick();
+        this.updateUI();
+    }
+
     applyModule(moduleId, silent = false) {
         this.deactivateAll();
         this.activeModule = moduleId;
         localStorage.setItem('gamingChallengeActiveFX', moduleId || '');
 
-        if (moduleId === 'crt') this.enableCRT();
-        else if (moduleId === 'stars') this.enableStars();
-        else if (moduleId === 'dither') this.enableDither();
-        else if (moduleId === 'storm') this.enableStorm();
-        else if (moduleId === 'vcr') this.enableVCR();
-        else if (moduleId === 'steam') this.enableSteam();
-        else if (moduleId === 'blueshift') this.enableBlueShift();
+        if (!moduleId) {
+            this.updateUI();
+            this.updateTriggerIcon();
+            return;
+        }
+
+        // Logic branching for 27 modules
+        switch(moduleId) {
+            case 'crt': this.enableCRT(); break;
+            case 'vcr': this.enableCSS('fx-vcr-active'); break;
+            case 'dither': this.enableCSS('fx-dither-active'); break;
+            case 'scanline': this.enableCSS('fx-scanline-pro'); break;
+            case 'interlace': this.enableCSS('fx-interlace-active'); break;
+            
+            case 'stars': this.startCanvasFX('stars'); break;
+            case 'storm': this.startCanvasFX('storm'); break;
+            case 'steam': this.startCanvasFX('steam'); break;
+            case 'snow': this.startCanvasFX('snow'); break;
+            case 'autumn': this.startCanvasFX('autumn'); break;
+            case 'underwater': this.startCanvasFX('underwater'); break;
+            case 'heatwave': this.enableCSS('fx-heatwave-active'); break;
+            
+            case 'matrix': this.startCanvasFX('matrix'); break;
+            case 'error': this.enableCSS('fx-error-active'); break;
+            case 'hologram': this.enableCSS('fx-hologram-active'); break;
+            case 'grid': this.enableCSS('fx-grid-active'); break;
+            
+            case 'blueshift': this.enableCSS('fx-blueshift-active'); break;
+            case 'noir': this.enableCSS('fx-noir-active'); break;
+            case 'sepia': this.enableCSS('fx-sepia-active'); break;
+            case 'bloom': this.enableCSS('fx-bloom-active'); break;
+            case 'infrared': this.enableCSS('fx-infrared-active'); break;
+            case 'popart': this.enableCSS('fx-popart-active'); break;
+        }
 
         if (!silent && typeof sfx !== 'undefined') sfx.playTick();
         this.updateUI();
@@ -70,7 +103,13 @@ class ExpansionManager {
         const root = document.documentElement;
         const vignette = document.getElementById('crt-vignette');
         
-        root.classList.remove('crt-active', 'fx-dither-active', 'fx-vcr-active', 'fx-blueshift-active', 'fx-storm-dim');
+        root.classList.remove(
+            'crt-active', 'fx-dither-active', 'fx-vcr-active', 'fx-blueshift-active', 'fx-storm-dim',
+            'fx-scanline-pro', 'fx-interlace-active', 'fx-heatwave-active', 'fx-underwater-active',
+            'fx-error-active', 'fx-hologram-active', 'fx-grid-active',
+            'fx-noir-active', 'fx-sepia-active', 'fx-bloom-active', 'fx-infrared-active', 'fx-popart-active'
+        );
+
         if (vignette) {
             vignette.classList.add('hidden');
             vignette.classList.remove('crt-vignette');
@@ -82,6 +121,16 @@ class ExpansionManager {
         document.body.classList.remove('lightning-flash');
     }
 
+    enableCRT() {
+        document.documentElement.classList.add('crt-active');
+        const v = document.getElementById('crt-vignette');
+        if (v) { v.classList.remove('hidden'); v.classList.add('crt-vignette'); }
+    }
+
+    enableCSS(className) {
+        document.documentElement.classList.add(className);
+    }
+
     getCanvas() {
         if (!this.fxCanvas) {
             this.fxCanvas = document.createElement('canvas');
@@ -89,14 +138,11 @@ class ExpansionManager {
             this.fxCanvas.className = 'fixed inset-0 pointer-events-none z-[0]';
             document.body.prepend(this.fxCanvas);
             this.fxCtx = this.fxCanvas.getContext('2d');
-            
             window.addEventListener('resize', () => {
                 if (this.fxCanvas && this.activeModule) {
                     this.fxCanvas.width = window.innerWidth;
                     this.fxCanvas.height = window.innerHeight;
-                    if (this.activeModule === 'stars') this.initStars();
-                    if (this.activeModule === 'storm') this.initStorm();
-                    if (this.activeModule === 'steam') this.initSteam();
+                    this.initParticles(this.activeModule);
                 }
             });
         }
@@ -106,166 +152,105 @@ class ExpansionManager {
         return this.fxCtx;
     }
 
-    enableCRT() {
-        const root = document.documentElement;
-        const vignette = document.getElementById('crt-vignette');
-        root.classList.add('crt-active');
-        if (vignette) {
-            vignette.classList.remove('hidden');
-            vignette.classList.add('crt-vignette');
+    startCanvasFX(type) {
+        this.getCanvas();
+        this.initParticles(type);
+        this.animate(type);
+        if (type === 'storm') this.triggerLightning();
+        if (type === 'underwater') this.enableCSS('fx-underwater-active');
+    }
+
+    initParticles(type) {
+        this.particles = [];
+        let count = 100;
+        if (type === 'stars') count = 150;
+        if (type === 'matrix') count = 50;
+        if (type === 'steam') count = 40;
+
+        for (let i = 0; i < count; i++) {
+            const p = {
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                size: Math.random() * 3 + 1,
+                speed: Math.random() * 2 + 0.5,
+                opacity: Math.random() * 0.5 + 0.2
+            };
+            if (type === 'matrix') {
+                p.char = String.fromCharCode(0x30A0 + Math.random() * 96);
+                p.speed = Math.random() * 5 + 2;
+                p.size = 10 + Math.random() * 10;
+            }
+            this.particles.push(p);
         }
     }
 
-    enableStars() {
-        this.getCanvas();
-        this.initStars();
-        this.animateStars();
-    }
-
-    enableDither() {
-        document.documentElement.classList.add('fx-dither-active');
-    }
-
-    enableStorm() {
-        this.getCanvas();
-        this.initStorm();
-        this.animateStorm();
-        this.triggerLightning();
-        
-        // Auto-dim if the theme is light
-        const lightThemes = ['inkwash', 'glacier', 'museum', 'manga', 'famicom', 'future', 'prism'];
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        if (lightThemes.includes(currentTheme)) {
-            document.documentElement.classList.add('fx-storm-dim');
-        }
-    }
-
-    enableVCR() {
-        document.documentElement.classList.add('fx-vcr-active');
-    }
-
-    enableSteam() {
-        this.getCanvas();
-        this.initSteam();
-        this.animateSteam();
-    }
-
-    enableBlueShift() {
-        document.documentElement.classList.add('fx-blueshift-active');
-    }
-
-    // --- Module Logic Implementations ---
-
-    initStars() {
-        this.stars = [];
-        for (let i = 0; i < 150; i++) {
-            this.stars.push({
-                x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
-                size: Math.random() * 3 + 0.5, speed: Math.random() * 1.2 + 0.2,
-                opacity: Math.random() * 0.7 + 0.3
-            });
-        }
-    }
-
-    animateStars() {
-        if (this.activeModule !== 'stars') return;
+    animate(type) {
+        if (this.activeModule !== type) return;
         this.fxCtx.clearRect(0, 0, this.fxCanvas.width, this.fxCanvas.height);
-        this.stars.forEach(s => {
-            s.x += s.speed;
-            if (s.x > window.innerWidth) { s.x = -5; s.y = Math.random() * window.innerHeight; }
-            this.fxCtx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
-            this.fxCtx.beginPath(); this.fxCtx.arc(s.x, s.y, s.size, 0, Math.PI * 2); this.fxCtx.fill();
+
+        this.particles.forEach(p => {
+            if (type === 'stars') {
+                p.x += p.speed * 0.5;
+                if (p.x > window.innerWidth) p.x = -5;
+                this.drawCircle(p.x, p.y, p.size, `rgba(255,255,255,${p.opacity})`);
+            } else if (type === 'storm') {
+                p.y += p.speed * 5; p.x += 2;
+                if (p.y > window.innerHeight) { p.y = -20; p.x = Math.random() * window.innerWidth; }
+                this.drawLine(p.x, p.y, p.x + 1, p.y + 15, 'rgba(200,220,255,0.3)');
+            } else if (type === 'snow') {
+                p.y += p.speed; p.x += Math.sin(p.y / 30);
+                if (p.y > window.innerHeight) p.y = -10;
+                this.drawCircle(p.x, p.y, p.size, `rgba(255,255,255,${p.opacity})`);
+            } else if (type === 'matrix') {
+                p.y += p.speed;
+                if (p.y > window.innerHeight) { p.y = -20; p.char = String.fromCharCode(0x30A0 + Math.random() * 96); }
+                this.fxCtx.fillStyle = `rgba(34, 197, 94, ${p.opacity})`;
+                this.fxCtx.font = `${p.size}px monospace`;
+                this.fxCtx.fillText(p.char, p.x, p.y);
+            } else if (type === 'steam') {
+                p.x += p.speed * 0.2;
+                if (p.x > window.innerWidth + 200) p.x = -200;
+                const grad = this.fxCtx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size * 50);
+                grad.addColorStop(0, `rgba(200,200,200,${p.opacity * 0.2})`);
+                grad.addColorStop(1, 'rgba(200,200,200,0)');
+                this.fxCtx.fillStyle = grad;
+                this.fxCtx.beginPath(); this.fxCtx.arc(p.x, p.y, p.size * 50, 0, Math.PI * 2); this.fxCtx.fill();
+            } else if (type === 'autumn') {
+                p.y += p.speed; p.x += Math.cos(p.y / 100) * 2;
+                if (p.y > window.innerHeight) p.y = -20;
+                this.fxCtx.fillStyle = `rgba(245, 158, 11, ${p.opacity})`;
+                this.fxCtx.fillRect(p.x, p.y, p.size * 2, p.size);
+            } else if (type === 'underwater') {
+                p.y -= p.speed * 0.5; p.x += Math.sin(p.y / 50) * 0.5;
+                if (p.y < -20) p.y = window.innerHeight + 20;
+                this.drawCircle(p.x, p.y, p.size, `rgba(255,255,255,${p.opacity * 0.3})`, true);
+            }
         });
-        this.fxAnimId = requestAnimationFrame(this.animateStars.bind(this));
+
+        this.fxAnimId = requestAnimationFrame(() => this.animate(type));
     }
 
-    initStorm() {
-        this.raindrops = [];
-        for (let i = 0; i < 100; i++) {
-            this.raindrops.push({
-                x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight,
-                len: Math.random() * 20 + 10, speed: Math.random() * 15 + 10
-            });
-        }
+    drawCircle(x, y, r, color, stroke = false) {
+        this.fxCtx.fillStyle = color;
+        this.fxCtx.beginPath(); this.fxCtx.arc(x, y, r, 0, Math.PI * 2); 
+        if (stroke) { this.fxCtx.strokeStyle = color; this.fxCtx.stroke(); } else { this.fxCtx.fill(); }
     }
 
-    animateStorm() {
-        if (this.activeModule !== 'storm') return;
-        this.fxCtx.clearRect(0, 0, this.fxCanvas.width, this.fxCanvas.height);
-        
-        // Detect if we need light or dark rain based on theme
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const lightThemes = ['inkwash', 'glacier', 'museum', 'manga', 'famicom', 'prism'];
-        const rainColor = lightThemes.includes(currentTheme) ? 'rgba(0, 0, 0, 0.2)' : 'rgba(255, 255, 255, 0.3)';
-
-        this.fxCtx.strokeStyle = rainColor;
-        this.fxCtx.lineWidth = 1.5; // Slightly thicker
-        this.fxCtx.lineCap = 'round';
-        this.raindrops.forEach(r => {
-            this.fxCtx.beginPath();
-            this.fxCtx.moveTo(r.x, r.y);
-            this.fxCtx.lineTo(r.x + 2, r.y + r.len);
-            this.fxCtx.stroke();
-            r.y += r.speed;
-            r.x += 2;
-            if (r.y > window.innerHeight) { r.y = -r.len; r.x = Math.random() * window.innerWidth; }
-        });
-        this.fxAnimId = requestAnimationFrame(this.animateStorm.bind(this));
+    drawLine(x1, y1, x2, y2, color) {
+        this.fxCtx.strokeStyle = color; this.fxCtx.lineWidth = 1;
+        this.fxCtx.beginPath(); this.fxCtx.moveTo(x1, y1); this.fxCtx.lineTo(x2, y2); this.fxCtx.stroke();
     }
 
     triggerLightning() {
         if (this.activeModule !== 'storm') return;
-        const delay = Math.random() * 8000 + 2000;
         this.lightningTimeout = setTimeout(() => {
             document.body.classList.add('lightning-flash');
-            if (typeof sfx !== 'undefined') sfx.playTone(60, 'sawtooth', 0.1, 0, 0.2); // Low thunder rumble
+            if (typeof sfx !== 'undefined') sfx.playTone(60, 'sawtooth', 0.1, 0, 0.2);
             setTimeout(() => {
                 document.body.classList.remove('lightning-flash');
                 this.triggerLightning();
             }, 150);
-        }, delay);
-    }
-
-    initSteam() {
-        this.fogClouds = [];
-        const count = 40; // Doubled density
-        for (let i = 0; i < count; i++) {
-            this.fogClouds.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight, // Full screen coverage
-                radius: Math.random() * 300 + 200, // Massive clouds
-                speed: Math.random() * 0.3 + 0.05,
-                opacity: Math.random() * 0.15 + 0.05
-            });
-        }
-    }
-
-    animateSteam() {
-        if (this.activeModule !== 'steam') return;
-        this.fxCtx.clearRect(0, 0, this.fxCanvas.width, this.fxCanvas.height);
-        
-        // Auto-dim for Silent Hill vibe
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const lightThemes = ['inkwash', 'glacier', 'museum', 'manga', 'famicom', 'prism'];
-        if (lightThemes.includes(currentTheme)) {
-            document.documentElement.classList.add('fx-storm-dim');
-        }
-
-        this.fogClouds.forEach(c => {
-            c.x += c.speed;
-            if (c.x - c.radius > window.innerWidth) {
-                c.x = -c.radius;
-                c.y = Math.random() * window.innerHeight;
-            }
-            const grad = this.fxCtx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.radius);
-            grad.addColorStop(0, `rgba(200, 200, 200, ${c.opacity})`);
-            grad.addColorStop(1, 'rgba(200, 200, 200, 0)');
-            this.fxCtx.fillStyle = grad;
-            this.fxCtx.beginPath();
-            this.fxCtx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
-            this.fxCtx.fill();
-        });
-        this.fxAnimId = requestAnimationFrame(this.animateSteam.bind(this));
+        }, Math.random() * 8000 + 2000);
     }
 
     updateTriggerIcon() {
@@ -281,24 +266,63 @@ class ExpansionManager {
     updateUI() {
         const list = document.getElementById('expansion-list');
         if (!list) return;
-        const modules = [
-            { id: 'crt', name: 'CRT FX Module', icon: '📺', color: '#fb923c' },
-            { id: 'stars', name: 'Starfield FX', icon: '✨', color: '#3b82f6' },
-            { id: 'dither', name: '8-Bit Dither', icon: '👾', color: '#a855f7' },
-            { id: 'storm', name: 'Storm Pak', icon: '⛈️', color: '#64748b' },
-            { id: 'vcr', name: 'VCR Retro Pak', icon: '📼', color: '#ef4444' },
-            { id: 'steam', name: 'Steam Fog FX', icon: '🌫️', color: '#94a3b8' },
-            { id: 'blueshift', name: 'Blue Shift Pak', icon: '🟦', color: '#06b6d4' }
+
+        const categories = [
+            { id: 'retro', name: 'Retro', modules: [
+                { id: 'crt', name: 'CRT FX', icon: '📺', color: '#fb923c' },
+                { id: 'vcr', name: 'VCR Retro', icon: '📼', color: '#ef4444' },
+                { id: 'dither', name: '8-Bit Dither', icon: '👾', color: '#a855f7' },
+                { id: 'scanline', name: 'Scanline Pro', icon: '📏', color: '#64748b' },
+                { id: 'interlace', name: 'Interlace', icon: '〰️', color: '#3b82f6' }
+            ]},
+            { id: 'nature', name: 'Nature', modules: [
+                { id: 'storm', name: 'Storm Pak', icon: '⛈️', color: '#475569' },
+                { id: 'steam', name: 'Silent Fog', icon: '🌫️', color: '#94a3b8' },
+                { id: 'stars', name: 'Starfield', icon: '✨', color: '#3b82f6' },
+                { id: 'snow', name: 'Snowfall', icon: '❄️', color: '#e0f2fe' },
+                { id: 'autumn', name: 'Autumn', icon: '🍂', color: '#b45309' },
+                { id: 'underwater', name: 'Deep Sea', icon: '🫧', color: '#0ea5e9' },
+                { id: 'heatwave', name: 'Heatwave', icon: '🔥', color: '#f59e0b' }
+            ]},
+            { id: 'digital', name: 'Digital', modules: [
+                { id: 'matrix', name: 'Matrix Code', icon: '📟', color: '#22c55e' },
+                { id: 'error', name: 'Sys Error', icon: '⚠️', color: '#ef4444' },
+                { id: 'hologram', name: 'Hologram', icon: '💎', color: '#00f2ff' },
+                { id: 'grid', name: 'Cyber Grid', icon: '🌐', color: '#7e22ce' }
+            ]},
+            { id: 'filters', name: 'Filters', modules: [
+                { id: 'blueshift', name: 'Blue Shift', icon: '🟦', color: '#06b6d4' },
+                { id: 'noir', name: 'Noir Cinema', icon: '🎬', color: '#1a1a1a' },
+                { id: 'sepia', name: 'Vintage', icon: '📜', color: '#78350f' },
+                { id: 'bloom', name: 'Dream Bloom', icon: '🌸', color: '#f0abfc' },
+                { id: 'infrared', name: 'Infrared', icon: '🌡️', color: '#dc2626' },
+                { id: 'popart', name: 'Pop Art', icon: '🎨', color: '#ffde00' }
+            ]}
         ];
-        list.innerHTML = modules.map(m => {
+
+        let html = `
+            <div class="sticky top-0 z-20 bg-[#0f172a] p-4 pb-6">
+                <div class="flex gap-1 p-1 bg-[#1e293b] rounded-lg border border-white/5 shadow-xl">
+                    ${categories.map(cat => `
+                        <button onclick="expansionManager.switchCategory('${cat.id}')" 
+                                class="flex-1 py-2 text-[9px] font-black uppercase tracking-widest rounded transition-all ${this.activeCategory === cat.id ? 'bg-[#fb923c] text-white shadow-lg' : 'text-white/40 hover:text-white hover:bg-white/5'}">
+                            ${cat.name}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        const activeCat = categories.find(c => c.id === this.activeCategory);
+        activeCat.modules.forEach(m => {
             const isActive = this.activeModule === m.id;
-            return `
-                <div class="px-4 pt-2">
+            html += `
+                <div class="px-4 mb-3">
                     <button onclick="expansionManager.toggleModule('${m.id}')" 
                             class="w-full flex items-center gap-4 p-4 rounded-xl transition-all border-2 ${isActive ? 'bg-white/10 border-white/20' : 'bg-transparent border-white/5 hover:bg-white/5 hover:border-white/10'} group/item text-left font-sans">
                         <div class="w-12 h-12 rounded-xl shadow-lg flex items-center justify-center shrink-0 border-2 border-white/10 transition-transform group-hover/item:scale-110" 
                              style="background-color: ${m.color}; color: #fff">
-                            <span class="text-xl">${m.icon}</span>
+                            <span class="text-2xl">${m.icon}</span>
                         </div>
                         <div class="flex flex-col min-w-0">
                             <h4 class="text-sm font-black uppercase tracking-wider truncate ${isActive ? 'text-white' : 'text-white/80 group-hover/item:text-white'}">${m.name}</h4>
@@ -313,7 +337,10 @@ class ExpansionManager {
                     </button>
                 </div>
             `;
-        }).join('');
+        });
+
+        list.innerHTML = html;
     }
 }
+
 const expansionManager = new ExpansionManager();

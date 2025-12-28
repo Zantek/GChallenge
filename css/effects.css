@@ -33,7 +33,31 @@
 }
 #boot-terminal { font-size: 0.8rem; line-height: 1.4; overflow: hidden; text-shadow: 0 0 5px #fff; }
 
-/* CRT Mode */
+/* --- UI SAFETY LAYER --- */
+/* Ensure controls sit above all visual noise */
+#console-container,
+#companion-container,
+#detail-modal,
+#settings-modal,
+#stats-modal,
+#share-modal,
+#theme-browser,
+#expansion-sidebar,
+header {
+    z-index: 50 !important;
+}
+
+/* --- THE FX OVERLAY SYSTEM --- */
+/* We use a dedicated pseudo-layer to apply filters WITHOUT touching body layout */
+html::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+}
+
+/* RETRO CATEGORY */
 .crt-active body::before {
     content: " "; display: block; position: fixed; inset: 0;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
@@ -45,8 +69,6 @@
     background-size: 3px 100%; z-index: 101; pointer-events: none;
     animation: crt-flicker 0.15s infinite;
 }
-
-/* Curvature and Vignette */
 .crt-active #crt-vignette {
     display: block !important;
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -54,14 +76,95 @@
     box-shadow: inset 0 0 10rem rgba(0,0,0,0.8);
     z-index: 102; pointer-events: none;
 }
+@keyframes crt-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.15; } 100% { opacity: 0.1; } }
 
-/* The actual "Tube" curve mask */
-.crt-active::before {
-    content: ""; position: fixed; inset: 0; z-index: 103; pointer-events: none;
-    background: radial-gradient(circle at center, transparent 0%, transparent 70%, rgba(0,0,0,1) 120%);
+.fx-vcr-active::after {
+    background: linear-gradient(transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
+    background-size: 100% 20px;
+    animation: vcr-tracking 0.5s linear infinite;
+    backdrop-filter: contrast(1.1) brightness(1.1) sepia(0.05);
+}
+@keyframes vcr-tracking { from { transform: translateY(-20px); } to { transform: translateY(0); } }
+
+.fx-dither-active::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0zM1 1h1v1H1z' fill='%23000'/%3E%3C/svg%3E");
+    background-size: 4px 4px;
+    opacity: 0.15;
 }
 
-@keyframes crt-flicker { 0% { opacity: 0.1; } 50% { opacity: 0.15; } 100% { opacity: 0.1; } }
+.fx-scanline-pro::after {
+    background: linear-gradient(rgba(0,0,0,0.3) 50%, transparent 50%);
+    background-size: 100% 2px;
+}
+
+.fx-interlace-active::after {
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1), rgba(0,0,0,0.1) 1px, transparent 1px, transparent 2px);
+    animation: interlace-flicker 0.1s infinite;
+}
+@keyframes interlace-flicker { 0% { opacity: 0.8; } 50% { opacity: 1; } 100% { opacity: 0.8; } }
+
+/* NATURE & ATMOSPHERIC */
+.fx-storm-dim body::before {
+    content: ""; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); z-index: -1; pointer-events: none;
+}
+.lightning-flash { animation: lightning-strike 0.15s ease-out forwards; }
+@keyframes lightning-strike { 0% { filter: brightness(1); } 50% { filter: brightness(2) contrast(1.5); } 100% { filter: brightness(1); } }
+
+.fx-heatwave-active::after {
+    backdrop-filter: contrast(1.1) brightness(1.1);
+    animation: heatwave-distort 2s ease-in-out infinite;
+}
+@keyframes heatwave-distort { 0%, 100% { transform: scale(1.0); filter: blur(0px); } 50% { transform: scale(1.01); filter: blur(1px); } }
+
+.fx-underwater-active::after {
+    background: rgba(0, 100, 255, 0.1);
+    backdrop-filter: blur(1px) saturate(1.5);
+}
+
+/* DIGITAL & GLITCH */
+.fx-error-active::after {
+    backdrop-filter: hue-rotate(90deg) contrast(1.5);
+    animation: error-jitter 0.2s infinite;
+}
+@keyframes error-jitter { 0% { transform: translate(1px, 1px); } 50% { transform: translate(-1px, -1px); } }
+
+.fx-hologram-active::after {
+    background: linear-gradient(transparent 0%, rgba(0,242,255,0.05) 50%, transparent 100%);
+    background-size: 100% 100px;
+    background-repeat: repeat;
+    animation: hologram-scan 3s linear infinite;
+    backdrop-filter: hue-rotate(180deg) saturate(0.5) brightness(1.2);
+}
+@keyframes hologram-scan { 
+    from { background-position: 0 0; } 
+    to { background-position: 0 100px; } 
+}
+
+.fx-grid-active body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image: linear-gradient(rgba(126, 34, 206, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(126, 34, 206, 0.2) 1px, transparent 1px);
+    background-size: 50px 50px; background-position: center;
+    perspective: 1000px; transform: rotateX(60deg) scale(2); transform-origin: bottom;
+}
+
+/* FILTERS CATEGORY */
+.fx-blueshift-active::after {
+    background: radial-gradient(circle at center, transparent 0%, rgba(6, 182, 212, 0.1) 100%);
+    backdrop-filter: contrast(1.2) saturate(1.3) hue-rotate(-15deg) brightness(0.85);
+}
+.fx-blueshift-active body::after {
+    content: ""; position: fixed; top: 45%; left: 0; width: 100%; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), rgba(255, 255, 255, 0.5), rgba(6, 182, 212, 0.3), transparent);
+    z-index: 100; pointer-events: none; filter: blur(4px); opacity: 0.4;
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4); animation: blueshift-flare 12s ease-in-out infinite;
+}
+@keyframes blueshift-flare { 0%, 100% { opacity: 0.2; transform: scaleX(0.8); } 50% { opacity: 0.5; transform: scaleX(1.2); } }
+
+.fx-noir-active::after { backdrop-filter: grayscale(1) contrast(1.5) brightness(0.8); }
+.fx-sepia-active::after { backdrop-filter: sepia(0.8) contrast(1.1) brightness(0.9); }
+.fx-bloom-active::after { backdrop-filter: brightness(1.1) saturate(1.2) blur(4px); box-shadow: inset 0 0 100px rgba(255,255,255,0.2); }
+.fx-infrared-active::after { backdrop-filter: hue-rotate(120deg) saturate(2) contrast(1.5) invert(0.1); }
+.fx-popart-active::after { backdrop-filter: saturate(2) contrast(1.2); background-image: radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px); background-size: 6px 6px; }
 
 /* System Glitch (Konami) */
 .system-glitch { animation: screen-shake 0.1s infinite; filter: invert(1) hue-rotate(90deg); }
@@ -76,94 +179,9 @@
 .power-surge-active {
     animation: power-surge-flicker 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 @keyframes power-surge-flicker {
     0% { filter: brightness(1); transform: translateY(0); }
     30% { filter: brightness(0.4) contrast(1.5); transform: translateY(2px); }
     60% { filter: brightness(0.7) contrast(1.2); transform: translateY(-1px); }
     100% { filter: brightness(1); transform: translateY(0); }
-}
-
-/* --- 8-Bit Dither FX --- */
-.fx-dither-active::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    pointer-events: none;
-    opacity: 0.15;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 2 2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h1v1H0zM1 1h1v1H1z' fill='%23000'/%3E%3C/svg%3E");
-    background-size: 4px 4px;
-}
-
-/* --- VCR Retro FX --- */
-.fx-vcr-active::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: linear-gradient(transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
-    background-size: 100% 20px;
-    animation: vcr-tracking 0.5s linear infinite;
-    mix-blend-mode: overlay;
-    backdrop-filter: contrast(1.1) brightness(1.1) sepia(0.05);
-}
-@keyframes vcr-tracking {
-    from { transform: translateY(-20px); }
-    to { transform: translateY(0); }
-}
-
-/* --- Blue Shift FX --- */
-.fx-blueshift-active::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(circle at center, transparent 0%, rgba(6, 182, 212, 0.1) 100%);
-    mix-blend-mode: color-burn;
-    backdrop-filter: contrast(1.2) saturate(1.3) hue-rotate(-15deg) brightness(0.85);
-}
-
-/* Anamorphic Lens Flare */
-.fx-blueshift-active::after {
-    content: "";
-    position: fixed;
-    top: 45%;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.3), rgba(255, 255, 255, 0.5), rgba(6, 182, 212, 0.3), transparent);
-    z-index: 100;
-    pointer-events: none;
-    filter: blur(4px);
-    opacity: 0.4;
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
-    animation: blueshift-flare 12s ease-in-out infinite;
-}
-
-@keyframes blueshift-flare {
-    0%, 100% { opacity: 0.2; transform: scaleX(0.8) translateY(0); }
-    50% { opacity: 0.5; transform: scaleX(1.2) translateY(5px); }
-}
-
-/* --- Storm FX --- */
-.fx-storm-dim::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: -1;
-    pointer-events: none;
-    backdrop-filter: brightness(0.7) contrast(1.2);
-}
-
-.lightning-flash {
-    animation: lightning-strike 0.15s ease-out forwards;
-}
-@keyframes lightning-strike {
-    0% { filter: brightness(1); }
-    50% { filter: brightness(2) contrast(1.5); }
-    100% { filter: brightness(1); }
 }
