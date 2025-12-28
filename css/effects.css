@@ -34,26 +34,30 @@
 #boot-terminal { font-size: 0.8rem; line-height: 1.4; overflow: hidden; text-shadow: 0 0 5px #fff; }
 
 /* --- UI SAFETY LAYER --- */
-/* Ensure controls sit above all visual noise */
-#console-container,
-#companion-container,
+/* Modals and Sidebars stay on top of EVERYTHING for usability */
 #detail-modal,
 #settings-modal,
 #stats-modal,
 #share-modal,
 #theme-browser,
-#expansion-sidebar,
+#expansion-sidebar {
+    z-index: 100 !important;
+}
+
+/* Header and Hardware sit below the FX layer to be filtered */
+#console-container,
+#companion-container,
 header {
-    z-index: 50 !important;
+    z-index: 10 !important;
 }
 
 /* --- THE FX OVERLAY SYSTEM --- */
-/* We use a dedicated pseudo-layer to apply filters WITHOUT touching body layout */
+/* We use a dedicated pseudo-layer to apply filters GLOBALLY */
 html::after {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: 20;
+    z-index: 60; /* Sits above header/hardware but below modals */
     pointer-events: none;
 }
 

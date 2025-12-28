@@ -16,6 +16,13 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Retro:** Famicom, Genesis, Game Gear, Spectrum, Virtual, Brick, Woodgrain, Invader.
     - **Art:** Overgrown, Ink-Wash, Manga, Museum, Noir, Tokyo, Nomad, Street.
     - **Modern:** Cube, Papercraft, Hydraulic, Prism, Hero, Craft.
+
+- **Expansion Pak FX Suite:** A professional tabbed sidebar featuring **22 high-fidelity visual modules**. These apply atmospheric filters globally across the dashboard, from Retro scanlines to Nature-based particle effects.
+    - **Retro:** CRT, VCR Retro, 8-Bit Dither, Scanline Pro, Interlace FX.
+    - **Nature:** Storm Pak, Silent Fog, Starfield FX, Snowfall, Autumn, Deep Sea, Heatwave.
+    - **Digital:** Matrix Code, Sys Error, Hologram, Cyber Grid.
+    - **Filters:** Blue Shift, Noir Cinema, Vintage, Dream Bloom, Infrared, Pop Art.
+
 - **Interactive Instruction Manual:** A physical "Book Spine" trigger sitting next to the console. Opens a 12-page, high-fidelity digital booklet containing system lore, 10 technical pro tips, a full 48-game catalog database, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
@@ -29,16 +36,6 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Poster Gallery:** A collection of high-fidelity custom posters for every completed game.
     - **Press Clippings:** Authentic 90s-style magazine advertisements generated procedurally for every finish.
 - **LO-FI Radio & Visualizer:** 18 unique procedural stations with a beat-reactive oscilloscope visualizer integrated into the system monitor.
-
-## 🏆 Challenge Lists (48 Games Total)
-
-- **Core Challenge:** 12 legendary titles defining the gaming landscape.
-- **The Weird Bonus List:** Experimental and quirky titles.
-- **Micro-Quest List:** Bite-sized RPG adventures finishable in a single evening.
-- **Paperwork List:** Satisfyingly tactile simulation and organization games.
-- **Time Warp List:** Games focused on time manipulation and loops (including *The Silent Age*).
-- **Zen Bonus List:** Meditative, low-stress experiences.
-- **Art House Bonus List:** Visually striking and intellectually stimulating masterpieces.
 
 ## 🛠️ Technical Overview
 
@@ -58,6 +55,7 @@ Since this is a static web project, no build or installation steps are required.
 
 ## 📝 Development TODOs
 - [x] Implement 32 unique Console Skins and Tabbed Sidebar Browser.
+- [x] Implement 22-module Expansion Pak FX Suite with Tabbed Categorization.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.

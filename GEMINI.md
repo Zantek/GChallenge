@@ -18,6 +18,13 @@ A highly immersive, responsive web-based application designed to track progress 
     - **Art:** Overgrown, Ink-Wash, Manga, Museum, Noir, Tokyo, Nomad, Street.
     - **Modern:** Cube, Papercraft, Hydraulic, Prism, Hero, Craft.
 
+- **Expansion Pak FX Suite:** A professional tabbed sidebar featuring **22 high-fidelity visual modules** that apply atmospheric effects globally to the entire dashboard.
+    - **Retro:** CRT, VCR Retro, 8-Bit Dither, Scanline Pro, Interlace FX.
+    - **Nature:** Storm Pak, Silent Fog, Starfield FX, Snowfall, Autumn, Deep Sea, Heatwave.
+    - **Digital:** Matrix Code, Sys Error, Hologram, Cyber Grid.
+    - **Filters:** Blue Shift, Noir Cinema, Vintage, Dream Bloom, Infrared, Pop Art.
+    - **Architecture:** Powered by a non-breaking `html::after` overlay system that preserves layout stability while filtering the header, console, and background.
+
 - **Interactive Instruction Manual:** A physical "Book Spine" sitter next to the console. Clicking it opens a 12-page, high-fidelity booklet containing system lore, 10 pro tips, a full 48-game catalog, and system credits.
 - **Super Mario World Overworld:** A linear, winding "World Map" visualizing your journey across 7 thematic biomes (Kingdom, Valley, Chronos Tower, etc.). Features diamond level nodes and a "HERE" flag marker.
 - **Permanent System Monitor:** A dedicated header marquee that scrolls real-time console metadata, featuring a reactive LED, infinite-loop ticker tape, and **Integrated Radio Controls** (Prev/Power/Next).
@@ -42,6 +49,7 @@ A highly immersive, responsive web-based application designed to track progress 
 
 ## 📝 Development TODOs
 - [x] Implement 32 unique Console Skins and Tabbed Sidebar Browser.
+- [x] Implement 22-module Expansion Pak FX Suite with Tabbed Categorization.
 - [x] Implement 18-station LO-FI Radio and real-time Visualizer.
 - [x] Implement 12-page Interactive Instruction Manual.
 - [x] Implement Super Mario World style linear Overworld Map.

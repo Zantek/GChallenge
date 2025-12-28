@@ -135,7 +135,8 @@ class ExpansionManager {
         if (!this.fxCanvas) {
             this.fxCanvas = document.createElement('canvas');
             this.fxCanvas.id = 'fx-layer-canvas';
-            this.fxCanvas.className = 'fixed inset-0 pointer-events-none z-[0]';
+            // Set z-index to 60 to cover header/hardware but stay below modals
+            this.fxCanvas.className = 'fixed inset-0 pointer-events-none z-[60]';
             document.body.prepend(this.fxCanvas);
             this.fxCtx = this.fxCanvas.getContext('2d');
             window.addEventListener('resize', () => {
