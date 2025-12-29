@@ -571,8 +571,12 @@
                     </div>
                     <div id="radio-channels"
                         class="grid grid-cols-1 gap-2 opacity-50 pointer-events-none transition-opacity">
-                        <span class="text-[8px] font-black text-gaming-muted uppercase tracking-widest text-center">Tune
-                            Station:</span>
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[8px] font-black text-gaming-muted uppercase tracking-widest">Tune Station</span>
+                            <button onclick="radio.toggleBand()" class="px-2 py-0.5 bg-gaming-accent/20 hover:bg-gaming-accent/40 text-gaming-accent border border-gaming-accent/30 rounded text-[7px] font-black uppercase tracking-widest transition-all">
+                                Band: FM/HF
+                            </button>
+                        </div>
                         <div class="flex items-center gap-2">
                             <button onclick="radio.prevChannel()"
                                 class="w-10 h-10 flex items-center justify-center bg-gaming-dark border border-gaming-border rounded hover:bg-gaming-card transition-all">
