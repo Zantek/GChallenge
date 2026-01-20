@@ -202,6 +202,10 @@ class InstructionManual {
                             <h6 class="font-black text-accent uppercase">07. ART HOUSE</h6>
                             <p>Visually striking and intellectually stimulating titles that push the boundaries of interactive aesthetics.</p>
                         </div>
+                        <div>
+                            <h6 class="font-black text-accent uppercase">08. GRAND THEFT AUTO</h6>
+                            <p>Legendary open-world crime sagas that defined the genre across three generations of hardware.</p>
+                        </div>
                     </div>
                 `
             },
@@ -313,6 +317,24 @@ class InstructionManual {
                                 <span>• Monument Valley</span>
                                 <span>• The Unfinished Swan</span>
                                 <span>• Manifold Garden</span>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            {
+                title: "CATALOG_DATABASE",
+                subtitle: "Manifest Vol. 5",
+                content: `
+                    <div class="space-y-6 text-[10px] leading-relaxed">
+                        <div class="space-y-2">
+                            <h6 class="font-black text-accent uppercase border-b border-current/10 pb-1">GRAND THEFT AUTO [05/05]</h6>
+                            <div class="grid grid-cols-1 gap-y-1 font-bold opacity-80">
+                                <span>• Grand Theft Auto III</span>
+                                <span>• Grand Theft Auto: Vice City</span>
+                                <span>• Grand Theft Auto: San Andreas</span>
+                                <span>• Grand Theft Auto IV</span>
+                                <span>• Grand Theft Auto V</span>
                             </div>
                         </div>
                     </div>

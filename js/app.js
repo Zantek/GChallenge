@@ -68,7 +68,15 @@ const paperworkGames = [
     { id: 'p6', title: "Death and Taxes", year: 2020, system: "PC / Switch", length: "3 hrs", genre: "Narrative / Sim", color: "from-slate-700 to-purple-900", wiki: "https://en.wikipedia.org/wiki/Death_and_Taxes_(video_game)", guide: "https://www.neoseeker.com/death-and-taxes/walkthrough", banner: "images/games/banners/death-and-taxes-banner.jpg", tagline: "Decide who lives and who dies... from your office chair.", brand: "indie", difficulty: 2, score: 70, desc: "Play as the Grim Reaper in a modern office environment. Review files, follow instructions (or don't), and decide the fate of mortals with a stroke of your pen and a slam of your stamp. It's a witty and thought-provoking narrative game about the mundane side of mortality." }
 ];
 
-const allGames = [...coreGames, ...bonusGames, ...zenGames, ...timeGames, ...artGames, ...microQuestGames, ...paperworkGames];
+const gtaGames = [
+    { id: 'g1', title: "Grand Theft Auto III", year: 2001, system: "PS2 / PC", length: "15 hrs", genre: "Open World / Action", color: "from-gray-700 to-slate-900", wiki: "https://en.wikipedia.org/wiki/Grand_Theft_Auto_III", guide: "https://www.ign.com/wikis/grand-theft-auto-3", banner: "images/games/banners/gta3-banner.jpg", tagline: "Welcome to Liberty City.", brand: "rockstar", difficulty: 3, score: 97, desc: "The game that changed everything. GTA III brought the series into 3D, creating a massive, living Liberty City. Experience the silent protagonist Claude's rise through the criminal underworld in this landmark open-world masterpiece." },
+    { id: 'g2', title: "Grand Theft Auto: Vice City", year: 2002, system: "PS2 / PC", length: "18 hrs", genre: "Open World / Action", color: "from-pink-500 to-cyan-400", wiki: "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_Vice_City", guide: "https://www.ign.com/wikis/grand-theft-auto-vice-city", banner: "images/games/banners/vice-city-banner.jpg", tagline: "The 80s are back.", brand: "rockstar", difficulty: 3, score: 95, desc: "A neon-soaked love letter to the 1980s. Follow Tommy Vercetti as he builds a criminal empire in the sun-drenched Vice City. Featuring an iconic soundtrack and a story inspired by Scarface, it's a stylish classic of the genre." },
+    { id: 'g3', title: "Grand Theft Auto: San Andreas", year: 2004, system: "PS2 / PC", length: "30 hrs", genre: "Open World / Action", color: "from-green-800 to-orange-900", wiki: "https://en.wikipedia.org/wiki/Grand_Theft_Auto:_San_Andreas", guide: "https://www.ign.com/wikis/grand-theft-auto-san-andreas", banner: "images/games/banners/san-andreas-banner.jpg", tagline: "Grove Street for life.", brand: "rockstar", difficulty: 4, score: 95, desc: "The definitive PS2-era open world. As CJ, you'll navigate the massive state of San Andreas, covering three major cities. With RPG-like stats, deep customization, and an epic story of family and betrayal, it remains a fan favorite." },
+    { id: 'g4', title: "Grand Theft Auto IV", year: 2008, system: "PS3 / Xbox 360 / PC", length: "28 hrs", genre: "Open World / Action", color: "from-gray-800 to-amber-900", wiki: "https://en.wikipedia.org/wiki/Grand_Theft_Auto_IV", guide: "https://www.ign.com/wikis/grand-theft-auto-4", banner: "images/games/banners/gta4-banner.jpg", tagline: "The American Dream is a lie.", brand: "rockstar", difficulty: 3, score: 98, desc: "A grittier, more grounded Liberty City awaits Niko Bellic. Featuring advanced physics and a mature narrative about the immigrant experience, GTA IV pushed the series into the high-definition era with unprecedented detail." },
+    { id: 'g5', title: "Grand Theft Auto V", year: 2013, system: "Consoles / PC", length: "32 hrs", genre: "Open World / Action", color: "from-green-600 to-green-900", wiki: "https://en.wikipedia.org/wiki/Grand_Theft_Auto_V", guide: "https://www.ign.com/wikis/grand-theft-auto-5", banner: "images/games/banners/gta5-banner.jpg", tagline: "Three characters, one city.", brand: "rockstar", difficulty: 3, score: 97, desc: "Rockstar's magnum opus. Experience the interconnected lives of Franklin, Michael, and Trevor in the massive world of Los Santos. With heist mechanics and a vast playground of activities, it remains one of the most successful games of all time." }
+];
+
+const allGames = [...coreGames, ...bonusGames, ...zenGames, ...timeGames, ...artGames, ...microQuestGames, ...paperworkGames, ...gtaGames];
 
 const categoryNames = { 
     'core': 'Core Challenge', 
@@ -77,7 +85,8 @@ const categoryNames = {
     'time': 'Time Warp', 
     'art': 'Art House',
     'micro': 'Micro-Quest',
-    'paper': 'Paperwork'
+    'paper': 'Paperwork',
+    'gta': 'Grand Theft Auto'
 };
 
 // --- Helpers ---
@@ -406,7 +415,8 @@ function updateProgress(silent = false, skipGrids = false) {
             'time': { list: timeGames, grid: 'time-grid', count: 'count-time', section: 'section-time' },
             'art': { list: artGames, grid: 'art-grid', count: 'count-art', section: 'section-art' },
             'micro': { list: microQuestGames, grid: 'micro-grid', count: 'count-micro', section: 'section-micro' },
-            'paper': { list: paperworkGames, grid: 'paper-grid', count: 'count-paper', section: 'section-paper' }
+            'paper': { list: paperworkGames, grid: 'paper-grid', count: 'count-paper', section: 'section-paper' },
+            'gta': { list: gtaGames, grid: 'gta-grid', count: 'count-gta', section: 'section-gta' }
         };
 
         Object.entries(categoryData).forEach(([key, data]) => {
@@ -488,6 +498,7 @@ function updateProgress(silent = false, skipGrids = false) {
     updateTrophy('trophy-zen', checkList(zenGames), "Zen Master");
     updateTrophy('trophy-time', checkList(timeGames), "Time Lord");
     updateTrophy('trophy-art', checkList(artGames), "Art Critic");
+    updateTrophy('trophy-gta', checkList(gtaGames), "GTA Master");
     updateTrophy('trophy-all', stats.completed === stats.total && stats.total > 0, "Grand Master");
 
     // Notify other components (Companion)

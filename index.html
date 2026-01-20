@@ -369,6 +369,27 @@
             </div>
         </section>
 
+        <!-- Grand Theft Auto Section -->
+        <section id="section-gta" class="transition-opacity duration-500">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleSection('gta')" class="p-1 hover:bg-white/10 rounded transition-colors" title="Toggle Section">
+                        <svg id="chevron-gta" class="w-5 h-5 text-gaming-muted transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="list-accent-bar h-8 w-1 bg-green-600 rounded-full"></div>
+                    <h2 class="text-2xl font-bold text-gaming-text">🔫 Grand Theft Auto</h2>
+                    <span id="count-gta" class="list-count-badge bg-green-900 text-green-200 text-xs font-semibold px-2.5 py-0.5 rounded ml-2">5 Games</span>
+                </div>
+                <div class="flex gap-4 text-[10px] font-black uppercase tracking-widest">
+                    <button onclick="dropCategory('gta')" class="text-gaming-muted hover:text-red-400 transition-colors">Drop All</button>
+                    <button onclick="reviveCategory('gta')" class="text-gaming-muted hover:text-emerald-400 transition-colors">Revive All</button>
+                </div>
+            </div>
+            <div id="grid-container-gta" class="transition-all duration-500 linear overflow-hidden max-h-[5000px]">
+                <div id="gta-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-4"></div>
+            </div>
+        </section>
+
         <!-- Time Warps -->
         <section id="section-time" class="transition-opacity duration-500">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -1237,40 +1258,85 @@
                                 <!-- Art Critic -->
 
 
-                                <div id="trophy-art" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Art House games">
+                                                                <div id="trophy-art" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Art House games">
 
 
-                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+                                                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
 
 
-                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                                                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-orange-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
 
 
-                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+                                                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
 
 
-                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                                                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
 
 
-                                        </div>
+                                                                        </div>
 
 
-                                    </div>
+                                                                    </div>
 
 
-                                    <div class="flex flex-col items-center text-center">
+                                                                    <div class="flex flex-col items-center text-center">
 
 
-                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art Critic</span>
+                                                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">Art Critic</span>
 
 
-                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors"></div>
+                                                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-orange-500 transition-colors"></div>
 
 
-                                    </div>
+                                                                    </div>
 
 
-                                </div>
+                                                                </div>
+
+
+                                
+
+
+                                                                <!-- GTA Legend -->
+
+
+                                                                <div id="trophy-gta" class="trophy-slot group flex flex-col items-center gap-3 relative cursor-help" title="Complete all Grand Theft Auto games">
+
+
+                                                                    <div class="trophy-icon-container relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center bg-gaming-dark/50 rounded-2xl border-2 border-gaming-border/50 transition-all duration-500">
+
+
+                                                                        <svg class="w-8 h-8 md:w-10 md:h-10 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 16-1.5 16zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+
+
+                                                                        <div class="trophy-lock absolute inset-0 flex items-center justify-center bg-gaming-dark/40 rounded-2xl opacity-60 backdrop-blur-[1px]">
+
+
+                                                                            <svg class="w-6 h-6 text-gaming-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+                                                                    <div class="flex flex-col items-center text-center">
+
+
+                                                                        <span class="text-[9px] md:text-[10px] font-black text-gaming-muted uppercase tracking-widest group-[.unlocked]:text-gaming-text transition-colors">GTA Legend</span>
+
+
+                                                                        <div class="h-1 w-8 bg-gaming-border/50 rounded-full mt-1 group-[.unlocked]:bg-green-500 transition-colors"></div>
+
+
+                                                                    </div>
+
+
+                                                                </div>
+
+
+                                
 
 
             
